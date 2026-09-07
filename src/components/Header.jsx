@@ -1,11 +1,11 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 const links = [
-  { label: 'Shop', href: '#shop' },
-  { label: 'Standards', href: '#standards' },
-  { label: 'Collection', href: '#collection' },
-  { label: 'Heritage', href: '#heritage' },
-  { label: 'Questions', href: '#faq' }
+  { label: 'Shop', href: '/products' },
+  { label: 'Standards', href: '/#standards' },
+  { label: 'Heritage', href: '/#heritage' },
+  { label: 'Questions', href: '/#faq' }
 ]
 
 export default function Header({ cart, onCartClick }) {
@@ -17,7 +17,7 @@ export default function Header({ cart, onCartClick }) {
         Cold pressed Nigella sativa. Plain labeling, no health claims.
       </p>
       <div className="flex h-20 items-center justify-between px-6 sm:px-10 lg:px-20">
-        <a href="#top" className="flex items-center gap-3">
+        <Link to="/" className="flex items-center gap-3">
           <span className="grid h-9 w-9 place-items-center rounded-full border border-brass font-display text-xs text-brass">
             DM
           </span>
@@ -25,7 +25,7 @@ export default function Header({ cart, onCartClick }) {
             DR. MUSHTAQ’S
             <span className="block font-mono text-[9px] tracking-[0.2em] text-muted">BLACKSEED</span>
           </span>
-        </a>
+        </Link>
         <nav className="hidden gap-8 md:flex">
           {links.map((link) => (
             <a

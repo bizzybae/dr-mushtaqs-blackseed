@@ -7,9 +7,9 @@ export default function Footer() {
           <p className="font-mono text-[9px] tracking-[0.2em] text-muted">BLACKSEED</p>
         </div>
         <nav className="flex flex-wrap gap-6 font-mono text-[10px] uppercase tracking-[0.1em] text-muted">
-          <a href="#shop">Shop</a>
-          <a href="#faq">Disclosures</a>
-          <a href="#heritage">Heritage</a>
+          <a href="/products">Shop</a>
+          <a href="/#faq">Disclosures</a>
+          <a href="/#heritage">Heritage</a>
         </nav>
       </div>
       <p className="mt-10 max-w-4xl font-mono text-[10px] leading-relaxed text-muted">
