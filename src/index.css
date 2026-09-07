@@ -10,6 +10,11 @@
   body {
     @apply bg-cream text-ink font-sans antialiased;
   }
+
+  ::selection {
+    background: #bb8c4b;
+    color: #171614;
+  }
 }
 
 @layer components {
