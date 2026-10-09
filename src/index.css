@@ -9,36 +9,48 @@
 
   body {
     @apply bg-cream text-ink font-sans antialiased;
+    text-rendering: optimizeLegibility;
   }
 
   ::selection {
     background: #bb8c4b;
     color: #171614;
   }
+
+  :focus-visible {
+    outline: 2px solid #bb8c4b;
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
 }
 
 @layer components {
   .eyebrow {
-    @apply font-mono text-[11px] uppercase tracking-[0.16em] text-brass;
+    @apply font-mono text-[11px] uppercase tracking-[0.18em] text-brass;
   }
 
   .btn {
-    @apply inline-flex items-center justify-center gap-3 border border-ink px-6 py-4 font-mono text-[11px] uppercase tracking-[0.12em] transition hover:bg-ink hover:text-cream;
+    @apply inline-flex items-center justify-center gap-3 border border-ink px-6 py-4 font-mono text-[11px] uppercase tracking-[0.14em] transition-colors duration-200 hover:bg-ink hover:text-cream;
   }
 
   .btn-solid {
-    @apply bg-ink text-cream hover:bg-brass hover:text-ink;
-  }
-
-  .section {
-    @apply px-6 py-20 sm:px-10 lg:px-20 lg:py-28;
+    @apply bg-ink text-cream hover:bg-brass hover:border-brass hover:text-ink;
   }
 
   .h1 {
-    @apply font-display text-5xl leading-[0.95] tracking-tight sm:text-6xl lg:text-8xl;
+    @apply font-display text-[2.75rem] leading-[0.98] tracking-tight sm:text-6xl lg:text-7xl;
   }
 
   .h2 {
-    @apply font-display text-4xl leading-[1] tracking-tight sm:text-5xl lg:text-6xl;
+    @apply font-display text-3xl leading-[1.05] tracking-tight sm:text-4xl lg:text-5xl;
   }
 }

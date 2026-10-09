@@ -18,9 +18,19 @@ This storefront is written to sell a product without making health claims.
 - Finalize the manufacturer, specifications, and certificates of analysis
 - Produce compliant labeling for the product category you actually sell
 - Establish lot traceability, complaint handling, and adverse event reporting
-- Publish shipping, returns, privacy, terms, and accessibility policies
-- Configure a payment processor and sales tax handling
+- Shipping, returns, privacy, and terms pages exist under `/policies/*`; have counsel review them before launch
+- Stripe Checkout is wired (`api/checkout.js`); enable Stripe Tax and set `STRIPE_AUTOMATIC_TAX=true` before launch
 - Have counsel review the label, the website, ads, influencer scripts, and social captions
 
 A disclaimer does not rescue a claim that is not permitted in the first place. Review the full net impression of the
 label and marketing together, not individual sentences in isolation.
+
+## Provisional content to confirm before launch
+
+The following were written to make the storefront complete and must be verified against real supplier and lab documents:
+
+- Prices on every variant (`product_variants.price_cents`)
+- Ingredient lists for the Softgels, Balm, and Scalp & Beard Serum (`products.inci_ingredients`)
+- The halal certification statement for the softgel shell
+- Lot data in `batches` (none published yet; the product page shows the specification until a lot is inserted)
+- Contact address hello@drmushtaqs.com
