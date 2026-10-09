@@ -87,7 +87,7 @@ export function CatalogProvider({ children }) {
             .from('products')
             .select(
               'slug,name,subtitle,tagline,category,product_type,short_description,long_description,inci_ingredients,is_featured,is_published,sort_order,badges,specs,' +
-                'product_variants(sku,label,size_ml,price_cents,compare_at_cents,stock,is_default,sort_order,image_storage_path,description),' +
+                'product_variants!product_variants_product_id_fkey(sku,label,size_ml,price_cents,compare_at_cents,stock,is_default,sort_order,image_storage_path,description),' +
                 'product_images(storage_path,alt,sort_order,aspect),' +
                 'product_sections(section_type,content,sort_order),' +
                 'batches(lot_number,pressed_date,best_by,thymoquinone_pct,acid_value,peroxide_value,coa_storage_path)'

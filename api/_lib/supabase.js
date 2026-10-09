@@ -24,7 +24,7 @@ async function rest(path, { method = 'GET', body, service = false, prefer } = {}
 export async function fetchVariants(skus) {
   const list = skus.map((s) => `"${s.replace(/"/g, '')}"`).join(',')
   return rest(
-    `product_variants?sku=in.(${list})&select=id,sku,label,price_cents,description,image_storage_path,product:products(name,slug,product_images(storage_path,sort_order))`
+    `product_variants?sku=in.(${list})&select=id,sku,label,price_cents,description,image_storage_path,product:products!product_variants_product_id_fkey(name,slug,product_images(storage_path,sort_order))`
   )
 }
 
