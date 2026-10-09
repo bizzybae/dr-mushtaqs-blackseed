@@ -74,9 +74,9 @@ export default function CartDrawer() {
           {lines.length === 0 ? (
             <div className="py-16 text-center">
               <p className="font-display text-xl">Your bag is empty.</p>
-              <p className="mt-2 text-sm text-muted">Five products. One oil. Start with the original.</p>
+              <p className="mt-2 text-sm text-muted">Start with the original oil, or shop by purpose.</p>
               <Link to="/shop" onClick={() => setOpen(false)} className="btn btn-solid mt-8" data-testid="link-empty-shop">
-                Shop the five
+                Shop by purpose
               </Link>
             </div>
           ) : (

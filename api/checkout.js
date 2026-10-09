@@ -74,8 +74,8 @@ export async function POST(request) {
   })
 
   const subtotal = clean.reduce((s, i) => s + bySku[i.sku].price_cents * i.qty, 0)
-  const threshold = Number(settings.free_shipping_threshold_cents ?? 7500)
-  const flat = Number(settings.flat_shipping_cents ?? 695)
+  const threshold = Number(settings.free_shipping_threshold_cents ?? 15000)
+  const flat = Number(settings.flat_shipping_cents ?? 900)
   const shippingAmount = subtotal >= threshold ? 0 : flat
 
   try {
@@ -106,7 +106,7 @@ export async function POST(request) {
         cart: JSON.stringify(clean),
         source: 'drmushtaqs-storefront',
       },
-      payment_intent_data: { description: 'Dr. Mushtaq’s Blackseed order' },
+      payment_intent_data: { description: 'Dr. Mushtaq’s order' },
     })
     return json({ url: session.url, id: session.id })
   } catch (err) {

@@ -12,6 +12,10 @@ This storefront is written to sell a product without making health claims.
 4. The quoted hadith appears in a separate heritage section with a note that it is not product evidence and not
    medical advice. It is never placed next to purchase copy as substantiation.
 5. The FDA disclaimer appears in the footer, alongside a general information disclaimer.
+6. The founder is described as "trained in family medicine"; the copy never implies an active clinical practice or a
+   physician-patient relationship, and never names where the company is located.
+7. Traditional names (Ayurveda, Unani, Chinese medicine) are listed for reference only, with a note that they are not
+   indications. No product copy borrows a traditional use as a benefit.
 
 ## Before selling
 
@@ -29,8 +33,14 @@ label and marketing together, not individual sentences in isolation.
 
 The following were written to make the storefront complete and must be verified against real supplier and lab documents:
 
-- Prices on every variant (`product_variants.price_cents`)
-- Ingredient lists for the Softgels, Balm, and Scalp & Beard Serum (`products.inci_ingredients`)
+- Prices on every variant (`product_variants.price_cents`), including set discounts and the Practitioner Case
+- Ingredient lists for every product (`products.inci_ingredients`); the expanded skin, hair, body, and fragrance
+  formulas were written as plausible compositions and have no supplier behind them yet
+- Botanical origins named on the Botanicals page (Kashmir saffron, Ethiopian blackseed, Assam oud, and so on)
 - The halal certification statement for the softgel shell
+- "Third-party tested" and "single-origin" label badges, which require a lab and supplier contracts to be true
+- Practitioner pricing terms and verification process on `/practitioners`
 - Lot data in `batches` (none published yet; the product page shows the specification until a lot is inserted)
 - Contact address hello@drmushtaqs.com
+- Product photography for the 13 newer products is AI-rendered from the original brand shots and must be replaced
+  with photographs of the real packaging before launch

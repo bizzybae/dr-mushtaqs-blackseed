@@ -10,7 +10,7 @@ import NotFound from './NotFound'
 export function FAQPage() {
   return (
     <>
-      <Seo title="Questions" description="Answers about Dr. Mushtaq’s products, the 4.64% thymoquinone standard, ordering, shipping, returns, and safety." />
+      <Seo title="Questions" description="Answers about Dr. Mushtaq’s products, sizes and pricing, the 60-Day Standard, ordering, shipping, and safety." />
       <section className="mx-auto max-w-[1440px] px-5 py-16 sm:px-8 lg:px-12 lg:py-24">
         <p className="eyebrow">Questions</p>
         <h1 className="h1 mt-6">Asked often.</h1>
@@ -133,7 +133,7 @@ export function CheckoutSuccess() {
           </div>
         )}
         <p className="mx-auto mt-8 max-w-md text-[15px] leading-relaxed text-ink/70">
-          A receipt from Stripe is on its way to your inbox, and a tracking link follows when the order ships from South Carolina, usually within one business day.
+          A receipt from Stripe is on its way to your inbox, and a tracking link follows when the order ships, usually within one business day. Every bottle is covered by the 60-Day Standard.
         </p>
         <Link to="/shop" className="btn btn-solid mt-10" data-testid="link-success-shop">
           Back to the shop

@@ -12,7 +12,7 @@ export default function Footer() {
             <Wordmark dark />
             <p className="mt-6 max-w-sm font-display text-2xl italic leading-snug text-cream/90">The Molecule, Not the Myth.</p>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-cream/60">
-              Single-origin Ethiopian Nigella sativa, cold-pressed and standardized to 4.64% thymoquinone. Five products, one oil, one number.
+              Physician-formulated blackseed, saffron, and grapevine botanicals. Single-origin, cold-pressed, lot-tested, and covered by the 60-Day Standard.
             </p>
             <div className="mt-8 max-w-sm">
               <Newsletter compact source="footer" />
@@ -44,7 +44,7 @@ export default function Footer() {
         <div className="mt-16 border-t border-cream/10 pt-8">
           <p className="max-w-4xl font-mono text-[10px] leading-relaxed text-cream/50">{FDA_DISCLAIMER}</p>
           <div className="mt-6 flex flex-col gap-2 font-mono text-[10px] uppercase tracking-[0.12em] text-cream/50 sm:flex-row sm:justify-between">
-            <p>Copyright 2026 Dr. Mushtaq’s. Myrtle Beach, South Carolina.</p>
+            <p>Copyright 2026 Dr. Mushtaq’s. All rights reserved.</p>
             <p>Secure checkout by Stripe</p>
           </div>
         </div>

@@ -2,17 +2,25 @@ import { Link } from 'react-router-dom'
 import ProductPhoto from '../components/ProductPhoto'
 import { LabelBadges, Seo } from '../components/ui'
 
+const MARKERS = [
+  ['Blackseed oil', 'Thymoquinone', 'HPLC', '4.64%'],
+  ['Saffron', 'Crocin · Safranal', 'UV-Vis, ISO 3632', 'Grade I'],
+  ['Grapevine', 'Total stilbenes', 'HPLC', 'Reported per lot'],
+  ['Oud · Sandalwood · Rose', 'Identity profile', 'GC-MS', 'Matched to reference'],
+  ['Every lot', 'Heavy metals · Microbial', 'ICP-MS · Plate count', 'Within USP limits'],
+]
+
 const STEPS = [
-  ['Seed', 'Nigella sativa grown in the Ethiopian highlands. One harvest per lot, bought directly from growers we have visited, cleaned and dried on site.'],
+  ['Source', 'One origin per botanical and one harvest per lot: Ethiopian Nigella sativa, Pampore saffron, Rhône grapevine, Isparta rose, Assam oud. Bought from growers and distillers we know.'],
   ['Press', 'Mechanical screw press held below 40 °C. No solvents, no heat, no refining. The oil settles for two weeks and is decanted, not filtered.'],
-  ['Test', 'A sample from every lot goes to an independent laboratory for HPLC assay of thymoquinone, plus peroxide and acid value for freshness and heavy metals for safety.'],
-  ['Release', 'The lot is released only at 4.64% thymoquinone or above. The lot number is printed on every bottle and the certificate of analysis is posted on the product page.'],
+  ['Test', 'A sample from every lot goes to an independent laboratory for the marker constituent of each botanical, plus peroxide and acid value for freshness, heavy metals, and a microbial panel.'],
+  ['Release', 'A lot is released only when it meets its specification: 4.64% thymoquinone for the oil, Grade I for saffron, the stated stilbene content for grapevine. The lot number is printed on every unit and the certificate is posted on the product page.'],
 ]
 
 export default function Science() {
   return (
     <>
-      <Seo title="The Molecule" description="Why Dr. Mushtaq’s standardizes blackseed oil to 4.64% thymoquinone, how it is pressed, and how every lot is tested." />
+      <Seo title="The Molecule" description="Why Dr. Mushtaq’s measures one marker constituent per botanical, prints the number, and makes no other claim. Thymoquinone, crocin, stilbenes, and how every lot is tested." />
       <section className="mx-auto max-w-[1440px] px-5 py-16 sm:px-8 lg:px-12 lg:py-24">
         <div className="grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-7">
@@ -25,7 +33,7 @@ export default function Science() {
           </div>
           <div className="lg:col-span-5 lg:pt-10">
             <p className="text-lg leading-relaxed text-ink/75">
-              Nigella sativa seed oil contains hundreds of compounds. One of them, thymoquinone, is the most studied, the most characteristic, and the most sensitive to how the seed was grown, pressed, and stored. That makes it the right thing to measure, and the right thing to print.
+              Every botanical we use contains hundreds of compounds. Each has one that is the most studied, the most characteristic, and the most sensitive to how the plant was grown, handled, and stored: thymoquinone in blackseed, crocin and safranal in saffron, the stilbenes in grapevine. We measure that one, print the number, and stop there.
             </p>
           </div>
         </div>
@@ -72,10 +80,37 @@ export default function Science() {
         </div>
       </section>
 
+      <section className="mx-auto max-w-[1440px] px-5 py-20 sm:px-8 lg:px-12">
+        <p className="eyebrow">What we measure</p>
+        <h2 className="h2 mt-4">One marker per botanical.</h2>
+        <div className="mt-10 overflow-x-auto">
+          <table className="w-full min-w-[640px] text-left">
+            <thead className="border-b border-ink/10 font-mono text-[10px] uppercase tracking-[0.16em] text-muted">
+              <tr>
+                <th className="py-3 pr-6 font-normal">Material</th>
+                <th className="py-3 pr-6 font-normal">Marker</th>
+                <th className="py-3 pr-6 font-normal">Method</th>
+                <th className="py-3 font-normal">Specification</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-ink/10">
+              {MARKERS.map(([m, k, method, spec]) => (
+                <tr key={m}>
+                  <td className="py-4 pr-6 font-display text-lg">{m}</td>
+                  <td className="py-4 pr-6 text-sm text-ink/80">{k}</td>
+                  <td className="py-4 pr-6 font-mono text-[11px] text-muted">{method}</td>
+                  <td className="py-4 font-mono text-[11px] text-brass">{spec}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
       <section className="mx-auto max-w-[1440px] px-5 py-20 sm:px-8 lg:px-12 lg:py-28">
         <div className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-4">
-            <p className="eyebrow">Seed to shelf</p>
+            <p className="eyebrow">Source to shelf</p>
             <h2 className="h2 mt-4">Four steps, one lot number.</h2>
             <ProductPhoto slug="collection-flatlay" fit="cover" ratio={1.2} position="left center" className="mt-10" sizes="(min-width: 1024px) 33vw, 100vw" />
           </div>

@@ -62,8 +62,8 @@ export function CartProvider({ children }) {
 
   const subtotalCents = lines.reduce((s, l) => s + l.lineCents, 0)
   const count = lines.reduce((s, l) => s + l.qty, 0)
-  const threshold = Number(settings.free_shipping_threshold_cents ?? 7500)
-  const flat = Number(settings.flat_shipping_cents ?? 695)
+  const threshold = Number(settings.free_shipping_threshold_cents ?? 15000)
+  const flat = Number(settings.flat_shipping_cents ?? 900)
   const shippingCents = subtotalCents === 0 || subtotalCents >= threshold ? 0 : flat
 
   const value = useMemo(

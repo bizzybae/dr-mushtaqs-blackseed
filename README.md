@@ -1,8 +1,15 @@
 # Dr. Mushtaq’s Blackseed
 
-Storefront for the five Dr. Mushtaq’s products: Blackseed Oil (100 mL and the Travel Ritual), Blackseed Oil Softgels,
-Blackseed Balm, Scalp & Beard Serum, and Culinary Finishing Oil. Built with Vite, React 18, Tailwind CSS, Supabase,
-and Stripe Checkout, deployed on Vercel.
+Storefront for Dr. Mushtaq’s, a physician-formulated botanical line organized by purpose: Within (taken daily), Skin,
+Hair, Body, Fragrance (alcohol-free attars), and Ritual Sets. 23 products across 6 collections, most in two or three
+sizes with per-mL savings on larger bottles, starting at $80 for 125 mL. Blackseed (Nigella sativa, standardized to
+4.64% thymoquinone) is the constant; saffron, grapevine, rose, amla, sesame, oud, sandalwood, vetiver, frankincense,
+and rosemary join it by use case. Built with Vite, React 18, Tailwind CSS, Supabase, and Stripe Checkout, deployed on
+Vercel.
+
+Marketing follows the physician-as-brand approach: the founder page (`/dr-mushtaq`) carries factual credentials and a
+disclosure, every product makes specification claims only, and the Botanicals and Practitioners pages name each
+material in Ayurvedic, Unani, and Chinese medicine terms for practitioner reference without indications.
 
 ## Stack
 
@@ -41,8 +48,11 @@ friendly notice instead of a payment page.
 
 ## Updating the catalog
 
-Prices, copy, variants, and images live in Supabase. Edit `src/data/catalog.js`, run `npm run seed:sql`, and apply
-`supabase/seed.sql` in the SQL editor; or edit rows directly in the Supabase dashboard. The site reads the database at
+Prices, copy, variants, and images live in Supabase. Edit `src/data/catalog.js` (products, botanicals, collections)
+or `src/data/site.js` (navigation, founder page, FAQ, policies), run `npm run seed:sql`, commit so the generated
+`supabase/seed.json` is on `main`, then run `supabase/seed.sql` in the SQL editor (it needs the `http` extension and
+fetches the JSON from GitHub); or edit rows directly in the Supabase dashboard. Anything not in the seed is unpublished,
+not deleted. The site reads the database at
 runtime, so no redeploy is needed for price or copy changes.
 
 To publish lot results, insert a row in `batches` (lot number, press date, thymoquinone %, COA path). The product page

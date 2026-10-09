@@ -1,50 +1,107 @@
 export const NAV = [
-  { label: 'Shop', to: '/shop' },
-  { label: 'The Molecule', to: '/science' },
-  { label: 'Our Story', to: '/story' },
-  { label: 'Questions', to: '/faq' },
+  { label: 'Within', to: '/collections/within', collection: 'within' },
+  { label: 'Skin', to: '/collections/skin', collection: 'skin' },
+  { label: 'Hair', to: '/collections/hair', collection: 'hair' },
+  { label: 'Body', to: '/collections/body', collection: 'body' },
+  { label: 'Fragrance', to: '/collections/fragrance', collection: 'fragrance' },
+  { label: 'Ritual Sets', to: '/collections/ritual-sets', collection: 'ritual-sets' },
+  {
+    label: 'Learn',
+    to: '/dr-mushtaq',
+    children: [
+      { label: 'Dr. Mushtaq', to: '/dr-mushtaq', note: 'The physician behind the label' },
+      { label: 'The Molecule', to: '/science', note: 'Why we print 4.64%' },
+      { label: 'Botanicals', to: '/botanicals', note: 'Materia medica across three traditions' },
+      { label: 'The Protocol', to: '/protocol', note: 'A day with the shelf' },
+      { label: 'Practitioners', to: '/practitioners', note: 'Dispensing, COAs, case pricing' },
+      { label: 'Questions', to: '/faq', note: 'Ordering, safety, the guarantee' },
+    ],
+  },
 ]
 
 export const FOOTER_LINKS = {
   Shop: [
-    { label: 'Blackseed Oil', to: '/shop/blackseed-oil' },
-    { label: 'Softgels', to: '/shop/blackseed-oil-softgels' },
-    { label: 'Balm', to: '/shop/blackseed-balm' },
-    { label: 'Scalp & Beard Serum', to: '/shop/scalp-beard-serum' },
-    { label: 'Culinary Finishing Oil', to: '/shop/culinary-finishing-oil' },
+    { label: 'Within', to: '/collections/within' },
+    { label: 'Skin', to: '/collections/skin' },
+    { label: 'Hair', to: '/collections/hair' },
+    { label: 'Body', to: '/collections/body' },
+    { label: 'Fragrance', to: '/collections/fragrance' },
+    { label: 'Ritual Sets', to: '/collections/ritual-sets' },
+    { label: 'Shop all', to: '/shop' },
   ],
   Learn: [
+    { label: 'Dr. Mushtaq', to: '/dr-mushtaq' },
     { label: 'The Molecule', to: '/science' },
-    { label: 'Our Story', to: '/story' },
-    { label: 'Questions', to: '/faq' },
+    { label: 'Botanicals', to: '/botanicals' },
+    { label: 'The Protocol', to: '/protocol' },
+    { label: 'Practitioners', to: '/practitioners' },
   ],
   Help: [
+    { label: 'The 60-Day Standard', to: '/policies/guarantee' },
     { label: 'Shipping & Returns', to: '/policies/shipping-returns' },
     { label: 'Privacy', to: '/policies/privacy' },
     { label: 'Terms', to: '/policies/terms' },
+    { label: 'Questions', to: '/faq' },
     { label: 'Contact', to: 'mailto:hello@drmushtaqs.com', external: true },
   ],
 }
 
+// Founder facts are drawn from public professional records; see the
+// disclosure line, which follows NAD guidance on founder endorsements.
 export const FOUNDER = {
-  name: 'Dr. Quddarat Mushtaq, MD',
-  role: 'Founder',
-  short:
-    'A family-medicine-trained physician in South Carolina who grew up with black seed in the kitchen cupboard and spent his training learning why most of what is said about it cannot be substantiated.',
-  body: [
-    'Black seed was in my house before I knew what a molecule was. My mother kept it next to the salt. In medical school I kept running into the same gap: a plant with a long record of human use and a thin record of honest labeling. Bottles sold on a hadith with no lot number. Oils that were pale and tasteless because they had been refined to nothing.',
-    'This company is my answer to that gap. We measure the one constituent worth measuring, we print the number, and we stop there. No cures. No promises. A clean oil you can taste, from a seed you can trace, with a certificate you can read.',
+  name: 'Dr. Quddarat U. Mushtaq, MD, MS',
+  shortName: 'Dr. Mushtaq',
+  role: 'Founder, formulator, and owner',
+  credentials: [
+    ['MD', 'Doctor of Medicine, Ross University School of Medicine'],
+    ['MS', 'Master of Science in Biological Sciences, Mississippi College'],
+    ['BS', 'Bachelor of Science in Biology, Francis Marion University'],
+    ['Training', 'Postgraduate training in family medicine'],
+    ['Since 2016', 'Founder of Start With You, the company behind Dr. Mushtaq’s'],
   ],
-  disclaimer:
-    'This biography is factual background about the founder. It is not a product endorsement, not advice for any individual, and not a substitute for care from your own licensed clinician. Nothing on this site creates a physician-patient relationship.',
+  short:
+    'A physician with a master’s in biological sciences who grew up with black seed in the kitchen cupboard and spent his training learning why most of what is said about it cannot be substantiated.',
+  lede: 'I measure one molecule, print the number, and stop there.',
+  body: [
+    'Black seed was in my house before I knew what a molecule was. My mother kept it next to the salt. In my master’s work and then in medical school I kept running into the same gap: a plant with a thousand years of use in Unani, Ayurvedic, and Chinese practice, and almost no honest labeling. Bottles sold on a saying with no lot number. Oils refined until they were pale and tasteless. Saffron sold as powder so no one could tell what it was.',
+    'This company is my answer to that gap. We buy one harvest of one botanical from one place. We press it cold. We send every lot to an independent laboratory, and we print what the laboratory found. Where there is a tradition, we honour it by getting the material right, not by borrowing its promises.',
+    'If a bottle does not meet the specification on its label, or you simply do not love it, I would rather refund you than have you keep it. That is the whole standard.',
+  ],
+  principles: [
+    ['One origin per botanical', 'Ethiopian Nigella sativa, Pampore saffron, Rhône grapevine, Isparta rose, Assam oud. One harvest per lot so the certificate means something.'],
+    ['Measure what matters', 'Thymoquinone in blackseed oil. Crocin and safranal in saffron. Total stilbenes in grapevine. The marker constituent of each botanical is assayed and reported.'],
+    ['Say less', 'Specification claims only: origin, process, concentration, testing. No disease language, no outcome promises, anywhere.'],
+    ['Respect the traditions', 'Kalonji, Habbat al-Sauda, Hei Zhong Cao Zi: the same seed, three medical traditions. We list the classical names so practitioners can place our materials in their own frameworks.'],
+    ['Stand behind every bottle', 'The 60-Day Standard: full refund, opened or not, no questions beyond what we could do better.'],
+  ],
+  disclosure:
+    'Dr. Quddarat U. Mushtaq, MD, MS is the founder and owner of Dr. Mushtaq’s and has a financial interest in every product sold here. His statements are his professional opinion as a formulator, not medical advice, and not a substitute for care from your own licensed clinician. Nothing on this site creates a physician-patient relationship. These products are not intended to diagnose, treat, cure, or prevent any disease.',
+  qa: [
+    ['Why would a physician start a botanical company?', 'Because the gap between how much people use these materials and how little they are told about them is a public-health problem of its own. I cannot fix the folklore. I can fix the label.'],
+    ['Why 4.64% and not a round number?', 'Because that is what the seed does when it is pressed cold and released fresh. A round number would be a marketing decision. This one is a laboratory result.'],
+    ['Do you take your own products?', 'The oil every morning, the softgels when I travel, the culinary bottle on most dinners. The attars I wear in rotation.'],
+    ['Will you ever make health claims?', 'No. If a claim is ever supportable enough to print, it will come with the study, the dose, and the population it applied to, and even then I would rather you heard it from your own clinician.'],
+    ['Why list Ayurvedic and Chinese names?', 'Because the practitioners who have used these botanicals longest work in those frameworks. If an Ayurvedic doctor wants Kalonji oil with a certificate of analysis, or a TCM herbalist wants Zang Hong Hua threads with a crocin assay, I want them to recognise what we make.'],
+  ],
 }
 
 export const HADITH = {
-  narration:
-    '“There is healing in black seed for all diseases except death.”',
+  narration: '“There is healing in black seed for all diseases except death.”',
   attribution: 'Narrated by Abu Hurairah, Sahih al-Bukhari 5688, Book 76 (Medicine)',
   note:
     'We quote this narration because it is why black seed has been kept in homes across the Muslim world for fourteen centuries. We quote it for heritage, not as evidence. It is not a product claim and not medical advice, and we have not evaluated it as either.',
+}
+
+export const PRACTITIONERS = {
+  lede: 'Dispense materials you can place in your own framework, with the documentation to back them.',
+  points: [
+    ['Classical names on every page', 'Each botanical lists its Ayurvedic, Unani, and Chinese names beside the Latin binomial and the part used.'],
+    ['Certificate of analysis per lot', 'Thymoquinone by HPLC for blackseed oil; crocin and safranal for saffron; total stilbenes for grapevine; heavy metals and microbial panel on every lot. Published on the product page and enclosed with every case.'],
+    ['Dispensing sizes', '500 mL apothecary bottles with glass pipettes, 360-count softgels, 1 kg bath soak, and the six-bottle Practitioner Case.'],
+    ['Practitioner pricing', 'Verified practitioners receive 20% off list on all sizes, 25% on cases, and net-30 terms after the second order.'],
+    ['No claims to police', 'Our labels and pages make specification claims only, so nothing we print conflicts with the guidance you give your own patients.'],
+  ],
+  eligible: 'Licensed acupuncturists and herbalists, Ayurvedic practitioners (BAMS or NAMA-certified), Unani hakims, naturopathic doctors, pharmacists, physicians, nurse practitioners, registered dietitians, and dispensaries.',
 }
 
 export const SITE_FAQ = [
@@ -52,47 +109,65 @@ export const SITE_FAQ = [
     group: 'The products',
     items: [
       ['What does “standardized to 4.64% thymoquinone” mean?', 'Thymoquinone is the most studied constituent of Nigella sativa seed oil and the clearest marker of seed quality and pressing care. We test every lot by HPLC and release it only when it meets our 4.64% specification. The number is printed so you can compare it to anything else on the shelf.'],
-      ['Is the oil in every product the same?', 'Yes. The dropper bottle, the softgel fill, the balm, the serum, and the culinary bottle all begin with the same single-origin Ethiopian pressing. The format changes; the oil does not.'],
-      ['Why Ethiopia?', 'Ethiopian Nigella sativa consistently yields a darker, more aromatic oil with higher thymoquinone than seed from most other origins. We buy one harvest per lot from growers we have visited.'],
-      ['Do you make health claims?', 'No. We do not claim that any product diagnoses, treats, cures, mitigates, or prevents any disease, and we make no outcome promises. We tell you what is in the bottle and how it was made.'],
+      ['Is blackseed oil in every product?', 'Yes. The dropper bottle, the softgels, the skin and hair oils, the body oil, the bath soak, and all three attars begin with the same single-origin Ethiopian pressing. Saffron, grapevine, rose, amla, sesame, and the resins are added by purpose.'],
+      ['Where do the other botanicals come from?', 'Saffron from Pampore in Kashmir, grapevine from the Rhône, damask rose from Isparta, amla from Uttar Pradesh, sesame from Gujarat, oud from Assam plantations, sandalwood from certified Mysore plantations, frankincense from Dhofar. One origin and one harvest per lot.'],
+      ['Are the products organic?', 'The blackseed, sesame, and grapeseed oils are certified organic at the press. Saffron, oud, and the resins are wild-type or plantation crops without organic certification schemes, so we do not claim it for them; we publish the pesticide and heavy-metal panel for every lot instead.'],
+      ['Do you make health claims?', 'No. We do not claim that any product diagnoses, treats, cures, mitigates, or prevents any disease, and we make no outcome promises. We tell you what is in the bottle, where it came from, and what the laboratory measured.'],
+    ],
+  },
+  {
+    group: 'Sizes and pricing',
+    items: [
+      ['Why do the larger sizes cost less per millilitre?', 'Bottling and testing cost roughly the same for a 125 mL and a 500 mL bottle, so we pass the difference on. The product page shows the saving against the smallest size.'],
+      ['Which size should I start with?', 'The smallest. Every product is covered by the 60-Day Standard, so start small, decide, then move up when you reorder.'],
+      ['How do sets save money?', 'Sets are priced 10% to 20% below the sum of their parts, and the Fragrance Discovery Set is credited in full against any 30 mL attar.'],
     ],
   },
   {
     group: 'Ordering',
     items: [
       ['How does checkout work?', 'Checkout is handled by Stripe. We never see or store your card details. You can pay by card, Apple Pay, Google Pay, or Link.'],
-      ['How much is shipping?', 'Shipping within the United States is complimentary on orders over $75 and a flat $6.95 below that. We ship Monday through Friday from South Carolina.'],
-      ['What is your return policy?', 'Unopened products may be returned within 30 days for a full refund. If something arrives damaged, write to us within seven days with a photo and we will replace it.'],
-      ['Do you ship internationally?', 'Not yet. We are starting with the United States while we finalize labeling for other markets.'],
+      ['How much is shipping?', 'Shipping within the United States is complimentary on orders over $150 and a flat $9 below that. Orders ship Monday through Friday and most arrive in two to five business days with a tracking link by email.'],
+      ['What is the guarantee?', 'The 60-Day Standard: use any product for up to 60 days and, if you do not love it, write to us for a full refund of the product price. Opened or not.'],
+      ['Do you ship internationally?', 'Not yet. We are starting with the United States while we finalise labeling for other markets.'],
     ],
   },
   {
     group: 'Safety',
     items: [
       ['Who should check with a clinician first?', 'Anyone pregnant or nursing, taking medication, managing a medical condition, scheduled for a procedure, or considering use for a child. Read the full label before use.'],
-      ['Is anything on this site medical advice?', 'No. The site, the founder biography, and the product information are general consumer information only. They do not create a physician-patient relationship or replace care from your own licensed clinician.'],
+      ['Is anything on this site medical advice?', 'No. The site, the founder’s pages, and the product information are general consumer information only. They do not create a physician-patient relationship or replace care from your own licensed clinician.'],
     ],
   },
 ]
 
 export const POLICIES = {
+  guarantee: {
+    title: 'The 60-Day Standard',
+    updated: 'October 2026',
+    sections: [
+      ['The promise', 'Use any Dr. Mushtaq’s product for up to 60 days from delivery. If it does not meet the specification printed on its label, or you simply do not love it, we refund the full product price to your original payment method. Opened or unopened.'],
+      ['How to claim', 'Email hello@drmushtaqs.com with your order number and one sentence on what we could do better. We reply within one business day and issue the refund within five. We may ask you to return the bottle so we can examine the lot; if so, we pay the postage.'],
+      ['What it covers', 'Every product sold on this site, including sets. Shipping charges are refunded if the product was defective or did not meet its specification.'],
+      ['Limits', 'One claim per product per household, and a maximum of three claims per order. We reserve the right to decline future orders where the guarantee is used repeatedly.'],
+    ],
+  },
   'shipping-returns': {
     title: 'Shipping & Returns',
     updated: 'October 2026',
     sections: [
-      ['Shipping', 'We ship within the United States Monday through Friday from Myrtle Beach, South Carolina. Orders placed before noon Eastern usually leave the same day. Shipping is complimentary on orders over $75 and a flat $6.95 below that. Most orders arrive in two to five business days by USPS or UPS, and you will receive a tracking link by email when your order ships.'],
-      ['Returns', 'Unopened products in original packaging may be returned within 30 days of delivery for a full refund of the product price. Write to hello@drmushtaqs.com with your order number and we will send a prepaid label. Refunds are issued to the original payment method within five business days of receipt.'],
+      ['Shipping', 'We ship within the United States Monday through Friday. Orders placed before noon Eastern usually leave the same day. Shipping is complimentary on orders over $150 and a flat $9 below that. Most orders arrive in two to five business days by USPS or UPS, and you will receive a tracking link by email when your order ships.'],
+      ['Returns', 'Every product is covered by the 60-Day Standard: a full refund of the product price within 60 days of delivery, opened or not. Write to hello@drmushtaqs.com with your order number.'],
       ['Damaged or incorrect items', 'If anything arrives damaged, leaking, or different from what you ordered, email a photo within seven days of delivery and we will replace it at no cost.'],
-      ['Opened products', 'For safety reasons we cannot resell opened products, so opened items are not eligible for refund unless they are defective. If an opened product is not what you expected, write to us anyway; we would rather hear about it.'],
     ],
   },
   privacy: {
     title: 'Privacy Policy',
     updated: 'October 2026',
     sections: [
-      ['What we collect', 'When you place an order we collect your name, email, shipping address, and the items you bought. Payment details are collected and stored by Stripe, not by us. If you join our list we collect your email address and the page you joined from.'],
-      ['How we use it', 'To fulfill and support your order, to send order and shipping notices, and, if you opted in, to send occasional notes about new lots and products. We do not sell or rent personal information.'],
-      ['Who we share it with', 'Stripe for payment processing, our shipping carriers for delivery, and Supabase and Vercel, which host our store and database in the United States. Each is bound by its own privacy terms.'],
+      ['What we collect', 'When you place an order we collect your name, email, shipping address, and the items you bought. Payment details are collected and stored by Stripe, not by us. If you join our list or apply for a practitioner account we collect what you enter in that form.'],
+      ['How we use it', 'To fulfil and support your order, to send order and shipping notices, to verify practitioner credentials, and, if you opted in, to send occasional notes about new lots and products. We do not sell or rent personal information.'],
+      ['Who we share it with', 'Stripe for payment processing, our shipping carriers for delivery, and Supabase and Vercel, which host our store and database in the United States.'],
       ['Your choices', 'Unsubscribe from any email with one click. To access, correct, or delete your information, write to hello@drmushtaqs.com.'],
       ['Cookies', 'The store uses a small amount of local storage to remember your bag between visits. We do not run advertising trackers.'],
     ],
@@ -102,12 +177,12 @@ export const POLICIES = {
     updated: 'October 2026',
     sections: [
       ['Products', 'Dr. Mushtaq’s products are sold as foods, dietary supplements, and cosmetics according to their labels. They are not intended to diagnose, treat, cure, or prevent any disease. Read the full label before use and consult a qualified clinician with any health question.'],
+      ['Founder disclosure', 'Dr. Quddarat U. Mushtaq, MD, MS is the founder and owner of this company. Statements attributed to him on this site are his opinions as formulator and owner and are not medical advice.'],
       ['Pricing and availability', 'Prices are in US dollars and may change without notice. Prices shown at checkout are final. We may limit quantities or decline an order where we suspect resale or fraud.'],
-      ['Information on this site', 'Content on this site is general information only. It is not medical advice and does not create a physician-patient relationship with the founder or anyone else.'],
-      ['Governing law', 'These terms are governed by the laws of the State of South Carolina.'],
+      ['Information on this site', 'Content on this site is general information only. Traditional names and uses are listed for education and practitioner reference, not as indications.'],
     ],
   },
 }
 
 export const FDA_DISCLAIMER =
-  'These statements have not been evaluated by the Food and Drug Administration. These products are not intended to diagnose, treat, cure, or prevent any disease. Information on this site is general in nature, is not medical advice, and does not create a physician-patient relationship. Consult a qualified clinician about your own health.'
+  'These statements have not been evaluated by the Food and Drug Administration. These products are not intended to diagnose, treat, cure, or prevent any disease. Dr. Quddarat U. Mushtaq, MD, MS is the founder and owner of Dr. Mushtaq’s; his statements are opinion, not medical advice, and do not create a physician-patient relationship. Consult a qualified clinician about your own health.'

@@ -1,0 +1,2793 @@
+{
+ "collections": [
+  {
+   "slug": "within",
+   "name": "Within",
+   "short": "Taken daily",
+   "description": "The oil itself, taken by the dropper, the softgel, or the spoon. Where every Dr. Mushtaq’s routine begins.",
+   "hero": "blackseed-oil",
+   "steps": [
+    "Daily",
+    "Measured",
+    "Table"
+   ],
+   "sort": 1
+  },
+  {
+   "slug": "skin",
+   "name": "Skin",
+   "short": "Cleanse, treat, seal",
+   "description": "Oil-first skincare built on cold-pressed blackseed, Kashmiri saffron, and grapevine. Three steps, no water, no fillers.",
+   "hero": "saffron-radiance-face-oil",
+   "steps": [
+    "Cleanse",
+    "Treat",
+    "Seal"
+   ],
+   "sort": 2
+  },
+  {
+   "slug": "hair",
+   "name": "Hair",
+   "short": "Scalp first",
+   "description": "Hair care that starts at the scalp: a pre-wash oil ritual and a leave-in serum for beard and crown.",
+   "hero": "amla-blackseed-hair-oil",
+   "steps": [
+    "Pre-wash",
+    "Leave-in"
+   ],
+   "sort": 3
+  },
+  {
+   "slug": "body",
+   "name": "Body",
+   "short": "The daily anointing",
+   "description": "A warm-oil self-massage and a mineral soak, in the tradition of abhyanga and the hammam.",
+   "hero": "saffron-sesame-body-oil",
+   "steps": [
+    "Soak",
+    "Anoint"
+   ],
+   "sort": 4
+  },
+  {
+   "slug": "fragrance",
+   "name": "Fragrance",
+   "short": "Alcohol-free attars",
+   "description": "Oil perfumes in the attar tradition: no alcohol, no spray, worn close to the skin. Blackseed warms every base.",
+   "hero": "oud-noir-attar",
+   "steps": [
+    "Attar",
+    "Discovery"
+   ],
+   "sort": 5
+  },
+  {
+   "slug": "ritual-sets",
+   "name": "Ritual Sets",
+   "short": "Save with sets",
+   "description": "Complete routines and gifts, priced below the sum of their parts.",
+   "hero": "collection-gift-set",
+   "steps": [
+    "Routine",
+    "Gift",
+    "Practitioner"
+   ],
+   "sort": 6
+  }
+ ],
+ "botanicals": [
+  {
+   "key": "blackseed",
+   "name": "Blackseed",
+   "latin": "Nigella sativa",
+   "part": "Seed, cold-pressed oil",
+   "origin": "Ethiopian highlands",
+   "ayurveda": "Kalonji, Upakunchika",
+   "unani": "Habbat al-Sauda, Kalonji",
+   "tcm": "Hei Zhong Cao Zi (黑种草子)",
+   "note": "The constant in every Dr. Mushtaq’s formula. Standardized to 4.64% thymoquinone by HPLC on every lot. Peppery, warm, faintly of oregano."
+  },
+  {
+   "key": "saffron",
+   "name": "Saffron",
+   "latin": "Crocus sativus",
+   "part": "Stigma",
+   "origin": "Kashmir, Pampore",
+   "ayurveda": "Kesar, Kumkuma",
+   "unani": "Zafran",
+   "tcm": "Zang Hong Hua (藏红花)",
+   "note": "Hand-picked stigmas graded for crocin and safranal content. We buy whole threads, never powder, and infuse them in blackseed oil ourselves."
+  },
+  {
+   "key": "grapevine",
+   "name": "Grapevine",
+   "latin": "Vitis vinifera",
+   "part": "Seed oil, leaf and vine-shoot extract",
+   "origin": "Rhône Valley",
+   "ayurveda": "Draksha",
+   "unani": "Angur",
+   "tcm": "Pu Tao (葡萄)",
+   "note": "Cold-pressed grapeseed oil for its light, dry finish, and an extract of the vine shoot itself, the part of the plant richest in resveratrol and viniferins."
+  },
+  {
+   "key": "rose",
+   "name": "Damask Rose",
+   "latin": "Rosa damascena",
+   "part": "Petal, otto and infused oil",
+   "origin": "Isparta",
+   "ayurveda": "Shatapatri, Taruni",
+   "unani": "Gul-e-Surkh",
+   "tcm": "Mei Gui Hua (玫瑰花)",
+   "note": "Steam-distilled otto for fragrance; whole petals infused in oil for the cleansing oil."
+  },
+  {
+   "key": "amla",
+   "name": "Amla",
+   "latin": "Phyllanthus emblica",
+   "part": "Fruit, oil infusion",
+   "origin": "Uttar Pradesh",
+   "ayurveda": "Amalaki",
+   "unani": "Amla",
+   "tcm": "Yu Gan Zi (余甘子)",
+   "note": "Sun-dried fruit infused slowly in sesame and blackseed oil, the classical way a hair oil is made."
+  },
+  {
+   "key": "sesame",
+   "name": "Sesame",
+   "latin": "Sesamum indicum",
+   "part": "Seed, cold-pressed oil",
+   "origin": "Gujarat",
+   "ayurveda": "Tila",
+   "unani": "Kunjad",
+   "tcm": "Hei Zhi Ma (黑芝麻)",
+   "note": "The traditional carrier of abhyanga. Cold-pressed, unroasted, so the aroma stays quiet."
+  },
+  {
+   "key": "oud",
+   "name": "Oud",
+   "latin": "Aquilaria malaccensis",
+   "part": "Resinous heartwood, distilled oil",
+   "origin": "Assam",
+   "ayurveda": "Agaru",
+   "unani": "Ood",
+   "tcm": "Chen Xiang (沉香)",
+   "note": "Plantation-grown, hydro-distilled agarwood oil. Deep, dry, animalic in trace, softened by blackseed."
+  },
+  {
+   "key": "sandalwood",
+   "name": "Sandalwood",
+   "latin": "Santalum album",
+   "part": "Heartwood, distilled oil",
+   "origin": "Mysore (certified plantation)",
+   "ayurveda": "Chandana",
+   "unani": "Sandal",
+   "tcm": "Tan Xiang (檀香)",
+   "note": "Creamy, quiet, long-lasting. The anchor of Kesar Rose."
+  },
+  {
+   "key": "vetiver",
+   "name": "Vetiver",
+   "latin": "Chrysopogon zizanioides",
+   "part": "Root, distilled oil",
+   "origin": "Haiti",
+   "ayurveda": "Ushira",
+   "unani": "Khas",
+   "tcm": "Xiang Gen Cao (香根草)",
+   "note": "Earthy, green, cool. Grounds the grapevine leaf in Vigne Verte."
+  },
+  {
+   "key": "frankincense",
+   "name": "Frankincense",
+   "latin": "Boswellia sacra",
+   "part": "Resin, distilled oil",
+   "origin": "Dhofar",
+   "ayurveda": "Shallaki (B. serrata)",
+   "unani": "Kundur, Luban",
+   "tcm": "Ru Xiang (乳香)",
+   "note": "Bright, resinous, citrus-edged. Used in trace in the body oil and the bath soak."
+  },
+  {
+   "key": "rosemary",
+   "name": "Rosemary",
+   "latin": "Rosmarinus officinalis",
+   "part": "Leaf, distilled oil",
+   "origin": "Tunisia",
+   "ayurveda": "Rusmari",
+   "unani": "Iklil al-Jabal",
+   "tcm": "Mi Die Xiang (迷迭香)",
+   "note": "The clean herbal lift in the Scalp & Beard Serum."
+  }
+ ],
+ "badges": [
+  "physician_formulated",
+  "cold_pressed",
+  "single_origin",
+  "third_party_tested"
+ ],
+ "products": [
+  {
+   "slug": "blackseed-oil",
+   "name": "Blackseed Oil",
+   "subtitle": "Cold-pressed Nigella sativa seed oil",
+   "tagline": "The original. One seed, one press, one number on the label.",
+   "category": "oil",
+   "type": "supplement",
+   "short": "Single-origin Ethiopian Nigella sativa, cold-pressed and standardized to 4.64% thymoquinone. Amber glass, glass dropper, lot number on every bottle.",
+   "long": "Most blackseed oil is sold on folklore. Ours is sold on a number. Every lot is pressed from a single Ethiopian harvest, held below 40 °C, and released only after an independent laboratory confirms thymoquinone at 4.64%. Unrefined and unblended, so the color, aroma, and peppery finish are the seed’s own.",
+   "ingredients": "Nigella sativa (black seed) oil.",
+   "featured": true,
+   "isNew": false,
+   "bestseller": true,
+   "sort": 1,
+   "specs": [
+    [
+     "Botanical",
+     "Nigella sativa L., seed"
+    ],
+    [
+     "Origin",
+     "Ethiopia, single harvest per lot"
+    ],
+    [
+     "Process",
+     "Cold-pressed below 40 °C, unrefined"
+    ],
+    [
+     "Standardization",
+     "Thymoquinone 4.64% by HPLC"
+    ],
+    [
+     "Packaging",
+     "Amber glass, glass dropper, tamper band"
+    ],
+    [
+     "Storage",
+     "Cool, dark place. Refrigerate after opening."
+    ]
+   ],
+   "collection": "within",
+   "step": "Daily",
+   "botanicals": [
+    "blackseed"
+   ],
+   "mosaic": [],
+   "variants": [
+    {
+     "sku": "DM-BSO-125",
+     "label": "125 mL",
+     "sizeMl": 125,
+     "price": 8000,
+     "compare": null,
+     "def": true,
+     "i": 0,
+     "image": "blackseed-oil",
+     "desc": "Dropper bottle | About four months at one dropper daily."
+    },
+    {
+     "sku": "DM-BSO-250",
+     "label": "250 mL",
+     "sizeMl": 250,
+     "price": 14800,
+     "compare": 16000,
+     "def": false,
+     "i": 1,
+     "image": "blackseed-oil",
+     "desc": "Dropper bottle | Eight months, or a household supply."
+    },
+    {
+     "sku": "DM-BSO-500",
+     "label": "500 mL",
+     "sizeMl": 500,
+     "price": 27200,
+     "compare": 32000,
+     "def": false,
+     "i": 2,
+     "image": "blackseed-oil",
+     "desc": "Apothecary bottle | The practitioner size. Ships with a glass pipette."
+    }
+   ],
+   "gallery": [
+    {
+     "path": "blackseed-oil",
+     "alt": "Dr. Mushtaq’s Blackseed Oil, amber dropper bottle on marble beside Nigella sativa flowers and seeds",
+     "aspect": 1.8333,
+     "i": 0
+    },
+    {
+     "path": "collection-gift-set",
+     "alt": "Dr. Mushtaq’s gift presentation: black box with gold interior, oil, balm, vials and botanical card",
+     "aspect": 1.7917,
+     "i": 1
+    },
+    {
+     "path": "collection-flatlay",
+     "alt": "Dr. Mushtaq’s collection on marble: oil, balm, sample vials, botanical card, brass dishes and mortar",
+     "aspect": 1.8338,
+     "i": 2
+    }
+   ],
+   "sections": [
+    {
+     "t": "how_to_use",
+     "c": [
+      "Shake gently. The oil is unfiltered and may show natural sediment.",
+      "Take one full dropper (about 1 mL) daily, or as directed by your clinician or practitioner.",
+      "Hold under the tongue for a moment before swallowing, or stir into warm water with honey."
+     ],
+     "i": 0
+    },
+    {
+     "t": "faq",
+     "c": [
+      [
+       "Why 4.64%?",
+       "Thymoquinone is the most studied constituent of Nigella sativa oil and the clearest marker of seed quality and pressing care. 4.64% is the concentration our Ethiopian seed consistently reaches when pressed cold and released fresh. We print it so you can compare."
+      ],
+      [
+       "Does it taste strong?",
+       "Yes. Honest blackseed oil is peppery, slightly bitter, and aromatic. A bland oil has usually been refined, diluted, or stored too long."
+      ],
+      [
+       "Which size should I start with?",
+       "The 125 mL bottle is about four months at one dropper a day. The 250 and 500 mL sizes are priced lower per millilitre for households and practitioners."
+      ]
+     ],
+     "i": 1
+    },
+    {
+     "t": "key_points",
+     "c": {
+      "safety": "For adults. Consult a qualified clinician before use if you are pregnant or nursing, taking medication, managing a medical condition, scheduled for a procedure, or considering use for a child. Discontinue and seek advice if any adverse reaction occurs."
+     },
+     "i": 2
+    }
+   ],
+   "bundle": []
+  },
+  {
+   "slug": "blackseed-oil-softgels",
+   "name": "Blackseed Oil Softgels",
+   "subtitle": "500 mg per softgel",
+   "tagline": "The same oil, measured.",
+   "category": "softgel",
+   "type": "supplement",
+   "short": "Our 4.64% thymoquinone oil, 500 mg per softgel, for people who want the measure without the taste.",
+   "long": "The softgel exists for one reason: not everyone wants to taste blackseed oil every morning. Each softgel carries 500 mg of the same lot-tested, cold-pressed Ethiopian oil that goes into the dropper bottle, sealed in a halal shell that protects it from light and air until you take it.",
+   "ingredients": "Nigella sativa (black seed) oil. Softgel shell: bovine gelatin (halal), glycerin, purified water.",
+   "featured": true,
+   "isNew": false,
+   "bestseller": false,
+   "sort": 2,
+   "specs": [
+    [
+     "Fill",
+     "500 mg Nigella sativa seed oil per softgel"
+    ],
+    [
+     "Standardization",
+     "Thymoquinone 4.64% by HPLC (oil fill)"
+    ],
+    [
+     "Shell",
+     "Halal bovine gelatin, glycerin, water"
+    ],
+    [
+     "Free from",
+     "Fillers, flow agents, artificial colors"
+    ],
+    [
+     "Packaging",
+     "Amber glass, induction seal, desiccant"
+    ]
+   ],
+   "collection": "within",
+   "step": "Measured",
+   "botanicals": [
+    "blackseed"
+   ],
+   "mosaic": [],
+   "variants": [
+    {
+     "sku": "DM-SG-90",
+     "label": "90 softgels",
+     "sizeMl": null,
+     "price": 7800,
+     "compare": null,
+     "def": true,
+     "i": 0,
+     "image": "blackseed-oil-softgels",
+     "desc": "45-day supply | "
+    },
+    {
+     "sku": "DM-SG-180",
+     "label": "180 softgels",
+     "sizeMl": null,
+     "price": 14400,
+     "compare": 15600,
+     "def": false,
+     "i": 1,
+     "image": "blackseed-oil-softgels",
+     "desc": "90-day supply | "
+    },
+    {
+     "sku": "DM-SG-360",
+     "label": "360 softgels",
+     "sizeMl": null,
+     "price": 26600,
+     "compare": 31200,
+     "def": false,
+     "i": 2,
+     "image": "blackseed-oil-softgels",
+     "desc": "180-day supply | "
+    }
+   ],
+   "gallery": [
+    {
+     "path": "blackseed-oil-softgels",
+     "alt": "Dr. Mushtaq’s Blackseed Oil Softgels, amber bottle beside a brass dish of softgels",
+     "aspect": 1.4906,
+     "i": 0
+    },
+    {
+     "path": "collection-flatlay",
+     "alt": "Dr. Mushtaq’s collection on marble: oil, balm, sample vials, botanical card, brass dishes and mortar",
+     "aspect": 1.8338,
+     "i": 1
+    }
+   ],
+   "sections": [
+    {
+     "t": "how_to_use",
+     "c": [
+      "Take two softgels daily with food, or as directed by your clinician or practitioner.",
+      "Store below 25 °C with the lid tight. Do not refrigerate; condensation softens the shell."
+     ],
+     "i": 0
+    },
+    {
+     "t": "faq",
+     "c": [
+      [
+       "Is the shell halal?",
+       "Yes. The gelatin is bovine and halal-certified; certification is attached to each lot record."
+      ],
+      [
+       "Two softgels equals how much oil?",
+       "Two softgels deliver 1,000 mg of oil, roughly one full dropper of the liquid."
+      ]
+     ],
+     "i": 1
+    },
+    {
+     "t": "key_points",
+     "c": {
+      "safety": "For adults. Consult a qualified clinician before use if you are pregnant or nursing, taking medication, managing a medical condition, scheduled for a procedure, or considering use for a child. Discontinue and seek advice if any adverse reaction occurs."
+     },
+     "i": 2
+    }
+   ],
+   "bundle": []
+  },
+  {
+   "slug": "golden-hour-saffron-infusion",
+   "name": "Golden Hour Saffron Infusion",
+   "subtitle": "Kashmiri saffron in blackseed oil",
+   "tagline": "Whole saffron threads, steeped for forty days in the oil.",
+   "category": "oil",
+   "type": "food",
+   "short": "Hand-picked Pampore saffron infused for forty days in our 4.64% blackseed oil. A spoon in warm milk, over rice, or straight.",
+   "long": "Saffron and black seed have shared the same kitchen shelf for a thousand years. We steep whole Kashmiri threads, never powder, in cold-pressed blackseed oil for forty days in the dark, then decant. The result is a deep gold oil with the honeyed, hay-and-leather aroma of real saffron and the peppery base of the seed.",
+   "ingredients": "Nigella sativa (black seed) oil, Crocus sativus (saffron) stigma.",
+   "featured": true,
+   "isNew": true,
+   "bestseller": false,
+   "sort": 3,
+   "specs": [
+    [
+     "Saffron",
+     "Crocus sativus, Pampore, Kashmir; whole stigmas, Grade I"
+    ],
+    [
+     "Ratio",
+     "1 g saffron per 125 mL oil"
+    ],
+    [
+     "Infusion",
+     "40 days, ambient, dark"
+    ],
+    [
+     "Base",
+     "Blackseed oil, thymoquinone 4.64% by HPLC"
+    ],
+    [
+     "Packaging",
+     "Amber glass, gold cap, pour reducer"
+    ]
+   ],
+   "collection": "within",
+   "step": "Daily",
+   "botanicals": [
+    "saffron",
+    "blackseed"
+   ],
+   "mosaic": [],
+   "variants": [
+    {
+     "sku": "DM-GHS-125",
+     "label": "125 mL",
+     "sizeMl": 125,
+     "price": 9800,
+     "compare": null,
+     "def": true,
+     "i": 0,
+     "image": "golden-hour-saffron-infusion",
+     "desc": "Gold-cap bottle | "
+    },
+    {
+     "sku": "DM-GHS-250",
+     "label": "250 mL",
+     "sizeMl": 250,
+     "price": 18000,
+     "compare": 19600,
+     "def": false,
+     "i": 1,
+     "image": "golden-hour-saffron-infusion",
+     "desc": "Gold-cap bottle | "
+    }
+   ],
+   "gallery": [
+    {
+     "path": "golden-hour-saffron-infusion",
+     "alt": "Dr. Mushtaq’s Golden Hour Saffron Infusion, amber bottle with gold cap beside a brass dish of saffron threads",
+     "aspect": 1.7778,
+     "i": 0
+    },
+    {
+     "path": "collection-flatlay",
+     "alt": "Dr. Mushtaq’s collection on marble: oil, balm, sample vials, botanical card, brass dishes and mortar",
+     "aspect": 1.8338,
+     "i": 1
+    }
+   ],
+   "sections": [
+    {
+     "t": "how_to_use",
+     "c": [
+      "Shake. Take one teaspoon daily, straight or stirred into warm milk or tea.",
+      "Finish rice, dal, or roasted vegetables with a thread of it.",
+      "Store sealed in a cool cupboard; use within four months of opening."
+     ],
+     "i": 0
+    },
+    {
+     "t": "faq",
+     "c": [
+      [
+       "Why infuse instead of blend?",
+       "Saffron’s aroma compounds are oil-soluble but fragile. A slow, cold infusion carries them intact; blending powdered saffron does not."
+      ],
+      [
+       "Is the saffron graded?",
+       "Yes. We buy ISO 3632 Grade I threads and keep the supplier’s crocin and safranal assay on file with each lot."
+      ]
+     ],
+     "i": 1
+    },
+    {
+     "t": "key_points",
+     "c": {
+      "safety": "Food product. Contains no major allergens. Not for use in pregnancy without consulting your clinician. Natural sediment is normal."
+     },
+     "i": 2
+    }
+   ],
+   "bundle": []
+  },
+  {
+   "slug": "culinary-finishing-oil",
+   "name": "Culinary Finishing Oil",
+   "subtitle": "Cold-pressed blackseed for the table",
+   "tagline": "Peppery, warm, meant to be tasted.",
+   "category": "culinary",
+   "type": "food",
+   "short": "The same cold-pressed Ethiopian oil in a kitchen bottle with a stainless pour spout. Finish lentils, flatbreads, labneh, roasted vegetables, and eggs.",
+   "long": "Blackseed has been a pantry oil for far longer than it has been a supplement. This is the pressing we are proudest of, in a bottle made to live beside your olive oil. It is not for frying. A thin thread over a finished plate is where it belongs.",
+   "ingredients": "Nigella sativa (black seed) oil.",
+   "featured": false,
+   "isNew": false,
+   "bestseller": false,
+   "sort": 4,
+   "specs": [
+    [
+     "Use",
+     "Finishing oil; do not heat"
+    ],
+    [
+     "Origin",
+     "Ethiopia, single harvest per lot"
+    ],
+    [
+     "Process",
+     "Cold-pressed below 40 °C, unrefined"
+    ],
+    [
+     "Flavor",
+     "Peppery, warm, faint oregano and cumin"
+    ],
+    [
+     "Packaging",
+     "Amber glass, stainless pour spout"
+    ]
+   ],
+   "collection": "within",
+   "step": "Table",
+   "botanicals": [
+    "blackseed"
+   ],
+   "mosaic": [],
+   "variants": [
+    {
+     "sku": "DM-CFO-250",
+     "label": "250 mL",
+     "sizeMl": 250,
+     "price": 8000,
+     "compare": null,
+     "def": true,
+     "i": 0,
+     "image": "culinary-finishing-oil",
+     "desc": "Pour-spout bottle | "
+    },
+    {
+     "sku": "DM-CFO-500",
+     "label": "500 mL",
+     "sizeMl": 500,
+     "price": 14800,
+     "compare": 16000,
+     "def": false,
+     "i": 1,
+     "image": "culinary-finishing-oil",
+     "desc": "Pour-spout bottle | "
+    }
+   ],
+   "gallery": [
+    {
+     "path": "culinary-finishing-oil",
+     "alt": "Dr. Mushtaq’s Culinary Finishing Oil, amber bottle with gold pour spout beside a dish of oil and seeds",
+     "aspect": 1.4906,
+     "i": 0
+    },
+    {
+     "path": "collection-flatlay",
+     "alt": "Dr. Mushtaq’s collection on marble: oil, balm, sample vials, botanical card, brass dishes and mortar",
+     "aspect": 1.8338,
+     "i": 1
+    }
+   ],
+   "sections": [
+    {
+     "t": "how_to_use",
+     "c": [
+      "Drizzle over finished dishes just before serving.",
+      "Pairs with lentils, chickpeas, labneh, roasted squash, eggs, and flatbread.",
+      "Store sealed in a cool cupboard. Use within three months of opening."
+     ],
+     "i": 0
+    },
+    {
+     "t": "faq",
+     "c": [
+      [
+       "Can I cook with it?",
+       "Treat it like a delicate extra-virgin oil: finish with it, do not fry with it. Heat dulls the aroma."
+      ],
+      [
+       "Is it the same oil as the dropper bottle?",
+       "Yes. Same seed, same press, same lot testing. The difference is the bottle and the spout."
+      ]
+     ],
+     "i": 1
+    },
+    {
+     "t": "key_points",
+     "c": {
+      "safety": "Contains no major allergens. Store away from heat and light. Natural sediment is normal."
+     },
+     "i": 2
+    }
+   ],
+   "bundle": []
+  },
+  {
+   "slug": "rose-blackseed-cleansing-oil",
+   "name": "Rose & Blackseed Cleansing Oil",
+   "subtitle": "Oil cleanser and makeup melt",
+   "tagline": "Dissolves the day without stripping it.",
+   "category": "topical",
+   "type": "cosmetic",
+   "short": "Grapeseed and blackseed oils infused with Isparta damask rose petals, with a touch of plant-derived emulsifier so it rinses clean with water.",
+   "long": "The first step of an oil-first routine. Light grapeseed carries rose-infused blackseed oil across the skin, lifting sunscreen, makeup, and the day’s film; a sugar-derived emulsifier turns it milky on contact with water so nothing is left behind but soft skin and a faint rose.",
+   "ingredients": "Vitis vinifera (grape) seed oil, Nigella sativa (black seed) oil, Rosa damascena flower extract, Polyglyceryl-4 oleate, Rosa damascena flower oil, Tocopherol.",
+   "featured": true,
+   "isNew": true,
+   "bestseller": false,
+   "sort": 5,
+   "specs": [
+    [
+     "Format",
+     "Rinse-off cleansing oil"
+    ],
+    [
+     "Rose",
+     "Isparta damask petals, 21-day infusion, plus otto"
+    ],
+    [
+     "Blackseed oil",
+     "Thymoquinone-standardized 4.64% oil"
+    ],
+    [
+     "Emulsifier",
+     "Sugar-derived polyglyceryl ester"
+    ],
+    [
+     "Fragrance",
+     "Rose otto only; no synthetic fragrance"
+    ],
+    [
+     "Packaging",
+     "Amber glass, lockable pump"
+    ]
+   ],
+   "collection": "skin",
+   "step": "Cleanse",
+   "botanicals": [
+    "rose",
+    "blackseed",
+    "grapevine"
+   ],
+   "mosaic": [],
+   "variants": [
+    {
+     "sku": "DM-RCO-125",
+     "label": "125 mL",
+     "sizeMl": 125,
+     "price": 8200,
+     "compare": null,
+     "def": true,
+     "i": 0,
+     "image": "rose-blackseed-cleansing-oil",
+     "desc": "Pump bottle | "
+    },
+    {
+     "sku": "DM-RCO-250",
+     "label": "250 mL",
+     "sizeMl": 250,
+     "price": 15200,
+     "compare": 16400,
+     "def": false,
+     "i": 1,
+     "image": "rose-blackseed-cleansing-oil",
+     "desc": "Pump bottle | "
+    }
+   ],
+   "gallery": [
+    {
+     "path": "rose-blackseed-cleansing-oil",
+     "alt": "Dr. Mushtaq’s Rose & Blackseed Cleansing Oil, amber pump bottle beside damask rose petals",
+     "aspect": 1.7778,
+     "i": 0
+    },
+    {
+     "path": "saffron-radiance-face-oil",
+     "alt": "Dr. Mushtaq’s Saffron Radiance Face Oil, dropper bottle beside a marble dish of saffron",
+     "aspect": 1.7778,
+     "i": 1
+    }
+   ],
+   "sections": [
+    {
+     "t": "how_to_use",
+     "c": [
+      "Press two pumps into dry palms and massage over a dry face for one minute.",
+      "Add a splash of warm water and keep massaging; the oil turns milky.",
+      "Rinse and follow with the face oil or serum."
+     ],
+     "i": 0
+    },
+    {
+     "t": "faq",
+     "c": [
+      [
+       "Will it clog pores?",
+       "Grapeseed and blackseed are both light, low-comedogenic oils and the formula rinses off completely. Patch test if you are unsure."
+      ],
+      [
+       "Does it remove mascara?",
+       "Yes, including waterproof. Hold a soaked fingertip on closed lashes for a few seconds first."
+      ]
+     ],
+     "i": 1
+    },
+    {
+     "t": "key_points",
+     "c": {
+      "safety": "For external use only. Patch test before first use. Avoid contact with eyes and broken or irritated skin. Discontinue if irritation occurs. Keep out of reach of children."
+     },
+     "i": 2
+    }
+   ],
+   "bundle": []
+  },
+  {
+   "slug": "saffron-radiance-face-oil",
+   "name": "Saffron Radiance Face Oil",
+   "subtitle": "Saffron, rosehip and blackseed",
+   "tagline": "The saffron oil. Six drops, morning and night.",
+   "category": "topical",
+   "type": "cosmetic",
+   "short": "Kashmiri saffron infused in cold-pressed rosehip, grapeseed and blackseed oils. A fast-absorbing daily face oil with the color of late afternoon.",
+   "long": "Saffron has been the centrepiece of South Asian skincare for centuries; we wanted it in an oil that actually absorbs. Rosehip and grapeseed give a dry, fast finish, blackseed brings its warm base, and whole Pampore threads steep in the blend for forty days. The color is the saffron’s own.",
+   "ingredients": "Rosa canina (rosehip) seed oil, Vitis vinifera (grape) seed oil, Nigella sativa (black seed) oil, Crocus sativus (saffron) flower extract, Simmondsia chinensis (jojoba) seed oil, Tocopherol.",
+   "featured": true,
+   "isNew": true,
+   "bestseller": true,
+   "sort": 6,
+   "specs": [
+    [
+     "Format",
+     "Leave-on face oil"
+    ],
+    [
+     "Saffron",
+     "Pampore Grade I threads, 40-day infusion"
+    ],
+    [
+     "Blackseed oil",
+     "Thymoquinone-standardized 4.64% oil"
+    ],
+    [
+     "Finish",
+     "Dry within 90 seconds"
+    ],
+    [
+     "Fragrance",
+     "None added"
+    ],
+    [
+     "Packaging",
+     "Amber glass, glass dropper"
+    ]
+   ],
+   "collection": "skin",
+   "step": "Treat",
+   "botanicals": [
+    "saffron",
+    "blackseed",
+    "grapevine"
+   ],
+   "mosaic": [],
+   "variants": [
+    {
+     "sku": "DM-SRF-50",
+     "label": "50 mL",
+     "sizeMl": 50,
+     "price": 11000,
+     "compare": null,
+     "def": true,
+     "i": 0,
+     "image": "saffron-radiance-face-oil",
+     "desc": "Dropper bottle | About four months at six drops twice daily."
+    },
+    {
+     "sku": "DM-SRF-125",
+     "label": "125 mL",
+     "sizeMl": 125,
+     "price": 23600,
+     "compare": 27500,
+     "def": false,
+     "i": 1,
+     "image": "saffron-radiance-face-oil",
+     "desc": "Dropper bottle | The refill size; decant into the 50 mL bottle."
+    }
+   ],
+   "gallery": [
+    {
+     "path": "saffron-radiance-face-oil",
+     "alt": "Dr. Mushtaq’s Saffron Radiance Face Oil, dropper bottle beside a marble dish of saffron",
+     "aspect": 1.7778,
+     "i": 0
+    },
+    {
+     "path": "golden-hour-saffron-infusion",
+     "alt": "Dr. Mushtaq’s Golden Hour Saffron Infusion, amber bottle with gold cap beside a brass dish of saffron threads",
+     "aspect": 1.7778,
+     "i": 1
+    },
+    {
+     "path": "collection-flatlay",
+     "alt": "Dr. Mushtaq’s collection on marble: oil, balm, sample vials, botanical card, brass dishes and mortar",
+     "aspect": 1.8338,
+     "i": 2
+    }
+   ],
+   "sections": [
+    {
+     "t": "how_to_use",
+     "c": [
+      "Warm six drops between fingertips.",
+      "Press onto a clean, slightly damp face and neck, morning and night.",
+      "Follow with the Blackseed Balm on dry areas, or sunscreen by day."
+     ],
+     "i": 0
+    },
+    {
+     "t": "faq",
+     "c": [
+      [
+       "Will it tint my skin?",
+       "No. The oil is golden in the bottle but sheer on the skin and absorbs fully."
+      ],
+      [
+       "Can I use it with retinoids or acids?",
+       "Yes. Apply it after water-based treatments have absorbed. If you are using prescription products, ask the clinician who prescribed them."
+      ]
+     ],
+     "i": 1
+    },
+    {
+     "t": "key_points",
+     "c": {
+      "safety": "For external use only. Patch test before first use. Avoid contact with eyes and broken or irritated skin. Discontinue if irritation occurs. Keep out of reach of children."
+     },
+     "i": 2
+    }
+   ],
+   "bundle": []
+  },
+  {
+   "slug": "grapevine-renewal-serum",
+   "name": "Grapevine Renewal Serum",
+   "subtitle": "Vine-shoot extract, grapeseed and blackseed",
+   "tagline": "From the part of the vine the winemaker prunes away.",
+   "category": "topical",
+   "type": "cosmetic",
+   "short": "Rhône grapevine-shoot extract, the plant’s richest source of resveratrol and viniferins, in a light grapeseed and blackseed oil serum for evening use.",
+   "long": "Vine shoots are cut and burned every winter. We buy them from a Rhône estate, extract them, and carry the extract in cold-pressed grapeseed and blackseed oils. The result is a thin, fast evening serum with a green, slightly tannic scent and nothing in it a winemaker would not recognise.",
+   "ingredients": "Vitis vinifera (grape) seed oil, Nigella sativa (black seed) oil, Vitis vinifera (grape) vine extract, Squalane (olive), Vitis vinifera (grape) leaf extract, Tocopherol.",
+   "featured": true,
+   "isNew": true,
+   "bestseller": false,
+   "sort": 7,
+   "specs": [
+    [
+     "Format",
+     "Leave-on evening serum"
+    ],
+    [
+     "Grapevine",
+     "Rhône vine-shoot and leaf extract, standardized to total stilbenes"
+    ],
+    [
+     "Blackseed oil",
+     "Thymoquinone-standardized 4.64% oil"
+    ],
+    [
+     "Finish",
+     "Dry, weightless"
+    ],
+    [
+     "Fragrance",
+     "None added"
+    ],
+    [
+     "Packaging",
+     "Amber glass, glass dropper"
+    ]
+   ],
+   "collection": "skin",
+   "step": "Treat",
+   "botanicals": [
+    "grapevine",
+    "blackseed"
+   ],
+   "mosaic": [],
+   "variants": [
+    {
+     "sku": "DM-GRS-50",
+     "label": "50 mL",
+     "sizeMl": 50,
+     "price": 12000,
+     "compare": null,
+     "def": true,
+     "i": 0,
+     "image": "grapevine-renewal-serum",
+     "desc": "Dropper bottle | "
+    },
+    {
+     "sku": "DM-GRS-125",
+     "label": "125 mL",
+     "sizeMl": 125,
+     "price": 25800,
+     "compare": 30000,
+     "def": false,
+     "i": 1,
+     "image": "grapevine-renewal-serum",
+     "desc": "Dropper bottle | The refill size."
+    }
+   ],
+   "gallery": [
+    {
+     "path": "grapevine-renewal-serum",
+     "alt": "Dr. Mushtaq’s Grapevine Renewal Serum, dropper bottle beside a grapevine leaf and grapes",
+     "aspect": 1.7778,
+     "i": 0
+    },
+    {
+     "path": "collection-flatlay",
+     "alt": "Dr. Mushtaq’s collection on marble: oil, balm, sample vials, botanical card, brass dishes and mortar",
+     "aspect": 1.8338,
+     "i": 1
+    }
+   ],
+   "sections": [
+    {
+     "t": "how_to_use",
+     "c": [
+      "In the evening, after cleansing, press four to six drops onto face and neck.",
+      "Layer the Saffron Radiance Face Oil on top if skin is dry.",
+      "Use nightly."
+     ],
+     "i": 0
+    },
+    {
+     "t": "faq",
+     "c": [
+      [
+       "What is a stilbene?",
+       "Stilbenes are the family of plant compounds that includes resveratrol and viniferins. Grapevine shoots contain far more than the grape itself, which is why we use the shoot."
+      ],
+      [
+       "Why evening?",
+       "Habit, mostly: the serum pairs well with the heavier face oil at night and leaves the morning routine shorter."
+      ]
+     ],
+     "i": 1
+    },
+    {
+     "t": "key_points",
+     "c": {
+      "safety": "For external use only. Patch test before first use. Avoid contact with eyes and broken or irritated skin. Discontinue if irritation occurs. Keep out of reach of children."
+     },
+     "i": 2
+    }
+   ],
+   "bundle": []
+  },
+  {
+   "slug": "blackseed-balm",
+   "name": "Blackseed Balm",
+   "subtitle": "Concentrated anhydrous salve",
+   "tagline": "A dense, slow-melting salve for dry places.",
+   "category": "topical",
+   "type": "cosmetic",
+   "short": "Blackseed oil folded into beeswax, shea, and jojoba with a trace of frankincense. For hands, elbows, heels, cuticles, lips, and the last step of a face routine.",
+   "long": "The balm is our oil in its most patient form. Beeswax and shea slow it down so it stays where you put it; jojoba carries it in; a trace of Dhofar frankincense gives it a quiet, resinous lift. There is no water, so there is no need for preservatives.",
+   "ingredients": "Butyrospermum parkii (shea) butter, Simmondsia chinensis (jojoba) seed oil, Cera alba (beeswax), Nigella sativa (black seed) oil, Boswellia sacra resin oil, Tocopherol.",
+   "featured": true,
+   "isNew": false,
+   "bestseller": false,
+   "sort": 8,
+   "specs": [
+    [
+     "Format",
+     "Anhydrous balm"
+    ],
+    [
+     "Blackseed oil",
+     "Thymoquinone-standardized 4.64% oil"
+    ],
+    [
+     "Fragrance",
+     "Frankincense resin oil only"
+    ],
+    [
+     "Water",
+     "None; no preservatives required"
+    ],
+    [
+     "Packaging",
+     "Amber glass jar, black ribbed cap"
+    ]
+   ],
+   "collection": "skin",
+   "step": "Seal",
+   "botanicals": [
+    "blackseed",
+    "frankincense"
+   ],
+   "mosaic": [],
+   "variants": [
+    {
+     "sku": "DM-BALM-60",
+     "label": "60 mL",
+     "sizeMl": 60,
+     "price": 7800,
+     "compare": null,
+     "def": true,
+     "i": 0,
+     "image": "blackseed-balm",
+     "desc": "Glass jar | "
+    },
+    {
+     "sku": "DM-BALM-120",
+     "label": "120 mL",
+     "sizeMl": 120,
+     "price": 14200,
+     "compare": 15600,
+     "def": false,
+     "i": 1,
+     "image": "blackseed-balm",
+     "desc": "Glass jar | "
+    }
+   ],
+   "gallery": [
+    {
+     "path": "blackseed-balm",
+     "alt": "Dr. Mushtaq’s Blackseed Balm, amber jar with the lid off showing the salve",
+     "aspect": 1.4906,
+     "i": 0
+    },
+    {
+     "path": "collection-gift-set",
+     "alt": "Dr. Mushtaq’s gift presentation: black box with gold interior, oil, balm, vials and botanical card",
+     "aspect": 1.7917,
+     "i": 1
+    }
+   ],
+   "sections": [
+    {
+     "t": "how_to_use",
+     "c": [
+      "Warm a small amount between fingertips until it melts.",
+      "Press into clean, dry skin wherever it feels tight, or over the face oil as a final seal at night.",
+      "Use after washing and before bed for the longest contact time."
+     ],
+     "i": 0
+    },
+    {
+     "t": "faq",
+     "c": [
+      [
+       "Will it stain?",
+       "The balm is amber-tinted but absorbs within a few minutes. Let it sink in before dressing."
+      ],
+      [
+       "Is it safe for the face?",
+       "Yes, as a cosmetic moisturizer and final seal. Patch test first and avoid the eye area."
+      ]
+     ],
+     "i": 1
+    },
+    {
+     "t": "key_points",
+     "c": {
+      "safety": "For external use only. Patch test before first use. Avoid contact with eyes and broken or irritated skin. Discontinue if irritation occurs. Keep out of reach of children."
+     },
+     "i": 2
+    }
+   ],
+   "bundle": []
+  },
+  {
+   "slug": "amla-blackseed-hair-oil",
+   "name": "Amla & Blackseed Hair Oil",
+   "subtitle": "Pre-wash scalp and length oil",
+   "tagline": "The Sunday oiling, made properly.",
+   "category": "hair",
+   "type": "cosmetic",
+   "short": "Sun-dried amla infused the classical way in cold-pressed sesame and blackseed oils. Massage into the scalp, leave for an hour or overnight, wash out.",
+   "long": "Across South Asia the week begins or ends with hair oiling. This is that oil, made without shortcuts: whole dried amla fruit steeped for three weeks in cold-pressed sesame, then blended with our 4.64% blackseed oil. It is a pre-wash treatment, not a styling product, and it smells of amla and warm seed, not perfume.",
+   "ingredients": "Sesamum indicum (sesame) seed oil, Nigella sativa (black seed) oil, Phyllanthus emblica (amla) fruit extract, Tocopherol.",
+   "featured": true,
+   "isNew": true,
+   "bestseller": false,
+   "sort": 9,
+   "specs": [
+    [
+     "Format",
+     "Pre-wash oil treatment"
+    ],
+    [
+     "Amla",
+     "Sun-dried Uttar Pradesh fruit, 21-day infusion"
+    ],
+    [
+     "Blackseed oil",
+     "Thymoquinone-standardized 4.64% oil"
+    ],
+    [
+     "Fragrance",
+     "None added"
+    ],
+    [
+     "Packaging",
+     "Amber glass, screw cap, applicator nozzle included"
+    ]
+   ],
+   "collection": "hair",
+   "step": "Pre-wash",
+   "botanicals": [
+    "amla",
+    "sesame",
+    "blackseed"
+   ],
+   "mosaic": [],
+   "variants": [
+    {
+     "sku": "DM-AHO-125",
+     "label": "125 mL",
+     "sizeMl": 125,
+     "price": 8400,
+     "compare": null,
+     "def": true,
+     "i": 0,
+     "image": "amla-blackseed-hair-oil",
+     "desc": "Screw-cap bottle | "
+    },
+    {
+     "sku": "DM-AHO-250",
+     "label": "250 mL",
+     "sizeMl": 250,
+     "price": 15600,
+     "compare": 16800,
+     "def": false,
+     "i": 1,
+     "image": "amla-blackseed-hair-oil",
+     "desc": "Screw-cap bottle | "
+    },
+    {
+     "sku": "DM-AHO-500",
+     "label": "500 mL",
+     "sizeMl": 500,
+     "price": 28600,
+     "compare": 33600,
+     "def": false,
+     "i": 2,
+     "image": "amla-blackseed-hair-oil",
+     "desc": "Apothecary bottle | "
+    }
+   ],
+   "gallery": [
+    {
+     "path": "amla-blackseed-hair-oil",
+     "alt": "Dr. Mushtaq’s Amla & Blackseed Hair Oil, amber bottle beside amla fruit and a wooden comb",
+     "aspect": 1.7778,
+     "i": 0
+    },
+    {
+     "path": "scalp-beard-serum",
+     "alt": "Dr. Mushtaq’s Scalp & Beard Serum, dropper bottle with a drop suspended, beside a black comb",
+     "aspect": 1.8333,
+     "i": 1
+    }
+   ],
+   "sections": [
+    {
+     "t": "how_to_use",
+     "c": [
+      "Warm a tablespoon of oil in your palms.",
+      "Part the hair and massage into the scalp for five minutes, then work through the lengths.",
+      "Leave for an hour, or overnight under a towel, then shampoo twice."
+     ],
+     "i": 0
+    },
+    {
+     "t": "faq",
+     "c": [
+      [
+       "Will it help hair grow?",
+       "We do not make that claim. This is a conditioning oil for scalp and lengths. It leaves hair softer and the scalp more comfortable."
+      ],
+      [
+       "How often?",
+       "Once or twice a week is the traditional rhythm."
+      ]
+     ],
+     "i": 1
+    },
+    {
+     "t": "key_points",
+     "c": {
+      "safety": "For external use only. Patch test before first use. Avoid contact with eyes and broken or irritated skin. Discontinue if irritation occurs. Keep out of reach of children."
+     },
+     "i": 2
+    }
+   ],
+   "bundle": []
+  },
+  {
+   "slug": "scalp-beard-serum",
+   "name": "Scalp & Beard Serum",
+   "subtitle": "Blackseed, rosemary and jojoba",
+   "tagline": "Light enough for the scalp, rich enough for the beard.",
+   "category": "hair",
+   "type": "cosmetic",
+   "short": "Our blackseed oil cut with jojoba and grapeseed and finished with rosemary leaf oil. A fast-absorbing leave-in for scalp, beard, and the skin beneath.",
+   "long": "A grooming oil has two jobs: condition the hair and leave the skin under it calm. Jojoba mirrors the skin’s own sebum, grapeseed keeps the texture light, blackseed brings its warm aroma, and rosemary gives the finish its clean herbal lift. It absorbs without a film.",
+   "ingredients": "Simmondsia chinensis (jojoba) seed oil, Vitis vinifera (grape) seed oil, Nigella sativa (black seed) oil, Rosmarinus officinalis (rosemary) leaf oil, Tocopherol.",
+   "featured": true,
+   "isNew": false,
+   "bestseller": false,
+   "sort": 10,
+   "specs": [
+    [
+     "Format",
+     "Leave-on serum"
+    ],
+    [
+     "Blackseed oil",
+     "Thymoquinone-standardized 4.64% oil"
+    ],
+    [
+     "Aroma",
+     "Rosemary leaf oil and the seed’s own note"
+    ],
+    [
+     "Finish",
+     "Dry, non-greasy"
+    ],
+    [
+     "Packaging",
+     "Amber glass, glass dropper"
+    ]
+   ],
+   "collection": "hair",
+   "step": "Leave-in",
+   "botanicals": [
+    "blackseed",
+    "rosemary",
+    "grapevine"
+   ],
+   "mosaic": [],
+   "variants": [
+    {
+     "sku": "DM-SRM-60",
+     "label": "60 mL",
+     "sizeMl": 60,
+     "price": 8200,
+     "compare": null,
+     "def": true,
+     "i": 0,
+     "image": "scalp-beard-serum",
+     "desc": "Dropper bottle | "
+    },
+    {
+     "sku": "DM-SRM-125",
+     "label": "125 mL",
+     "sizeMl": 125,
+     "price": 15000,
+     "compare": 17083,
+     "def": false,
+     "i": 1,
+     "image": "scalp-beard-serum",
+     "desc": "Dropper bottle | "
+    }
+   ],
+   "gallery": [
+    {
+     "path": "scalp-beard-serum",
+     "alt": "Dr. Mushtaq’s Scalp & Beard Serum, dropper bottle with a drop suspended, beside a black comb",
+     "aspect": 1.8333,
+     "i": 0
+    },
+    {
+     "path": "amla-blackseed-hair-oil",
+     "alt": "Dr. Mushtaq’s Amla & Blackseed Hair Oil, amber bottle beside amla fruit and a wooden comb",
+     "aspect": 1.7778,
+     "i": 1
+    }
+   ],
+   "sections": [
+    {
+     "t": "how_to_use",
+     "c": [
+      "Beard: dispense 3 to 5 drops into palms, rub to warm, work from skin outward, then comb.",
+      "Scalp: part hair and apply a few drops directly to the scalp. Massage for a minute. Leave in.",
+      "Use daily or as needed."
+     ],
+     "i": 0
+    },
+    {
+     "t": "faq",
+     "c": [
+      [
+       "Does it help hair grow?",
+       "We do not make that claim. This is a cosmetic conditioning serum."
+      ],
+      [
+       "Can I use it after shaving?",
+       "Yes, sparingly, as a conditioning oil. Patch test first."
+      ]
+     ],
+     "i": 1
+    },
+    {
+     "t": "key_points",
+     "c": {
+      "safety": "For external use only. Patch test before first use. Avoid contact with eyes and broken or irritated skin. Discontinue if irritation occurs. Keep out of reach of children."
+     },
+     "i": 2
+    }
+   ],
+   "bundle": []
+  },
+  {
+   "slug": "blackseed-bath-soak",
+   "name": "Blackseed & Mineral Bath Soak",
+   "subtitle": "Dead Sea and Epsom salts with blackseed oil",
+   "tagline": "Twenty minutes, once a week.",
+   "category": "topical",
+   "type": "cosmetic",
+   "short": "Coarse Dead Sea and Epsom salts dressed in blackseed oil, with whole seeds, cornflower petals, and a trace of frankincense.",
+   "long": "The hammam tradition pairs mineral water with oil; this is that pairing in a jar. Salts are tumbled in our 4.64% blackseed oil so the bath leaves skin soft rather than tight, and a trace of Dhofar frankincense scents the steam.",
+   "ingredients": "Maris sal (Dead Sea salt), Magnesium sulfate, Nigella sativa (black seed) oil, Nigella sativa seed, Centaurea cyanus (cornflower) flower, Boswellia sacra resin oil.",
+   "featured": false,
+   "isNew": true,
+   "bestseller": false,
+   "sort": 11,
+   "specs": [
+    [
+     "Format",
+     "Bath salts"
+    ],
+    [
+     "Salts",
+     "Dead Sea and Epsom, coarse grade"
+    ],
+    [
+     "Blackseed oil",
+     "Thymoquinone-standardized 4.64% oil"
+    ],
+    [
+     "Fragrance",
+     "Frankincense resin oil only"
+    ],
+    [
+     "Packaging",
+     "Glass apothecary jar, brass scoop included"
+    ]
+   ],
+   "collection": "body",
+   "step": "Soak",
+   "botanicals": [
+    "blackseed",
+    "frankincense"
+   ],
+   "mosaic": [],
+   "variants": [
+    {
+     "sku": "DM-BBS-500",
+     "label": "500 g",
+     "sizeMl": null,
+     "price": 7800,
+     "compare": null,
+     "def": true,
+     "i": 0,
+     "image": "blackseed-bath-soak",
+     "desc": "Glass jar | About eight baths."
+    },
+    {
+     "sku": "DM-BBS-1000",
+     "label": "1 kg",
+     "sizeMl": null,
+     "price": 14200,
+     "compare": 15600,
+     "def": false,
+     "i": 1,
+     "image": "blackseed-bath-soak",
+     "desc": "Glass jar | "
+    }
+   ],
+   "gallery": [
+    {
+     "path": "blackseed-bath-soak",
+     "alt": "Dr. Mushtaq’s Blackseed & Mineral Bath Soak, glass jar of mineral salts with a brass scoop",
+     "aspect": 1.7778,
+     "i": 0
+    },
+    {
+     "path": "saffron-sesame-body-oil",
+     "alt": "Dr. Mushtaq’s Saffron & Sesame Body Oil, amber pump bottle beside sesame seeds and saffron",
+     "aspect": 1.7778,
+     "i": 1
+    }
+   ],
+   "sections": [
+    {
+     "t": "how_to_use",
+     "c": [
+      "Add two scoops to a warm bath as it fills.",
+      "Soak for twenty minutes.",
+      "Pat dry and follow with the Saffron & Sesame Body Oil on damp skin."
+     ],
+     "i": 0
+    },
+    {
+     "t": "faq",
+     "c": [
+      [
+       "Will the oil leave a ring?",
+       "A faint one, which wipes away with a cloth. Rinse the tub while it is still warm."
+      ],
+      [
+       "Can I use it as a scrub?",
+       "The coarse grade is too sharp for skin as a scrub; let it dissolve in the bath."
+      ]
+     ],
+     "i": 1
+    },
+    {
+     "t": "key_points",
+     "c": {
+      "safety": "For external use only. Patch test before first use. Avoid contact with eyes and broken or irritated skin. Discontinue if irritation occurs. Keep out of reach of children."
+     },
+     "i": 2
+    }
+   ],
+   "bundle": []
+  },
+  {
+   "slug": "saffron-sesame-body-oil",
+   "name": "Saffron & Sesame Body Oil",
+   "subtitle": "Warm-oil massage in the abhyanga tradition",
+   "tagline": "The daily anointing.",
+   "category": "topical",
+   "type": "cosmetic",
+   "short": "Cold-pressed sesame and blackseed oils infused with Kashmiri saffron and a trace of frankincense. For warm self-massage before the shower.",
+   "long": "Abhyanga, the Ayurvedic practice of warm-oil self-massage, traditionally uses sesame. We keep the sesame and add our 4.64% blackseed oil, a forty-day saffron infusion, and a trace of Dhofar frankincense. Warm the bottle in a bowl of hot water, take ten minutes, then shower.",
+   "ingredients": "Sesamum indicum (sesame) seed oil, Nigella sativa (black seed) oil, Crocus sativus (saffron) flower extract, Boswellia sacra resin oil, Tocopherol.",
+   "featured": true,
+   "isNew": true,
+   "bestseller": false,
+   "sort": 12,
+   "specs": [
+    [
+     "Format",
+     "Body massage oil"
+    ],
+    [
+     "Base",
+     "Cold-pressed, unroasted sesame"
+    ],
+    [
+     "Blackseed oil",
+     "Thymoquinone-standardized 4.64% oil"
+    ],
+    [
+     "Saffron",
+     "Pampore Grade I threads, 40-day infusion"
+    ],
+    [
+     "Fragrance",
+     "Frankincense resin oil only"
+    ],
+    [
+     "Packaging",
+     "Amber glass, lockable pump"
+    ]
+   ],
+   "collection": "body",
+   "step": "Anoint",
+   "botanicals": [
+    "sesame",
+    "saffron",
+    "blackseed",
+    "frankincense"
+   ],
+   "mosaic": [],
+   "variants": [
+    {
+     "sku": "DM-SBO-125",
+     "label": "125 mL",
+     "sizeMl": 125,
+     "price": 8800,
+     "compare": null,
+     "def": true,
+     "i": 0,
+     "image": "saffron-sesame-body-oil",
+     "desc": "Pump bottle | "
+    },
+    {
+     "sku": "DM-SBO-250",
+     "label": "250 mL",
+     "sizeMl": 250,
+     "price": 16200,
+     "compare": 17600,
+     "def": false,
+     "i": 1,
+     "image": "saffron-sesame-body-oil",
+     "desc": "Pump bottle | "
+    },
+    {
+     "sku": "DM-SBO-500",
+     "label": "500 mL",
+     "sizeMl": 500,
+     "price": 30000,
+     "compare": 35200,
+     "def": false,
+     "i": 2,
+     "image": "saffron-sesame-body-oil",
+     "desc": "Apothecary bottle | "
+    }
+   ],
+   "gallery": [
+    {
+     "path": "saffron-sesame-body-oil",
+     "alt": "Dr. Mushtaq’s Saffron & Sesame Body Oil, amber pump bottle beside sesame seeds and saffron",
+     "aspect": 1.7778,
+     "i": 0
+    },
+    {
+     "path": "blackseed-bath-soak",
+     "alt": "Dr. Mushtaq’s Blackseed & Mineral Bath Soak, glass jar of mineral salts with a brass scoop",
+     "aspect": 1.7778,
+     "i": 1
+    }
+   ],
+   "sections": [
+    {
+     "t": "how_to_use",
+     "c": [
+      "Stand the bottle in a bowl of hot water for five minutes.",
+      "Massage warm oil over the whole body with long strokes toward the heart; circles over joints.",
+      "Rest ten minutes, then shower without soap on the oiled areas."
+     ],
+     "i": 0
+    },
+    {
+     "t": "faq",
+     "c": [
+      [
+       "Will it stain towels?",
+       "Keep a dedicated towel for the practice; sesame oil can mark light fabric over time."
+      ],
+      [
+       "Can I use it after the bath soak?",
+       "Yes. Applying it to damp skin after the soak is the shortest route to soft skin."
+      ]
+     ],
+     "i": 1
+    },
+    {
+     "t": "key_points",
+     "c": {
+      "safety": "For external use only. Patch test before first use. Avoid contact with eyes and broken or irritated skin. Discontinue if irritation occurs. Keep out of reach of children. Contains sesame."
+     },
+     "i": 2
+    }
+   ],
+   "bundle": []
+  },
+  {
+   "slug": "oud-noir-attar",
+   "name": "Oud Noir Attar",
+   "subtitle": "Assam oud, blackseed, amber",
+   "tagline": "Dark wood, warm seed, no alcohol.",
+   "category": "fragrance",
+   "type": "cosmetic",
+   "short": "Hydro-distilled Assam agarwood oil in a base of jojoba and blackseed oil, with labdanum and a trace of frankincense. Worn on the pulse points, it stays close for a working day.",
+   "long": "An attar is a perfume without alcohol: pure aromatic oils carried in a fixed oil and worn on the skin. Ours begins with plantation agarwood from Assam, deep and dry, warmed by our blackseed oil, rounded with labdanum amber and lifted by Dhofar frankincense. It opens dark and settles into skin-warm wood.",
+   "ingredients": "Simmondsia chinensis (jojoba) seed oil, Nigella sativa (black seed) oil, Aquilaria malaccensis wood oil, Cistus ladaniferus resin extract, Boswellia sacra resin oil, Tocopherol.",
+   "featured": true,
+   "isNew": true,
+   "bestseller": false,
+   "sort": 13,
+   "specs": [
+    [
+     "Family",
+     "Woody amber"
+    ],
+    [
+     "Notes",
+     "Oud, blackseed, labdanum, frankincense"
+    ],
+    [
+     "Concentration",
+     "20% aromatic oils in carrier"
+    ],
+    [
+     "Alcohol",
+     "None"
+    ],
+    [
+     "Wear",
+     "8 to 10 hours, close to the skin"
+    ],
+    [
+     "Packaging",
+     "Amber glass, gold cap, glass dabber"
+    ]
+   ],
+   "collection": "fragrance",
+   "step": "Attar",
+   "botanicals": [
+    "oud",
+    "blackseed",
+    "frankincense"
+   ],
+   "mosaic": [],
+   "variants": [
+    {
+     "sku": "DM-OUD-12",
+     "label": "12 mL",
+     "sizeMl": 12,
+     "price": 8800,
+     "compare": null,
+     "def": true,
+     "i": 0,
+     "image": "oud-noir-attar",
+     "desc": "Attar bottle | "
+    },
+    {
+     "sku": "DM-OUD-30",
+     "label": "30 mL",
+     "sizeMl": 30,
+     "price": 19000,
+     "compare": 22000,
+     "def": false,
+     "i": 1,
+     "image": "oud-noir-attar",
+     "desc": "Attar bottle | "
+    }
+   ],
+   "gallery": [
+    {
+     "path": "oud-noir-attar",
+     "alt": "Dr. Mushtaq’s Oud Noir Attar, amber perfume-oil bottle with gold cap beside agarwood chips",
+     "aspect": 1.7778,
+     "i": 0
+    },
+    {
+     "path": "fragrance-discovery-set",
+     "alt": "Dr. Mushtaq’s Fragrance Discovery Set: three attar vials in a black and gold box",
+     "aspect": 1.7778,
+     "i": 1
+    }
+   ],
+   "sections": [
+    {
+     "t": "how_to_use",
+     "c": [
+      "Touch the dabber to wrists, behind the ears, and the hollow of the throat.",
+      "Do not rub; let it warm.",
+      "Layer under Kesar Rose for a softer edge."
+     ],
+     "i": 0
+    },
+    {
+     "t": "faq",
+     "c": [
+      [
+       "Is the oud real?",
+       "Yes. Plantation-grown Aquilaria malaccensis, hydro-distilled in Assam. The supplier’s GC-MS profile is kept with each lot."
+      ],
+      [
+       "Why no alcohol?",
+       "Attars are the older form of perfume, worn in cultures where alcohol is avoided. Oil also wears closer and longer."
+      ]
+     ],
+     "i": 1
+    },
+    {
+     "t": "key_points",
+     "c": {
+      "safety": "For external use only. Apply to pulse points; avoid eyes and mucous membranes. Contains natural essential oils; patch test before first use. Keep out of reach of children."
+     },
+     "i": 2
+    }
+   ],
+   "bundle": []
+  },
+  {
+   "slug": "kesar-rose-attar",
+   "name": "Kesar Rose Attar",
+   "subtitle": "Saffron, damask rose, sandalwood",
+   "tagline": "Rose with the saffron left in.",
+   "category": "fragrance",
+   "type": "cosmetic",
+   "short": "Isparta rose otto and a forty-day saffron infusion over Mysore sandalwood, in jojoba and blackseed oil. Honeyed, spiced, and quiet.",
+   "long": "Kesar is the Hindi word for saffron. This attar pairs it with the rose it has always been paired with, in the way an Indian attar-maker would: over sandalwood, in oil, without alcohol. It smells of rose, then of saffron’s leather-and-honey, then for hours of warm sandalwood.",
+   "ingredients": "Simmondsia chinensis (jojoba) seed oil, Nigella sativa (black seed) oil, Santalum album wood oil, Rosa damascena flower oil, Crocus sativus (saffron) flower extract, Tocopherol.",
+   "featured": true,
+   "isNew": true,
+   "bestseller": false,
+   "sort": 14,
+   "specs": [
+    [
+     "Family",
+     "Floral spice"
+    ],
+    [
+     "Notes",
+     "Damask rose, saffron, sandalwood, blackseed"
+    ],
+    [
+     "Concentration",
+     "20% aromatic oils in carrier"
+    ],
+    [
+     "Alcohol",
+     "None"
+    ],
+    [
+     "Wear",
+     "6 to 8 hours"
+    ],
+    [
+     "Packaging",
+     "Amber glass, gold cap, glass dabber"
+    ]
+   ],
+   "collection": "fragrance",
+   "step": "Attar",
+   "botanicals": [
+    "saffron",
+    "rose",
+    "sandalwood",
+    "blackseed"
+   ],
+   "mosaic": [],
+   "variants": [
+    {
+     "sku": "DM-KSR-12",
+     "label": "12 mL",
+     "sizeMl": 12,
+     "price": 8800,
+     "compare": null,
+     "def": true,
+     "i": 0,
+     "image": "kesar-rose-attar",
+     "desc": "Attar bottle | "
+    },
+    {
+     "sku": "DM-KSR-30",
+     "label": "30 mL",
+     "sizeMl": 30,
+     "price": 19000,
+     "compare": 22000,
+     "def": false,
+     "i": 1,
+     "image": "kesar-rose-attar",
+     "desc": "Attar bottle | "
+    }
+   ],
+   "gallery": [
+    {
+     "path": "kesar-rose-attar",
+     "alt": "Dr. Mushtaq’s Kesar Rose Attar, amber perfume-oil bottle beside rose petals and saffron",
+     "aspect": 1.7778,
+     "i": 0
+    },
+    {
+     "path": "fragrance-discovery-set",
+     "alt": "Dr. Mushtaq’s Fragrance Discovery Set: three attar vials in a black and gold box",
+     "aspect": 1.7778,
+     "i": 1
+    }
+   ],
+   "sections": [
+    {
+     "t": "how_to_use",
+     "c": [
+      "Touch the dabber to wrists and throat.",
+      "Wear alone, or over Oud Noir for depth."
+     ],
+     "i": 0
+    },
+    {
+     "t": "faq",
+     "c": [
+      [
+       "Is the sandalwood sustainable?",
+       "Yes. Certified plantation Santalum album, not wild-harvested."
+      ],
+      [
+       "Is it unisex?",
+       "All three attars are. Rose and saffron have been worn by men across the Middle East and South Asia for centuries."
+      ]
+     ],
+     "i": 1
+    },
+    {
+     "t": "key_points",
+     "c": {
+      "safety": "For external use only. Apply to pulse points; avoid eyes and mucous membranes. Contains natural essential oils; patch test before first use. Keep out of reach of children."
+     },
+     "i": 2
+    }
+   ],
+   "bundle": []
+  },
+  {
+   "slug": "vigne-verte-attar",
+   "name": "Vigne Verte Attar",
+   "subtitle": "Grapevine leaf, vetiver, bergamot",
+   "tagline": "A vineyard in June.",
+   "category": "fragrance",
+   "type": "cosmetic",
+   "short": "Green grapevine-leaf absolute and Haitian vetiver over bergamot, in jojoba and blackseed oil. Cool, green, and dry.",
+   "long": "The third attar is the green one. Grapevine-leaf absolute smells of a vineyard row in early summer: sap, crushed leaf, a little tannin. Vetiver roots it; bergamot opens it; blackseed keeps it from turning sweet.",
+   "ingredients": "Simmondsia chinensis (jojoba) seed oil, Nigella sativa (black seed) oil, Chrysopogon zizanioides (vetiver) root oil, Vitis vinifera (grape) leaf extract, Citrus bergamia (bergamot) peel oil, Tocopherol.",
+   "featured": false,
+   "isNew": true,
+   "bestseller": false,
+   "sort": 15,
+   "specs": [
+    [
+     "Family",
+     "Green woody"
+    ],
+    [
+     "Notes",
+     "Grapevine leaf, vetiver, bergamot, blackseed"
+    ],
+    [
+     "Concentration",
+     "18% aromatic oils in carrier"
+    ],
+    [
+     "Alcohol",
+     "None"
+    ],
+    [
+     "Wear",
+     "5 to 7 hours"
+    ],
+    [
+     "Packaging",
+     "Amber glass, gold cap, glass dabber"
+    ]
+   ],
+   "collection": "fragrance",
+   "step": "Attar",
+   "botanicals": [
+    "grapevine",
+    "vetiver",
+    "blackseed"
+   ],
+   "mosaic": [],
+   "variants": [
+    {
+     "sku": "DM-VGV-12",
+     "label": "12 mL",
+     "sizeMl": 12,
+     "price": 8800,
+     "compare": null,
+     "def": true,
+     "i": 0,
+     "image": "vigne-verte-attar",
+     "desc": "Attar bottle | "
+    },
+    {
+     "sku": "DM-VGV-30",
+     "label": "30 mL",
+     "sizeMl": 30,
+     "price": 19000,
+     "compare": 22000,
+     "def": false,
+     "i": 1,
+     "image": "vigne-verte-attar",
+     "desc": "Attar bottle | "
+    }
+   ],
+   "gallery": [
+    {
+     "path": "vigne-verte-attar",
+     "alt": "Dr. Mushtaq’s Vigne Verte Attar, amber perfume-oil bottle beside a grapevine leaf and vetiver root",
+     "aspect": 1.7778,
+     "i": 0
+    },
+    {
+     "path": "fragrance-discovery-set",
+     "alt": "Dr. Mushtaq’s Fragrance Discovery Set: three attar vials in a black and gold box",
+     "aspect": 1.7778,
+     "i": 1
+    }
+   ],
+   "sections": [
+    {
+     "t": "how_to_use",
+     "c": [
+      "Touch the dabber to wrists and the back of the neck.",
+      "Best in daylight and warm weather."
+     ],
+     "i": 0
+    },
+    {
+     "t": "faq",
+     "c": [
+      [
+       "Is bergamot phototoxic?",
+       "We use furocoumarin-free (FCF) bergamot oil, so no."
+      ]
+     ],
+     "i": 1
+    },
+    {
+     "t": "key_points",
+     "c": {
+      "safety": "For external use only. Apply to pulse points; avoid eyes and mucous membranes. Contains natural essential oils; patch test before first use. Keep out of reach of children."
+     },
+     "i": 2
+    }
+   ],
+   "bundle": []
+  },
+  {
+   "slug": "fragrance-discovery-set",
+   "name": "Fragrance Discovery Set",
+   "subtitle": "All three attars, 3 mL each",
+   "tagline": "Wear each for a week before you choose.",
+   "category": "bundle",
+   "type": "bundle",
+   "short": "Oud Noir, Kesar Rose, and Vigne Verte in 3 mL dabber vials, seated in a black and gold box. The price is credited back when you buy a full bottle.",
+   "long": "Attars change on the skin over hours, so a paper strip tells you nothing. Wear each of the three for a week. When you choose, the code inside the lid takes the full price of this set off any 30 mL bottle.",
+   "ingredients": "See Oud Noir Attar, Kesar Rose Attar, and Vigne Verte Attar.",
+   "featured": true,
+   "isNew": true,
+   "bestseller": false,
+   "sort": 16,
+   "specs": [
+    [
+     "Contents",
+     "3 × 3 mL attar vials with dabber caps"
+    ],
+    [
+     "Box",
+     "Rigid matte black, gold interior"
+    ],
+    [
+     "Credit",
+     "Full set price off any 30 mL attar"
+    ]
+   ],
+   "collection": "fragrance",
+   "step": "Discovery",
+   "botanicals": [
+    "oud",
+    "saffron",
+    "rose",
+    "grapevine",
+    "vetiver",
+    "blackseed"
+   ],
+   "mosaic": [],
+   "variants": [
+    {
+     "sku": "DM-FDS",
+     "label": "Discovery Set",
+     "sizeMl": null,
+     "price": 8500,
+     "compare": null,
+     "def": true,
+     "i": 0,
+     "image": "fragrance-discovery-set",
+     "desc": "3 × 3 mL | "
+    }
+   ],
+   "gallery": [
+    {
+     "path": "fragrance-discovery-set",
+     "alt": "Dr. Mushtaq’s Fragrance Discovery Set: three attar vials in a black and gold box",
+     "aspect": 1.7778,
+     "i": 0
+    },
+    {
+     "path": "oud-noir-attar",
+     "alt": "Dr. Mushtaq’s Oud Noir Attar, amber perfume-oil bottle with gold cap beside agarwood chips",
+     "aspect": 1.7778,
+     "i": 1
+    },
+    {
+     "path": "kesar-rose-attar",
+     "alt": "Dr. Mushtaq’s Kesar Rose Attar, amber perfume-oil bottle beside rose petals and saffron",
+     "aspect": 1.7778,
+     "i": 2
+    },
+    {
+     "path": "vigne-verte-attar",
+     "alt": "Dr. Mushtaq’s Vigne Verte Attar, amber perfume-oil bottle beside a grapevine leaf and vetiver root",
+     "aspect": 1.7778,
+     "i": 3
+    }
+   ],
+   "sections": [
+    {
+     "t": "how_to_use",
+     "c": [
+      "Wear one attar per week on the pulse points.",
+      "Use the code inside the lid toward a full bottle."
+     ],
+     "i": 0
+    },
+    {
+     "t": "faq",
+     "c": [
+      [
+       "Can I gift it?",
+       "Yes. The credit code works for whoever redeems it."
+      ]
+     ],
+     "i": 1
+    },
+    {
+     "t": "key_points",
+     "c": {
+      "safety": "For external use only. Apply to pulse points; avoid eyes and mucous membranes. Contains natural essential oils; patch test before first use. Keep out of reach of children."
+     },
+     "i": 2
+    }
+   ],
+   "bundle": []
+  },
+  {
+   "slug": "the-travel-ritual",
+   "name": "The Travel Ritual",
+   "subtitle": "Five 10 mL vials of Blackseed Oil",
+   "tagline": "The oil, portioned for the road.",
+   "category": "bundle",
+   "type": "bundle",
+   "short": "Our 4.64% Blackseed Oil in five 10 mL vials, seated in a walnut stand inside a rigid magnetic box. For travel, gifting, or a first month.",
+   "long": "Five vials is roughly a month at one dropper a day, portioned so a bottle never has to travel. The walnut stand lives on a bathroom shelf; the box is made to be kept.",
+   "ingredients": "Nigella sativa (black seed) oil.",
+   "featured": true,
+   "isNew": false,
+   "bestseller": false,
+   "sort": 17,
+   "specs": [
+    [
+     "Contents",
+     "5 × 10 mL vials with orifice reducers"
+    ],
+    [
+     "Oil",
+     "Blackseed Oil, thymoquinone 4.64% by HPLC"
+    ],
+    [
+     "Stand",
+     "Solid walnut"
+    ],
+    [
+     "Box",
+     "Rigid magnetic, gold interior"
+    ]
+   ],
+   "collection": "ritual-sets",
+   "step": "Routine",
+   "botanicals": [
+    "blackseed"
+   ],
+   "mosaic": [],
+   "variants": [
+    {
+     "sku": "DM-BSO-TR5",
+     "label": "Travel Ritual",
+     "sizeMl": null,
+     "price": 8500,
+     "compare": null,
+     "def": true,
+     "i": 0,
+     "image": "travel-ritual",
+     "desc": "5 × 10 mL | "
+    }
+   ],
+   "gallery": [
+    {
+     "path": "travel-ritual",
+     "alt": "Dr. Mushtaq’s Travel Ritual: black and gold box with five 10 mL vials and a walnut stand",
+     "aspect": 1.4906,
+     "i": 0
+    },
+    {
+     "path": "blackseed-oil",
+     "alt": "Dr. Mushtaq’s Blackseed Oil, amber dropper bottle on marble beside Nigella sativa flowers and seeds",
+     "aspect": 1.8333,
+     "i": 1
+    }
+   ],
+   "sections": [
+    {
+     "t": "how_to_use",
+     "c": [
+      "One vial is about ten days at 1 mL daily.",
+      "Keep sealed vials in the box, away from light."
+     ],
+     "i": 0
+    },
+    {
+     "t": "faq",
+     "c": [
+      [
+       "Is it TSA-friendly?",
+       "Each vial is well under the 100 mL liquid limit."
+      ]
+     ],
+     "i": 1
+    },
+    {
+     "t": "key_points",
+     "c": {
+      "safety": "For adults. Consult a qualified clinician before use if you are pregnant or nursing, taking medication, managing a medical condition, scheduled for a procedure, or considering use for a child. Discontinue and seek advice if any adverse reaction occurs."
+     },
+     "i": 2
+    }
+   ],
+   "bundle": []
+  },
+  {
+   "slug": "the-morning-protocol",
+   "name": "The Morning Protocol",
+   "subtitle": "Blackseed Oil 125 mL + Softgels 90",
+   "tagline": "The dropper at home, the softgel away.",
+   "category": "bundle",
+   "type": "bundle",
+   "short": "The two ways of taking the oil, together: a 125 mL dropper bottle for the kitchen and ninety softgels for the bag.",
+   "long": "Most people who stay with blackseed oil end up with both formats: the dropper when they are home, the softgel when they are not. This set pairs them and saves ten percent.",
+   "ingredients": "See Blackseed Oil and Blackseed Oil Softgels.",
+   "featured": true,
+   "isNew": false,
+   "bestseller": false,
+   "sort": 18,
+   "specs": [
+    [
+     "Contents",
+     "Blackseed Oil 125 mL, Blackseed Oil Softgels 90"
+    ],
+    [
+     "Saving",
+     "10% against buying separately"
+    ]
+   ],
+   "collection": "ritual-sets",
+   "step": "Routine",
+   "botanicals": [
+    "blackseed"
+   ],
+   "mosaic": [
+    "blackseed-oil",
+    "blackseed-oil-softgels"
+   ],
+   "variants": [
+    {
+     "sku": "DM-SET-MORNING",
+     "label": "The Set",
+     "sizeMl": null,
+     "price": 14200,
+     "compare": 15800,
+     "def": true,
+     "i": 0,
+     "image": null,
+     "desc": "2 pieces | "
+    }
+   ],
+   "gallery": [],
+   "sections": [
+    {
+     "t": "how_to_use",
+     "c": [
+      "One dropper or two softgels daily, not both."
+     ],
+     "i": 0
+    },
+    {
+     "t": "faq",
+     "c": [],
+     "i": 1
+    },
+    {
+     "t": "key_points",
+     "c": {
+      "safety": "For adults. Consult a qualified clinician before use if you are pregnant or nursing, taking medication, managing a medical condition, scheduled for a procedure, or considering use for a child. Discontinue and seek advice if any adverse reaction occurs."
+     },
+     "i": 2
+    }
+   ],
+   "bundle": [
+    {
+     "sku": "DM-BSO-125",
+     "qty": 1
+    },
+    {
+     "sku": "DM-SG-90",
+     "qty": 1
+    }
+   ]
+  },
+  {
+   "slug": "the-skin-ritual",
+   "name": "The Skin Ritual",
+   "subtitle": "Cleanse, treat, seal",
+   "tagline": "The whole three-step routine, ten percent off.",
+   "category": "bundle",
+   "type": "bundle",
+   "short": "Rose & Blackseed Cleansing Oil 125 mL, Saffron Radiance Face Oil 50 mL, and Blackseed Balm 60 mL.",
+   "long": "An oil-first routine in three steps: cleanse with rose, treat with saffron, seal with the balm. Everything you need for about four months.",
+   "ingredients": "See the three products.",
+   "featured": true,
+   "isNew": true,
+   "bestseller": false,
+   "sort": 19,
+   "specs": [
+    [
+     "Contents",
+     "Cleansing Oil 125 mL, Face Oil 50 mL, Balm 60 mL"
+    ],
+    [
+     "Saving",
+     "10% against buying separately"
+    ]
+   ],
+   "collection": "ritual-sets",
+   "step": "Routine",
+   "botanicals": [
+    "rose",
+    "saffron",
+    "blackseed",
+    "grapevine"
+   ],
+   "mosaic": [
+    "rose-blackseed-cleansing-oil",
+    "saffron-radiance-face-oil",
+    "blackseed-balm"
+   ],
+   "variants": [
+    {
+     "sku": "DM-SET-SKIN",
+     "label": "The Set",
+     "sizeMl": null,
+     "price": 24300,
+     "compare": 27000,
+     "def": true,
+     "i": 0,
+     "image": null,
+     "desc": "3 pieces | "
+    }
+   ],
+   "gallery": [],
+   "sections": [
+    {
+     "t": "how_to_use",
+     "c": [
+      "Morning: cleanse, six drops of face oil, sunscreen.",
+      "Evening: cleanse, face oil, balm on dry areas."
+     ],
+     "i": 0
+    },
+    {
+     "t": "faq",
+     "c": [],
+     "i": 1
+    },
+    {
+     "t": "key_points",
+     "c": {
+      "safety": "For external use only. Patch test before first use. Avoid contact with eyes and broken or irritated skin. Discontinue if irritation occurs. Keep out of reach of children."
+     },
+     "i": 2
+    }
+   ],
+   "bundle": [
+    {
+     "sku": "DM-RCO-125",
+     "qty": 1
+    },
+    {
+     "sku": "DM-SRF-50",
+     "qty": 1
+    },
+    {
+     "sku": "DM-BALM-60",
+     "qty": 1
+    }
+   ]
+  },
+  {
+   "slug": "the-hair-ritual",
+   "name": "The Hair Ritual",
+   "subtitle": "Pre-wash oil + leave-in serum",
+   "tagline": "Sunday oiling and the everyday serum.",
+   "category": "bundle",
+   "type": "bundle",
+   "short": "Amla & Blackseed Hair Oil 125 mL and Scalp & Beard Serum 60 mL.",
+   "long": "The weekly treatment and the daily finish, together and ten percent off.",
+   "ingredients": "See the two products.",
+   "featured": false,
+   "isNew": true,
+   "bestseller": false,
+   "sort": 20,
+   "specs": [
+    [
+     "Contents",
+     "Hair Oil 125 mL, Scalp & Beard Serum 60 mL"
+    ],
+    [
+     "Saving",
+     "10% against buying separately"
+    ]
+   ],
+   "collection": "ritual-sets",
+   "step": "Routine",
+   "botanicals": [
+    "amla",
+    "sesame",
+    "blackseed",
+    "rosemary"
+   ],
+   "mosaic": [
+    "amla-blackseed-hair-oil",
+    "scalp-beard-serum"
+   ],
+   "variants": [
+    {
+     "sku": "DM-SET-HAIR",
+     "label": "The Set",
+     "sizeMl": null,
+     "price": 14900,
+     "compare": 16600,
+     "def": true,
+     "i": 0,
+     "image": null,
+     "desc": "2 pieces | "
+    }
+   ],
+   "gallery": [],
+   "sections": [
+    {
+     "t": "how_to_use",
+     "c": [
+      "Oil once a week before washing; serum daily after."
+     ],
+     "i": 0
+    },
+    {
+     "t": "faq",
+     "c": [],
+     "i": 1
+    },
+    {
+     "t": "key_points",
+     "c": {
+      "safety": "For external use only. Patch test before first use. Avoid contact with eyes and broken or irritated skin. Discontinue if irritation occurs. Keep out of reach of children."
+     },
+     "i": 2
+    }
+   ],
+   "bundle": [
+    {
+     "sku": "DM-AHO-125",
+     "qty": 1
+    },
+    {
+     "sku": "DM-SRM-60",
+     "qty": 1
+    }
+   ]
+  },
+  {
+   "slug": "the-founders-set",
+   "name": "The Founder’s Set",
+   "subtitle": "Oil, balm, and the three attars",
+   "tagline": "What Dr. Mushtaq gives.",
+   "category": "bundle",
+   "type": "bundle",
+   "short": "Blackseed Oil 125 mL, Blackseed Balm 60 mL, and the Fragrance Discovery Set, in a rigid black and gold presentation box with a botanical card.",
+   "long": "The set the founder sends to friends: the original oil, the balm, and a first taste of all three attars, boxed with a letterpress card on Nigella sativa and thymoquinone.",
+   "ingredients": "See the individual products.",
+   "featured": true,
+   "isNew": true,
+   "bestseller": false,
+   "sort": 21,
+   "specs": [
+    [
+     "Contents",
+     "Blackseed Oil 125 mL, Blackseed Balm 60 mL, Fragrance Discovery Set"
+    ],
+    [
+     "Box",
+     "Rigid magnetic, gold interior, botanical card"
+    ],
+    [
+     "Saving",
+     "10% against buying separately"
+    ]
+   ],
+   "collection": "ritual-sets",
+   "step": "Gift",
+   "botanicals": [
+    "blackseed",
+    "saffron",
+    "rose",
+    "oud"
+   ],
+   "mosaic": [],
+   "variants": [
+    {
+     "sku": "DM-SET-FOUNDER",
+     "label": "The Set",
+     "sizeMl": null,
+     "price": 21800,
+     "compare": 24300,
+     "def": true,
+     "i": 0,
+     "image": "collection-gift-set",
+     "desc": "Gift box | "
+    }
+   ],
+   "gallery": [
+    {
+     "path": "collection-gift-set",
+     "alt": "Dr. Mushtaq’s gift presentation: black box with gold interior, oil, balm, vials and botanical card",
+     "aspect": 1.7917,
+     "i": 0
+    },
+    {
+     "path": "fragrance-discovery-set",
+     "alt": "Dr. Mushtaq’s Fragrance Discovery Set: three attar vials in a black and gold box",
+     "aspect": 1.7778,
+     "i": 1
+    }
+   ],
+   "sections": [
+    {
+     "t": "how_to_use",
+     "c": [
+      "Add a gift note at checkout."
+     ],
+     "i": 0
+    },
+    {
+     "t": "faq",
+     "c": [],
+     "i": 1
+    },
+    {
+     "t": "key_points",
+     "c": {
+      "safety": "For adults. Consult a qualified clinician before use if you are pregnant or nursing, taking medication, managing a medical condition, scheduled for a procedure, or considering use for a child. Discontinue and seek advice if any adverse reaction occurs."
+     },
+     "i": 2
+    }
+   ],
+   "bundle": [
+    {
+     "sku": "DM-BSO-125",
+     "qty": 1
+    },
+    {
+     "sku": "DM-BALM-60",
+     "qty": 1
+    },
+    {
+     "sku": "DM-FDS",
+     "qty": 1
+    }
+   ]
+  },
+  {
+   "slug": "the-complete-shelf",
+   "name": "The Complete Shelf",
+   "subtitle": "One of everything, twenty percent off",
+   "tagline": "Within, skin, hair, body. The whole house.",
+   "category": "bundle",
+   "type": "bundle",
+   "short": "Nine products across Within, Skin, Hair and Body in their starting sizes. The way to furnish a whole bathroom shelf at once.",
+   "long": "Blackseed Oil, Softgels, Culinary Finishing Oil, Rose & Blackseed Cleansing Oil, Saffron Radiance Face Oil, Blackseed Balm, Scalp & Beard Serum, Amla & Blackseed Hair Oil, and Saffron & Sesame Body Oil. Twenty percent below the sum of the parts.",
+   "ingredients": "See the individual products.",
+   "featured": true,
+   "isNew": true,
+   "bestseller": false,
+   "sort": 22,
+   "specs": [
+    [
+     "Contents",
+     "Nine products in starting sizes"
+    ],
+    [
+     "Saving",
+     "20% against buying separately"
+    ]
+   ],
+   "collection": "ritual-sets",
+   "step": "Routine",
+   "botanicals": [
+    "blackseed",
+    "saffron",
+    "grapevine",
+    "rose",
+    "amla",
+    "sesame"
+   ],
+   "mosaic": [],
+   "variants": [
+    {
+     "sku": "DM-SET-SHELF",
+     "label": "The Shelf",
+     "sizeMl": null,
+     "price": 61000,
+     "compare": 76200,
+     "def": true,
+     "i": 0,
+     "image": "collection-flatlay",
+     "desc": "9 pieces | "
+    }
+   ],
+   "gallery": [
+    {
+     "path": "collection-flatlay",
+     "alt": "Dr. Mushtaq’s collection on marble: oil, balm, sample vials, botanical card, brass dishes and mortar",
+     "aspect": 1.8338,
+     "i": 0
+    },
+    {
+     "path": "collection-gift-set",
+     "alt": "Dr. Mushtaq’s gift presentation: black box with gold interior, oil, balm, vials and botanical card",
+     "aspect": 1.7917,
+     "i": 1
+    }
+   ],
+   "sections": [
+    {
+     "t": "how_to_use",
+     "c": [
+      "Follow the Protocol page for a day with the shelf."
+     ],
+     "i": 0
+    },
+    {
+     "t": "faq",
+     "c": [],
+     "i": 1
+    },
+    {
+     "t": "key_points",
+     "c": {
+      "safety": "For adults. Consult a qualified clinician before use if you are pregnant or nursing, taking medication, managing a medical condition, scheduled for a procedure, or considering use for a child. Discontinue and seek advice if any adverse reaction occurs."
+     },
+     "i": 2
+    }
+   ],
+   "bundle": [
+    {
+     "sku": "DM-BSO-125",
+     "qty": 1
+    },
+    {
+     "sku": "DM-SG-90",
+     "qty": 1
+    },
+    {
+     "sku": "DM-CFO-250",
+     "qty": 1
+    },
+    {
+     "sku": "DM-RCO-125",
+     "qty": 1
+    },
+    {
+     "sku": "DM-SRF-50",
+     "qty": 1
+    },
+    {
+     "sku": "DM-BALM-60",
+     "qty": 1
+    },
+    {
+     "sku": "DM-SRM-60",
+     "qty": 1
+    },
+    {
+     "sku": "DM-AHO-125",
+     "qty": 1
+    },
+    {
+     "sku": "DM-SBO-125",
+     "qty": 1
+    }
+   ]
+  },
+  {
+   "slug": "practitioner-case",
+   "name": "Practitioner Case",
+   "subtitle": "Six 500 mL Blackseed Oil",
+   "tagline": "Three litres, one lot, one certificate.",
+   "category": "bundle",
+   "type": "bundle",
+   "short": "Six 500 mL apothecary bottles of Blackseed Oil from a single lot, with the lot’s certificate of analysis and twelve glass pipettes. For clinics, dispensaries, and households that buy by the case.",
+   "long": "Ayurvedic, Unani, and Chinese-medicine practitioners asked for the oil in a form they could dispense. This is it: one lot, six bottles, the certificate of analysis in the crate, and a price seventeen percent below the single 500 mL bottle.",
+   "ingredients": "Nigella sativa (black seed) oil.",
+   "featured": false,
+   "isNew": true,
+   "bestseller": false,
+   "sort": 23,
+   "specs": [
+    [
+     "Contents",
+     "6 × 500 mL apothecary bottles, 12 glass pipettes"
+    ],
+    [
+     "Lot",
+     "Single lot per case; COA enclosed"
+    ],
+    [
+     "Saving",
+     "17% against the 500 mL price"
+    ]
+   ],
+   "collection": "ritual-sets",
+   "step": "Practitioner",
+   "botanicals": [
+    "blackseed"
+   ],
+   "mosaic": [],
+   "variants": [
+    {
+     "sku": "DM-CASE-BSO",
+     "label": "The Case",
+     "sizeMl": null,
+     "price": 136000,
+     "compare": 163200,
+     "def": true,
+     "i": 0,
+     "image": "practitioner-case",
+     "desc": "6 × 500 mL | "
+    }
+   ],
+   "gallery": [
+    {
+     "path": "practitioner-case",
+     "alt": "Dr. Mushtaq’s Practitioner Case: six 500 mL bottles of Blackseed Oil in a wooden crate with a certificate of analysis",
+     "aspect": 1.7778,
+     "i": 0
+    },
+    {
+     "path": "blackseed-oil",
+     "alt": "Dr. Mushtaq’s Blackseed Oil, amber dropper bottle on marble beside Nigella sativa flowers and seeds",
+     "aspect": 1.8333,
+     "i": 1
+    }
+   ],
+   "sections": [
+    {
+     "t": "how_to_use",
+     "c": [
+      "Dispense as your practice sees fit. Lot number is printed on every bottle for your records."
+     ],
+     "i": 0
+    },
+    {
+     "t": "faq",
+     "c": [
+      [
+       "Do you offer practitioner accounts?",
+       "Yes. See the Practitioners page for terms, COAs, and larger quantities."
+      ]
+     ],
+     "i": 1
+    },
+    {
+     "t": "key_points",
+     "c": {
+      "safety": "For adults. Consult a qualified clinician before use if you are pregnant or nursing, taking medication, managing a medical condition, scheduled for a procedure, or considering use for a child. Discontinue and seek advice if any adverse reaction occurs."
+     },
+     "i": 2
+    }
+   ],
+   "bundle": [
+    {
+     "sku": "DM-BSO-500",
+     "qty": 6
+    }
+   ]
+  }
+ ]
+}

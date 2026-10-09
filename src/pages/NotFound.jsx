@@ -10,7 +10,7 @@ export default function NotFound() {
         <h1 className="h1 mt-6">Nothing here.</h1>
         <p className="mt-6 text-ink/70">That page has gone the way of the myth.</p>
         <Link to="/shop" className="btn btn-solid mt-10">
-          Shop the five
+          Shop by purpose
         </Link>
       </section>
     </>
