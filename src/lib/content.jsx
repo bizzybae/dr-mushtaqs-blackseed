@@ -18,6 +18,7 @@ export const sanity = projectId
       apiVersion: '2025-01-01',
       useCdn: !inStudio,
       perspective: 'published',
+      maxRetries: 1,
     })
   : null
 
