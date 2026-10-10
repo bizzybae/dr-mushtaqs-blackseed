@@ -57,3 +57,5 @@ drop policy if exists "public insert" on public.waitlist;
 create policy "public insert" on public.waitlist for insert with check (true);
 -- no public select, update, or delete: confirmation and unsubscribe run with the service role
 revoke select, update, delete on public.waitlist from anon, authenticated;
+revoke truncate, trigger, references on public.waitlist from anon, authenticated;
+revoke truncate, trigger, references on public.practitioner_inquiries from anon, authenticated;

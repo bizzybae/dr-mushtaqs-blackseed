@@ -18,7 +18,11 @@ async function rest(path, { method = 'GET', body, service = false, prefer } = {}
     body: body ? JSON.stringify(body) : undefined,
   })
   if (!res.ok) throw new Error(`Supabase ${method} ${path} -> ${res.status} ${await res.text()}`)
-  return res.status === 204 ? null : res.json()
+  if (res.status === 204 || res.status === 201) {
+    const text = await res.text()
+    return text ? JSON.parse(text) : null
+  }
+  return res.json()
 }
 
 export async function fetchVariants(skus) {
@@ -29,9 +33,12 @@ export async function fetchVariants(skus) {
 }
 
 // Waitlist: public insert under RLS; reads and updates need the service role.
+// anon has INSERT only (no SELECT), so we generate the token here and ask for
+// no representation back.
 export async function insertWaitlist(row) {
-  const rows = await rest('waitlist', { method: 'POST', body: row, prefer: 'return=representation' })
-  return rows?.[0] || null
+  const confirm_token = crypto.randomUUID()
+  await rest('waitlist', { method: 'POST', body: { ...row, confirm_token }, prefer: 'return=minimal' })
+  return { confirm_token }
 }
 export async function findWaitlistByToken(token) {
   const rows = await rest(`waitlist?confirm_token=eq.${encodeURIComponent(token)}&select=id,email,confirmed`, { service: true })
