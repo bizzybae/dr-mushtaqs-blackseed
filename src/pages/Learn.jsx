@@ -4,13 +4,14 @@ import ProductPhoto, { ProductThumb } from '../components/ProductPhoto'
 import ProductCard from '../components/ProductCard'
 import { Accordion, GuaranteeStrip, LabelBadges, PhysicianSeal, SectionHead, Seo } from '../components/ui'
 import { Mark } from '../components/Logo'
-import { BOTANICALS, PROTOCOL } from '../data/catalog'
-import { FOUNDER, PRACTITIONERS } from '../data/site'
+import { PROTOCOL } from '../data/catalog'
+import { useSite } from '../lib/content'
 import { isConcept, useCatalog } from '../lib/catalog'
 import { supabase } from '../lib/supabase'
 
 // ───────────────────────── Dr. Mushtaq ─────────────────────────
 export function FounderPage() {
+  const { FOUNDER } = useSite()
   return (
     <>
       <Seo title="About Dr. Mushtaq" description="Dr. Quddarat U. Mushtaq, MD, MS: why he started the company, what gets tested on every lot, and what never goes on the label." image="/products/physician-desk.jpg" />
@@ -146,6 +147,7 @@ export function FounderPage() {
 
 // ───────────────────────── Botanicals ─────────────────────────
 export function BotanicalsPage() {
+  const { BOTANICALS } = useSite()
   const { products } = useCatalog()
   const entries = Object.entries(BOTANICALS)
   return (
@@ -298,6 +300,7 @@ export function ProtocolPage() {
 
 // ───────────────────────── Practitioners ─────────────────────────
 export function PractitionersPage() {
+  const { PRACTITIONERS } = useSite()
   const { products } = useCatalog()
   const sizes = products.filter((p) => ['blackseed-oil', 'blackseed-oil-softgels', 'amla-blackseed-hair-oil', 'saffron-sesame-body-oil', 'practitioner-case'].includes(p.slug))
   const [form, setForm] = useState({ name: '', email: '', practice: '', credential: '', note: '' })

@@ -3,12 +3,13 @@ import { Link, useParams, useSearchParams } from 'react-router-dom'
 import { Accordion, Seo } from '../components/ui'
 import WaitlistForm from '../components/WaitlistForm'
 import { MICRO } from '../data/catalog'
-import { POLICIES, SITE_FAQ } from '../data/site'
+import { useSite } from '../lib/content'
 import { money } from '../lib/catalog'
 import { useCart } from '../lib/cart'
 import NotFound from './NotFound'
 
 export function FAQPage() {
+  const { SITE_FAQ } = useSite()
   return (
     <>
       <Seo title="Questions" description="Answers about Dr. Mushtaq’s products, sizes and pricing, the 60-Day Standard, ordering, shipping, and safety." />
@@ -41,6 +42,7 @@ export function FAQPage() {
 }
 
 export function PolicyPage() {
+  const { POLICIES } = useSite()
   const { slug } = useParams()
   const policy = POLICIES[slug]
   if (!policy) return <NotFound />

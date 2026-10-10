@@ -95,6 +95,7 @@ export const HOME = {
 export const COA = {
   title: 'Every lot, tested. Every number, published.',
   body: 'Each pressing gets an independent lab panel covering thymoquinone, fatty-acid profile, freshness, heavy metals, and microbial screen. Scan the lot code on your bottle to see its full certificate.',
+  panel: ['Thymoquinone, with the method named', 'Fatty-acid profile', 'Peroxide value (freshness)', 'Heavy metals: lead, arsenic, cadmium, mercury', 'Microbial screen'],
   howToRead: [
     ['What thymoquinone is', 'Thymoquinone is a small aromatic molecule, a quinone, that gives Nigella sativa seed oil much of its peppery character. Laboratories report it as a percentage of the oil by weight, measured by gas chromatography or liquid chromatography against a reference standard.'],
     ['Why it varies by harvest', 'The seed’s chemistry depends on the cultivar, the soil, the season, how long the seed was stored, and how warm the press ran. Two honest lots from the same farm can differ. That is why we publish a number per lot rather than printing one number for all time.'],
@@ -179,6 +180,14 @@ export const HERITAGE = {
     'Nigella sativa is a small annual in the buttercup family, grown for its black, angular seeds across the Middle East, North Africa, and South Asia. Seeds were found in Tutankhamun’s tomb, and the plant appears in the Old Testament under the name ketzah, where the prophet Isaiah describes it being threshed with a stick rather than a sledge.',
     'In the kitchen it is kalonji, habbat al-barakah, çörek otu, or siyah daneh depending on where you are standing. It is pressed into naan and sprinkled over simit, tempered in hot oil for dal, folded into Bengali panch phoron, and stirred into string cheese in the Levant. The oil was pressed for the table long before it was bottled for anything else.',
     'In Islamic tradition the seed holds a place of its own. The narration quoted below is why a jar of it sits in so many homes, passed from one generation to the next with the salt and the honey. We keep that tradition by getting the seed itself right. The seed is a food and a story; we make no claim beyond that.',
+  ],
+  names: [
+    ['Kalonji', 'Hindi and Urdu, the kitchen name across South Asia'],
+    ['Habbat al-barakah', 'Arabic, “the seed of blessing”'],
+    ['Habbat al-sauda', 'Arabic, “the black seed”'],
+    ['Çörek otu', 'Turkish, the seed on simit and börek'],
+    ['Siyah daneh', 'Persian, “black grain”'],
+    ['Ketzah', 'Hebrew, the name in Isaiah 28'],
   ],
 }
 

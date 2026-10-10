@@ -2,11 +2,12 @@ import { useEffect, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { Wordmark } from './Logo'
 import ProductPhoto, { ProductThumb } from './ProductPhoto'
-import { HOME, NAV } from '../data/site'
+import { useSite } from '../lib/content'
 import { useCart } from '../lib/cart'
 import { isConcept, money, priceFrom, priceTo, useCatalog, useSiteMode } from '../lib/catalog'
 
 export default function Header() {
+  const { HOME, NAV } = useSite()
   const { count, setOpen } = useCart()
   const { products, collections, settings } = useCatalog()
   const mode = useSiteMode()

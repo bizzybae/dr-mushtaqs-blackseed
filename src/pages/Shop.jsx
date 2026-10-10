@@ -3,9 +3,9 @@ import { Link, useParams } from 'react-router-dom'
 import ProductCard from '../components/ProductCard'
 import ProductPhoto from '../components/ProductPhoto'
 import { GuaranteeStrip, LabelBadges, Seo } from '../components/ui'
-import { BOTANICALS } from '../data/catalog'
 import { isConcept, useCatalog, useCollection, useListedProducts } from '../lib/catalog'
 import NotFound from './NotFound'
+import { useSite } from '../lib/content'
 
 // /shop : everything, filterable by purpose
 export default function Shop() {
@@ -73,6 +73,7 @@ export default function Shop() {
 
 // /collections/:slug : one purpose, grouped by step
 export function CollectionPage() {
+  const { BOTANICALS } = useSite()
   const { slug } = useParams()
   const { collection, products, loading } = useCollection(slug)
   const { collections } = useCatalog()

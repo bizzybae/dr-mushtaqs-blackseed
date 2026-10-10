@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom'
 import { Wordmark } from './Logo'
-import { FDA_DISCLAIMER, FOOTER_LINKS, NO_MEDICAL_SERVICES } from '../data/site'
+import { useSite } from '../lib/content'
 import WaitlistForm from './WaitlistForm'
 import TrustStrip from './TrustStrip'
 
 export default function Footer() {
+  const { FDA_DISCLAIMER, FOOTER_LINKS, NO_MEDICAL_SERVICES } = useSite()
   return (
     <footer className="bg-ink text-cream">
       <div className="mx-auto max-w-[1440px] px-5 py-16 sm:px-8 lg:px-12 lg:py-20">

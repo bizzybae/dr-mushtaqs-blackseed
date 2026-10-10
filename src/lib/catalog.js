@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useMemo, useState, createElement } from 'react'
 import { supabase } from './supabase'
+import { applyProductContent, useSite } from './content'
 import { PRODUCTS, IMAGES, COLLECTIONS, LABEL_BADGES, STATUS } from '../data/catalog'
 
 const MEDIA_BASE = String(import.meta.env.VITE_MEDIA_BASE || '/products').replace(/\/+$/, '')
@@ -149,7 +150,12 @@ export function CatalogProvider({ children }) {
     }
   }, [])
 
-  const value = useMemo(() => state, [state])
+  // Editorial copy from Sanity overlays the commerce rows by slug.
+  const { PRODUCT_CONTENT } = useSite()
+  const value = useMemo(
+    () => ({ ...state, products: state.products.map((p) => applyProductContent(p, PRODUCT_CONTENT?.[p.slug])) }),
+    [state, PRODUCT_CONTENT]
+  )
   return createElement(CatalogContext.Provider, { value }, children)
 }
 

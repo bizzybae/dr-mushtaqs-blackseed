@@ -8,14 +8,15 @@ import SafetyLine from '../components/SafetyLine'
 import StickyBuyBar from '../components/StickyBuyBar'
 import WaitlistForm from '../components/WaitlistForm'
 import { Accordion, GuaranteeStrip, LabelBadges, PhysicianSeal, Seo } from '../components/ui'
-import { BOTANICALS, PROTOCOL } from '../data/catalog'
-import { FOUNDER } from '../data/site'
+import { PROTOCOL } from '../data/catalog'
+import { useSite } from '../lib/content'
 import { track } from '../lib/analytics'
 import { findVariant, isConcept, isListed, isPurchasable, money, perMl, perOz, savingsPct, servingsPer, statusOf, useCatalog, useCurrentBatch, useProduct } from '../lib/catalog'
 import { startCheckout, useCart } from '../lib/cart'
 import NotFound from './NotFound'
 
 export default function ProductPage() {
+  const { FOUNDER, BOTANICALS } = useSite()
   const { slug } = useParams()
   const [params, setParams] = useSearchParams()
   const { product, loading } = useProduct(slug)

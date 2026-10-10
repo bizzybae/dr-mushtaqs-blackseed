@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { Accordion, Seo } from '../components/ui'
 import WaitlistForm from '../components/WaitlistForm'
-import { COA } from '../data/site'
+import { useSite } from '../lib/content'
 import { track } from '../lib/analytics'
 import { useCatalog } from '../lib/catalog'
 
@@ -15,6 +15,7 @@ function allLots(products) {
 }
 
 export function CoaPage() {
+  const { COA } = useSite()
   const { products, loading } = useCatalog()
   const lots = allLots(products)
   const original = products.find((p) => p.slug === 'blackseed-oil')
@@ -31,7 +32,7 @@ export function CoaPage() {
           </div>
           <div className="lg:col-span-5">
             <ul className="divide-y divide-ink/10 border-y border-ink/10">
-              {['Thymoquinone, with the method named', 'Fatty-acid profile', 'Peroxide value (freshness)', 'Heavy metals: lead, arsenic, cadmium, mercury', 'Microbial screen'].map((t, i) => (
+              {(COA.panel || []).map((t, i) => (
                 <li key={t} className="flex gap-5 py-4">
                   <span className="font-mono text-[11px] text-brass">0{i + 1}</span>
                   <p className="text-base text-ink/80">{t}</p>

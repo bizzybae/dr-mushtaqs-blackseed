@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom'
-import { TRUST } from '../data/site'
+import { useSite } from '../lib/content'
 
 export default function TrustStrip({ dark = false }) {
+  const { TRUST } = useSite()
   const items = TRUST.filter((t) => t.label)
   if (!items.length) return null
   return (

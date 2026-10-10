@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom'
 import { ProductThumb } from '../components/ProductPhoto'
 import { NotifyButton } from '../components/WaitlistForm'
 import { Accordion, SectionHead, Seo } from '../components/ui'
-import { HADITH, HERITAGE, NO_MEDICAL_SERVICES, SAFETY_FAQ, SAFETY_LINE } from '../data/site'
+import { useSite } from '../lib/content'
 import { defaultVariant, useCatalog, useConceptProducts } from '../lib/catalog'
 
 // /coming-soon : every concept, grouped by purpose. Name, format, one
@@ -66,6 +66,7 @@ export function ComingSoonPage() {
 }
 
 export function SafetyPage() {
+  const { NO_MEDICAL_SERVICES, SAFETY_FAQ, SAFETY_LINE } = useSite()
   return (
     <>
       <Seo title="Safety" description="Who should check with a clinician before using Dr. Mushtaq’s products, what to do if you have a reaction, and what this site is and is not." />
@@ -98,6 +99,7 @@ export function SafetyPage() {
 // /heritage : culinary and cultural history plus the narration. No buy
 // button on this page, and no founder or credential block.
 export function HeritagePage() {
+  const { HADITH, HERITAGE } = useSite()
   return (
     <>
       <Seo title="Heritage" description="Black seed has been pressed, eaten, and shared across the Middle East, North Africa, and South Asia for centuries. Its culinary and cultural story." />
@@ -127,7 +129,7 @@ export function HeritagePage() {
       <section className="mx-auto max-w-3xl px-5 py-16 sm:px-8">
         <SectionHead eyebrow="Further reading" title="Where the names come from." />
         <ul className="mt-8 divide-y divide-ink/10 border-y border-ink/10 text-base text-ink/75">
-          {[['Kalonji', 'Hindi and Urdu, the kitchen name across South Asia'], ['Habbat al-barakah', 'Arabic, “the seed of blessing”'], ['Habbat al-sauda', 'Arabic, “the black seed”'], ['Çörek otu', 'Turkish, the seed on simit and börek'], ['Siyah daneh', 'Persian, “black grain”'], ['Ketzah', 'Hebrew, the name in Isaiah 28']].map(([k, v]) => (
+          {(HERITAGE.names || []).map(([k, v]) => (
             <li key={k} className="grid grid-cols-3 gap-4 py-3">
               <span className="font-display text-lg text-ink">{k}</span>
               <span className="col-span-2">{v}</span>

@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom'
-import { SAFETY_LINE } from '../data/site'
+import { useSite } from '../lib/content'
 
 export default function SafetyLine({ dark = false, className = '' }) {
+  const { SAFETY_LINE } = useSite()
   return (
     <p className={`text-[13px] leading-relaxed ${dark ? 'text-cream/65' : 'text-ink/65'} ${className}`} data-testid="text-safety-line">
       {SAFETY_LINE}{' '}

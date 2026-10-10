@@ -6,10 +6,11 @@ import ReviewsSlot from '../components/ReviewsSlot'
 import TrustStrip from '../components/TrustStrip'
 import WaitlistForm from '../components/WaitlistForm'
 import { Accordion, GuaranteeStrip, PhysicianSeal, SectionHead, Seo } from '../components/ui'
-import { FOUNDER, HOME, SITE_FAQ } from '../data/site'
+import { useSite } from '../lib/content'
 import { defaultVariant, isConcept, money, useCatalog, useCurrentBatch, useSiteMode } from '../lib/catalog'
 
 export default function Home() {
+  const { FOUNDER, HOME, SITE_FAQ } = useSite()
   const { products, collections } = useCatalog()
   const mode = useSiteMode()
   const live = mode === 'live'
