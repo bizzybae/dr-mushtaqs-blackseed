@@ -28,7 +28,7 @@ export default function CartDrawer() {
     } catch (err) {
       setError(
         err.code === 'checkout_not_configured'
-          ? 'Checkout is being connected. Leave your email in the footer and we will tell you the moment it opens.'
+          ? 'Checkout is not open yet. Join the first-lot list in the footer and we will write the day it opens.'
           : err.message
       )
       setBusy(false)
@@ -74,7 +74,7 @@ export default function CartDrawer() {
           {lines.length === 0 ? (
             <div className="py-16 text-center">
               <p className="font-display text-xl">Your bag is empty.</p>
-              <p className="mt-2 text-sm text-muted">Start with the original oil, or shop by purpose.</p>
+              <p className="mt-2 text-sm text-muted">Nothing here yet. Your future dropper awaits.</p>
               <Link to="/shop" onClick={() => setOpen(false)} className="btn btn-solid mt-8" data-testid="link-empty-shop">
                 Shop by purpose
               </Link>

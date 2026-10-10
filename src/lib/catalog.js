@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useMemo, useState, createElement } from 'react'
 import { supabase } from './supabase'
-import { PRODUCTS, IMAGES, COLLECTIONS, LABEL_BADGES } from '../data/catalog'
+import { PRODUCTS, IMAGES, COLLECTIONS, LABEL_BADGES, STATUS } from '../data/catalog'
 
 const MEDIA_BASE = String(import.meta.env.VITE_MEDIA_BASE || '/products').replace(/\/+$/, '')
 
@@ -44,6 +44,7 @@ function fromRows(products, collections, settings) {
         })
       return {
         slug: p.slug,
+        status: STATUS[p.status] ? p.status : 'concept',
         sort: p.sort_order,
         collection: p.collection_slug,
         step: p.step,
@@ -67,8 +68,18 @@ function fromRows(products, collections, settings) {
         howToUse: sections.how_to_use || [],
         faq: sections.faq || [],
         safety: sections.key_points?.safety || '',
+        intendedUse: p.intended_use || '',
+        sensoryLine: p.sensory_line || '',
+        sensory: p.sensory_notes || '',
+        storage: p.storage || '',
+        shelfLife: p.shelf_life || '',
+        serving: p.serving || '',
+        servingMl: p.serving_ml ? Number(p.serving_ml) : undefined,
+        directions: p.directions || [],
+        howTo: Array.isArray(p.how_to) ? p.how_to : [],
         variants,
-        batches: (p.batches || []).sort((a, b) => (a.pressed_date < b.pressed_date ? 1 : -1)),
+        batches: normaliseBatches(p.batches),
+        reviews: (p.reviews || []).filter((r) => r.is_approved),
       }
     })
     .sort((a, b) => a.sort - b.sort)
@@ -80,8 +91,17 @@ function fromRows(products, collections, settings) {
   return { products: list, collections: cols.length ? cols : COLLECTIONS, settings: map }
 }
 
+// Only published rows ever reach the browser (RLS), but filter again so a
+// row can never render half-finished. Newest press first.
+export function normaliseBatches(rows) {
+  return (rows || [])
+    .filter((b) => b && b.published !== false && b.lot_number)
+    .map((b) => ({ ...b, press_date: b.press_date || b.pressed_date || null }))
+    .sort((a, b) => ((a.press_date || '') < (b.press_date || '') ? 1 : -1))
+}
+
 const STATIC = {
-  products: PRODUCTS.map((p) => ({ ...p, batches: [], bundle: p.bundle || [], mosaic: p.mosaic || [], gallery: p.gallery || [] })),
+  products: PRODUCTS.map((p) => ({ ...p, status: p.status || 'concept', batches: [], reviews: [], bundle: p.bundle || [], mosaic: p.mosaic || [], gallery: p.gallery || [], directions: p.directions || [], howTo: p.howTo || [] })),
   collections: COLLECTIONS,
   settings: { free_shipping_threshold_cents: 15000, flat_shipping_cents: 900, announcement: 'Complimentary shipping on orders over $150' },
 }
@@ -100,12 +120,14 @@ export function CatalogProvider({ children }) {
           supabase
             .from('products')
             .select(
-              'slug,name,subtitle,tagline,category,product_type,short_description,long_description,inci_ingredients,is_featured,is_new,is_bestseller,is_published,sort_order,badges,specs,collection_slug,step,botanicals,mosaic,' +
+              'slug,status,name,subtitle,tagline,category,product_type,short_description,long_description,inci_ingredients,is_featured,is_new,is_bestseller,is_published,sort_order,badges,specs,collection_slug,step,botanicals,mosaic,' +
+                'intended_use,sensory_line,sensory_notes,storage,shelf_life,serving,serving_ml,directions,how_to,' +
                 'product_variants!product_variants_product_id_fkey(sku,label,size_ml,price_cents,compare_at_cents,stock,is_default,sort_order,image_storage_path,description),' +
                 'product_images(storage_path,alt,sort_order,aspect),' +
                 'product_sections(section_type,content,sort_order),' +
                 'bundle_items!bundle_items_bundle_product_id_fkey(quantity,variant:product_variants!bundle_items_variant_id_fkey(sku)),' +
-                'batches(lot_number,pressed_date,best_by,thymoquinone_pct,acid_value,peroxide_value,coa_storage_path)'
+                'batches(lot_number,press_date,pressed_date,best_by,origin_country,origin_region,thymoquinone_pct,tq_method,peroxide_value,fatty_acid_profile,heavy_metals_result,micro_result,lab_name,coa_pdf_url,published,is_current),' +
+                'reviews(author_name,rating,title,body,is_verified_buyer,is_approved,created_at)'
             )
             .order('sort_order'),
           supabase.from('collections').select('slug,name,short_label,description,hero_image_url,steps,sort_order,is_published').order('sort_order'),
@@ -147,6 +169,44 @@ export function useCollection(slug) {
   return { collection, products: items, loading }
 }
 
+// Lifecycle helpers. The server enforces the same rule in api/checkout.js.
+export const statusOf = (product) => STATUS[product?.status] || STATUS.concept
+export const isPurchasable = (product) => statusOf(product).purchasable
+export const isConcept = (product) => (product?.status || 'concept') === 'concept'
+// Products that get their own page: anything past the concept stage.
+export const isListed = (product) => !isConcept(product)
+export function useListedProducts() {
+  const { products, loading } = useCatalog()
+  return { products: products.filter(isListed), loading }
+}
+export function useConceptProducts() {
+  const { products, loading } = useCatalog()
+  return { products: products.filter(isConcept), loading }
+}
+// Site-wide state: live once anything can be bought.
+export function useSiteMode() {
+  const { products } = useCatalog()
+  return products.some(isPurchasable) ? 'live' : 'prelaunch'
+}
+export function useCurrentBatch(product) {
+  const list = product?.batches || []
+  return list.find((b) => b.is_current) || list[0] || null
+}
+
+const ML_PER_FL_OZ = 29.5735
+export function perOz(variant) {
+  if (!variant?.sizeMl) return null
+  return Math.round(variant.priceCents / (variant.sizeMl / ML_PER_FL_OZ))
+}
+export function perMl(variant) {
+  if (!variant?.sizeMl) return null
+  return Math.round(variant.priceCents / variant.sizeMl)
+}
+export function servingsPer(product, variant) {
+  if (!product?.servingMl || !variant?.sizeMl) return null
+  return Math.floor(variant.sizeMl / product.servingMl)
+}
+
 export function findVariant(products, sku) {
   for (const p of products) {
     const v = p.variants.find((x) => x.sku === sku)
@@ -178,7 +238,7 @@ export function cardImages(product) {
   return []
 }
 
-export { LABEL_BADGES }
+export { LABEL_BADGES, STATUS }
 
 export const money = (cents, opts = {}) =>
   new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: cents % 100 === 0 && !opts.always ? 0 : 2 }).format(cents / 100)

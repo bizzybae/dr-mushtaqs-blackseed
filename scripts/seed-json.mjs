@@ -6,10 +6,12 @@ import { PRODUCTS, IMAGES, COLLECTIONS, BOTANICALS, LABEL_BADGES } from '../src/
 
 const doc = {
   collections: COLLECTIONS.map((c) => ({ slug: c.slug, name: c.name, short: c.short, description: c.description, hero: c.hero, steps: c.steps, sort: c.sort })),
-  botanicals: Object.entries(BOTANICALS).map(([key, b]) => ({ key, ...b })),
+  botanicals: Object.entries(BOTANICALS).map(([key, b]) => ({ key, ...b, origin: null })),
   badges: LABEL_BADGES.map((b) => b.key),
   products: PRODUCTS.map((p) => ({
-    slug: p.slug, name: p.name, subtitle: p.subtitle, tagline: p.tagline, category: p.category, type: p.productType,
+    slug: p.slug, status: p.status || 'concept', name: p.name, subtitle: p.subtitle, tagline: p.tagline, category: p.category, type: p.productType,
+    intendedUse: p.intendedUse || null, sensoryLine: p.sensoryLine || null, sensory: p.sensory || null, storage: p.storage || null, shelfLife: p.shelfLife || null,
+    serving: p.serving || null, servingMl: p.servingMl ?? null, directions: p.directions || [], howTo: p.howTo || [],
     short: p.short, long: p.long, ingredients: p.ingredients, featured: !!p.featured, isNew: !!p.isNew, bestseller: !!p.bestseller,
     sort: p.sort, specs: p.specs, collection: p.collection, step: p.step, botanicals: p.botanicals || [], mosaic: p.mosaic || [],
     variants: p.variants.map((v, i) => ({ sku: v.sku, label: v.label, sizeMl: v.sizeMl ?? null, price: v.priceCents, compare: v.compareAtCents ?? null, def: !!v.default, i, image: v.image || null, desc: `${v.format || ''} | ${v.description || ''}` })),
@@ -19,7 +21,8 @@ const doc = {
   })),
 }
 writeFileSync(new URL('../supabase/seed.json', import.meta.url), JSON.stringify(doc, null, 1))
-const SEED_URL = 'https://raw.githubusercontent.com/bizzybae/dr-mushtaqs-blackseed/main/supabase/seed.json'
+// SEED_REF=branch-name to seed from a feature branch (Vercel preview); defaults to main.
+const SEED_URL = `https://raw.githubusercontent.com/bizzybae/dr-mushtaqs-blackseed/${process.env.SEED_REF || 'main'}/supabase/seed.json`
 const slugs = PRODUCTS.map((p) => `'${p.slug}'`).join(',')
 const cslugs = COLLECTIONS.map((c) => `'${c.slug}'`).join(',')
 
@@ -38,15 +41,20 @@ select x.key, x.name, x.latin, x.part, x.origin, x.ayurveda, x.unani, x.tcm, x.n
 from seed_doc, jsonb_to_recordset(d->'botanicals') as x(key text, name text, latin text, part text, origin text, ayurveda text, unani text, tcm text, note text)
 on conflict (key) do update set name = excluded.name, latin = excluded.latin, part = excluded.part, origin = excluded.origin, ayurveda = excluded.ayurveda, unani = excluded.unani, tcm = excluded.tcm, note = excluded.note;
 
-insert into public.products (slug, name, subtitle, tagline, category, product_type, short_description, long_description, inci_ingredients, is_featured, is_new, is_bestseller, is_published, sort_order, badges, specs, collection_slug, step, botanicals, mosaic, seo_title, seo_description)
-select x.slug, x.name, x.subtitle, x.tagline, x.category, x.type, x.short, x.long, x.ingredients, x.featured, x."isNew", x.bestseller, true, x.sort,
+insert into public.products (slug, status, name, subtitle, tagline, category, product_type, short_description, long_description, inci_ingredients, is_featured, is_new, is_bestseller, is_published, sort_order, badges, specs, collection_slug, step, botanicals, mosaic, seo_title, seo_description,
+  intended_use, sensory_line, sensory_notes, storage, shelf_life, serving, serving_ml, directions, how_to)
+select x.slug, x.status, x.name, x.subtitle, x.tagline, x.category, x.type, x.short, x.long, x.ingredients, x.featured, x."isNew", x.bestseller, true, x.sort,
   array(select jsonb_array_elements_text(d->'badges')), x.specs, x.collection, x.step,
-  array(select jsonb_array_elements_text(x.botanicals)), array(select jsonb_array_elements_text(x.mosaic)), x.name || ' | Dr. Mushtaq’s', x.short
-from seed_doc, jsonb_to_recordset(d->'products') as x(slug text, name text, subtitle text, tagline text, category text, type text, short text, long text, ingredients text, featured bool, "isNew" bool, bestseller bool, sort int, specs jsonb, collection text, step text, botanicals jsonb, mosaic jsonb)
-on conflict (slug) do update set name = excluded.name, subtitle = excluded.subtitle, tagline = excluded.tagline, category = excluded.category, product_type = excluded.product_type,
+  array(select jsonb_array_elements_text(x.botanicals)), array(select jsonb_array_elements_text(x.mosaic)), x.name || ' | Dr. Mushtaq’s', x.short,
+  x."intendedUse", x."sensoryLine", x.sensory, x.storage, x."shelfLife", x.serving, x."servingMl", array(select jsonb_array_elements_text(x.directions)), x."howTo"
+from seed_doc, jsonb_to_recordset(d->'products') as x(slug text, status text, name text, subtitle text, tagline text, category text, type text, short text, long text, ingredients text, featured bool, "isNew" bool, bestseller bool, sort int, specs jsonb, collection text, step text, botanicals jsonb, mosaic jsonb,
+  "intendedUse" text, "sensoryLine" text, sensory text, storage text, "shelfLife" text, serving text, "servingMl" numeric, directions jsonb, "howTo" jsonb)
+on conflict (slug) do update set status = excluded.status, name = excluded.name, subtitle = excluded.subtitle, tagline = excluded.tagline, category = excluded.category, product_type = excluded.product_type,
   short_description = excluded.short_description, long_description = excluded.long_description, inci_ingredients = excluded.inci_ingredients, is_featured = excluded.is_featured, is_new = excluded.is_new,
   is_bestseller = excluded.is_bestseller, is_published = true, sort_order = excluded.sort_order, badges = excluded.badges, specs = excluded.specs, collection_slug = excluded.collection_slug, step = excluded.step,
-  botanicals = excluded.botanicals, mosaic = excluded.mosaic, seo_title = excluded.seo_title, seo_description = excluded.seo_description, updated_at = now();
+  botanicals = excluded.botanicals, mosaic = excluded.mosaic, seo_title = excluded.seo_title, seo_description = excluded.seo_description,
+  intended_use = excluded.intended_use, sensory_line = excluded.sensory_line, sensory_notes = excluded.sensory_notes, storage = excluded.storage, shelf_life = excluded.shelf_life, serving = excluded.serving,
+  serving_ml = excluded.serving_ml, directions = excluded.directions, how_to = excluded.how_to, updated_at = now();
 
 insert into public.product_variants (product_id, sku, label, size_ml, price_cents, compare_at_cents, is_default, sort_order, image_storage_path, description, stock)
 select p.id, v.sku, v.label, v."sizeMl", v.price, v.compare, v.def, v.i, v.image, v."desc", 100

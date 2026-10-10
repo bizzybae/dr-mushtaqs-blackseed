@@ -5,9 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "node scripts/check-claims.mjs && vite build",
     "preview": "vite preview",
-    "seed:sql": "node scripts/seed-json.mjs"
+    "seed:sql": "node scripts/seed-json.mjs",
+    "check:claims": "node scripts/check-claims.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.45.0",

@@ -7,6 +7,12 @@ sizes with per-mL savings on larger bottles, starting at $80 for 125 mL. Blackse
 and rosemary join it by use case. Built with Vite, React 18, Tailwind CSS, Supabase, and Stripe Checkout, deployed on
 Vercel.
 
+Launch state: every product carries a lifecycle `status` (`concept`, `prelaunch`, `available`, `sold_out`). Nothing is
+purchasable until the owner flips a product to `available`; until then the storefront collects a double-opt-in waitlist
+and the checkout function refuses non-available SKUs server-side. Concepts live on `/coming-soon` only. Lab results
+render only from published rows in `batches` (`/coa`, `/coa/:lot`, and the BatchBadge); no number appears anywhere
+until a lot is published.
+
 Marketing follows the physician-as-brand approach: the founder page (`/dr-mushtaq`) carries factual credentials and a
 disclosure, every product makes specification claims only, and the Botanicals and Practitioners pages name each
 material in Ayurvedic, Unani, and Chinese medicine terms for practitioner reference without indications.
@@ -57,6 +63,24 @@ runtime, so no redeploy is needed for price or copy changes.
 
 To publish lot results, insert a row in `batches` (lot number, press date, thymoquinone %, COA path). The product page
 shows the batch table automatically.
+
+## Waitlist email
+
+`api/waitlist.js` inserts the row with the publishable key (public-insert RLS) and sends the confirmation through Resend
+when `RESEND_API_KEY` is set (`WAITLIST_FROM` optional). Confirm and unsubscribe links hit `GET /api/waitlist?confirm=`
+and `?unsubscribe=` and need `SUPABASE_SERVICE_ROLE_KEY`. Without the Resend key the row is still stored and the UI
+shows the no-email success copy.
+
+## Publishing a lot
+
+Insert a row in `batches` with `published = true` (and `is_current = true` for the shipping lot). Fill only the fields the
+laboratory reported; the lot page hides empty rows. The QR code on the bottle should point at `/coa/<lot_number>`.
+
+## Claims check
+
+`npm run check:claims` (also runs before every build and in CI) scans `src/`, `index.html`, and `public/favicon.svg` for
+the banned-word list in `scripts/check-claims.mjs`. Only the FDA disclaimer, the safety line, and the labelled hadith
+quotation are allowlisted.
 
 ## Compliance
 

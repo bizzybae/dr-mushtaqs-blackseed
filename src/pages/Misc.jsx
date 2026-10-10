@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 import { Link, useParams, useSearchParams } from 'react-router-dom'
 import { Accordion, Seo } from '../components/ui'
-import Newsletter from '../components/Newsletter'
+import WaitlistForm from '../components/WaitlistForm'
+import { MICRO } from '../data/catalog'
 import { POLICIES, SITE_FAQ } from '../data/site'
 import { money } from '../lib/catalog'
 import { useCart } from '../lib/cart'
@@ -53,7 +54,7 @@ export function PolicyPage() {
           {policy.sections.map(([title, body]) => (
             <div key={title} className="grid gap-4 py-8 sm:grid-cols-12">
               <h2 className="font-display text-xl sm:col-span-4">{title}</h2>
-              <p className="text-[15px] leading-relaxed text-ink/75 sm:col-span-8">{body}</p>
+              <p className="text-base leading-relaxed text-ink/75 sm:col-span-8">{body}</p>
             </div>
           ))}
         </div>
@@ -132,7 +133,7 @@ export function CheckoutSuccess() {
             )}
           </div>
         )}
-        <p className="mx-auto mt-8 max-w-md text-[15px] leading-relaxed text-ink/70">
+        <p className="mx-auto mt-8 max-w-md text-base leading-relaxed text-ink/70">
           A receipt from Stripe is on its way to your inbox, and a tracking link follows when the order ships, usually within one business day. Every bottle is covered by the 60-Day Standard.
         </p>
         <Link to="/shop" className="btn btn-solid mt-10" data-testid="link-success-shop">
@@ -151,7 +152,7 @@ export function CheckoutCancel() {
       <section className="mx-auto max-w-2xl px-5 py-20 text-center sm:px-8 lg:py-32">
         <p className="eyebrow">No charge was made</p>
         <h1 className="h1 mt-6">Your bag is waiting.</h1>
-        <p className="mx-auto mt-8 max-w-md text-[15px] leading-relaxed text-ink/70">Nothing was charged. Your items are still in the bag whenever you are ready.</p>
+        <p className="mx-auto mt-8 max-w-md text-base leading-relaxed text-ink/70">Nothing was charged. Your items are still in the bag whenever you are ready.</p>
         <div className="mt-10 flex flex-wrap justify-center gap-4">
           <button onClick={() => setOpen(true)} className="btn btn-solid" data-testid="button-cancel-open-bag">
             Open bag
@@ -161,8 +162,37 @@ export function CheckoutCancel() {
           </Link>
         </div>
         <div className="mx-auto mt-16 max-w-md text-left">
-          <Newsletter source="checkout-cancel" />
+          <WaitlistForm source="checkout-cancel" label="Hear about new lots" />
         </div>
+      </section>
+    </>
+  )
+}
+
+
+// /waitlist/:state : landing pages for the confirmation and unsubscribe links.
+const WAITLIST_STATES = {
+  confirmed: ['Confirmed', MICRO.waitlistDone, 'We will write once, the day the first lot ships, with its certificate attached.'],
+  unsubscribed: ['Unsubscribed', 'You have been removed from the list.', 'No further email from us. If that was a mistake, you can join again from any product page.'],
+  invalid: ['Link not recognised', 'This link is not valid or has already been used.', 'If you were trying to confirm, join again from the site and use the newest email.'],
+  error: ['Something went wrong', 'We could not update your subscription.', 'Please try the link again in a moment or write to hello@drmushtaqs.com.'],
+}
+
+export function WaitlistStatusPage() {
+  const { state } = useParams()
+  const entry = WAITLIST_STATES[state]
+  if (!entry) return <NotFound />
+  const [eyebrow, title, body] = entry
+  return (
+    <>
+      <Seo title={eyebrow} />
+      <section className="mx-auto max-w-2xl px-5 py-24 text-center sm:px-8 lg:py-32">
+        <p className="eyebrow">{eyebrow}</p>
+        <h1 className="h1 mt-6">{title}</h1>
+        <p className="mx-auto mt-6 max-w-md text-lg leading-relaxed text-ink/70">{body}</p>
+        <Link to="/" className="btn btn-solid mt-10">
+          Back to the site
+        </Link>
       </section>
     </>
   )

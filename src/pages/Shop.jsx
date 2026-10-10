@@ -4,14 +4,17 @@ import ProductCard from '../components/ProductCard'
 import ProductPhoto from '../components/ProductPhoto'
 import { GuaranteeStrip, LabelBadges, Seo } from '../components/ui'
 import { BOTANICALS } from '../data/catalog'
-import { useCatalog, useCollection } from '../lib/catalog'
+import { isConcept, useCatalog, useCollection, useListedProducts } from '../lib/catalog'
 import NotFound from './NotFound'
 
 // /shop : everything, filterable by purpose
 export default function Shop() {
-  const { products, collections } = useCatalog()
+  const { products } = useListedProducts()
+  const { collections, products: all } = useCatalog()
   const [filter, setFilter] = useState('all')
   const shown = filter === 'all' ? products : products.filter((p) => p.collection === filter)
+  const conceptCount = all.filter(isConcept).length
+  const filters = [{ slug: 'all', name: 'All' }, ...collections.filter((c) => products.some((p) => p.collection === c.slug))]
 
   return (
     <>
@@ -19,10 +22,12 @@ export default function Shop() {
       <section className="border-b border-ink/10 bg-sand">
         <div className="mx-auto grid max-w-[1440px] gap-10 px-5 py-16 sm:px-8 lg:grid-cols-12 lg:px-12 lg:py-20">
           <div className="lg:col-span-6">
-            <p className="eyebrow">The collection</p>
-            <h1 className="h1 mt-6">Everything we make.</h1>
+            <p className="eyebrow">The shop</p>
+            <h1 className="h1 mt-6">{products.length === 1 ? 'One oil, done properly.' : 'Everything we make.'}</h1>
             <p className="mt-6 max-w-lg text-lg leading-relaxed text-ink/70">
-              {products.length} products across five purposes, every one built on the same cold-pressed, 4.64% thymoquinone blackseed oil. Two or three sizes each; the larger sizes cost less per millilitre.
+              {products.length === 1
+                ? 'The Original Blackseed Oil in three sizes, each priced lower per millilitre as the bottle grows. The rest of the line opens as each first lot is tested.'
+                : `${products.length} products, every one built on the same cold-pressed, lot-tested blackseed oil. Two or three sizes each; the larger sizes cost less per millilitre.`}
             </p>
             <div className="mt-10">
               <LabelBadges compact />
@@ -36,7 +41,7 @@ export default function Shop() {
 
       <section className="mx-auto max-w-[1440px] px-5 py-14 sm:px-8 lg:px-12 lg:py-20">
         <div className="flex flex-wrap items-center gap-2 border-b border-ink/10 pb-6" role="group" aria-label="Filter by purpose">
-          {[{ slug: 'all', name: 'All' }, ...collections].map((c) => (
+          {filters.map((c) => (
             <button key={c.slug} onClick={() => setFilter(c.slug)} aria-pressed={filter === c.slug} className={`px-3 py-2 font-mono text-[11px] uppercase tracking-[0.14em] transition-colors sm:px-4 ${filter === c.slug ? 'bg-ink text-cream' : 'hover:text-brass'}`} data-testid={`button-filter-${c.slug}`}>
               {c.name}
             </button>
@@ -45,11 +50,22 @@ export default function Shop() {
             {shown.length} of {products.length}
           </p>
         </div>
-        <div className="mt-12 grid gap-x-6 gap-y-14 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <div className={`mt-12 grid gap-x-6 gap-y-14 sm:grid-cols-2 ${shown.length > 2 ? 'lg:grid-cols-3 xl:grid-cols-4' : 'lg:grid-cols-2'}`}>
           {shown.map((p, i) => (
-            <ProductCard key={p.slug} product={p} index={i} ratio={1.1} priority={i < 4} />
+            <ProductCard key={p.slug} product={p} index={i} ratio={shown.length > 2 ? 1.1 : 1.5} priority={i < 4} />
           ))}
         </div>
+        {conceptCount > 0 && (
+          <div className="mt-16 flex flex-col gap-4 border border-ink/10 p-6 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <p className="font-display text-2xl">{conceptCount} more in development.</p>
+              <p className="mt-1 text-base text-ink/70">Skin, hair, body, fragrance, and ritual sets, each announced the day its first lot is tested.</p>
+            </div>
+            <Link to="/coming-soon" className="btn shrink-0" data-testid="link-shop-coming-soon">
+              See what is coming
+            </Link>
+          </div>
+        )}
       </section>
     </>
   )
@@ -81,6 +97,11 @@ export function CollectionPage() {
             <p className="eyebrow mt-8">{collection.short}</p>
             <h1 className="h1 mt-4">{collection.name}</h1>
             <p className="mt-6 max-w-md text-lg leading-relaxed text-ink/70">{collection.description}</p>
+            {products.length > 0 && products.every(isConcept) && (
+              <p className="mt-4 inline-block bg-ink px-3 py-1 font-mono text-[11px] uppercase tracking-[0.16em] text-cream" data-testid="badge-collection-coming">
+                In development · notify me on any product
+              </p>
+            )}
             {steps.length > 0 && (
               <ol className="mt-10 flex flex-wrap gap-x-8 gap-y-3">
                 {steps.map((s, i) => (
@@ -137,7 +158,7 @@ export function CollectionPage() {
                   <li key={k} className="border border-ink/10 p-6">
                     <p className="font-display text-xl">{b.name}</p>
                     <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.12em] text-muted">
-                      {b.latin} · {b.origin}
+                      {b.latin} · {b.part}
                     </p>
                     <dl className="mt-4 grid grid-cols-3 gap-2 font-mono text-[10px] uppercase tracking-[0.1em]">
                       <div>

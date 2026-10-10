@@ -3,18 +3,18 @@ import ProductPhoto from '../components/ProductPhoto'
 import { LabelBadges, Seo } from '../components/ui'
 
 const MARKERS = [
-  ['Blackseed oil', 'Thymoquinone', 'HPLC', '4.64%'],
-  ['Saffron', 'Crocin · Safranal', 'UV-Vis, ISO 3632', 'Grade I'],
+  ['Blackseed oil', 'Thymoquinone', 'Chromatography, method named per lot', 'Published per lot'],
+  ['Saffron', 'Crocin · Safranal', 'UV-Vis, ISO 3632', 'Reported per lot'],
   ['Grapevine', 'Total stilbenes', 'HPLC', 'Reported per lot'],
-  ['Oud · Sandalwood · Rose', 'Identity profile', 'GC-MS', 'Matched to reference'],
-  ['Every lot', 'Heavy metals · Microbial', 'ICP-MS · Plate count', 'Within USP limits'],
+  ['Oud · Sandalwood · Rose', 'Identity profile', 'GC-MS', 'Reported per lot'],
+  ['Every lot', 'Heavy metals · Microbial', 'ICP-MS · Plate count', 'Laboratory wording published as issued'],
 ]
 
 const STEPS = [
-  ['Source', 'One origin per botanical and one harvest per lot: Ethiopian Nigella sativa, Pampore saffron, Rhône grapevine, Isparta rose, Assam oud. Bought from growers and distillers we know.'],
+  ['Source', 'One origin per botanical and one harvest per lot, bought from a documented supplier. The origin is named on that lot’s certificate once we hold the paperwork, not before.'],
   ['Press', 'Mechanical screw press held below 40 °C. No solvents, no heat, no refining. The oil settles for two weeks and is decanted, not filtered.'],
   ['Test', 'A sample from every lot goes to an independent laboratory for the marker constituent of each botanical, plus peroxide and acid value for freshness, heavy metals, and a microbial panel.'],
-  ['Release', 'A lot is released only when it meets its specification: 4.64% thymoquinone for the oil, Grade I for saffron, the stated stilbene content for grapevine. The lot number is printed on every unit and the certificate is posted on the product page.'],
+  ['Release', 'A lot is released only after its certificate is published. The figures are the laboratory’s, not ours, and they are shown per lot rather than printed once on a label.'],
 ]
 
 export default function Science() {
@@ -64,13 +64,13 @@ export default function Science() {
             <p className="mt-6 font-mono text-[10px] uppercase tracking-[0.14em] text-cream/60">2-isopropyl-5-methyl-1,4-benzoquinone · C₁₀H₁₂O₂</p>
           </div>
           <div className="lg:col-span-6 lg:col-start-7">
-            <h2 className="font-display text-3xl leading-tight sm:text-4xl">Why we print 4.64%</h2>
-            <div className="mt-6 space-y-5 text-[15px] leading-relaxed text-cream/75">
+            <h2 className="font-display text-3xl leading-tight sm:text-4xl">Why a number per lot</h2>
+            <div className="mt-6 space-y-5 text-base leading-relaxed text-cream/75">
               <p>
                 Thymoquinone concentration in commercial blackseed oils ranges from almost nothing in refined or adulterated oils to several percent in fresh, cold-pressed oil from good seed. The number collapses with heat, with light, with time, and with dilution. It is, in other words, an honest witness.
               </p>
               <p>
-                4.64% is the concentration our Ethiopian seed reaches when it is pressed cold and released fresh. We set that as the specification, we test every lot against it by HPLC, and we print the result on the label so you can compare it to anything else on the shelf. Below the specification, the lot is not released under our name.
+                So we do not print one number for all time. Each lot goes to an independent laboratory, the result is published on that lot’s certificate page with the method named, and the lot code on your bottle takes you to it. The figure you see is the laboratory’s for the oil in your hand, not a brand average and not a supplier’s quote.
               </p>
               <p>
                 We do not attach outcomes to the number. It tells you about the oil, not about you. That is the whole point.
@@ -90,7 +90,7 @@ export default function Science() {
                 <th className="py-3 pr-6 font-normal">Material</th>
                 <th className="py-3 pr-6 font-normal">Marker</th>
                 <th className="py-3 pr-6 font-normal">Method</th>
-                <th className="py-3 font-normal">Specification</th>
+                <th className="py-3 font-normal">Reported</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-ink/10">
@@ -119,7 +119,7 @@ export default function Science() {
               <li key={title} className="grid grid-cols-12 gap-4 border-t border-ink/10 py-8 last:border-b">
                 <span className="col-span-2 font-mono text-[10px] text-brass sm:col-span-1">0{i + 1}</span>
                 <h3 className="col-span-10 font-display text-2xl sm:col-span-3">{title}</h3>
-                <p className="col-span-12 text-[15px] leading-relaxed text-ink/75 sm:col-span-8 sm:col-start-5">{body}</p>
+                <p className="col-span-12 text-base leading-relaxed text-ink/75 sm:col-span-8 sm:col-start-5">{body}</p>
               </li>
             ))}
           </ol>

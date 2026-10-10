@@ -5,18 +5,15 @@ import ProductCard from '../components/ProductCard'
 import { Accordion, GuaranteeStrip, LabelBadges, PhysicianSeal, SectionHead, Seo } from '../components/ui'
 import { Mark } from '../components/Logo'
 import { BOTANICALS, PROTOCOL } from '../data/catalog'
-import { FOUNDER, HADITH, PRACTITIONERS } from '../data/site'
-import { useCatalog } from '../lib/catalog'
+import { FOUNDER, PRACTITIONERS } from '../data/site'
+import { isConcept, useCatalog } from '../lib/catalog'
 import { supabase } from '../lib/supabase'
 
 // ───────────────────────── Dr. Mushtaq ─────────────────────────
 export function FounderPage() {
-  const { products } = useCatalog()
-  const picks = ['blackseed-oil', 'blackseed-oil-softgels', 'culinary-finishing-oil', 'oud-noir-attar'].map((s) => products.find((p) => p.slug === s)).filter(Boolean)
-
   return (
     <>
-      <Seo title="Dr. Mushtaq" description="Dr. Quddarat U. Mushtaq, MD, MS: the physician who formulates, signs, and stands behind every Dr. Mushtaq’s product." image="/products/physician-desk.jpg" />
+      <Seo title="About Dr. Mushtaq" description="Dr. Quddarat U. Mushtaq, MD, MS: why he started the company, what gets tested on every lot, and what never goes on the label." image="/products/physician-desk.jpg" />
       <section className="bg-sand">
         <div className="mx-auto grid max-w-[1440px] gap-10 px-5 py-16 sm:px-8 lg:grid-cols-12 lg:px-12 lg:py-24">
           <div className="flex flex-col justify-center lg:col-span-5">
@@ -48,12 +45,12 @@ export function FounderPage() {
                 </div>
               ))}
             </dl>
-            <p className="mt-6 font-mono text-[10px] leading-relaxed text-muted">Credentials as stated in public professional records. Dr. Mushtaq does not practise medicine through this company and no product here is a prescription.</p>
+            <p className="mt-6 font-mono text-[11px] leading-relaxed text-muted">Credentials as stated in public professional records. {FOUNDER.noMedical} No product here is a prescription.</p>
           </div>
           <div className="lg:col-span-7 lg:col-start-6">
-            <p className="eyebrow">In his words</p>
+            <p className="eyebrow">Why I started it</p>
             <div className="mt-6 space-y-6 text-lg leading-relaxed text-ink/80">
-              {FOUNDER.body.map((p, i) => (
+              {FOUNDER.why.map((p, i) => (
                 <p key={i} className={i === 0 ? 'font-display text-2xl leading-snug text-ink sm:text-3xl' : ''}>
                   {p}
                 </p>
@@ -63,6 +60,49 @@ export function FounderPage() {
             <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.14em] text-muted">{FOUNDER.name}</p>
           </div>
         </div>
+      </section>
+
+      <section className="border-y border-ink/10 bg-sand">
+        <div className="mx-auto grid max-w-[1440px] gap-12 px-5 py-20 sm:px-8 lg:grid-cols-2 lg:px-12 lg:py-28">
+          <div>
+            <p className="eyebrow">{FOUNDER.tested.title}</p>
+            <ul className="mt-6 divide-y divide-ink/10 border-y border-ink/10" data-testid="list-tested">
+              {FOUNDER.tested.items.map(([t, b]) => (
+                <li key={t} className="grid grid-cols-3 gap-4 py-4">
+                  <p className="font-display text-lg">{t}</p>
+                  <p className="col-span-2 text-base leading-relaxed text-ink/75">{b}</p>
+                </li>
+              ))}
+            </ul>
+            <Link to="/coa" className="mt-8 inline-block font-mono text-[11px] uppercase tracking-[0.14em] hover:text-brass">
+              See the lab reports →
+            </Link>
+          </div>
+          <div>
+            <p className="eyebrow">{FOUNDER.never.title}</p>
+            <ul className="mt-6 space-y-4" data-testid="list-never">
+              {FOUNDER.never.items.map((t) => (
+                <li key={t} className="flex gap-4 text-lg leading-snug text-ink/85">
+                  <span className="mt-2 h-2 w-2 shrink-0 border border-ink" aria-hidden="true" />
+                  {t}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-[1440px] px-5 py-20 sm:px-8 lg:px-12 lg:py-28">
+        <SectionHead eyebrow="In his words" title={FOUNDER.training.title} lede="Not as anyone’s doctor. As the person who writes the labels." />
+        <ol className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-4" data-testid="list-training">
+          {FOUNDER.training.items.map(([t, b], i) => (
+            <li key={t} className="border border-ink/10 p-6">
+              <span className="font-mono text-[11px] text-brass">0{i + 1}</span>
+              <p className="mt-4 font-display text-xl">{t}</p>
+              <p className="mt-3 text-base leading-relaxed text-ink/70">{b}</p>
+            </li>
+          ))}
+        </ol>
       </section>
 
       <section className="bg-ink text-cream">
@@ -90,27 +130,15 @@ export function FounderPage() {
           </div>
           <div className="lg:col-span-8">
             <Accordion items={FOUNDER.qa} defaultOpen={0} id="founder" />
-            <p className="mt-6 font-mono text-[10px] leading-relaxed text-muted">{FOUNDER.disclosure}</p>
           </div>
         </div>
       </section>
 
-      <section className="border-y border-ink/10 bg-sand">
-        <div className="mx-auto max-w-[1440px] px-5 py-20 sm:px-8 lg:px-12">
-          <SectionHead eyebrow="On his shelf" title="What the founder uses." />
-          <div className="mt-12 grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
-            {picks.map((p, i) => (
-              <ProductCard key={p.slug} product={p} index={i} ratio={1} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-3xl px-5 py-20 text-center sm:px-8 lg:py-24">
-        <p className="eyebrow">Heritage</p>
-        <blockquote className="mt-8 font-display text-3xl italic leading-snug sm:text-4xl">{HADITH.narration}</blockquote>
-        <p className="mt-6 font-mono text-[10px] uppercase tracking-[0.16em] text-muted">{HADITH.attribution}</p>
-        <p className="mx-auto mt-8 max-w-xl text-sm leading-relaxed text-ink/60">{HADITH.note}</p>
+      <section className="mx-auto max-w-3xl px-5 py-16 text-center sm:px-8">
+        <p className="font-mono text-[11px] leading-relaxed text-muted">{FOUNDER.disclosure}</p>
+        <Link to="/safety" className="mt-6 inline-block font-mono text-[11px] uppercase tracking-[0.14em] hover:text-brass">
+          Safety information →
+        </Link>
       </section>
     </>
   )
@@ -122,7 +150,7 @@ export function BotanicalsPage() {
   const entries = Object.entries(BOTANICALS)
   return (
     <>
-      <Seo title="Botanicals" description="The materia medica behind Dr. Mushtaq’s: each botanical with its Latin name, part used, single origin, and classical names in Ayurveda, Unani, and Chinese medicine." />
+      <Seo title="Botanicals" description="The materia medica behind Dr. Mushtaq’s: each botanical with its Latin name, part used, and classical names in Ayurveda, Unani, and Chinese medicine." />
       <section className="mx-auto max-w-[1440px] px-5 py-16 sm:px-8 lg:px-12 lg:py-24">
         <div className="grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-7">
@@ -135,7 +163,7 @@ export function BotanicalsPage() {
           </div>
           <div className="lg:col-span-5 lg:pt-10">
             <p className="text-lg leading-relaxed text-ink/75">
-              Every material we use has been handled for centuries by Ayurvedic vaidyas, Unani hakims, and Chinese herbalists under its own name. We list those names beside the Latin binomial, the part used, and the single origin we buy from, so a practitioner can place our materials inside their own framework. Names are offered for reference, not as indications.
+              Every material we use has been handled for centuries by Ayurvedic vaidyas, Unani hakims, and Chinese herbalists under its own name. We list those names beside the Latin binomial and the part used, so a practitioner can place our materials inside their own framework. Names are offered for reference, not as indications.
             </p>
           </div>
         </div>
@@ -145,7 +173,7 @@ export function BotanicalsPage() {
         <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
           <div className="hidden grid-cols-12 gap-4 border-b border-ink/10 py-3 font-mono text-[10px] uppercase tracking-[0.16em] text-muted lg:grid">
             <p className="col-span-3">Botanical</p>
-            <p className="col-span-2">Part · Origin</p>
+            <p className="col-span-2">Part used</p>
             <p className="col-span-2">Ayurveda</p>
             <p className="col-span-2">Unani / Tibb</p>
             <p className="col-span-3">Chinese medicine</p>
@@ -162,7 +190,7 @@ export function BotanicalsPage() {
                   </div>
                   <div className="font-mono text-[11px] leading-relaxed text-ink/75 lg:col-span-2">
                     <p>{b.part}</p>
-                    <p className="text-muted">{b.origin}</p>
+                    <p className="text-muted">Origin named per lot</p>
                   </div>
                   <div className="lg:col-span-2">
                     <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-brass lg:hidden">Ayurveda</p>
@@ -179,7 +207,7 @@ export function BotanicalsPage() {
                       <ul className="mt-4 flex flex-wrap gap-2">
                         {used.slice(0, 4).map((p) => (
                           <li key={p.slug}>
-                            <Link to={`/shop/${p.slug}`} className="border border-ink/15 px-2 py-1 font-mono text-[10px] uppercase tracking-[0.1em] hover:border-ink hover:text-brass">
+                            <Link to={isConcept(p) ? `/coming-soon#${p.slug}` : `/shop/${p.slug}`} className="border border-ink/15 px-2 py-1 font-mono text-[10px] uppercase tracking-[0.1em] hover:border-ink hover:text-brass">
                               {p.name}
                             </Link>
                           </li>
@@ -234,7 +262,7 @@ export function ProtocolPage() {
                   <span className="font-mono text-[11px] text-brass">{step.step}</span>
                   <span className="font-display text-2xl">{step.time}</span>
                 </div>
-                <Link to={`/shop/${p.slug}`} className="group flex items-center gap-5 lg:col-span-6">
+                <Link to={isConcept(p) ? `/coming-soon#${p.slug}` : `/shop/${p.slug}`} className="group flex items-center gap-5 lg:col-span-6">
                   <div className="w-28 shrink-0">
                     <ProductThumb product={p} ratio={1.2} sizes="112px" imgClassName="transition-transform duration-700 group-hover:scale-[1.03]" />
                   </div>
@@ -243,7 +271,7 @@ export function ProtocolPage() {
                     <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.12em] text-muted">{p.subtitle}</p>
                   </div>
                 </Link>
-                <p className="text-[15px] leading-relaxed text-ink/70 lg:col-span-4">{step.note}</p>
+                <p className="text-base leading-relaxed text-ink/70 lg:col-span-4">{step.note}</p>
               </li>
             )
           })}
@@ -257,8 +285,8 @@ export function ProtocolPage() {
               <p className="eyebrow">The whole day, boxed</p>
               <p className="mt-3 font-display text-3xl text-cream">{shelf.name}</p>
               <p className="mt-3 text-cream/70">{shelf.short}</p>
-              <Link to={`/shop/${shelf.slug}`} className="btn mt-8 border-cream/40 text-cream hover:bg-cream hover:text-ink" data-testid="link-protocol-shelf">
-                See the set · save 20%
+              <Link to={isConcept(shelf) ? `/coming-soon#${shelf.slug}` : `/shop/${shelf.slug}`} className="btn mt-8 border-cream/40 text-cream hover:bg-cream hover:text-ink" data-testid="link-protocol-shelf">
+                {isConcept(shelf) ? 'Coming soon · notify me' : 'See the set'}
               </Link>
             </div>
           </div>
@@ -293,7 +321,7 @@ export function PractitionersPage() {
   const field = (k, label, type = 'text', required = true) => (
     <label className="block">
       <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted">{label}</span>
-      <input type={type} required={required} value={form[k]} onChange={(e) => setForm({ ...form, [k]: e.target.value })} className="mt-2 w-full border-b border-ink/30 bg-transparent py-2 text-sm outline-none focus:border-ink" data-testid={`input-practitioner-${k}`} />
+      <input type={type} required={required} value={form[k]} onChange={(e) => setForm({ ...form, [k]: e.target.value })} className="mt-2 min-h-[44px] w-full border-b border-ink/30 bg-transparent py-2 text-base outline-none focus:border-ink" data-testid={`input-practitioner-${k}`} />
     </label>
   )
 
@@ -363,7 +391,7 @@ export function PractitionersPage() {
               </div>
               <label className="block">
                 <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted">What do you dispense most? (optional)</span>
-                <textarea rows={3} value={form.note} onChange={(e) => setForm({ ...form, note: e.target.value })} className="mt-2 w-full border-b border-ink/30 bg-transparent py-2 text-sm outline-none focus:border-ink" data-testid="input-practitioner-note" />
+                <textarea rows={3} value={form.note} onChange={(e) => setForm({ ...form, note: e.target.value })} className="mt-2 min-h-[44px] w-full border-b border-ink/30 bg-transparent py-2 text-base outline-none focus:border-ink" data-testid="input-practitioner-note" />
               </label>
               {state === 'error' && <p className="text-sm text-red-700">Something went wrong. Please try again or email hello@drmushtaqs.com.</p>}
               <button type="submit" disabled={state === 'busy'} className="btn btn-solid disabled:opacity-60" data-testid="button-practitioner-submit">

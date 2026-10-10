@@ -9,7 +9,9 @@ import ProductPage from './pages/ProductPage'
 import Science from './pages/Science'
 import NotFound from './pages/NotFound'
 import { BotanicalsPage, FounderPage, PractitionersPage, ProtocolPage } from './pages/Learn'
-import { CheckoutCancel, CheckoutSuccess, FAQPage, PolicyPage } from './pages/Misc'
+import { CheckoutCancel, CheckoutSuccess, FAQPage, PolicyPage, WaitlistStatusPage } from './pages/Misc'
+import { CoaPage, LotPage } from './pages/Coa'
+import { ComingSoonPage, HeritagePage, SafetyPage } from './pages/Launch'
 import { CatalogProvider } from './lib/catalog'
 import { CartProvider } from './lib/cart'
 
@@ -31,7 +33,13 @@ export default function App() {
                 <Route path="/products/:slug" element={<LegacyProduct />} />
                 <Route path="/science" element={<Science />} />
                 <Route path="/dr-mushtaq" element={<FounderPage />} />
+                <Route path="/about" element={<FounderPage />} />
                 <Route path="/story" element={<Navigate to="/dr-mushtaq" replace />} />
+                <Route path="/coming-soon" element={<ComingSoonPage />} />
+                <Route path="/coa" element={<CoaPage />} />
+                <Route path="/coa/:lot" element={<LotPage />} />
+                <Route path="/safety" element={<SafetyPage />} />
+                <Route path="/heritage" element={<HeritagePage />} />
                 <Route path="/botanicals" element={<BotanicalsPage />} />
                 <Route path="/protocol" element={<ProtocolPage />} />
                 <Route path="/practitioners" element={<PractitionersPage />} />
@@ -39,6 +47,7 @@ export default function App() {
                 <Route path="/policies/:slug" element={<PolicyPage />} />
                 <Route path="/checkout/success" element={<CheckoutSuccess />} />
                 <Route path="/checkout/cancel" element={<CheckoutCancel />} />
+                <Route path="/waitlist/:state" element={<WaitlistStatusPage />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </main>

@@ -54,6 +54,16 @@ export async function POST(request) {
   const missing = clean.filter((i) => !bySku[i.sku]).map((i) => i.sku)
   if (missing.length) return json({ error: 'unknown_sku', message: `Unknown item: ${missing.join(', ')}` }, 400)
 
+  // Purchasability is enforced here, not only in the UI. Only products whose
+  // status is 'available' (and which are published) can be bought.
+  const blocked = clean.filter((i) => bySku[i.sku].product?.status !== 'available' || bySku[i.sku].product?.is_published === false)
+  if (blocked.length) {
+    return json(
+      { error: 'not_available', message: `Not available for purchase yet: ${blocked.map((i) => bySku[i.sku].product?.name || i.sku).join(', ')}. Join the list and we will write when it opens.` },
+      409
+    )
+  }
+
   const line_items = clean.map((i) => {
     const v = bySku[i.sku]
     const name = v.product?.name ? `${v.product.name} · ${v.label}` : v.label

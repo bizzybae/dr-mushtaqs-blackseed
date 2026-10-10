@@ -2,13 +2,14 @@ import { useEffect, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { Wordmark } from './Logo'
 import ProductPhoto, { ProductThumb } from './ProductPhoto'
-import { NAV } from '../data/site'
+import { HOME, NAV } from '../data/site'
 import { useCart } from '../lib/cart'
-import { money, priceFrom, priceTo, useCatalog } from '../lib/catalog'
+import { isConcept, money, priceFrom, priceTo, useCatalog, useSiteMode } from '../lib/catalog'
 
 export default function Header() {
   const { count, setOpen } = useCart()
   const { products, collections, settings } = useCatalog()
+  const mode = useSiteMode()
   const [menu, setMenu] = useState(false)
   const [panel, setPanel] = useState(null) // collection slug | 'learn' | null
   const location = useLocation()
@@ -39,7 +40,7 @@ export default function Header() {
           Skip to content
         </a>
         <p className="bg-ink px-4 py-2 text-center font-mono text-[10px] uppercase tracking-[0.18em] text-cream/90">
-          {settings.announcement || 'Complimentary shipping on orders over $150'}
+          {mode === 'prelaunch' ? HOME.announcement.prelaunch : settings.announcement || HOME.announcement.live}
           <span className="hidden sm:inline">
             <span className="mx-3 text-brass">·</span>
             Physician formulated · The 60-Day Standard
@@ -107,12 +108,12 @@ export default function Header() {
                 </div>
                 <div className={`col-span-9 grid gap-5 ${panelProducts.length > 4 ? 'grid-cols-5' : 'grid-cols-4'}`}>
                   {panelProducts.slice(0, 10).map((p) => (
-                    <Link key={p.slug} to={`/shop/${p.slug}`} className="group" data-testid={`link-menu-${p.slug}`} tabIndex={panel ? 0 : -1}>
+                    <Link key={p.slug} to={isConcept(p) ? `/coming-soon#${p.slug}` : `/shop/${p.slug}`} className="group" data-testid={`link-menu-${p.slug}`} tabIndex={panel ? 0 : -1}>
                       <ProductThumb product={p} ratio={1.15} sizes="220px" />
-                      <p className="mt-3 font-display text-[15px] leading-tight group-hover:text-brass">{p.name}</p>
+                      <p className="mt-3 font-display text-base leading-tight group-hover:text-brass">{p.name}</p>
                       <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.12em] text-muted">{p.step}</p>
                       <p className="mt-1 font-mono text-[11px] text-ink">
-                        {p.variants.length > 1 ? `${money(priceFrom(p))} to ${money(priceTo(p))}` : money(priceFrom(p))}
+                        {isConcept(p) ? 'Coming soon' : p.variants.length > 1 ? `${money(priceFrom(p))} to ${money(priceTo(p))}` : money(priceFrom(p))}
                       </p>
                     </Link>
                   ))}

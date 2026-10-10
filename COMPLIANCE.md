@@ -16,6 +16,12 @@ This storefront is written to sell a product without making health claims.
    physician-patient relationship, and never names where the company is located.
 7. Traditional names (Ayurveda, Unani, Chinese medicine) are listed for reference only, with a note that they are not
    indications. No product copy borrows a traditional use as a benefit.
+8. No laboratory figure is shown unless it comes from a published `batches` row for that lot. Supplier quotes are never
+   rendered. Origins are named on the lot certificate once supplier documentation is held, not before.
+9. Banned words (heal, cure, treat, prevent, immune, inflammation, detox, boost, remedy, medicinal, therapeutic,
+   clinical, proven, disease, condition, symptom, restorative, organic, "supports [body system]") are blocked by
+   `scripts/check-claims.mjs` in CI and before every build.
+10. Missing data renders nothing. No "pending", no placeholders, no fabricated reviews, scarcity, or countdowns.
 
 ## Before selling
 
@@ -36,9 +42,13 @@ The following were written to make the storefront complete and must be verified 
 - Prices on every variant (`product_variants.price_cents`), including set discounts and the Practitioner Case
 - Ingredient lists for every product (`products.inci_ingredients`); the expanded skin, hair, body, and fragrance
   formulas were written as plausible compositions and have no supplier behind them yet
-- Botanical origins named on the Botanicals page (Kashmir saffron, Ethiopian blackseed, Assam oud, and so on)
+- Botanical origins (removed from the site until supplier documentation is held; publish them per lot on the COA)
 - The halal certification statement for the softgel shell
-- "Third-party tested" and "single-origin" label badges, which require a lab and supplier contracts to be true
+- "Lot tested" and "single origin" label badges, which require a lab and supplier contracts to be true
+- Sensory notes, directions, serving size, storage, and shelf life for the Original (written from the brief; confirm
+  against the real first lot and the final label)
+- The 4.64% figure printed on the current label artwork and renders: remove from packaging until a lot certificate
+  supports a number, or print the lot code and QR instead
 - Practitioner pricing terms and verification process on `/practitioners`
 - Lot data in `batches` (none published yet; the product page shows the specification until a lot is inserted)
 - Contact address hello@drmushtaqs.com

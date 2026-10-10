@@ -6,7 +6,7 @@ import { LABEL_BADGES } from '../data/catalog'
 
 export function Seo({ title, description, image = '/og.jpg' }) {
   useEffect(() => {
-    const full = title ? `${title} | Dr. Mushtaq’s Blackseed` : 'Dr. Mushtaq’s Blackseed Oil | The Molecule, Not the Myth.'
+    const full = title ? `${title} | Dr. Mushtaq’s Blackseed` : 'Dr. Mushtaq’s Blackseed | Cold-Pressed Black Seed Oil, Lot Tested'
     document.title = full
     const set = (sel, attr, value) => {
       let el = document.head.querySelector(sel)
@@ -61,7 +61,7 @@ export function Accordion({ items, defaultOpen = -1, id = 'acc' }) {
               className={`grid transition-[grid-template-rows] duration-300 ease-out ${isOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'}`}
             >
               <div className="overflow-hidden">
-                <p className="pb-6 pr-10 text-[15px] leading-relaxed text-ink/75">{a}</p>
+                <p className="pb-6 pr-10 text-base leading-relaxed text-ink/75">{a}</p>
               </div>
             </div>
           </div>
@@ -99,10 +99,10 @@ const ICONS = {
   ),
 }
 
-export function LabelBadges({ dark = false, compact = false, withSpec = true }) {
-  const items = [...LABEL_BADGES, ...(withSpec ? [{ key: 'tq', label: '4.64% Thymoquinone', detail: 'Measured by HPLC on every lot of blackseed oil and printed on the label.' }] : [])]
+export function LabelBadges({ dark = false, compact = false }) {
+  const items = LABEL_BADGES
   return (
-    <ul className={compact ? 'flex flex-wrap gap-x-8 gap-y-4' : 'grid grid-cols-2 gap-8 lg:grid-cols-5'}>
+    <ul className={compact ? 'flex flex-wrap gap-x-8 gap-y-4' : 'grid grid-cols-2 gap-8 lg:grid-cols-4'}>
       {items.map((b) => (
         <li key={b.key} className={`flex gap-3 ${compact ? 'items-center' : ''}`}>
           <svg viewBox="0 0 24 24" className="h-6 w-6 shrink-0 text-brass" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round" strokeLinecap="round" aria-hidden="true">
