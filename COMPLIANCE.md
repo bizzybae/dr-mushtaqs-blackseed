@@ -20,7 +20,8 @@ This storefront is written to sell a product without making health claims.
    rendered. Origins are named on the lot certificate once supplier documentation is held, not before.
 9. Banned words (heal, cure, treat, prevent, immune, inflammation, detox, boost, remedy, medicinal, therapeutic,
    clinical, proven, disease, condition, symptom, restorative, organic, "supports [body system]") are blocked by
-   `scripts/check-claims.mjs` in CI and before every build.
+   `scripts/check-claims.mjs` in CI and before every build, and by the same list (`shared/claims.mjs`) as a
+   document-level validation rule in the Sanity Studio, so editors cannot publish them either.
 10. Missing data renders nothing. No "pending", no placeholders, no fabricated reviews, scarcity, or countdowns.
 
 ## Before selling

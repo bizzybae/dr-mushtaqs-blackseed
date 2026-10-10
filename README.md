@@ -64,6 +64,30 @@ runtime, so no redeploy is needed for price or copy changes.
 To publish lot results, insert a row in `batches` (lot number, press date, thymoquinone %, COA path). The product page
 shows the batch table automatically.
 
+## Content (Sanity)
+
+Editorial copy comes from Sanity when `VITE_SANITY_PROJECT_ID` (and optionally `VITE_SANITY_DATASET`) is set; the
+storefront falls back to `src/data/site.js` and the editorial fields in `src/data/catalog.js` otherwise, field by field,
+so a half-filled Studio never blanks a section. `src/lib/content.jsx` shapes Sanity documents into exactly the objects
+`site.js` exports (`useSite()`), and `CatalogProvider` overlays `productContent` documents onto products by slug.
+
+- Studio: `studio/` is its own package (Sanity v6, React 19, Node 22). `npm run studio` for local, `npm run
+  studio:deploy` to host it at `dr-mushtaqs.sanity.studio` (set `SANITY_STUDIO_PROJECT_ID`).
+- Schemas: `studio/schemas/index.js`. Singletons for site settings, home, founder, heritage, lab-reports guide,
+  practitioners, safety; collections for FAQ groups, policies, botanicals, and product copy. Every document type runs
+  the banned-word rule from `shared/claims.mjs` as document-level validation, so the Studio refuses to publish a term
+  the build would also reject.
+- Import: `npm run sanity:import` writes `sanity/import.ndjson` from the repo copy; add `--push` with
+  `SANITY_PROJECT_ID` and `SANITY_API_TOKEN` to upsert (use `--no-overwrite` once editors have made changes).
+- Commerce facts (prices, sizes, status, lots, waitlist) never live in Sanity.
+
+## Owner console
+
+`/owner` is a Supabase-authenticated console for lots and certificates (with PDF upload to the public `coa` bucket),
+product status, the waitlist (CSV export), and practitioner inquiries. Access is an email allow-list in
+`public.owners`, enforced by RLS policies that call `public.is_owner()`; everyone else gets empty tables. Sign-in is a
+magic link, so add the site URL and `/owner` redirect to Supabase Auth → URL Configuration.
+
 ## Waitlist email
 
 `api/waitlist.js` inserts the row with the publishable key (public-insert RLS) and sends the confirmation through Resend
@@ -78,8 +102,8 @@ laboratory reported; the lot page hides empty rows. The QR code on the bottle sh
 
 ## Claims check
 
-`npm run check:claims` (also runs before every build and in CI) scans `src/`, `index.html`, and `public/favicon.svg` for
-the banned-word list in `scripts/check-claims.mjs`. Only the FDA disclaimer, the safety line, and the labelled hadith
+`npm run check:claims` (also runs before every build and in CI) scans `src/`, `index.html`, `studio/schemas`, and
+`public/favicon.svg` for the banned-word list in `shared/claims.mjs`, which the Sanity Studio also enforces. Only the FDA disclaimer, the safety line, and the labelled hadith
 quotation are allowlisted.
 
 ## Compliance
