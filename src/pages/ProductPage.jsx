@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { Link, Navigate, useParams, useSearchParams } from 'react-router-dom'
+import { Link, useParams, useSearchParams } from 'react-router-dom'
 import ProductPhoto, { ProductThumb } from '../components/ProductPhoto'
 import ProductCard from '../components/ProductCard'
 import BatchBadge from '../components/BatchBadge'
@@ -11,7 +11,7 @@ import { Accordion, GuaranteeStrip, LabelBadges, PhysicianSeal, Seo } from '../c
 import { PROTOCOL } from '../data/catalog'
 import { useSite } from '../lib/content'
 import { track } from '../lib/analytics'
-import { findVariant, isConcept, isListed, isPurchasable, money, perMl, perOz, savingsPct, servingsPer, statusOf, useCatalog, useCurrentBatch, useProduct } from '../lib/catalog'
+import { findVariant, isPurchasable, money, perMl, perOz, savingsPct, servingsPer, showsUnitPrice, statusOf, useCatalog, useCurrentBatch, useProduct, whyLabel } from '../lib/catalog'
 import { startCheckout, useCart } from '../lib/cart'
 import NotFound from './NotFound'
 
@@ -41,12 +41,12 @@ export default function ProductPage() {
     setNote(null)
   }, [slug, variant?.sku])
   useEffect(() => {
-    if (product && isListed(product)) track('product_viewed', { slug: product.slug, status: product.status })
+    if (product) track('product_viewed', { slug: product.slug, status: product.status })
   }, [product?.slug])
 
   if (!product) return loading ? <div className="min-h-[60vh]" /> : <NotFound />
-  // Concepts have no product page: they live on /coming-soon only.
-  if (isConcept(product)) return <Navigate to={`/coming-soon#${product.slug}`} replace />
+  // Every product, concept included, gets its page. Concepts cannot be bought
+  // (api/checkout.js refuses them) and show Notify me instead of Add to bag.
 
   const buyable = isPurchasable(product)
   const status = statusOf(product)
@@ -68,20 +68,40 @@ export default function ProductPage() {
     sku: variant.sku,
     brand: { '@type': 'Brand', name: 'Dr. Mushtaq’s' },
     image: [`${typeof window !== 'undefined' ? window.location.origin : ''}/products/${product.image || product.mosaic?.[0] || 'collection-flatlay'}.jpg`],
-    offers: product.variants.map((v) => ({
-      '@type': 'Offer',
-      sku: v.sku,
-      price: (v.priceCents / 100).toFixed(2),
-      priceCurrency: 'USD',
-      availability: `https://schema.org/${product.status === 'available' ? 'InStock' : product.status === 'sold_out' ? 'SoldOut' : 'PreOrder'}`,
-      url: typeof window !== 'undefined' ? `${window.location.origin}/shop/${product.slug}?variant=${v.sku}` : undefined,
-    })),
+    // Concepts carry no offer: nothing is for sale and the price is still a plan.
+    ...(product.status === 'concept'
+      ? {}
+      : {
+          offers: product.variants.map((v) => ({
+            '@type': 'Offer',
+            sku: v.sku,
+            price: (v.priceCents / 100).toFixed(2),
+            priceCurrency: 'USD',
+            availability: `https://schema.org/${product.status === 'available' ? 'InStock' : product.status === 'sold_out' ? 'SoldOut' : 'PreOrder'}`,
+            url: typeof window !== 'undefined' ? `${window.location.origin}/shop/${product.slug}?variant=${v.sku}` : undefined,
+          })),
+        }),
   }
   const gallery = [...new Set([variant.image, ...(product.gallery || []), ...(product.mosaic?.length && !product.image ? ['__mosaic__', ...product.mosaic] : [])].filter(Boolean))]
   const fallbackRelated = (related.length ? related : products.filter((p) => p.slug !== product.slug && p.featured)).slice(0, 4)
   const protocolStep = PROTOCOL.find((s) => s.product === product.slug)
   const save = savingsPct(variant)
-  const unit = variant.sizeMl ? `${money(perMl(variant), { always: true })} per mL · ${money(perOz(variant), { always: true })} per fl oz` : null
+  const unitPrice = showsUnitPrice(product)
+  const unit = unitPrice && variant.sizeMl ? `${money(perMl(variant), { always: true })} per mL · ${money(perOz(variant), { always: true })} per fl oz` : null
+  // The three questions every product answers. Each block renders only from real data.
+  const steps = product.directions?.length ? product.directions : product.howToUse || []
+  const why = product.why || []
+  const detail = [
+    product.intendedUse && { key: 'what', label: 'What it’s for', body: product.intendedUse, sub: product.sensoryLine },
+    steps.length > 0 && { key: 'how', label: 'How to use', steps },
+    why.length > 0 && { key: 'why', label: whyLabel(product), items: why },
+  ].filter(Boolean)
+  const waitlistCopy =
+    product.status === 'prelaunch'
+      ? ['The first lot is still at the lab.', 'We will email you the day it ships, with its certificate attached. No charge, no card.']
+      : product.status === 'concept'
+        ? ['Still in development.', 'Leave your email and we will write when it is ready, with its lab report. No charge, no card.']
+        : ['Not available right now.', 'Leave your email and we will write when it is back.']
   const bundleLines = (product.bundle || []).map((b) => ({ ...b, hit: findVariant(products, b.sku) })).filter((b) => b.hit)
   const botanicals = (product.botanicals || []).map((k) => BOTANICALS[k]).filter(Boolean)
 
@@ -167,7 +187,6 @@ export default function ProductPage() {
           <h1 className="mt-4 font-display text-4xl leading-[1.05] tracking-tight sm:text-5xl">{product.name}</h1>
           <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.14em] text-muted">{product.subtitle}</p>
           <p className="mt-4 text-lg leading-relaxed text-ink/70">{product.tagline}</p>
-          {product.intendedUse && <p className="mt-3 text-base leading-relaxed text-ink/80" data-testid="text-intended-use">{product.intendedUse}</p>}
           {batch && <BatchBadge batch={batch} className="mt-5" />}
 
           <div className="mt-8 flex flex-wrap items-baseline gap-x-3 gap-y-1">
@@ -181,7 +200,7 @@ export default function ProductPage() {
 
           {product.variants.length > 1 && (
             <fieldset className="mt-8">
-              <legend className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted">Size · larger sizes cost less per mL</legend>
+              <legend className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted">{unitPrice ? 'Size · larger sizes cost less per mL' : 'Size'}</legend>
               <div className={`mt-3 grid gap-3 ${product.variants.length === 3 ? 'grid-cols-3' : 'grid-cols-2'}`}>
                 {product.variants.map((v) => {
                   const s = savingsPct(v)
@@ -190,7 +209,7 @@ export default function ProductPage() {
                     <button key={v.sku} onClick={() => setParams(v.default ? {} : { variant: v.sku }, { replace: true })} aria-pressed={on} className={`border px-3 py-4 text-left transition-colors ${on ? 'border-ink bg-ink text-cream' : 'border-ink/20 hover:border-ink'}`} data-testid={`button-variant-${v.sku}`}>
                       <span className="block font-display text-base">{v.label}</span>
                       <span className={`mt-1 block font-mono text-[11px] uppercase tracking-[0.12em] ${on ? 'text-cream/70' : 'text-muted'}`}>{money(v.priceCents)}</span>
-                      {v.sizeMl && <span className={`mt-1 block font-mono text-[10px] uppercase tracking-[0.1em] ${on ? 'text-cream/60' : 'text-muted'}`}>{money(perOz(v), { always: true })}/fl oz</span>}
+                      {unitPrice && v.sizeMl && <span className={`mt-1 block font-mono text-[10px] uppercase tracking-[0.1em] ${on ? 'text-cream/60' : 'text-muted'}`}>{money(perOz(v), { always: true })}/fl oz</span>}
                       {s > 0 && <span className="mt-1 block font-mono text-[10px] uppercase tracking-[0.12em] text-brass">Save {s}%</span>}
                     </button>
                   )
@@ -267,10 +286,8 @@ export default function ProductPage() {
               </>
             ) : (
               <div className="border border-ink/15 bg-sand/60 p-5" data-testid="box-waitlist">
-                <p className="font-display text-xl">{product.status === 'prelaunch' ? 'The first lot is still at the lab.' : 'Not available right now.'}</p>
-                <p className="mt-2 text-base leading-relaxed text-ink/70">
-                  {product.status === 'prelaunch' ? 'We will email you the day it ships, with its certificate attached. No charge, no card.' : 'Leave your email and we will write when it is back.'}
-                </p>
+                <p className="font-display text-xl">{waitlistCopy[0]}</p>
+                <p className="mt-2 text-base leading-relaxed text-ink/70">{waitlistCopy[1]}</p>
                 <div className="mt-5">
                   <WaitlistForm sku={variant.sku} source={`pdp-${product.slug}`} label={status.cta} compact />
                 </div>
@@ -278,6 +295,40 @@ export default function ProductPage() {
             )}
             <SafetyLine className="mt-4" />
           </div>
+
+          {/* What it’s for · How to use · Why it suits your skin */}
+          {detail.length > 0 && (
+            <div className="mt-8 divide-y divide-ink/10 border border-ink/10" data-testid="detail-blocks">
+              {detail.map((d) => (
+                <section key={d.key} className="px-5 py-5" data-testid={`detail-${d.key}`}>
+                  <h2 className="font-mono text-[10px] uppercase tracking-[0.16em] text-brass">{d.label}</h2>
+                  {d.body && <p className="mt-3 text-base leading-relaxed text-ink/85">{d.body}</p>}
+                  {d.sub && <p className="mt-2 font-display text-lg italic text-ink/60">{d.sub}</p>}
+                  {d.steps && (
+                    <ol className="mt-3 space-y-3">
+                      {d.steps.map((step, i) => (
+                        <li key={i} className="flex gap-4">
+                          <span className="mt-1 shrink-0 font-mono text-[11px] text-brass">0{i + 1}</span>
+                          <p className="text-base leading-relaxed text-ink/80">{step}</p>
+                        </li>
+                      ))}
+                    </ol>
+                  )}
+                  {d.items && (
+                    <ul className="mt-3 space-y-3">
+                      {d.items.map((line, i) => (
+                        <li key={i} className="flex gap-4">
+                          <span className="mt-[0.6em] h-1.5 w-1.5 shrink-0 bg-brass" aria-hidden="true" />
+                          <p className="text-base leading-relaxed text-ink/80">{line}</p>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </section>
+              ))}
+            </div>
+          )}
+
           <div className="mt-5 flex items-center gap-4 border border-ink/10 px-4 py-3">
             <PhysicianSeal className="h-12 w-12 shrink-0" />
             <p className="font-mono text-[11px] uppercase leading-relaxed tracking-[0.12em] text-muted">
@@ -379,24 +430,19 @@ export default function ProductPage() {
       <section className="bg-ink text-cream">
         <div className="mx-auto grid max-w-[1440px] gap-12 px-5 py-20 sm:px-8 lg:grid-cols-12 lg:px-12 lg:py-24">
           <div className="lg:col-span-5">
-            <p className="eyebrow">Directions</p>
-            <ol className="mt-8 space-y-6">
-              {(product.directions?.length ? product.directions : product.howToUse).map((step, i) => (
-                <li key={i} className="flex gap-5">
-                  <span className="font-mono text-[11px] text-brass">0{i + 1}</span>
-                  <p className="text-base leading-relaxed text-cream/85">{step}</p>
-                </li>
-              ))}
-            </ol>
             {protocolStep && (
-              <p className="mt-8 border-t border-cream/15 pt-6 font-mono text-[11px] uppercase leading-relaxed tracking-[0.14em] text-cream/60">
-                In the protocol: step {protocolStep.step}, {protocolStep.time.toLowerCase()} ·{' '}
-                <Link to="/protocol" className="underline hover:text-brass">
-                  see the day
-                </Link>
-              </p>
+              <>
+                <p className="eyebrow">In the routine</p>
+                <p className="mt-6 text-base leading-relaxed text-cream/85">{protocolStep.note}</p>
+                <p className="mt-6 font-mono text-[11px] uppercase leading-relaxed tracking-[0.14em] text-cream/60">
+                  Step {protocolStep.step}, {protocolStep.time.toLowerCase()} ·{' '}
+                  <Link to="/protocol" className="underline hover:text-brass">
+                    see the day
+                  </Link>
+                </p>
+              </>
             )}
-            <div className="mt-10 border-t border-cream/15 pt-8">
+            <div className={protocolStep ? 'mt-10 border-t border-cream/15 pt-8' : ''}>
               <p className="eyebrow">A note from the formulator</p>
               <p className="mt-4 text-base leading-relaxed text-cream/80">{FOUNDER.lede} Every lot of this product carries its certificate, and every bottle carries the 60-Day Standard.</p>
               <p className="mt-4 font-display text-xl italic text-brass">{FOUNDER.name}</p>

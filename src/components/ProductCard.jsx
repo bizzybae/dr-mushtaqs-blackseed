@@ -17,7 +17,7 @@ export default function ProductCard({ product, index = 0, ratio = 1.1, priority 
   const concept = isConcept(product)
   const buyable = isPurchasable(product)
   const badge = concept ? 'Coming soon' : product.status === 'prelaunch' ? 'First lot soon' : product.status === 'sold_out' ? 'Sold out' : product.bestseller ? 'Bestseller' : product.isNew ? 'New' : null
-  const href = concept ? `/coming-soon#${product.slug}` : `/shop/${product.slug}`
+  const href = `/shop/${product.slug}`
   const second = (product.gallery || []).find((g) => g !== product.image)
 
   return (

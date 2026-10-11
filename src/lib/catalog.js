@@ -78,6 +78,9 @@ function fromRows(products, collections, settings) {
         servingMl: p.serving_ml ? Number(p.serving_ml) : undefined,
         directions: p.directions || [],
         howTo: Array.isArray(p.how_to) ? p.how_to : [],
+        // "Why it suits your skin": only claims the owner has approved reach the browser (RLS),
+        // and only the cosmetic kind renders as copy. Spec claims stay on the label badges.
+        why: (p.claims || []).filter((c) => c.claim_type === 'cosmetic' && c.text).map((c) => c.text),
         variants,
         batches: normaliseBatches(p.batches),
         reviews: (p.reviews || []).filter((r) => r.is_approved),
@@ -102,7 +105,7 @@ export function normaliseBatches(rows) {
 }
 
 const STATIC = {
-  products: PRODUCTS.map((p) => ({ ...p, status: p.status || 'concept', batches: [], reviews: [], bundle: p.bundle || [], mosaic: p.mosaic || [], gallery: p.gallery || [], directions: p.directions || [], howTo: p.howTo || [] })),
+  products: PRODUCTS.map((p) => ({ ...p, status: p.status || 'concept', batches: [], reviews: [], bundle: p.bundle || [], mosaic: p.mosaic || [], gallery: p.gallery || [], directions: p.directions || [], howTo: p.howTo || [], why: p.why || [] })),
   collections: COLLECTIONS,
   settings: { free_shipping_threshold_cents: 15000, flat_shipping_cents: 900, announcement: 'Complimentary shipping on orders over $150' },
 }
@@ -126,6 +129,7 @@ export function CatalogProvider({ children }) {
                 'product_variants!product_variants_product_id_fkey(sku,label,size_ml,price_cents,compare_at_cents,stock,is_default,sort_order,image_storage_path,description),' +
                 'product_images(storage_path,alt,sort_order,aspect),' +
                 'product_sections(section_type,content,sort_order),' +
+                'claims(text,claim_type),' +
                 'bundle_items!bundle_items_bundle_product_id_fkey(quantity,variant:product_variants!bundle_items_variant_id_fkey(sku)),' +
                 'batches(lot_number,press_date,pressed_date,best_by,origin_country,origin_region,thymoquinone_pct,tq_method,peroxide_value,fatty_acid_profile,heavy_metals_result,micro_result,lab_name,coa_pdf_url,published,is_current),' +
                 'reviews(author_name,rating,title,body,is_verified_buyer,is_approved,created_at)'
@@ -179,8 +183,19 @@ export function useCollection(slug) {
 export const statusOf = (product) => STATUS[product?.status] || STATUS.concept
 export const isPurchasable = (product) => statusOf(product).purchasable
 export const isConcept = (product) => (product?.status || 'concept') === 'concept'
-// Products that get their own page: anything past the concept stage.
+// Products on the shop grid: anything past the concept stage. Every product,
+// concept included, has its own /shop/{slug} page (concepts show Notify me).
 export const isListed = (product) => !isConcept(product)
+export const productPath = (product) => `/shop/${product.slug}`
+// The label for the third detail block depends on what the product is for.
+export function whyLabel(product) {
+  if (product?.collection === 'hair') return 'Why it suits your hair'
+  if (product?.category === 'topical' || product?.collection === 'skin' || product?.collection === 'body') return 'Why it suits your skin'
+  return 'Why it is on the shelf'
+}
+// Per-mL and per-fl-oz lines only make sense for products sold in bottle sizes.
+// Small formats (eye concentrate, attars) would read as misleadingly expensive.
+export const showsUnitPrice = (product) => Math.max(0, ...(product?.variants || []).map((v) => v.sizeMl || 0)) > 30
 export function useListedProducts() {
   const { products, loading } = useCatalog()
   return { products: products.filter(isListed), loading }
