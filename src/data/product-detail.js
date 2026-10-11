@@ -72,7 +72,7 @@ export const PRODUCT_DETAIL = {
     ],
     why: [
       "Rose: damask petals infused for 21 days plus rose otto, chosen for how soft skin feels after rinsing.",
-      "Blackseed: a light, low-comedogenic seed oil that lifts sunscreen and makeup and rinses clean.",
+      "Blackseed: a light seed oil, high in linoleic acid, that lifts sunscreen and makeup and rinses clean.",
       "Grapeseed: a thin, fast-rinsing carrier that keeps the formula from feeling heavy.",
     ],
   },
@@ -96,8 +96,8 @@ export const PRODUCT_DETAIL = {
     ],
     why: [
       "Caffeine and rose hydrosol: a cooling, refreshed feel on application; rose water replaces fragrance so the formula stays fragrance-free near the eyes.",
-      "Niacinamide 4%: vitamin B3, one of the best-studied cosmetic ingredients for the eye area. Improves the look of uneven tone and helps skin feel resilient.",
-      "Saffron: Crocus sativus stigma, the botanical behind Golden Hour and the Radiance oil, used for centuries for the way it brightens the look of skin; here it lifts the dull, shadowed look under the eyes.",
+      "Niacinamide 4%: vitamin B3, one of the best-studied cosmetic ingredients. In published trials it improved the look of uneven tone and fine lines and helped skin feel more resilient.",
+      "Saffron: Crocus sativus stigma, the botanical behind Golden Hour and the Radiance oil, used in traditional cosmetics for a brighter-looking complexion; here it is carried in a light gel for the same brighter look under the eyes.",
       "Blackseed: cold-pressed Nigella sativa, the constant across every product. Fatty acids that leave the skin’s moisture barrier feeling comfortable, so thin under-eye skin feels hydrated for longer.",
       "Grapevine: Vitis vinifera shoot, the same botanical as the Renewal Serum. Polyphenols from the vine help even the appearance of skin tone and support a smoother-looking surface.",
     ],
@@ -151,9 +151,9 @@ export const PRODUCT_DETAIL = {
       ["Night seal", "A thin layer over the face oil on the driest areas."],
     ],
     why: [
-      "Blackseed: cold-pressed oil in an anhydrous base, so there is no water and no preservative.",
+      "Blackseed: cold-pressed oil in an anhydrous base, so there is no water and no need for a preservative.",
       "Frankincense resin oil: the only aroma, chosen for its dry, resinous warmth.",
-      "Anhydrous base: a slow-melting seal that holds moisture in dry places for hours.",
+      "Anhydrous base: a slow-melting seal that helps hold moisture in dry places.",
     ],
   },
   "amla-blackseed-hair-oil": {
@@ -207,7 +207,7 @@ export const PRODUCT_DETAIL = {
     why: [
       "Blackseed oil: leaves skin feeling supple after the soak.",
       "Frankincense: the only scent, resinous and quiet.",
-      "Dead Sea and Epsom salts: coarse minerals that soften the water.",
+      "Dead Sea and Epsom salts: coarse, magnesium-rich minerals; bathing in Dead Sea salt solution has been shown to leave skin smoother and better hydrated.",
     ],
   },
   "saffron-sesame-body-oil": {
