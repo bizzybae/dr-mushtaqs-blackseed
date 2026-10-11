@@ -81,13 +81,12 @@ export function useCart() {
 }
 
 // Build the payload /api/checkout expects and hand off to Stripe.
-export async function startCheckout(lines, { subscribe = false } = {}) {
+export async function startCheckout(lines) {
   const res = await fetch('/api/checkout', {
     method: 'POST',
     headers: { 'content-type': 'application/json' },
     body: JSON.stringify({
       items: lines.map((l) => ({ sku: l.sku, qty: l.qty })),
-      subscribe: Boolean(subscribe),
       origin: window.location.origin,
     }),
   })

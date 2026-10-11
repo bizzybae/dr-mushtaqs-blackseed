@@ -25,7 +25,7 @@ export const sanity = projectId
 const QUERY = `{
   "settings": *[_id == "siteSettings"][0],
   "home": *[_id == "homePage"][0],
-  "founder": *[_id == "founderPage"][0]{ ..., "portraitUrl": portrait.asset->url, "portraitAlt": portrait.alt },
+  "founder": *[_id == "founderPage"][0],
   "heritage": *[_id == "heritagePage"][0],
   "coa": *[_id == "coaGuide"][0],
   "practitioners": *[_id == "practitionersPage"][0],
@@ -74,15 +74,6 @@ export function shapeSite(c) {
     heritageTeaser: { title: or(h.heritageTeaser?.title, D.HOME.heritageTeaser.title), body: or(h.heritageTeaser?.body, D.HOME.heritageTeaser.body) },
     whoFor: pairs(h.whoFor, D.HOME.whoFor),
     finalCta: { prelaunch: or(h.finalCtaPrelaunch, D.HOME.finalCta.prelaunch), live: or(h.finalCtaLive, D.HOME.finalCta.live) },
-    lotOne: or(h.lotOne, D.HOME.lotOne),
-    subscription: { label: or(h.subscription?.label, D.HOME.subscription.label), note: or(h.subscription?.note, D.HOME.subscription.note) },
-    practitionerTeaser: {
-      title: or(h.practitionerTeaser?.title, D.HOME.practitionerTeaser.title),
-      body: or(h.practitionerTeaser?.body, D.HOME.practitionerTeaser.body),
-      points: or(h.practitionerTeaser?.points, D.HOME.practitionerTeaser.points),
-      cta: or(h.practitionerTeaser?.cta, D.HOME.practitionerTeaser.cta),
-    },
-    roadmapTeaser: { title: or(h.roadmapTeaser?.title, D.HOME.roadmapTeaser.title), body: or(h.roadmapTeaser?.body, D.HOME.roadmapTeaser.body), cta: or(h.roadmapTeaser?.cta, D.HOME.roadmapTeaser.cta) },
   }
   const FOUNDER = {
     ...D.FOUNDER,
@@ -100,9 +91,6 @@ export function shapeSite(c) {
     noMedical: or(f.noMedical, D.FOUNDER.noMedical),
     disclosure: or(f.disclosure, D.FOUNDER.disclosure),
     qa: qa(f.qa, D.FOUNDER.qa),
-    // Portrait only from Sanity; the repo ships no photograph of a real person.
-    portraitUrl: f.portraitUrl || null,
-    portraitAlt: or(f.portraitAlt, `${or(f.name, D.FOUNDER.name)}, founder`),
   }
   const HADITH = {
     narration: D.HADITH.narration, // never editable

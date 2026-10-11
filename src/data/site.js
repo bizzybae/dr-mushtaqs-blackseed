@@ -5,7 +5,6 @@ export const NAV = [
   { label: 'Body', to: '/collections/body', collection: 'body' },
   { label: 'Fragrance', to: '/collections/fragrance', collection: 'fragrance' },
   { label: 'Ritual Sets', to: '/collections/ritual-sets', collection: 'ritual-sets' },
-  { label: 'Practitioners', to: '/practitioners' },
   {
     label: 'Learn',
     to: '/dr-mushtaq',
@@ -16,6 +15,7 @@ export const NAV = [
       { label: 'Botanicals', to: '/botanicals', note: 'Materia medica across three traditions' },
       { label: 'Heritage', to: '/heritage', note: 'A seed with a long story' },
       { label: 'The Protocol', to: '/protocol', note: 'A day with the shelf' },
+      { label: 'Practitioners', to: '/practitioners', note: 'Dispensing and documentation' },
       { label: 'Safety', to: '/safety', note: 'Who should check with a clinician first' },
       { label: 'Questions', to: '/faq', note: 'Ordering, sizes, the guarantee' },
     ],
@@ -30,7 +30,7 @@ export const FOOTER_LINKS = {
     { label: 'Body', to: '/collections/body' },
     { label: 'Fragrance', to: '/collections/fragrance' },
     { label: 'Ritual Sets', to: '/collections/ritual-sets' },
-    { label: 'What is next', to: '/coming-soon' },
+    { label: 'Coming soon', to: '/coming-soon' },
   ],
   Learn: [
     { label: 'Dr. Mushtaq', to: '/dr-mushtaq' },
@@ -90,39 +90,7 @@ export const HOME = {
     ['Family tradition', 'The seed your grandmother kept beside the salt.'],
   ],
   finalCta: { prelaunch: 'Be first to try the Original.', live: 'Start with the Original.' },
-  // Rendered only when site_settings.lot_one_bottles is set; the number is never invented.
-  lotOne: 'Lot one is {n} bottles. The list is served in order.',
-  subscription: { label: 'Monthly delivery at launch', note: 'Save 15% on every refill. Pause or cancel any time.' },
-  practitionerTeaser: {
-    title: 'For practitioners.',
-    body: 'Verified accounts, practitioner pricing, 500 mL dispensing bottles, and the six-bottle Practitioner Case, each with its lot certificate enclosed. Specification claims only, so nothing we print conflicts with your guidance.',
-    points: ['Verification by credential, then pricing and terms', 'Classical names beside every Latin binomial', 'Certificate of analysis in every case'],
-    cta: 'Open a practitioner account',
-  },
-  roadmapTeaser: { title: 'The line arrives in order.', body: 'The Original first. Everything else opens when its formula is final and its first lot has been tested.', cta: 'See what is next' },
 }
-
-// /coming-soon: the line in sequence, not a catalogue. No dates; phases only.
-// Each phase lists products by collection (minus anything already past concept).
-export const ROADMAP = [
-  { key: 'now', label: 'Now', title: 'The Original, lot one', body: 'Blackseed Oil in 125, 250, and 500 mL. The first pressing is at the laboratory; it ships the day its certificate is published. Practitioner Cases (six 500 mL bottles) open to verified accounts with the same lot.', slugs: ['blackseed-oil', 'practitioner-case'], interests: ['within', 'practitioner'] },
-  { key: 'next', label: 'Next', title: 'Within completes', body: 'The same oil in three more forms: measured softgels, the forty-day saffron infusion, and a finishing oil for the kitchen.', collections: ['within'], interests: ['within'] },
-  { key: 'then', label: 'Then', title: 'Skin', body: 'Cleanse, nourish, seal: the three-step oil routine, the cooling eye concentrate, and the balm.', collections: ['skin'], interests: ['skin'] },
-  { key: 'later', label: 'Later', title: 'Hair and Body', body: 'The Sunday oiling, the scalp and beard serum, the bath soak, and the body oil.', collections: ['hair', 'body'], interests: ['hair', 'body'] },
-  { key: 'last', label: 'Last', title: 'Fragrance and Sets', body: 'Three alcohol-free attars, the Discovery Set credited in full against a 30 mL bottle, and the ritual sets once their pieces exist.', collections: ['fragrance', 'ritual-sets'], interests: ['fragrance', 'ritual-sets'] },
-]
-
-// Interest tags for the single list. Keys are stored in waitlist.interests.
-export const INTERESTS = [
-  { key: 'within', label: 'Within', note: 'Oil, softgels, saffron infusion, finishing oil' },
-  { key: 'skin', label: 'Skin', note: 'Cleansing oil, face oil, eye concentrate, serum, balm' },
-  { key: 'hair', label: 'Hair', note: 'Hair oil, scalp and beard serum' },
-  { key: 'body', label: 'Body', note: 'Bath soak, body oil' },
-  { key: 'fragrance', label: 'Fragrance', note: 'Three attars and the Discovery Set' },
-  { key: 'ritual-sets', label: 'Ritual Sets', note: 'Bundles at 10 to 20% off' },
-  { key: 'subscription', label: 'Monthly delivery', note: 'Refills at 15% off, pause or cancel any time' },
-  { key: 'practitioner', label: 'Practitioner account', note: 'Verification, pricing, dispensing sizes' },
-]
 
 export const COA = {
   title: 'Every lot, tested. Every number, published.',
@@ -249,7 +217,7 @@ export const SITE_FAQ = [
   {
     group: 'The products',
     items: [
-      ['What does “lot tested” mean?', 'Every lot of oil goes to an independent laboratory for thymoquinone, fatty-acid profile, peroxide value, heavy metals, and a microbial screen. We publish the certificate on the lot page before the lot ships, and the lot code is printed on the bottle. A specimen of the certificate, with every field and no results, is on the Lab Reports page now.'],
+      ['What does “lot tested” mean?', 'Every lot of oil goes to an independent laboratory for thymoquinone, fatty-acid profile, peroxide value, heavy metals, and a microbial screen. We publish the certificate on the lot page before the lot ships, and the lot code is printed on the bottle.'],
       ['Why is there no thymoquinone number on the label?', 'Because the honest number belongs to a lot, not a brand. Thymoquinone varies with the harvest and the press. We publish each lot’s result on its certificate page rather than printing one figure for all time.'],
       ['Is blackseed oil in every product?', 'Yes. Everything we make, from the dropper bottle to the attars, begins with the same cold-pressed, lot-tested blackseed oil. Saffron, grapevine, rose, amla, sesame, and the resins are added by purpose.'],
       ['Where do the botanicals come from?', 'One origin and one harvest per lot. We name the origin on the lot’s certificate once we hold the supplier documentation for it, not before.'],
@@ -269,7 +237,6 @@ export const SITE_FAQ = [
     items: [
       ['When can I buy?', 'The Original ships when its first lot clears the laboratory. Join the first-lot list and we will email you the day it opens, with the certificate attached. Other products open as they are finalised.'],
       ['How will checkout work?', 'Checkout is handled by Stripe. We never see or store your card details. You can pay by card, Apple Pay, Google Pay, or Link.'],
-      ['Is there a subscription?', 'Yes, from launch. Blackseed Oil and the Softgels can be set to arrive every 30 days at 15% off, with each delivery carrying its own lot certificate. Pause, skip, or cancel any time from the link in your receipt. Tick “Monthly delivery” on the list and we will set yours up first.'],
       ['How much is shipping?', 'Shipping within the United States is complimentary on orders over $150 and a flat $9 below that. Orders ship Monday through Friday and most arrive in two to five business days with a tracking link by email.'],
       ['What is the guarantee?', 'The 60-Day Standard: use any product for up to 60 days and, if you do not love it, write to us for a full refund of the product price. Opened or not.'],
       ['Do you ship internationally?', 'Not yet. We are starting with the United States while we finalise labeling for other markets.'],

@@ -73,32 +73,15 @@ export function CoaPage() {
         </section>
       )}
 
-      {/* Specimen: the format is public before any lot exists. Blank results, watermarked. */}
-      <section className="mx-auto max-w-[1440px] px-5 py-16 sm:px-8 lg:px-12" data-testid="section-specimen">
-        <div className="grid gap-8 border border-ink/10 p-8 lg:grid-cols-12 lg:items-center">
-          <div className="lg:col-span-7">
-            <p className="eyebrow">Specimen</p>
-            <p className="mt-3 font-display text-2xl">What a lot certificate will show, before lot one exists.</p>
-            <p className="mt-3 text-base leading-relaxed text-ink/70">A one-page specimen with every field the laboratory will fill in: the panel, the method beside each line, the unit, and a blank result box. It is watermarked and carries no numbers, because none exist yet. When the first lot is issued, the real certificate replaces it here.</p>
-          </div>
-          <div className="flex flex-col gap-3 lg:col-span-5 lg:items-end">
-            <a href="/coa/specimen.pdf" target="_blank" rel="noreferrer" className="btn btn-solid" data-testid="link-coa-specimen" onClick={() => track('coa_specimen_opened', { from: 'coa' })}>
-              Open the specimen (PDF)
-            </a>
-            <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted">Not a test result · no lot · no laboratory named</p>
-          </div>
-        </div>
-      </section>
-
       {!loading && lots.length === 0 && (
-        <section className="mx-auto max-w-[1440px] px-5 pb-16 sm:px-8 lg:px-12">
+        <section className="mx-auto max-w-[1440px] px-5 py-16 sm:px-8 lg:px-12">
           <div className="grid gap-8 border border-ink/10 p-8 lg:grid-cols-12 lg:items-center">
             <div className="lg:col-span-7">
               <p className="font-display text-2xl">The first lot’s certificate will be published here before it ships.</p>
               <p className="mt-3 text-base leading-relaxed text-ink/70">Join the list and we will send it to you the same day, attached to the note that the Original is open.</p>
             </div>
             <div className="lg:col-span-5">
-              <WaitlistForm sku={original?.variants?.[0]?.sku || null} source="coa" label="Send me the first certificate" interests={['within']} compact />
+              <WaitlistForm sku={original?.variants?.[0]?.sku || null} source="coa" label="Send me the first certificate" compact />
             </div>
           </div>
         </section>

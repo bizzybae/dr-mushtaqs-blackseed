@@ -60,7 +60,7 @@ export default function ProductCard({ product, index = 0, ratio = 1.1, priority 
               {money(variant.priceCents)}
             </button>
           ) : (
-            <NotifyButton sku={variant.sku} source={`card-${product.slug}`} label={status.cta} interests={[product.collection]} className="btn min-h-[48px] flex-1" />
+            <NotifyButton sku={variant.sku} source={`card-${product.slug}`} label={status.cta} className="btn min-h-[48px] flex-1" />
           )}
         </div>
         {buyable && bulk > 0 && <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.14em] text-muted">Save up to {bulk}% on larger sizes</p>}

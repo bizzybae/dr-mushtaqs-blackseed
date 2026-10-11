@@ -28,21 +28,17 @@ async function rest(path, { method = 'GET', body, service = false, prefer } = {}
 export async function fetchVariants(skus) {
   const list = skus.map((s) => `"${s.replace(/"/g, '')}"`).join(',')
   return rest(
-    `product_variants?sku=in.(${list})&select=id,sku,label,price_cents,description,image_storage_path,product:products!product_variants_product_id_fkey(name,slug,status,is_published,collection_slug,product_type,product_images(storage_path,sort_order))`
+    `product_variants?sku=in.(${list})&select=id,sku,label,price_cents,description,image_storage_path,product:products!product_variants_product_id_fkey(name,slug,status,is_published,product_images(storage_path,sort_order))`
   )
 }
 
-// Waitlist: one row per email. public.waitlist_join (SECURITY DEFINER, callable
-// by anon) inserts or merges interest tags and returns only 'created' or
-// 'updated'; it never returns stored data. We generate the confirm token here so
-// the confirmation email can carry it without a read.
-export async function joinWaitlist({ email, sku, source, interests }) {
+// Waitlist: public insert under RLS; reads and updates need the service role.
+// anon has INSERT only (no SELECT), so we generate the token here and ask for
+// no representation back.
+export async function insertWaitlist(row) {
   const confirm_token = crypto.randomUUID()
-  const status = await rest('rpc/waitlist_join', {
-    method: 'POST',
-    body: { p_email: email, p_interests: interests, p_sku: sku, p_source: source, p_token: confirm_token },
-  })
-  return { status, confirm_token: status === 'created' ? confirm_token : null }
+  await rest('waitlist', { method: 'POST', body: { ...row, confirm_token }, prefer: 'return=minimal' })
+  return { confirm_token }
 }
 export async function findWaitlistByToken(token) {
   const rows = await rest(`waitlist?confirm_token=eq.${encodeURIComponent(token)}&select=id,email,confirmed`, { service: true })

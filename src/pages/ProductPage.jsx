@@ -16,11 +16,11 @@ import { startCheckout, useCart } from '../lib/cart'
 import NotFound from './NotFound'
 
 export default function ProductPage() {
-  const { FOUNDER, BOTANICALS, HOME } = useSite()
+  const { FOUNDER, BOTANICALS } = useSite()
   const { slug } = useParams()
   const [params, setParams] = useSearchParams()
   const { product, loading } = useProduct(slug)
-  const { products, collections, settings } = useCatalog()
+  const { products, collections } = useCatalog()
   const { add } = useCart()
   const [qty, setQty] = useState(1)
   const [busy, setBusy] = useState(false)
@@ -96,10 +96,6 @@ export default function ProductPage() {
     steps.length > 0 && { key: 'how', label: 'How to use', steps },
     why.length > 0 && { key: 'why', label: whyLabel(product), items: why },
   ].filter(Boolean)
-  // Monthly delivery: daily-use products in Within, never sets or fragrance.
-  const subscribable = product.collection === 'within' && product.productType !== 'bundle'
-  const subPct = Number(settings?.subscription_discount_pct ?? 15)
-  const [plan, setPlan] = useState('once') // once | monthly
   const waitlistCopy =
     product.status === 'prelaunch'
       ? ['The first lot is still at the lab.', 'We will email you the day it ships, with its certificate attached. No charge, no card.']
@@ -111,10 +107,9 @@ export default function ProductPage() {
 
   async function buyNow() {
     setBusy(true)
-    const subscribe = subscribable && plan === 'monthly'
-    track('checkout_started', { sku: variant.sku, qty, plan: subscribe ? 'monthly' : 'once' })
+    track('checkout_started', { sku: variant.sku, qty })
     try {
-      await startCheckout([{ sku: variant.sku, qty }], { subscribe })
+      await startCheckout([{ sku: variant.sku, qty }])
     } catch (err) {
       track('checkout_error', { code: err.code || 'unknown' })
       setNote(err.code === 'checkout_not_configured' ? 'Checkout is not open yet.' : err.message)
@@ -262,20 +257,6 @@ export default function ProductPage() {
           )}
 
           <div ref={ctaRef} className="mt-8">
-            {buyable && subscribable && (
-              <fieldset className="mb-4 grid grid-cols-2 gap-3" data-testid="fieldset-plan">
-                <legend className="sr-only">Delivery</legend>
-                {[
-                  ['once', 'One time', money(variant.priceCents)],
-                  ['monthly', `Every 30 days · save ${subPct}%`, money(Math.round(variant.priceCents * (1 - subPct / 100)))],
-                ].map(([key, title, price]) => (
-                  <button key={key} type="button" onClick={() => setPlan(key)} aria-pressed={plan === key} className={`border px-3 py-3 text-left transition-colors ${plan === key ? 'border-ink bg-ink text-cream' : 'border-ink/20 hover:border-ink'}`} data-testid={`button-plan-${key}`}>
-                    <span className="block font-display text-base">{title}</span>
-                    <span className={`mt-1 block font-mono text-[11px] uppercase tracking-[0.12em] ${plan === key ? 'text-cream/70' : 'text-muted'}`}>{price}{key === 'monthly' ? ' per delivery' : ''}</span>
-                  </button>
-                ))}
-              </fieldset>
-            )}
             {buyable ? (
               <>
                 <div className="flex gap-3">
@@ -290,14 +271,13 @@ export default function ProductPage() {
                       +
                     </button>
                   </div>
-                  <button onClick={subscribable && plan === 'monthly' ? buyNow : addToBag} disabled={busy} className="btn btn-solid h-14 flex-1 disabled:opacity-60" data-testid="button-pdp-add">
-                    {subscribable && plan === 'monthly' ? 'Start monthly delivery' : `Add to bag · ${money(variant.priceCents * qty)}`}
+                  <button onClick={addToBag} className="btn btn-solid h-14 flex-1" data-testid="button-pdp-add">
+                    Add to bag · {money(variant.priceCents * qty)}
                   </button>
                 </div>
                 <button onClick={buyNow} disabled={busy} className="btn mt-3 h-14 w-full disabled:opacity-60" data-testid="button-pdp-buy">
-                  {busy ? 'Opening secure checkout' : subscribable && plan === 'monthly' ? `Subscribe · ${money(Math.round(variant.priceCents * qty * (1 - subPct / 100)))} every 30 days` : 'Buy now with Stripe'}
+                  {busy ? 'Opening secure checkout' : 'Buy now with Stripe'}
                 </button>
-                {subscribable && plan === 'monthly' && <p className="mt-3 text-[13px] leading-relaxed text-ink/60">{HOME.subscription.note} Each delivery carries its own lot certificate.</p>}
                 {note && (
                   <p className="mt-3 text-base leading-relaxed text-ink/75" role="status" data-testid="text-pdp-note">
                     {note}
@@ -309,7 +289,7 @@ export default function ProductPage() {
                 <p className="font-display text-xl">{waitlistCopy[0]}</p>
                 <p className="mt-2 text-base leading-relaxed text-ink/70">{waitlistCopy[1]}</p>
                 <div className="mt-5">
-                  <WaitlistForm sku={variant.sku} source={`pdp-${product.slug}`} label={status.cta} interests={[product.collection]} options={subscribable ? ['subscription'] : []} compact />
+                  <WaitlistForm sku={variant.sku} source={`pdp-${product.slug}`} label={status.cta} compact />
                 </div>
               </div>
             )}

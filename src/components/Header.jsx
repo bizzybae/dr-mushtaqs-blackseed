@@ -56,17 +56,7 @@ export default function Header() {
 
             <nav className="hidden items-center gap-7 lg:flex" aria-label="Primary">
               {NAV.map((item) => {
-                // Items with a panel: collections and Learn. Plain links (Practitioners) close any open panel.
-                const key = item.collection || (item.children ? 'learn' : null)
-                if (!key) {
-                  return (
-                    <div key={item.to} onMouseEnter={() => setPanel(null)}>
-                      <NavLink to={item.to} className={linkClass} onFocus={() => setPanel(null)} data-testid={`nav-${item.to.slice(1)}`}>
-                        {item.label}
-                      </NavLink>
-                    </div>
-                  )
-                }
+                const key = item.collection || 'learn'
                 return (
                   <div key={item.to} onMouseEnter={() => setPanel(key)}>
                     <NavLink to={item.to} className={linkClass} aria-haspopup="true" aria-expanded={panel === key} onFocus={() => setPanel(key)} data-testid={`nav-${key}`}>
@@ -174,15 +164,6 @@ export default function Header() {
                   </Link>
                 </li>
               ))}
-            </ul>
-            <p className="eyebrow mt-10">Practitioners</p>
-            <ul className="mt-3 divide-y divide-ink/10 border-y border-ink/10">
-              <li>
-                <Link to="/practitioners" className="flex items-baseline justify-between py-4" data-testid="link-mobile-practitioners">
-                  <span className="font-display text-2xl">Practitioners</span>
-                  <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted">Accounts and pricing</span>
-                </Link>
-              </li>
             </ul>
             <p className="eyebrow mt-10">Learn</p>
             <ul className="mt-3 divide-y divide-ink/10 border-y border-ink/10">

@@ -1,9 +1,6 @@
 // Vercel serverless function: Stripe Checkout.
 //
-//   POST /api/checkout   { items: [{ sku, qty }], subscribe?, origin }  -> { url }
-//        subscribe: true opens a Stripe Checkout in subscription mode (every 30 days at
-//        site_settings.subscription_discount_pct off, default 15). Only daily-use products
-//        (collection 'within', not bundles) may subscribe; the server enforces it.
+//   POST /api/checkout   { items: [{ sku, qty }], origin }  -> { url }
 //   GET  /api/checkout?session_id=cs_...                     -> order summary
 //
 // Prices are never trusted from the browser. Each SKU is looked up in
@@ -67,15 +64,6 @@ export async function POST(request) {
     )
   }
 
-  const subscribe = body?.subscribe === true
-  const subPct = Math.min(50, Math.max(0, Number(settings.subscription_discount_pct ?? 15)))
-  if (subscribe) {
-    const notSub = clean.filter((i) => bySku[i.sku].product?.collection_slug !== 'within' || bySku[i.sku].product?.product_type === 'bundle')
-    if (notSub.length) {
-      return json({ error: 'not_subscribable', message: `Monthly delivery is available for the daily-use oils only, not: ${notSub.map((i) => bySku[i.sku].product?.name || i.sku).join(', ')}.` }, 400)
-    }
-  }
-
   const line_items = clean.map((i) => {
     const v = bySku[i.sku]
     const name = v.product?.name ? `${v.product.name} · ${v.label}` : v.label
@@ -84,8 +72,7 @@ export async function POST(request) {
       quantity: i.qty,
       price_data: {
         currency: settings.currency || 'usd',
-        unit_amount: subscribe ? Math.round(v.price_cents * (1 - subPct / 100)) : v.price_cents,
-        ...(subscribe ? { recurring: { interval: 'day', interval_count: 30 } } : {}),
+        unit_amount: v.price_cents,
         product_data: {
           name,
           description: v.description ? v.description.split('|').slice(1).join('|').trim() || undefined : undefined,
@@ -96,14 +83,14 @@ export async function POST(request) {
     }
   })
 
-  const subtotal = clean.reduce((s, i) => s + (subscribe ? Math.round(bySku[i.sku].price_cents * (1 - subPct / 100)) : bySku[i.sku].price_cents) * i.qty, 0)
+  const subtotal = clean.reduce((s, i) => s + bySku[i.sku].price_cents * i.qty, 0)
   const threshold = Number(settings.free_shipping_threshold_cents ?? 15000)
   const flat = Number(settings.flat_shipping_cents ?? 900)
   const shippingAmount = subtotal >= threshold ? 0 : flat
 
   try {
     const session = await stripe.checkout.sessions.create({
-      mode: subscribe ? 'subscription' : 'payment',
+      mode: 'payment',
       line_items,
       success_url: `${origin}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${origin}/checkout/cancel`,
@@ -128,11 +115,8 @@ export async function POST(request) {
       metadata: {
         cart: JSON.stringify(clean),
         source: 'drmushtaqs-storefront',
-        plan: subscribe ? 'monthly' : 'once',
       },
-      ...(subscribe
-        ? { subscription_data: { description: 'Dr. Mushtaq’s monthly delivery', metadata: { cart: JSON.stringify(clean), source: 'drmushtaqs-storefront' } } }
-        : { payment_intent_data: { description: 'Dr. Mushtaq’s order' } }),
+      payment_intent_data: { description: 'Dr. Mushtaq’s order' },
     })
     return json({ url: session.url, id: session.id })
   } catch (err) {
