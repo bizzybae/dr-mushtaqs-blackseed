@@ -1,6 +1,7 @@
 // Vercel serverless function: first-lot waitlist with double opt-in.
 //
-//   POST /api/waitlist            { email, sku?, source?, website? }  -> { ok, status, confirmation_sent }
+//   POST /api/waitlist            { email, sku?, source?, interests?, website? }  -> { ok, status, confirmation_sent }
+//        status: 'saved' (new row, confirmation sent when email is configured) | 'updated' (already on the list; interests merged)
 //   GET  /api/waitlist?confirm=<token>                                -> redirect /waitlist/confirmed
 //   GET  /api/waitlist?unsubscribe=<token>                            -> redirect /waitlist/unsubscribed
 //
@@ -10,7 +11,7 @@
 // through Resend when RESEND_API_KEY is set; otherwise the row is stored and
 // the response says so, and the client shows the no-email success copy.
 
-import { insertWaitlist, findWaitlistByToken, updateWaitlist } from './_lib/supabase.js'
+import { joinWaitlist, findWaitlistByToken, updateWaitlist } from './_lib/supabase.js'
 
 export const config = { runtime: 'nodejs' }
 
@@ -29,6 +30,7 @@ function limited(ip) {
 }
 
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
+const INTEREST_KEYS = new Set(['within', 'skin', 'hair', 'body', 'fragrance', 'ritual-sets', 'subscription', 'practitioner'])
 
 export async function POST(request) {
   let body
@@ -48,15 +50,18 @@ export async function POST(request) {
   if (!EMAIL.test(email)) return json({ ok: false, message: 'Please enter a valid email address.' }, 400)
   const sku = body?.sku ? String(body.sku).slice(0, 64) : null
   const source = String(body?.source || 'site').slice(0, 64)
+  // Interest tags are a closed set; anything else is dropped.
+  const interests = [...new Set((Array.isArray(body?.interests) ? body.interests : []).map(String).filter((t) => INTEREST_KEYS.has(t)))].slice(0, 12)
 
   let row
   try {
-    row = await insertWaitlist({ email, sku, source })
+    row = await joinWaitlist({ email, sku, source, interests })
   } catch (err) {
-    if (/23505|duplicate/i.test(String(err.message))) return json({ ok: true, status: 'duplicate', confirmation_sent: false }, 409)
-    console.error('[waitlist] insert failed', err)
+    if (/22023|invalid email/i.test(String(err.message))) return json({ ok: false, message: 'Please enter a valid email address.' }, 400)
+    console.error('[waitlist] join failed', err)
     return json({ ok: false, message: 'We could not save your email. Please try again.' }, 502)
   }
+  if (row.status === 'updated') return json({ ok: true, status: 'updated', confirmation_sent: false })
 
   const origin = siteOrigin(request)
   let sent = false

@@ -16,6 +16,7 @@ const str = (name, title, opts = {}) => defineField({ name, title, type: 'string
 const txt = (name, title, opts = {}) => defineField({ name, title, type: 'text', rows: 4, ...opts })
 const list = (name, title, of, opts = {}) => defineField({ name, title, type: 'array', of, ...opts })
 const strings = (name, title, opts = {}) => list(name, title, [{ type: 'string' }], opts)
+const obj = (name, title, fields, opts = {}) => defineField({ name, title, type: 'object', fields, ...opts })
 
 const titledBody = defineType({
   name: 'titledBody',
@@ -89,6 +90,10 @@ const homePage = defineType({
     list('whoFor', 'Who it is for (four tiles)', [{ type: 'titledBody' }], { validation: (R) => R.max(4) }),
     str('finalCtaPrelaunch', 'Final CTA (prelaunch)'),
     str('finalCtaLive', 'Final CTA (live)'),
+    obj('practitionerTeaser', 'Practitioner band (home)', [str('title', 'Title'), txt('body', 'Body', { rows: 3 }), strings('points', 'Points'), str('cta', 'Button label')]),
+    obj('roadmapTeaser', 'Roadmap teaser (home)', [str('title', 'Title'), txt('body', 'Body', { rows: 2 }), str('cta', 'Link label')]),
+    obj('subscription', 'Monthly delivery option', [str('label', 'Checkbox label'), str('note', 'Note under the checkbox')]),
+    str('lotOne', 'Lot-one line', { description: 'Shown only when the commerce database has a lot_one_bottles setting. Use {n} for the number.' }),
   ],
   preview: { prepare: () => ({ title: 'Home page' }) },
 })
@@ -99,6 +104,7 @@ const founderPage = defineType({
   type: 'document',
   validation: claims,
   fields: [
+    defineField({ name: 'portrait', title: 'Portrait photograph', type: 'image', options: { hotspot: true }, fields: [str('alt', 'Alt text')], description: 'A real photograph of the founder. Shown on the home page and the founder page when set.' }),
     str('name', 'Full name with credentials'),
     str('shortName', 'Short name'),
     str('role', 'Role line'),

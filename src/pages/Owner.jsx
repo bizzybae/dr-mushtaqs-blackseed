@@ -493,24 +493,31 @@ function Waitlist() {
   useEffect(() => {
     supabase
       .from('waitlist')
-      .select('email,sku,source,confirmed,confirmed_at,unsubscribed_at,created_at')
+      .select('email,sku,source,interests,confirmed,confirmed_at,unsubscribed_at,created_at')
       .order('created_at', { ascending: false })
       .then(({ data, error }) => {
         if (error) setMsg(error.message)
         setRows(data || [])
       })
   }, [])
-  const stats = useMemo(() => ({ total: rows.length, confirmed: rows.filter((r) => r.confirmed && !r.unsubscribed_at).length, bySku: rows.reduce((m, r) => ((m[r.sku || 'general'] = (m[r.sku || 'general'] || 0) + 1), m), {}) }), [rows])
+  const stats = useMemo(
+    () => ({
+      total: rows.length,
+      confirmed: rows.filter((r) => r.confirmed && !r.unsubscribed_at).length,
+      byInterest: rows.reduce((m, r) => ((r.interests || []).forEach((t) => (m[t] = (m[t] || 0) + 1)), m), {}),
+    }),
+    [rows]
+  )
   return (
     <div>
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
           <h2 className="font-display text-2xl">Waitlist</h2>
           <p className="mt-2 text-base text-ink/70" data-testid="text-waitlist-stats">
-            {stats.total} signups · {stats.confirmed} confirmed · {Object.entries(stats.bySku).map(([k, n]) => `${k}: ${n}`).join(' · ')}
+            {stats.total} on the list · {stats.confirmed} confirmed · {Object.entries(stats.byInterest).map(([k, n]) => `${k}: ${n}`).join(' · ') || 'no interests ticked yet'}
           </p>
         </div>
-        <button onClick={() => download(`waitlist-${new Date().toISOString().slice(0, 10)}.csv`, csv(rows, ['email', 'sku', 'source', 'confirmed', 'confirmed_at', 'unsubscribed_at', 'created_at']))} className="btn" data-testid="button-waitlist-csv">
+        <button onClick={() => download(`waitlist-${new Date().toISOString().slice(0, 10)}.csv`, csv(rows.map((r) => ({ ...r, interests: (r.interests || []).join(' ') })), ['email', 'interests', 'sku', 'source', 'confirmed', 'confirmed_at', 'unsubscribed_at', 'created_at']))} className="btn" data-testid="button-waitlist-csv">
           Export CSV
         </button>
       </div>
@@ -520,7 +527,8 @@ function Waitlist() {
           <thead className="border-b border-ink/10 bg-sand/60">
             <tr>
               <th className={thead}>Email</th>
-              <th className={thead}>SKU</th>
+              <th className={thead}>Interests</th>
+              <th className={thead}>First SKU</th>
               <th className={thead}>Source</th>
               <th className={thead}>Confirmed</th>
               <th className={thead}>Joined</th>
@@ -529,14 +537,15 @@ function Waitlist() {
           <tbody className="divide-y divide-ink/10" data-testid="table-owner-waitlist">
             {rows.length === 0 && (
               <tr>
-                <td className={`${td} text-ink/60`} colSpan={5}>
+                <td className={`${td} text-ink/60`} colSpan={6}>
                   No signups yet.
                 </td>
               </tr>
             )}
             {rows.map((r) => (
-              <tr key={`${r.email}-${r.sku}`}>
+              <tr key={r.email}>
                 <td className={td}>{r.email}</td>
+                <td className={`${td} font-mono text-sm`}>{(r.interests || []).join(', ')}</td>
                 <td className={`${td} font-mono text-sm`}>{r.sku || ''}</td>
                 <td className={`${td} font-mono text-sm text-muted`}>{r.source}</td>
                 <td className={`${td} font-mono text-sm`}>{r.unsubscribed_at ? 'unsubscribed' : r.confirmed ? 'yes' : 'pending confirmation'}</td>
