@@ -1,15 +1,22 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { Link, useParams, useSearchParams } from 'react-router-dom'
 import ProductPhoto, { ProductThumb } from '../components/ProductPhoto'
 import ProductCard from '../components/ProductCard'
+import BatchBadge from '../components/BatchBadge'
+import ReviewsSlot from '../components/ReviewsSlot'
+import SafetyLine from '../components/SafetyLine'
+import StickyBuyBar from '../components/StickyBuyBar'
+import WaitlistForm from '../components/WaitlistForm'
 import { Accordion, GuaranteeStrip, LabelBadges, PhysicianSeal, Seo } from '../components/ui'
-import { BOTANICALS, PROTOCOL } from '../data/catalog'
-import { FOUNDER } from '../data/site'
-import { findVariant, money, savingsPct, useCatalog, useProduct } from '../lib/catalog'
+import { PROTOCOL } from '../data/catalog'
+import { useSite } from '../lib/content'
+import { track } from '../lib/analytics'
+import { findVariant, isPurchasable, money, perMl, perOz, savingsPct, servingsPer, showsUnitPrice, statusOf, useCatalog, useCurrentBatch, useProduct, whyLabel } from '../lib/catalog'
 import { startCheckout, useCart } from '../lib/cart'
 import NotFound from './NotFound'
 
 export default function ProductPage() {
+  const { FOUNDER, BOTANICALS } = useSite()
   const { slug } = useParams()
   const [params, setParams] = useSearchParams()
   const { product, loading } = useProduct(slug)
@@ -26,38 +33,99 @@ export default function ProductPage() {
   }, [product, params])
 
   const [shot, setShot] = useState(0)
+  const ctaRef = useRef(null)
+  const batch = useCurrentBatch(product)
   useEffect(() => {
     setShot(0)
     setQty(1)
     setNote(null)
   }, [slug, variant?.sku])
+  useEffect(() => {
+    if (product) track('product_viewed', { slug: product.slug, status: product.status })
+  }, [product?.slug])
 
   if (!product) return loading ? <div className="min-h-[60vh]" /> : <NotFound />
+  // Every product, concept included, gets its page. Concepts cannot be bought
+  // (api/checkout.js refuses them) and show Notify me instead of Add to bag.
 
+  const buyable = isPurchasable(product)
+  const status = statusOf(product)
   const collection = collections.find((c) => c.slug === product.collection)
   const isSet = product.productType === 'bundle'
+  const related = products.filter((p) => p.slug !== product.slug && p.collection === product.collection)
+  const servings = servingsPer(product, variant)
+  const specRows = [
+    ...(product.specs || []),
+    ...(servings ? [['Servings per bottle', `About ${servings} at ${product.servingMl} mL`]] : []),
+    ...(product.shelfLife ? [['Shelf life', product.shelfLife]] : []),
+    ...(product.storage ? [['Storage', product.storage]] : []),
+  ].filter(([k, v]) => k && v)
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: product.name,
+    description: product.short,
+    sku: variant.sku,
+    brand: { '@type': 'Brand', name: 'Dr. Mushtaq’s' },
+    image: [`${typeof window !== 'undefined' ? window.location.origin : ''}/products/${product.image || product.mosaic?.[0] || 'collection-flatlay'}.jpg`],
+    // Concepts carry no offer: nothing is for sale and the price is still a plan.
+    ...(product.status === 'concept'
+      ? {}
+      : {
+          offers: product.variants.map((v) => ({
+            '@type': 'Offer',
+            sku: v.sku,
+            price: (v.priceCents / 100).toFixed(2),
+            priceCurrency: 'USD',
+            availability: `https://schema.org/${product.status === 'available' ? 'InStock' : product.status === 'sold_out' ? 'SoldOut' : 'PreOrder'}`,
+            url: typeof window !== 'undefined' ? `${window.location.origin}/shop/${product.slug}?variant=${v.sku}` : undefined,
+          })),
+        }),
+  }
   const gallery = [...new Set([variant.image, ...(product.gallery || []), ...(product.mosaic?.length && !product.image ? ['__mosaic__', ...product.mosaic] : [])].filter(Boolean))]
-  const related = products.filter((p) => p.slug !== product.slug && p.collection === product.collection).slice(0, 4)
-  const fallbackRelated = related.length ? related : products.filter((p) => p.slug !== product.slug && p.featured).slice(0, 4)
+  const fallbackRelated = (related.length ? related : products.filter((p) => p.slug !== product.slug && p.featured)).slice(0, 4)
   const protocolStep = PROTOCOL.find((s) => s.product === product.slug)
   const save = savingsPct(variant)
-  const unit = variant.sizeMl ? `${money(Math.round(variant.priceCents / variant.sizeMl), { always: true })} per mL` : null
+  const unitPrice = showsUnitPrice(product)
+  const unit = unitPrice && variant.sizeMl ? `${money(perMl(variant), { always: true })} per mL · ${money(perOz(variant), { always: true })} per fl oz` : null
+  // The three questions every product answers. Each block renders only from real data.
+  const steps = product.directions?.length ? product.directions : product.howToUse || []
+  const why = product.why || []
+  const detail = [
+    product.intendedUse && { key: 'what', label: 'What it’s for', body: product.intendedUse, sub: product.sensoryLine },
+    steps.length > 0 && { key: 'how', label: 'How to use', steps },
+    why.length > 0 && { key: 'why', label: whyLabel(product), items: why },
+  ].filter(Boolean)
+  const waitlistCopy =
+    product.status === 'prelaunch'
+      ? ['The first lot is still at the lab.', 'We will email you the day it ships, with its certificate attached. No charge, no card.']
+      : product.status === 'concept'
+        ? ['Still in development.', 'Leave your email and we will write when it is ready, with its lab report. No charge, no card.']
+        : ['Not available right now.', 'Leave your email and we will write when it is back.']
   const bundleLines = (product.bundle || []).map((b) => ({ ...b, hit: findVariant(products, b.sku) })).filter((b) => b.hit)
   const botanicals = (product.botanicals || []).map((k) => BOTANICALS[k]).filter(Boolean)
 
   async function buyNow() {
     setBusy(true)
+    track('checkout_started', { sku: variant.sku, qty })
     try {
       await startCheckout([{ sku: variant.sku, qty }])
     } catch (err) {
-      setNote(err.code === 'checkout_not_configured' ? 'Checkout is being connected. Add to bag for now and we will notify the list when it opens.' : err.message)
+      track('checkout_error', { code: err.code || 'unknown' })
+      setNote(err.code === 'checkout_not_configured' ? 'Checkout is not open yet.' : err.message)
       setBusy(false)
     }
+  }
+
+  function addToBag() {
+    track('add_to_cart', { sku: variant.sku, qty })
+    add(variant.sku, qty)
   }
 
   return (
     <>
       <Seo title={product.name} description={product.short} image={`/products/${product.image || product.mosaic?.[0] || 'collection-flatlay'}.jpg`} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
       <nav aria-label="Breadcrumb" className="mx-auto max-w-[1440px] px-5 pt-6 sm:px-8 lg:px-12">
         <ol className="flex flex-wrap gap-2 font-mono text-[10px] uppercase tracking-[0.14em] text-muted">
@@ -108,11 +176,18 @@ export default function ProductPage() {
         <div className="lg:col-span-5 lg:pl-6">
           <div className="flex items-center gap-3">
             <p className="eyebrow">{collection ? `${collection.name} · ${product.step}` : product.step}</p>
-            {(product.bestseller || product.isNew) && <span className="bg-ink px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.16em] text-cream">{product.bestseller ? 'Bestseller' : 'New'}</span>}
+            {!buyable ? (
+              <span className="bg-ink px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.16em] text-cream" data-testid="badge-status">
+                {status.label}
+              </span>
+            ) : (
+              (product.bestseller || product.isNew) && <span className="bg-ink px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.16em] text-cream">{product.bestseller ? 'Bestseller' : 'New'}</span>
+            )}
           </div>
           <h1 className="mt-4 font-display text-4xl leading-[1.05] tracking-tight sm:text-5xl">{product.name}</h1>
           <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.14em] text-muted">{product.subtitle}</p>
           <p className="mt-4 text-lg leading-relaxed text-ink/70">{product.tagline}</p>
+          {batch && <BatchBadge batch={batch} className="mt-5" />}
 
           <div className="mt-8 flex flex-wrap items-baseline gap-x-3 gap-y-1">
             <p className="font-display text-3xl" data-testid="text-pdp-price">
@@ -120,12 +195,12 @@ export default function ProductPage() {
             </p>
             {variant.compareAtCents && variant.compareAtCents > variant.priceCents && <p className="font-mono text-sm text-muted line-through">{money(variant.compareAtCents)}</p>}
             {save > 0 && <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-brass">Save {save}%</p>}
-            {unit && <p className="w-full font-mono text-[10px] uppercase tracking-[0.14em] text-muted sm:w-auto">{unit}</p>}
+            {unit && <p className="w-full font-mono text-[11px] uppercase tracking-[0.14em] text-muted">{unit}</p>}
           </div>
 
           {product.variants.length > 1 && (
             <fieldset className="mt-8">
-              <legend className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted">Size · larger sizes cost less per mL</legend>
+              <legend className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted">{unitPrice ? 'Size · larger sizes cost less per mL' : 'Size'}</legend>
               <div className={`mt-3 grid gap-3 ${product.variants.length === 3 ? 'grid-cols-3' : 'grid-cols-2'}`}>
                 {product.variants.map((v) => {
                   const s = savingsPct(v)
@@ -133,8 +208,9 @@ export default function ProductPage() {
                   return (
                     <button key={v.sku} onClick={() => setParams(v.default ? {} : { variant: v.sku }, { replace: true })} aria-pressed={on} className={`border px-3 py-4 text-left transition-colors ${on ? 'border-ink bg-ink text-cream' : 'border-ink/20 hover:border-ink'}`} data-testid={`button-variant-${v.sku}`}>
                       <span className="block font-display text-base">{v.label}</span>
-                      <span className={`mt-1 block font-mono text-[10px] uppercase tracking-[0.12em] ${on ? 'text-cream/70' : 'text-muted'}`}>{money(v.priceCents)}</span>
-                      {s > 0 && <span className={`mt-1 block font-mono text-[10px] uppercase tracking-[0.12em] ${on ? 'text-brass' : 'text-brass'}`}>Save {s}%</span>}
+                      <span className={`mt-1 block font-mono text-[11px] uppercase tracking-[0.12em] ${on ? 'text-cream/70' : 'text-muted'}`}>{money(v.priceCents)}</span>
+                      {unitPrice && v.sizeMl && <span className={`mt-1 block font-mono text-[10px] uppercase tracking-[0.1em] ${on ? 'text-cream/60' : 'text-muted'}`}>{money(perOz(v), { always: true })}/fl oz</span>}
+                      {s > 0 && <span className="mt-1 block font-mono text-[10px] uppercase tracking-[0.12em] text-brass">Save {s}%</span>}
                     </button>
                   )
                 })}
@@ -180,33 +256,82 @@ export default function ProductPage() {
             </div>
           )}
 
-          <div className="mt-8 flex gap-3">
-            <div className="inline-flex items-center border border-ink/20">
-              <button onClick={() => setQty((q) => Math.max(1, q - 1))} className="h-14 w-12 font-mono hover:bg-ink hover:text-cream" aria-label="Decrease quantity" data-testid="button-pdp-dec">
-                −
-              </button>
-              <span className="w-10 text-center font-mono text-sm" data-testid="text-pdp-qty">
-                {qty}
-              </span>
-              <button onClick={() => setQty((q) => Math.min(12, q + 1))} className="h-14 w-12 font-mono hover:bg-ink hover:text-cream" aria-label="Increase quantity" data-testid="button-pdp-inc">
-                +
-              </button>
-            </div>
-            <button onClick={() => add(variant.sku, qty)} className="btn btn-solid h-14 flex-1" data-testid="button-pdp-add">
-              Add to bag · {money(variant.priceCents * qty)}
-            </button>
+          <div ref={ctaRef} className="mt-8">
+            {buyable ? (
+              <>
+                <div className="flex gap-3">
+                  <div className="inline-flex items-center border border-ink/20">
+                    <button onClick={() => setQty((q) => Math.max(1, q - 1))} className="h-14 w-12 font-mono hover:bg-ink hover:text-cream" aria-label="Decrease quantity" data-testid="button-pdp-dec">
+                      −
+                    </button>
+                    <span className="w-10 text-center font-mono text-sm" data-testid="text-pdp-qty">
+                      {qty}
+                    </span>
+                    <button onClick={() => setQty((q) => Math.min(12, q + 1))} className="h-14 w-12 font-mono hover:bg-ink hover:text-cream" aria-label="Increase quantity" data-testid="button-pdp-inc">
+                      +
+                    </button>
+                  </div>
+                  <button onClick={addToBag} className="btn btn-solid h-14 flex-1" data-testid="button-pdp-add">
+                    Add to bag · {money(variant.priceCents * qty)}
+                  </button>
+                </div>
+                <button onClick={buyNow} disabled={busy} className="btn mt-3 h-14 w-full disabled:opacity-60" data-testid="button-pdp-buy">
+                  {busy ? 'Opening secure checkout' : 'Buy now with Stripe'}
+                </button>
+                {note && (
+                  <p className="mt-3 text-base leading-relaxed text-ink/75" role="status" data-testid="text-pdp-note">
+                    {note}
+                  </p>
+                )}
+              </>
+            ) : (
+              <div className="border border-ink/15 bg-sand/60 p-5" data-testid="box-waitlist">
+                <p className="font-display text-xl">{waitlistCopy[0]}</p>
+                <p className="mt-2 text-base leading-relaxed text-ink/70">{waitlistCopy[1]}</p>
+                <div className="mt-5">
+                  <WaitlistForm sku={variant.sku} source={`pdp-${product.slug}`} label={status.cta} compact />
+                </div>
+              </div>
+            )}
+            <SafetyLine className="mt-4" />
           </div>
-          <button onClick={buyNow} disabled={busy} className="btn mt-3 h-14 w-full disabled:opacity-60" data-testid="button-pdp-buy">
-            {busy ? 'Opening secure checkout' : 'Buy now with Stripe'}
-          </button>
-          {note && (
-            <p className="mt-3 text-sm leading-relaxed text-ink/75" role="status" data-testid="text-pdp-note">
-              {note}
-            </p>
+
+          {/* What it’s for · How to use · Why it suits your skin */}
+          {detail.length > 0 && (
+            <div className="mt-8 divide-y divide-ink/10 border border-ink/10" data-testid="detail-blocks">
+              {detail.map((d) => (
+                <section key={d.key} className="px-5 py-5" data-testid={`detail-${d.key}`}>
+                  <h2 className="font-mono text-[10px] uppercase tracking-[0.16em] text-brass">{d.label}</h2>
+                  {d.body && <p className="mt-3 text-base leading-relaxed text-ink/85">{d.body}</p>}
+                  {d.sub && <p className="mt-2 font-display text-lg italic text-ink/60">{d.sub}</p>}
+                  {d.steps && (
+                    <ol className="mt-3 space-y-3">
+                      {d.steps.map((step, i) => (
+                        <li key={i} className="flex gap-4">
+                          <span className="mt-1 shrink-0 font-mono text-[11px] text-brass">0{i + 1}</span>
+                          <p className="text-base leading-relaxed text-ink/80">{step}</p>
+                        </li>
+                      ))}
+                    </ol>
+                  )}
+                  {d.items && (
+                    <ul className="mt-3 space-y-3">
+                      {d.items.map((line, i) => (
+                        <li key={i} className="flex gap-4">
+                          <span className="mt-[0.6em] h-1.5 w-1.5 shrink-0 bg-brass" aria-hidden="true" />
+                          <p className="text-base leading-relaxed text-ink/80">{line}</p>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </section>
+              ))}
+            </div>
           )}
+
           <div className="mt-5 flex items-center gap-4 border border-ink/10 px-4 py-3">
             <PhysicianSeal className="h-12 w-12 shrink-0" />
-            <p className="font-mono text-[10px] uppercase leading-relaxed tracking-[0.12em] text-muted">
+            <p className="font-mono text-[11px] uppercase leading-relaxed tracking-[0.12em] text-muted">
               Physician formulated · The 60-Day Standard · Complimentary US shipping over $150
             </p>
           </div>
@@ -215,21 +340,31 @@ export default function ProductPage() {
             <LabelBadges compact />
           </div>
 
-          <p className="mt-10 text-[15px] leading-relaxed text-ink/80">{product.long}</p>
+          <p className="mt-10 text-base leading-relaxed text-ink/80">{product.long}</p>
 
-          <dl className="mt-10 divide-y divide-ink/10 border-y border-ink/10">
-            {product.specs.map(([k, v]) => (
+          {product.sensory && (
+            <div className="mt-10 border-l-2 border-brass pl-5" data-testid="text-sensory">
+              <p className="eyebrow">Sensory notes</p>
+              <p className="mt-3 text-base leading-relaxed text-ink/80">{product.sensory}</p>
+              {product.sensoryLine && <p className="mt-2 font-display text-lg italic text-brass">{product.sensoryLine}</p>}
+            </div>
+          )}
+
+          <dl className="mt-10 divide-y divide-ink/10 border-y border-ink/10" data-testid="table-specs">
+            {specRows.map(([k, v]) => (
               <div key={k} className="grid grid-cols-3 gap-4 py-3">
-                <dt className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted">{k}</dt>
-                <dd className="col-span-2 text-sm text-ink/80">{v}</dd>
+                <dt className="font-mono text-[11px] uppercase tracking-[0.14em] text-muted">{k}</dt>
+                <dd className="col-span-2 text-base text-ink/80">{v}</dd>
               </div>
             ))}
           </dl>
 
-          <div className="mt-10">
-            <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted">Ingredients</p>
-            <p className="mt-3 text-sm leading-relaxed text-ink/80">{product.ingredients}</p>
-          </div>
+          {product.ingredients && (
+            <div className="mt-10">
+              <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted">Ingredients</p>
+              <p className="mt-3 text-base leading-relaxed text-ink/80">{product.ingredients}</p>
+            </div>
+          )}
         </div>
       </section>
 
@@ -251,7 +386,7 @@ export default function ProductPage() {
                 <li key={b.latin} className="border border-ink/10 p-6">
                   <p className="font-display text-xl">{b.name}</p>
                   <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.12em] text-muted">
-                    {b.latin} · {b.part} · {b.origin}
+                    {b.latin} · {b.part}
                   </p>
                   <p className="mt-3 text-sm leading-relaxed text-ink/70">{b.note}</p>
                   <dl className="mt-4 grid grid-cols-3 gap-2 font-mono text-[10px] uppercase tracking-[0.1em]">
@@ -275,88 +410,84 @@ export default function ProductPage() {
         </section>
       )}
 
-      {/* How to use + batch analysis */}
+      {/* How to enjoy it */}
+      {product.howTo?.length > 0 && (
+        <section className="mx-auto max-w-[1440px] px-5 py-20 sm:px-8 lg:px-12">
+          <p className="eyebrow">How to enjoy it</p>
+          <ul className={`mt-8 grid gap-5 ${product.howTo.length >= 3 ? 'md:grid-cols-3' : 'md:grid-cols-2'}`} data-testid="cards-how-to">
+            {product.howTo.map(([t, b], i) => (
+              <li key={t} className="border border-ink/10 p-6">
+                <span className="font-mono text-[11px] text-brass">0{i + 1}</span>
+                <p className="mt-3 font-display text-2xl">{t}</p>
+                <p className="mt-3 text-base leading-relaxed text-ink/75">{b}</p>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      {/* Directions + lab report */}
       <section className="bg-ink text-cream">
         <div className="mx-auto grid max-w-[1440px] gap-12 px-5 py-20 sm:px-8 lg:grid-cols-12 lg:px-12 lg:py-24">
           <div className="lg:col-span-5">
-            <p className="eyebrow">How to use</p>
-            <ol className="mt-8 space-y-6">
-              {product.howToUse.map((step, i) => (
-                <li key={i} className="flex gap-5">
-                  <span className="font-mono text-[10px] text-brass">0{i + 1}</span>
-                  <p className="text-[15px] leading-relaxed text-cream/85">{step}</p>
-                </li>
-              ))}
-            </ol>
             {protocolStep && (
-              <p className="mt-8 border-t border-cream/15 pt-6 font-mono text-[10px] uppercase leading-relaxed tracking-[0.14em] text-cream/60">
-                In the protocol: step {protocolStep.step}, {protocolStep.time.toLowerCase()} ·{' '}
-                <Link to="/protocol" className="underline hover:text-brass">
-                  see the day
-                </Link>
-              </p>
+              <>
+                <p className="eyebrow">In the routine</p>
+                <p className="mt-6 text-base leading-relaxed text-cream/85">{protocolStep.note}</p>
+                <p className="mt-6 font-mono text-[11px] uppercase leading-relaxed tracking-[0.14em] text-cream/60">
+                  Step {protocolStep.step}, {protocolStep.time.toLowerCase()} ·{' '}
+                  <Link to="/protocol" className="underline hover:text-brass">
+                    see the day
+                  </Link>
+                </p>
+              </>
             )}
-            <div className="mt-10 border-t border-cream/15 pt-8">
+            <div className={protocolStep ? 'mt-10 border-t border-cream/15 pt-8' : ''}>
               <p className="eyebrow">A note from the formulator</p>
-              <p className="mt-4 text-[15px] leading-relaxed text-cream/80">{FOUNDER.lede} Every lot of this product carries its certificate, and every bottle carries the 60-Day Standard.</p>
+              <p className="mt-4 text-base leading-relaxed text-cream/80">{FOUNDER.lede} Every lot of this product carries its certificate, and every bottle carries the 60-Day Standard.</p>
               <p className="mt-4 font-display text-xl italic text-brass">{FOUNDER.name}</p>
-              <p className="mt-3 font-mono text-[10px] leading-relaxed text-cream/40">{FOUNDER.disclosure}</p>
+              <p className="mt-3 font-mono text-[11px] leading-relaxed text-cream/50">{FOUNDER.disclosure}</p>
             </div>
           </div>
           <div className="lg:col-span-6 lg:col-start-7">
-            <p className="eyebrow">Batch analysis</p>
-            <h2 className="mt-4 font-display text-3xl text-cream">What the lab measured.</h2>
-            {product.batches && product.batches.length > 0 ? (
-              <div className="mt-8 overflow-hidden border border-cream/15">
-                <table className="w-full text-left font-mono text-[11px]">
+            <p className="eyebrow">Lab report</p>
+            <h2 className="mt-4 font-display text-3xl text-cream">Every lot, tested. Every number, published.</h2>
+            <p className="mt-4 text-base leading-relaxed text-cream/70">Each pressing gets an independent lab panel covering thymoquinone, fatty-acid profile, freshness, heavy metals, and microbial screen. Scan the lot code on your bottle to see its full certificate.</p>
+            {product.batches?.length > 0 && (
+              <div className="mt-8 overflow-hidden border border-cream/15" data-testid="table-batches">
+                <table className="w-full text-left font-mono text-[12px]">
                   <thead className="bg-cream/5 uppercase tracking-[0.12em] text-cream/60">
                     <tr>
                       <th className="px-4 py-3 font-normal">Lot</th>
                       <th className="px-4 py-3 font-normal">Pressed</th>
-                      <th className="px-4 py-3 font-normal">TQ %</th>
-                      <th className="px-4 py-3 font-normal">COA</th>
+                      <th className="px-4 py-3 font-normal">Thymoquinone</th>
+                      <th className="px-4 py-3 font-normal">Report</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-cream/10">
-                    {product.batches.map((b) => (
+                    {product.batches.map((b, i) => (
                       <tr key={b.lot_number}>
-                        <td className="px-4 py-3">{b.lot_number}</td>
-                        <td className="px-4 py-3 text-cream/70">{b.pressed_date || '·'}</td>
-                        <td className="px-4 py-3 text-brass">{b.thymoquinone_pct ? `${Number(b.thymoquinone_pct).toFixed(2)}%` : '·'}</td>
                         <td className="px-4 py-3">
-                          {b.coa_storage_path ? (
-                            <a href={b.coa_storage_path} className="underline hover:text-brass" target="_blank" rel="noreferrer">
-                              PDF
-                            </a>
-                          ) : (
-                            <span className="text-cream/50">Pending</span>
-                          )}
+                          {b.lot_number}
+                          <span className="ml-2 text-cream/50">{b.is_current || i === 0 ? 'current' : 'previous'}</span>
+                        </td>
+                        <td className="px-4 py-3 text-cream/70">{b.press_date}</td>
+                        <td className="px-4 py-3 text-brass">{b.thymoquinone_pct != null ? `${Number(b.thymoquinone_pct).toFixed(2)}%` : ''}</td>
+                        <td className="px-4 py-3">
+                          <Link to={`/coa/${encodeURIComponent(b.lot_number)}`} className="underline hover:text-brass" onClick={() => track('coa_opened', { lot: b.lot_number, from: 'pdp' })}>
+                            View
+                          </Link>
                         </td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
               </div>
-            ) : (
-              <div className="mt-8 border border-cream/15 p-6">
-                <dl className="grid grid-cols-2 gap-6 sm:grid-cols-3">
-                  <div>
-                    <dt className="font-mono text-[10px] uppercase tracking-[0.14em] text-cream/60">Blackseed oil</dt>
-                    <dd className="mt-2 font-display text-2xl text-brass">4.64% TQ</dd>
-                  </div>
-                  <div>
-                    <dt className="font-mono text-[10px] uppercase tracking-[0.14em] text-cream/60">Method</dt>
-                    <dd className="mt-2 font-display text-2xl text-cream">HPLC</dd>
-                  </div>
-                  <div>
-                    <dt className="font-mono text-[10px] uppercase tracking-[0.14em] text-cream/60">Panel</dt>
-                    <dd className="mt-2 font-display text-2xl text-cream">Metals · Micro</dd>
-                  </div>
-                </dl>
-                <p className="mt-6 text-sm leading-relaxed text-cream/60">Lot numbers, press dates, and the certificate of analysis for each release appear here the day the lot ships. Find your lot number on the base of the bottle.</p>
-              </div>
             )}
-            <p className="mt-6 font-mono text-[10px] leading-relaxed text-cream/50">{product.safety}</p>
+            <Link to="/coa" className="btn mt-8 border-cream/40 text-cream hover:bg-cream hover:text-ink" data-testid="link-pdp-coa">
+              How to read a lab report
+            </Link>
+            <p className="mt-8 font-mono text-[11px] leading-relaxed text-cream/60">{product.safety}</p>
           </div>
         </div>
       </section>
@@ -374,6 +505,16 @@ export default function ProductPage() {
           </div>
         </section>
       )}
+
+      <ReviewsSlot reviews={product.reviews} />
+
+      <StickyBuyBar
+        anchorRef={ctaRef}
+        name={product.name}
+        price={variant.priceCents}
+        cta={buyable ? 'Add to bag' : 'Notify me'}
+        onClick={() => (buyable ? addToBag() : ctaRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' }))}
+      />
 
       <section className="border-t border-ink/10 bg-sand">
         <div className="mx-auto max-w-[1440px] px-5 py-20 sm:px-8 lg:px-12">

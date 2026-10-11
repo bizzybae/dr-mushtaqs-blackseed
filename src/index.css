@@ -5,6 +5,8 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    /* 17px base for older shoppers; rem-based type and spacing scale with it */
+    font-size: 17px;
   }
 
   body {
@@ -39,7 +41,7 @@
   }
 
   .btn {
-    @apply inline-flex items-center justify-center gap-3 border border-ink px-6 py-4 font-mono text-[11px] uppercase tracking-[0.14em] transition-colors duration-200 hover:bg-ink hover:text-cream;
+    @apply inline-flex min-h-[44px] items-center justify-center gap-3 border border-ink px-6 py-4 font-mono text-[11px] uppercase tracking-[0.14em] transition-colors duration-200 hover:bg-ink hover:text-cream;
   }
 
   .btn-solid {

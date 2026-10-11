@@ -16,12 +16,12 @@
   {
    "slug": "skin",
    "name": "Skin",
-   "short": "Cleanse, treat, seal",
-   "description": "Oil-first skincare built on cold-pressed blackseed, Kashmiri saffron, and grapevine. Three steps, no water, no fillers.",
+   "short": "Cleanse, nourish, seal",
+   "description": "Oil-first skincare built on cold-pressed blackseed, saffron, and grapevine. Three steps, no water, no fillers.",
    "hero": "saffron-radiance-face-oil",
    "steps": [
     "Cleanse",
-    "Treat",
+    "Nourish",
     "Seal"
    ],
    "sort": 2
@@ -82,121 +82,121 @@
    "name": "Blackseed",
    "latin": "Nigella sativa",
    "part": "Seed, cold-pressed oil",
-   "origin": "Ethiopian highlands",
    "ayurveda": "Kalonji, Upakunchika",
    "unani": "Habbat al-Sauda, Kalonji",
    "tcm": "Hei Zhong Cao Zi (黑种草子)",
-   "note": "The constant in every Dr. Mushtaq’s formula. Standardized to 4.64% thymoquinone by HPLC on every lot. Peppery, warm, faintly of oregano."
+   "note": "The constant in every Dr. Mushtaq’s formula. Thymoquinone is measured on every lot and the result is published with the lot. Peppery, warm, faintly of oregano.",
+   "origin": null
   },
   {
    "key": "saffron",
    "name": "Saffron",
    "latin": "Crocus sativus",
    "part": "Stigma",
-   "origin": "Kashmir, Pampore",
    "ayurveda": "Kesar, Kumkuma",
    "unani": "Zafran",
    "tcm": "Zang Hong Hua (藏红花)",
-   "note": "Hand-picked stigmas graded for crocin and safranal content. We buy whole threads, never powder, and infuse them in blackseed oil ourselves."
+   "note": "Hand-picked stigmas graded for crocin and safranal content. We buy whole threads, never powder, and infuse them in blackseed oil ourselves.",
+   "origin": null
   },
   {
    "key": "grapevine",
    "name": "Grapevine",
    "latin": "Vitis vinifera",
    "part": "Seed oil, leaf and vine-shoot extract",
-   "origin": "Rhône Valley",
    "ayurveda": "Draksha",
    "unani": "Angur",
    "tcm": "Pu Tao (葡萄)",
-   "note": "Cold-pressed grapeseed oil for its light, dry finish, and an extract of the vine shoot itself, the part of the plant richest in resveratrol and viniferins."
+   "note": "Cold-pressed grapeseed oil for its light, dry finish, and an extract of the vine shoot itself, the part of the plant richest in resveratrol and viniferins.",
+   "origin": null
   },
   {
    "key": "rose",
    "name": "Damask Rose",
    "latin": "Rosa damascena",
    "part": "Petal, otto and infused oil",
-   "origin": "Isparta",
    "ayurveda": "Shatapatri, Taruni",
    "unani": "Gul-e-Surkh",
    "tcm": "Mei Gui Hua (玫瑰花)",
-   "note": "Steam-distilled otto for fragrance; whole petals infused in oil for the cleansing oil."
+   "note": "Steam-distilled otto for fragrance; whole petals infused in oil for the cleansing oil.",
+   "origin": null
   },
   {
    "key": "amla",
    "name": "Amla",
    "latin": "Phyllanthus emblica",
    "part": "Fruit, oil infusion",
-   "origin": "Uttar Pradesh",
    "ayurveda": "Amalaki",
    "unani": "Amla",
    "tcm": "Yu Gan Zi (余甘子)",
-   "note": "Sun-dried fruit infused slowly in sesame and blackseed oil, the classical way a hair oil is made."
+   "note": "Sun-dried fruit infused slowly in sesame and blackseed oil, the classical way a hair oil is made.",
+   "origin": null
   },
   {
    "key": "sesame",
    "name": "Sesame",
    "latin": "Sesamum indicum",
    "part": "Seed, cold-pressed oil",
-   "origin": "Gujarat",
    "ayurveda": "Tila",
    "unani": "Kunjad",
    "tcm": "Hei Zhi Ma (黑芝麻)",
-   "note": "The traditional carrier of abhyanga. Cold-pressed, unroasted, so the aroma stays quiet."
+   "note": "The traditional carrier of abhyanga. Cold-pressed, unroasted, so the aroma stays quiet.",
+   "origin": null
   },
   {
    "key": "oud",
    "name": "Oud",
    "latin": "Aquilaria malaccensis",
    "part": "Resinous heartwood, distilled oil",
-   "origin": "Assam",
    "ayurveda": "Agaru",
    "unani": "Ood",
    "tcm": "Chen Xiang (沉香)",
-   "note": "Plantation-grown, hydro-distilled agarwood oil. Deep, dry, animalic in trace, softened by blackseed."
+   "note": "Plantation-grown, hydro-distilled agarwood oil. Deep, dry, animalic in trace, softened by blackseed.",
+   "origin": null
   },
   {
    "key": "sandalwood",
    "name": "Sandalwood",
    "latin": "Santalum album",
    "part": "Heartwood, distilled oil",
-   "origin": "Mysore (certified plantation)",
    "ayurveda": "Chandana",
    "unani": "Sandal",
    "tcm": "Tan Xiang (檀香)",
-   "note": "Creamy, quiet, long-lasting. The anchor of Kesar Rose."
+   "note": "Creamy, quiet, long-lasting. The anchor of Kesar Rose.",
+   "origin": null
   },
   {
    "key": "vetiver",
    "name": "Vetiver",
    "latin": "Chrysopogon zizanioides",
    "part": "Root, distilled oil",
-   "origin": "Haiti",
    "ayurveda": "Ushira",
    "unani": "Khas",
    "tcm": "Xiang Gen Cao (香根草)",
-   "note": "Earthy, green, cool. Grounds the grapevine leaf in Vigne Verte."
+   "note": "Earthy, green, cool. Grounds the grapevine leaf in Vigne Verte.",
+   "origin": null
   },
   {
    "key": "frankincense",
    "name": "Frankincense",
    "latin": "Boswellia sacra",
    "part": "Resin, distilled oil",
-   "origin": "Dhofar",
    "ayurveda": "Shallaki (B. serrata)",
    "unani": "Kundur, Luban",
    "tcm": "Ru Xiang (乳香)",
-   "note": "Bright, resinous, citrus-edged. Used in trace in the body oil and the bath soak."
+   "note": "Bright, resinous, citrus-edged. Used in trace in the body oil and the bath soak.",
+   "origin": null
   },
   {
    "key": "rosemary",
    "name": "Rosemary",
    "latin": "Rosmarinus officinalis",
    "part": "Leaf, distilled oil",
-   "origin": "Tunisia",
    "ayurveda": "Rusmari",
    "unani": "Iklil al-Jabal",
    "tcm": "Mi Die Xiang (迷迭香)",
-   "note": "The clean herbal lift in the Scalp & Beard Serum."
+   "note": "The clean herbal lift in the Scalp & Beard Serum.",
+   "origin": null
   }
  ],
  "badges": [
@@ -208,13 +208,36 @@
  "products": [
   {
    "slug": "blackseed-oil",
+   "status": "prelaunch",
    "name": "Blackseed Oil",
    "subtitle": "Cold-pressed Nigella sativa seed oil",
-   "tagline": "The original. One seed, one press, one number on the label.",
+   "tagline": "The original. One seed, one ingredient, one certificate per lot.",
    "category": "oil",
    "type": "supplement",
-   "short": "Single-origin Ethiopian Nigella sativa, cold-pressed and standardized to 4.64% thymoquinone. Amber glass, glass dropper, lot number on every bottle.",
-   "long": "Most blackseed oil is sold on folklore. Ours is sold on a number. Every lot is pressed from a single Ethiopian harvest, held below 40 °C, and released only after an independent laboratory confirms thymoquinone at 4.64%. Unrefined and unblended, so the color, aroma, and peppery finish are the seed’s own.",
+   "intendedUse": "A daily spoonful of seed oil, taken straight or stirred into food.",
+   "sensoryLine": "Bold, peppery, unapologetically seed-y.",
+   "sensory": "Bold, peppery, a little bitter. Deep amber-gold. A big herbal aroma. This is an unrefined seed oil, not a neutral one.",
+   "storage": "Cool, dark place. Refrigerate after opening.",
+   "shelfLife": null,
+   "serving": null,
+   "servingMl": 1,
+   "directions": [
+    "Shake gently. The oil is unfiltered and may show natural sediment.",
+    "Take one dropper, about 1 mL, with or after a meal.",
+    "Never heat it. Stir into food after cooking, not during."
+   ],
+   "howTo": [
+    [
+     "Straight up",
+     "One dropper, with or after a meal. Let it sit on the tongue a moment before swallowing."
+    ],
+    [
+     "In food",
+     "Stir into honey, yogurt, or a smoothie, or drizzle over salad, labneh, or warm bread. Never heat it."
+    ]
+   ],
+   "short": "Single-ingredient Nigella sativa seed oil, cold pressed and bottled in amber glass. Every lot ships with a published laboratory certificate.",
+   "long": "Most blackseed oil is sold on folklore. Ours is sold on a certificate. Each lot is pressed cold from one harvest, bottled unrefined and unblended, and released only after an independent laboratory has reported thymoquinone, fatty-acid profile, freshness, heavy metals, and a microbial screen. The number on your bottle’s lot page is that laboratory’s, not ours.",
    "ingredients": "Nigella sativa (black seed) oil.",
    "featured": true,
    "isNew": false,
@@ -222,28 +245,24 @@
    "sort": 1,
    "specs": [
     [
-     "Botanical",
-     "Nigella sativa L., seed"
-    ],
-    [
-     "Origin",
-     "Ethiopia, single harvest per lot"
+     "Ingredient",
+     "100% cold-pressed Nigella sativa seed oil"
     ],
     [
      "Process",
-     "Cold-pressed below 40 °C, unrefined"
+     "Cold pressed, unrefined"
     ],
     [
-     "Standardization",
-     "Thymoquinone 4.64% by HPLC"
+     "Origin",
+     "Single harvest per lot, named on the lot certificate"
     ],
     [
      "Packaging",
-     "Amber glass, glass dropper, tamper band"
+     "Amber glass, glass dropper, tamper-evident seal"
     ],
     [
-     "Storage",
-     "Cool, dark place. Refrigerate after opening."
+     "Serving",
+     "One dropper, about 1 mL"
     ]
    ],
    "collection": "within",
@@ -312,8 +331,8 @@
      "t": "how_to_use",
      "c": [
       "Shake gently. The oil is unfiltered and may show natural sediment.",
-      "Take one full dropper (about 1 mL) daily, or as directed by your clinician or practitioner.",
-      "Hold under the tongue for a moment before swallowing, or stir into warm water with honey."
+      "Take one dropper, about 1 mL, with or after a meal.",
+      "Never heat it. Stir into food after cooking, not during."
      ],
      "i": 0
     },
@@ -321,8 +340,8 @@
      "t": "faq",
      "c": [
       [
-       "Why 4.64%?",
-       "Thymoquinone is the most studied constituent of Nigella sativa oil and the clearest marker of seed quality and pressing care. 4.64% is the concentration our Ethiopian seed consistently reaches when pressed cold and released fresh. We print it so you can compare."
+       "Why publish a certificate for every lot?",
+       "Because thymoquinone and freshness vary with the harvest and the press. A single number printed once on a label would be a marketing decision. A certificate per lot is a laboratory result, and it is the only number we will show you."
       ],
       [
        "Does it taste strong?",
@@ -338,22 +357,45 @@
     {
      "t": "key_points",
      "c": {
-      "safety": "For adults. Consult a qualified clinician before use if you are pregnant or nursing, taking medication, managing a medical condition, scheduled for a procedure, or considering use for a child. Discontinue and seek advice if any adverse reaction occurs."
+      "safety": "For adults. Read the full label. Talk to your clinician first if pregnant, nursing, taking medication, or managing a health condition. Discontinue and seek advice if any adverse reaction occurs."
      },
      "i": 2
     }
    ],
+   "why": [],
    "bundle": []
   },
   {
    "slug": "blackseed-oil-softgels",
+   "status": "concept",
    "name": "Blackseed Oil Softgels",
    "subtitle": "500 mg per softgel",
    "tagline": "The same oil, measured.",
    "category": "softgel",
    "type": "supplement",
-   "short": "Our 4.64% thymoquinone oil, 500 mg per softgel, for people who want the measure without the taste.",
-   "long": "The softgel exists for one reason: not everyone wants to taste blackseed oil every morning. Each softgel carries 500 mg of the same lot-tested, cold-pressed Ethiopian oil that goes into the dropper bottle, sealed in a halal shell that protects it from light and air until you take it.",
+   "intendedUse": "The same cold-pressed oil, measured at 500 mg per softgel, for travel or for anyone who would rather not taste it.",
+   "sensoryLine": "No taste, no aftertaste; swallow with water.",
+   "sensory": null,
+   "storage": null,
+   "shelfLife": null,
+   "serving": null,
+   "servingMl": null,
+   "directions": [
+    "Take two softgels daily with food, or as directed by your clinician or practitioner.",
+    "Store below 25 °C with the lid tight. Do not refrigerate; condensation softens the shell."
+   ],
+   "howTo": [
+    [
+     "Daily",
+     "Two softgels with a meal, at the same time each day."
+    ],
+    [
+     "Travel",
+     "Induction-sealed jar; decant a week into a vial for the road."
+    ]
+   ],
+   "short": "Our lot-tested oil, 500 mg per softgel, for people who want the measure without the taste.",
+   "long": "The softgel exists for one reason: not everyone wants to taste blackseed oil every morning. Each softgel carries 500 mg of the same lot-tested, cold-pressed oil that goes into the dropper bottle, sealed in a halal shell that protects it from light and air until you take it.",
    "ingredients": "Nigella sativa (black seed) oil. Softgel shell: bovine gelatin (halal), glycerin, purified water.",
    "featured": true,
    "isNew": false,
@@ -365,8 +407,8 @@
      "500 mg Nigella sativa seed oil per softgel"
     ],
     [
-     "Standardization",
-     "Thymoquinone 4.64% by HPLC (oil fill)"
+     "Testing",
+     "Thymoquinone measured per lot on the oil fill"
     ],
     [
      "Shell",
@@ -462,22 +504,46 @@
     {
      "t": "key_points",
      "c": {
-      "safety": "For adults. Consult a qualified clinician before use if you are pregnant or nursing, taking medication, managing a medical condition, scheduled for a procedure, or considering use for a child. Discontinue and seek advice if any adverse reaction occurs."
+      "safety": "For adults. Read the full label. Talk to your clinician first if pregnant, nursing, taking medication, or managing a health condition. Discontinue and seek advice if any adverse reaction occurs."
      },
      "i": 2
     }
    ],
+   "why": [],
    "bundle": []
   },
   {
    "slug": "golden-hour-saffron-infusion",
+   "status": "concept",
    "name": "Golden Hour Saffron Infusion",
-   "subtitle": "Kashmiri saffron in blackseed oil",
+   "subtitle": "saffron in blackseed oil",
    "tagline": "Whole saffron threads, steeped for forty days in the oil.",
    "category": "oil",
    "type": "food",
-   "short": "Hand-picked Pampore saffron infused for forty days in our 4.64% blackseed oil. A spoon in warm milk, over rice, or straight.",
-   "long": "Saffron and black seed have shared the same kitchen shelf for a thousand years. We steep whole Kashmiri threads, never powder, in cold-pressed blackseed oil for forty days in the dark, then decant. The result is a deep gold oil with the honeyed, hay-and-leather aroma of real saffron and the peppery base of the seed.",
+   "intendedUse": "Blackseed oil with whole saffron threads steeped for forty days, taken by the spoon or poured over food.",
+   "sensoryLine": "Honeyed and floral, with the pepper of the seed underneath.",
+   "sensory": null,
+   "storage": null,
+   "shelfLife": null,
+   "serving": null,
+   "servingMl": null,
+   "directions": [
+    "Shake. Take one teaspoon daily, straight or stirred into warm milk or tea.",
+    "Finish rice, dal, or roasted vegetables with a thread of it.",
+    "Store sealed in a cool cupboard; use within four months of opening."
+   ],
+   "howTo": [
+    [
+     "By the spoon",
+     "One teaspoon in the late afternoon, the golden hour it is named for."
+    ],
+    [
+     "Over food",
+     "Drizzle over rice, yogurt, or warm milk after cooking. Never heat it."
+    ]
+   ],
+   "short": "Hand-picked saffron infused for forty days in our lot-tested blackseed oil. A spoon in warm milk, over rice, or straight.",
+   "long": "Saffron and black seed have shared the same kitchen shelf for a thousand years. We steep whole threads, never powder, in cold-pressed blackseed oil for forty days in the dark, then decant. The result is a deep gold oil with the honeyed, hay-and-leather aroma of real saffron and the peppery base of the seed.",
    "ingredients": "Nigella sativa (black seed) oil, Crocus sativus (saffron) stigma.",
    "featured": true,
    "isNew": true,
@@ -486,7 +552,7 @@
    "specs": [
     [
      "Saffron",
-     "Crocus sativus, Pampore, Kashmir; whole stigmas, Grade I"
+     "Crocus sativus; whole stigmas, Grade I"
     ],
     [
      "Ratio",
@@ -498,7 +564,7 @@
     ],
     [
      "Base",
-     "Blackseed oil, thymoquinone 4.64% by HPLC"
+     "Blackseed oil, lot tested"
     ],
     [
      "Packaging",
@@ -582,16 +648,40 @@
      "i": 2
     }
    ],
+   "why": [],
    "bundle": []
   },
   {
    "slug": "culinary-finishing-oil",
+   "status": "concept",
    "name": "Culinary Finishing Oil",
    "subtitle": "Cold-pressed blackseed for the table",
    "tagline": "Peppery, warm, meant to be tasted.",
    "category": "culinary",
    "type": "food",
-   "short": "The same cold-pressed Ethiopian oil in a kitchen bottle with a stainless pour spout. Finish lentils, flatbreads, labneh, roasted vegetables, and eggs.",
+   "intendedUse": "A finishing oil for the table, drizzled over finished dishes and never heated.",
+   "sensoryLine": "Peppery and warm, with faint oregano and cumin.",
+   "sensory": null,
+   "storage": null,
+   "shelfLife": null,
+   "serving": null,
+   "servingMl": null,
+   "directions": [
+    "Drizzle over finished dishes just before serving.",
+    "Pairs with lentils, chickpeas, labneh, roasted squash, eggs, and flatbread.",
+    "Store sealed in a cool cupboard. Use within three months of opening."
+   ],
+   "howTo": [
+    [
+     "At the table",
+     "A thin ribbon over labneh, lentils, roasted vegetables, or warm bread."
+    ],
+    [
+     "In the kitchen",
+     "Whisk into dressings and dips; add after cooking, not during."
+    ]
+   ],
+   "short": "The same cold-pressed oil in a kitchen bottle with a stainless pour spout. Finish lentils, flatbreads, labneh, roasted vegetables, and eggs.",
    "long": "Blackseed has been a pantry oil for far longer than it has been a supplement. This is the pressing we are proudest of, in a bottle made to live beside your olive oil. It is not for frying. A thin thread over a finished plate is where it belongs.",
    "ingredients": "Nigella sativa (black seed) oil.",
    "featured": false,
@@ -605,7 +695,7 @@
     ],
     [
      "Origin",
-     "Ethiopia, single harvest per lot"
+     "Single harvest per lot, named on the lot certificate"
     ],
     [
      "Process",
@@ -679,7 +769,7 @@
      "c": [
       [
        "Can I cook with it?",
-       "Treat it like a delicate extra-virgin oil: finish with it, do not fry with it. Heat dulls the aroma."
+       "Think of it as a delicate extra-virgin oil: finish with it, do not fry with it. Heat dulls the aroma."
       ],
       [
        "Is it the same oil as the dropper bottle?",
@@ -696,16 +786,40 @@
      "i": 2
     }
    ],
+   "why": [],
    "bundle": []
   },
   {
    "slug": "rose-blackseed-cleansing-oil",
+   "status": "concept",
    "name": "Rose & Blackseed Cleansing Oil",
    "subtitle": "Oil cleanser and makeup melt",
    "tagline": "Dissolves the day without stripping it.",
    "category": "topical",
    "type": "cosmetic",
-   "short": "Grapeseed and blackseed oils infused with Isparta damask rose petals, with a touch of plant-derived emulsifier so it rinses clean with water.",
+   "intendedUse": "A rinse-off cleansing oil that dissolves makeup, sunscreen, and the day without stripping the skin.",
+   "sensoryLine": "Silky oil that turns milky with water; a trace of rose, then nothing.",
+   "sensory": null,
+   "storage": null,
+   "shelfLife": null,
+   "serving": null,
+   "servingMl": null,
+   "directions": [
+    "Press two pumps into dry palms and massage over a dry face for one minute.",
+    "Add a splash of warm water and keep massaging; the oil turns milky.",
+    "Rinse and follow with the face oil or serum."
+   ],
+   "howTo": [
+    [
+     "Evening",
+     "Two pumps on dry skin, massage one minute, add warm water until milky, rinse."
+    ],
+    [
+     "Morning",
+     "Optional: one pump as a quick rinse before the face oil."
+    ]
+   ],
+   "short": "Grapeseed and blackseed oils infused with damask rose petals, with a touch of plant-derived emulsifier so it rinses clean with water.",
    "long": "The first step of an oil-first routine. Light grapeseed carries rose-infused blackseed oil across the skin, lifting sunscreen, makeup, and the day’s film; a sugar-derived emulsifier turns it milky on contact with water so nothing is left behind but soft skin and a faint rose.",
    "ingredients": "Vitis vinifera (grape) seed oil, Nigella sativa (black seed) oil, Rosa damascena flower extract, Polyglyceryl-4 oleate, Rosa damascena flower oil, Tocopherol.",
    "featured": true,
@@ -719,11 +833,11 @@
     ],
     [
      "Rose",
-     "Isparta damask petals, 21-day infusion, plus otto"
+     "damask petals, 21-day infusion, plus otto"
     ],
     [
      "Blackseed oil",
-     "Thymoquinone-standardized 4.64% oil"
+     "Cold-pressed, lot-tested oil"
     ],
     [
      "Emulsifier",
@@ -816,16 +930,44 @@
      "i": 2
     }
    ],
+   "why": [
+    "Rose: damask petals infused for 21 days plus rose otto, chosen for how soft skin feels after rinsing.",
+    "Blackseed: a light seed oil, high in linoleic acid, that lifts sunscreen and makeup and rinses clean.",
+    "Grapeseed: a thin, fast-rinsing carrier that keeps the formula from feeling heavy."
+   ],
    "bundle": []
   },
   {
    "slug": "saffron-radiance-face-oil",
+   "status": "concept",
    "name": "Saffron Radiance Face Oil",
    "subtitle": "Saffron, rosehip and blackseed",
    "tagline": "The saffron oil. Six drops, morning and night.",
    "category": "topical",
    "type": "cosmetic",
-   "short": "Kashmiri saffron infused in cold-pressed rosehip, grapeseed and blackseed oils. A fast-absorbing daily face oil with the color of late afternoon.",
+   "intendedUse": "A leave-on face oil for a brighter, more even-looking complexion, morning and night.",
+   "sensoryLine": "Golden in the bottle, sheer on skin, dry within ninety seconds.",
+   "sensory": null,
+   "storage": null,
+   "shelfLife": null,
+   "serving": null,
+   "servingMl": null,
+   "directions": [
+    "Warm six drops between fingertips.",
+    "Press onto a clean, slightly damp face and neck, morning and night.",
+    "Follow with the Blackseed Balm on dry areas, or sunscreen by day."
+   ],
+   "howTo": [
+    [
+     "Morning",
+     "Six drops on damp skin, then sunscreen."
+    ],
+    [
+     "Night",
+     "Six drops after the serum; seal dry areas with the balm."
+    ]
+   ],
+   "short": "saffron infused in cold-pressed rosehip, grapeseed and blackseed oils. A fast-absorbing daily face oil with the color of late afternoon.",
    "long": "Saffron has been the centrepiece of South Asian skincare for centuries; we wanted it in an oil that actually absorbs. Rosehip and grapeseed give a dry, fast finish, blackseed brings its warm base, and whole Pampore threads steep in the blend for forty days. The color is the saffron’s own.",
    "ingredients": "Rosa canina (rosehip) seed oil, Vitis vinifera (grape) seed oil, Nigella sativa (black seed) oil, Crocus sativus (saffron) flower extract, Simmondsia chinensis (jojoba) seed oil, Tocopherol.",
    "featured": true,
@@ -839,11 +981,11 @@
     ],
     [
      "Saffron",
-     "Pampore Grade I threads, 40-day infusion"
+     "Grade I threads, 40-day infusion"
     ],
     [
      "Blackseed oil",
-     "Thymoquinone-standardized 4.64% oil"
+     "Cold-pressed, lot-tested oil"
     ],
     [
      "Finish",
@@ -859,7 +1001,7 @@
     ]
    ],
    "collection": "skin",
-   "step": "Treat",
+   "step": "Nourish",
    "botanicals": [
     "saffron",
     "blackseed",
@@ -929,7 +1071,7 @@
       ],
       [
        "Can I use it with retinoids or acids?",
-       "Yes. Apply it after water-based treatments have absorbed. If you are using prescription products, ask the clinician who prescribed them."
+       "Yes. Apply it after water-based products have absorbed. If you are using prescription products, ask the clinician who prescribed them."
       ]
      ],
      "i": 1
@@ -942,22 +1084,210 @@
      "i": 2
     }
    ],
+   "why": [
+    "Blackseed: cold-pressed seed oil rich in linoleic acid that supports the moisture barrier of the skin.",
+    "Grapevine: vine polyphenols that help skin look smoother and more even in tone.",
+    "Saffron: Grade I threads, 40-day infusion, for a brighter, more even-looking complexion."
+   ],
+   "bundle": []
+  },
+  {
+   "slug": "saffron-blackseed-eye-concentrate",
+   "status": "concept",
+   "name": "Saffron & Blackseed Eye Concentrate",
+   "subtitle": "Cooling eye concentrate with applicator tip",
+   "tagline": "Awake, under the eye.",
+   "category": "topical",
+   "type": "cosmetic",
+   "intendedUse": "A light, cooling concentrate for the thin skin around the eyes, brightening the look of the under-eye and helping it look rested and hydrated.",
+   "sensoryLine": "Cool gel-cream, matte-satin finish, no scent.",
+   "sensory": "Cool gel-cream that sinks in within a minute. Matte-satin finish. No scent.",
+   "storage": "Cool, dry place or refrigerator. Keep the cap on; wipe the tip dry after use.",
+   "shelfLife": "12 months unopened; 6 months after opening.",
+   "serving": null,
+   "servingMl": null,
+   "directions": [
+    "Start on clean, dry skin. Press the tube once; a rice-grain amount is enough for both eyes.",
+    "Glide the cooling tip from the inner corner outward along the orbital bone; do not pull the skin.",
+    "Roll upward over the brow bone and tap any remainder in with the ring finger.",
+    "Wait 30 seconds, then follow with face oil or concealer.",
+    "Morning: keep the tube in the refrigerator for a stronger cooling effect."
+   ],
+   "howTo": [
+    [
+     "Morning",
+     "Keep the tube in the refrigerator; one pass per eye before concealer."
+    ],
+    [
+     "Night",
+     "After the Grapevine Renewal Serum, before the Saffron Radiance Face Oil."
+    ],
+    [
+     "The tip",
+     "Wipe with a dry tissue after use; never rinse under water."
+    ]
+   ],
+   "short": "A light, cooling concentrate for the thin skin around the eyes, with a sealed metal applicator tip.",
+   "long": "Saffron and grapevine, the two botanicals already in the Radiance oil and the Renewal serum, carried in a weightless gel-cream with cold-pressed blackseed oil, niacinamide, and caffeine. The zinc-alloy tip stays a few degrees cooler than skin, so each pass feels cool and applies the formula without fingers touching it. Fragrance-free, because the eye area is where fragrance most often stings.",
+   "ingredients": "Aqua, Squalane, Niacinamide, Glycerin, Nigella Sativa Seed Oil, Caffeine, Crocus Sativus Flower Extract, Vitis Vinifera Shoot Extract, Rosa Damascena Flower Water, Sodium Hyaluronate, Polyglyceryl-6 Distearate, Xanthan Gum, Sodium Phytate, Pentylene Glycol",
+   "featured": false,
+   "isNew": true,
+   "bestseller": false,
+   "sort": 7,
+   "specs": [
+    [
+     "Format",
+     "Leave-on eye concentrate"
+    ],
+    [
+     "Applicator",
+     "Zinc-alloy cooling tip, sealed into the tube neck"
+    ],
+    [
+     "Saffron",
+     "Grade I threads, 40-day infusion"
+    ],
+    [
+     "Blackseed oil",
+     "Cold-pressed, lot-tested oil"
+    ],
+    [
+     "Also",
+     "Niacinamide 4%, caffeine 1%, squalane, sodium hyaluronate"
+    ],
+    [
+     "Fragrance",
+     "None added"
+    ],
+    [
+     "Packaging",
+     "Airless tube, brass cap, metal tip"
+    ]
+   ],
+   "collection": "skin",
+   "step": "Nourish",
+   "botanicals": [
+    "saffron",
+    "blackseed",
+    "grapevine",
+    "rose"
+   ],
+   "mosaic": [],
+   "variants": [
+    {
+     "sku": "DM-EYE-15",
+     "label": "15 mL",
+     "sizeMl": 15,
+     "price": 8800,
+     "compare": null,
+     "def": true,
+     "i": 0,
+     "image": "collection-flatlay",
+     "desc": "Airless tube | About three months, morning and night."
+    },
+    {
+     "sku": "DM-EYE-30",
+     "label": "30 mL",
+     "sizeMl": 30,
+     "price": 16000,
+     "compare": 17600,
+     "def": false,
+     "i": 1,
+     "image": "collection-flatlay",
+     "desc": "Airless tube | The six-month size."
+    }
+   ],
+   "gallery": [
+    {
+     "path": "collection-flatlay",
+     "alt": "Dr. Mushtaq’s collection on marble: oil, balm, sample vials, botanical card, brass dishes and mortar",
+     "aspect": 1.8338,
+     "i": 0
+    }
+   ],
+   "sections": [
+    {
+     "t": "how_to_use",
+     "c": [
+      "Start on clean, dry skin. Press the tube once; a rice-grain amount is enough for both eyes.",
+      "Glide the cooling tip from the inner corner outward along the orbital bone; do not pull the skin.",
+      "Roll upward over the brow bone and tap any remainder in with the ring finger.",
+      "Wait 30 seconds, then follow with face oil or concealer."
+     ],
+     "i": 0
+    },
+    {
+     "t": "faq",
+     "c": [
+      [
+       "Can I use it with the Grapevine Renewal Serum?",
+       "Yes. Serum first on the face, eye concentrate last before oil."
+      ],
+      [
+       "Does it replace eye makeup remover?",
+       "No. Use the Cleansing Oil to remove makeup first."
+      ],
+      [
+       "Why no fragrance?",
+       "The eye area is where fragrance most often stings; this is the only product in the line without a scent profile."
+      ]
+     ],
+     "i": 1
+    },
+    {
+     "t": "key_points",
+     "c": {
+      "safety": "For external use only. Keep out of the eye itself. Patch test behind the ear 24 hours before first use. Discontinue if irritation occurs. Keep out of reach of children."
+     },
+     "i": 2
+    }
+   ],
+   "why": [
+    "Caffeine and rose hydrosol: a cooling, refreshed feel on application; rose water replaces fragrance so the formula stays fragrance-free near the eyes.",
+    "Niacinamide 4%: vitamin B3, one of the best-studied cosmetic ingredients. In published trials it improved the look of uneven tone and fine lines and helped skin feel more resilient.",
+    "Saffron: Crocus sativus stigma, the botanical behind Golden Hour and the Radiance oil, used in traditional cosmetics for a brighter-looking complexion; here it is carried in a light gel for the same brighter look under the eyes.",
+    "Blackseed: cold-pressed Nigella sativa, the constant across every product. Fatty acids that leave the skin’s moisture barrier feeling comfortable, so thin under-eye skin feels hydrated for longer.",
+    "Grapevine: Vitis vinifera shoot, the same botanical as the Renewal Serum. Polyphenols from the vine help even the appearance of skin tone and support a smoother-looking surface."
+   ],
    "bundle": []
   },
   {
    "slug": "grapevine-renewal-serum",
+   "status": "concept",
    "name": "Grapevine Renewal Serum",
    "subtitle": "Vine-shoot extract, grapeseed and blackseed",
    "tagline": "From the part of the vine the winemaker prunes away.",
    "category": "topical",
    "type": "cosmetic",
-   "short": "Rhône grapevine-shoot extract, the plant’s richest source of resveratrol and viniferins, in a light grapeseed and blackseed oil serum for evening use.",
-   "long": "Vine shoots are cut and burned every winter. We buy them from a Rhône estate, extract them, and carry the extract in cold-pressed grapeseed and blackseed oils. The result is a thin, fast evening serum with a green, slightly tannic scent and nothing in it a winemaker would not recognise.",
+   "intendedUse": "An evening serum for skin that looks smoother and more even in tone.",
+   "sensoryLine": "Weightless, dry-touch, no scent.",
+   "sensory": null,
+   "storage": null,
+   "shelfLife": null,
+   "serving": null,
+   "servingMl": null,
+   "directions": [
+    "In the evening, after cleansing, press four to six drops onto face and neck.",
+    "Layer the Saffron Radiance Face Oil on top if skin is dry.",
+    "Use nightly."
+   ],
+   "howTo": [
+    [
+     "Night",
+     "Four to six drops on face and neck after cleansing."
+    ],
+    [
+     "Layering",
+     "Face oil on top if skin is dry; the eye concentrate last."
+    ]
+   ],
+   "short": "Grapevine-shoot extract, the plant’s richest source of resveratrol and viniferins, in a light grapeseed and blackseed oil serum for evening use.",
+   "long": "Vine shoots are cut and burned every winter. We buy them from a single estate, extract them, and carry the extract in cold-pressed grapeseed and blackseed oils. The result is a thin, fast evening serum with a green, slightly tannic scent and nothing in it a winemaker would not recognise.",
    "ingredients": "Vitis vinifera (grape) seed oil, Nigella sativa (black seed) oil, Vitis vinifera (grape) vine extract, Squalane (olive), Vitis vinifera (grape) leaf extract, Tocopherol.",
    "featured": true,
    "isNew": true,
    "bestseller": false,
-   "sort": 7,
+   "sort": 8,
    "specs": [
     [
      "Format",
@@ -965,11 +1295,11 @@
     ],
     [
      "Grapevine",
-     "Rhône vine-shoot and leaf extract, standardized to total stilbenes"
+     "Vine-shoot and leaf extract, standardized to total stilbenes"
     ],
     [
      "Blackseed oil",
-     "Thymoquinone-standardized 4.64% oil"
+     "Cold-pressed, lot-tested oil"
     ],
     [
      "Finish",
@@ -985,7 +1315,7 @@
     ]
    ],
    "collection": "skin",
-   "step": "Treat",
+   "step": "Nourish",
    "botanicals": [
     "grapevine",
     "blackseed"
@@ -1061,22 +1391,50 @@
      "i": 2
     }
    ],
+   "why": [
+    "Blackseed: a light seed oil that leaves a dry, weightless finish.",
+    "Fragrance-free: nothing added that the skin does not need at night.",
+    "Grapevine shoot: standardized stilbenes, the family that includes resveratrol and viniferins, for skin that looks smoother and more even in tone."
+   ],
    "bundle": []
   },
   {
    "slug": "blackseed-balm",
+   "status": "concept",
    "name": "Blackseed Balm",
    "subtitle": "Concentrated anhydrous salve",
    "tagline": "A dense, slow-melting salve for dry places.",
    "category": "topical",
    "type": "cosmetic",
+   "intendedUse": "A dense anhydrous balm to seal moisture into dry places: hands, elbows, heels, lips, and over the face oil at night.",
+   "sensoryLine": "Slow-melting, amber-tinted, faint frankincense.",
+   "sensory": null,
+   "storage": null,
+   "shelfLife": null,
+   "serving": null,
+   "servingMl": null,
+   "directions": [
+    "Warm a small amount between fingertips until it melts.",
+    "Press into clean, dry skin wherever it feels tight, or over the face oil as a final seal at night.",
+    "Use after washing and before bed for the longest contact time."
+   ],
+   "howTo": [
+    [
+     "Spot use",
+     "Warm a pea-sized amount and press into dry patches."
+    ],
+    [
+     "Night seal",
+     "A thin layer over the face oil on the driest areas."
+    ]
+   ],
    "short": "Blackseed oil folded into beeswax, shea, and jojoba with a trace of frankincense. For hands, elbows, heels, cuticles, lips, and the last step of a face routine.",
-   "long": "The balm is our oil in its most patient form. Beeswax and shea slow it down so it stays where you put it; jojoba carries it in; a trace of Dhofar frankincense gives it a quiet, resinous lift. There is no water, so there is no need for preservatives.",
+   "long": "The balm is our oil in its most patient form. Beeswax and shea slow it down so it stays where you put it; jojoba carries it in; a trace of frankincense gives it a quiet, resinous lift. There is no water, so there is no need for preservatives.",
    "ingredients": "Butyrospermum parkii (shea) butter, Simmondsia chinensis (jojoba) seed oil, Cera alba (beeswax), Nigella sativa (black seed) oil, Boswellia sacra resin oil, Tocopherol.",
    "featured": true,
    "isNew": false,
    "bestseller": false,
-   "sort": 8,
+   "sort": 9,
    "specs": [
     [
      "Format",
@@ -1084,7 +1442,7 @@
     ],
     [
      "Blackseed oil",
-     "Thymoquinone-standardized 4.64% oil"
+     "Cold-pressed, lot-tested oil"
     ],
     [
      "Fragrance",
@@ -1176,34 +1534,62 @@
      "i": 2
     }
    ],
+   "why": [
+    "Blackseed: cold-pressed oil in an anhydrous base, so there is no water and no need for a preservative.",
+    "Frankincense resin oil: the only aroma, chosen for its dry, resinous warmth.",
+    "Anhydrous base: a slow-melting seal that helps hold moisture in dry places."
+   ],
    "bundle": []
   },
   {
    "slug": "amla-blackseed-hair-oil",
+   "status": "concept",
    "name": "Amla & Blackseed Hair Oil",
    "subtitle": "Pre-wash scalp and length oil",
    "tagline": "The Sunday oiling, made properly.",
    "category": "hair",
    "type": "cosmetic",
+   "intendedUse": "A pre-wash hair oil for scalp and lengths, left on for an hour or overnight before shampooing.",
+   "sensoryLine": "Rich but not sticky; warm, nutty amla.",
+   "sensory": null,
+   "storage": null,
+   "shelfLife": null,
+   "serving": null,
+   "servingMl": null,
+   "directions": [
+    "Warm a tablespoon of oil in your palms.",
+    "Part the hair and massage into the scalp for five minutes, then work through the lengths.",
+    "Leave for an hour, or overnight under a towel, then shampoo twice."
+   ],
+   "howTo": [
+    [
+     "Sunday oiling",
+     "Part the hair, apply to the scalp with the nozzle, massage, then work through the lengths. Leave one hour or overnight."
+    ],
+    [
+     "Quick version",
+     "Lengths only, twenty minutes before washing."
+    ]
+   ],
    "short": "Sun-dried amla infused the classical way in cold-pressed sesame and blackseed oils. Massage into the scalp, leave for an hour or overnight, wash out.",
-   "long": "Across South Asia the week begins or ends with hair oiling. This is that oil, made without shortcuts: whole dried amla fruit steeped for three weeks in cold-pressed sesame, then blended with our 4.64% blackseed oil. It is a pre-wash treatment, not a styling product, and it smells of amla and warm seed, not perfume.",
+   "long": "Across South Asia the week begins or ends with hair oiling. This is that oil, made without shortcuts: whole dried amla fruit steeped for three weeks in cold-pressed sesame, then blended with our lot-tested blackseed oil. It is a pre-wash oil, not a styling product, and it smells of amla and warm seed, not perfume.",
    "ingredients": "Sesamum indicum (sesame) seed oil, Nigella sativa (black seed) oil, Phyllanthus emblica (amla) fruit extract, Tocopherol.",
    "featured": true,
    "isNew": true,
    "bestseller": false,
-   "sort": 9,
+   "sort": 10,
    "specs": [
     [
      "Format",
-     "Pre-wash oil treatment"
+     "Pre-wash hair oil"
     ],
     [
      "Amla",
-     "Sun-dried Uttar Pradesh fruit, 21-day infusion"
+     "Sun-dried fruit, 21-day infusion"
     ],
     [
      "Blackseed oil",
-     "Thymoquinone-standardized 4.64% oil"
+     "Cold-pressed, lot-tested oil"
     ],
     [
      "Fragrance",
@@ -1303,22 +1689,50 @@
      "i": 2
     }
    ],
+   "why": [
+    "Amla: sun-dried fruit infused for 21 days, long used in oiling traditions for hair that looks glossy and feels soft.",
+    "Blackseed: softens the scalp before washing without leaving residue.",
+    "Sesame: unroasted, cold-pressed carrier that spreads easily through the lengths."
+   ],
    "bundle": []
   },
   {
    "slug": "scalp-beard-serum",
+   "status": "concept",
    "name": "Scalp & Beard Serum",
    "subtitle": "Blackseed, rosemary and jojoba",
    "tagline": "Light enough for the scalp, rich enough for the beard.",
    "category": "hair",
    "type": "cosmetic",
+   "intendedUse": "A leave-on serum for scalp and beard that softens without a greasy finish.",
+   "sensoryLine": "Dry finish; rosemary and the note of the seed itself.",
+   "sensory": null,
+   "storage": null,
+   "shelfLife": null,
+   "serving": null,
+   "servingMl": null,
+   "directions": [
+    "Beard: dispense 3 to 5 drops into palms, rub to warm, work from skin outward, then comb.",
+    "Scalp: part hair and apply a few drops directly to the scalp. Massage for a minute. Leave in.",
+    "Use daily or as needed."
+   ],
+   "howTo": [
+    [
+     "Scalp",
+     "Four to six drops along the parting, massaged in, morning or night."
+    ],
+    [
+     "Beard",
+     "Three drops warmed in the palms, worked through to the skin beneath."
+    ]
+   ],
    "short": "Our blackseed oil cut with jojoba and grapeseed and finished with rosemary leaf oil. A fast-absorbing leave-in for scalp, beard, and the skin beneath.",
-   "long": "A grooming oil has two jobs: condition the hair and leave the skin under it calm. Jojoba mirrors the skin’s own sebum, grapeseed keeps the texture light, blackseed brings its warm aroma, and rosemary gives the finish its clean herbal lift. It absorbs without a film.",
+   "long": "A grooming oil has two jobs: soften the hair and leave the skin under it comfortable. Jojoba mirrors the skin’s own sebum, grapeseed keeps the texture light, blackseed brings its warm aroma, and rosemary gives the finish its clean herbal lift. It absorbs without a film.",
    "ingredients": "Simmondsia chinensis (jojoba) seed oil, Vitis vinifera (grape) seed oil, Nigella sativa (black seed) oil, Rosmarinus officinalis (rosemary) leaf oil, Tocopherol.",
    "featured": true,
    "isNew": false,
    "bestseller": false,
-   "sort": 10,
+   "sort": 11,
    "specs": [
     [
      "Format",
@@ -1326,7 +1740,7 @@
     ],
     [
      "Blackseed oil",
-     "Thymoquinone-standardized 4.64% oil"
+     "Cold-pressed, lot-tested oil"
     ],
     [
      "Aroma",
@@ -1419,22 +1833,50 @@
      "i": 2
     }
    ],
+   "why": [
+    "Blackseed: light conditioning for the skin under the beard.",
+    "Grapevine: a dry-touch finish with no greasy feel.",
+    "Rosemary leaf oil: a bright, cooling note on the scalp."
+   ],
    "bundle": []
   },
   {
    "slug": "blackseed-bath-soak",
+   "status": "concept",
    "name": "Blackseed & Mineral Bath Soak",
    "subtitle": "Dead Sea and Epsom salts with blackseed oil",
    "tagline": "Twenty minutes, once a week.",
    "category": "topical",
    "type": "cosmetic",
+   "intendedUse": "A weekly mineral bath with blackseed oil and frankincense for a twenty-minute soak.",
+   "sensoryLine": "Coarse salts, soft water, resinous frankincense.",
+   "sensory": null,
+   "storage": null,
+   "shelfLife": null,
+   "serving": null,
+   "servingMl": null,
+   "directions": [
+    "Add two scoops to a warm bath as it fills.",
+    "Soak for twenty minutes.",
+    "Pat dry and follow with the Saffron & Sesame Body Oil on damp skin."
+   ],
+   "howTo": [
+    [
+     "Weekly",
+     "Two scoops under running warm water; soak twenty minutes."
+    ],
+    [
+     "Foot soak",
+     "Half a scoop in a basin for the quick version."
+    ]
+   ],
    "short": "Coarse Dead Sea and Epsom salts dressed in blackseed oil, with whole seeds, cornflower petals, and a trace of frankincense.",
-   "long": "The hammam tradition pairs mineral water with oil; this is that pairing in a jar. Salts are tumbled in our 4.64% blackseed oil so the bath leaves skin soft rather than tight, and a trace of Dhofar frankincense scents the steam.",
+   "long": "The hammam tradition pairs mineral water with oil; this is that pairing in a jar. Salts are tumbled in our lot-tested blackseed oil so the bath leaves skin soft rather than tight, and a trace of frankincense scents the steam.",
    "ingredients": "Maris sal (Dead Sea salt), Magnesium sulfate, Nigella sativa (black seed) oil, Nigella sativa seed, Centaurea cyanus (cornflower) flower, Boswellia sacra resin oil.",
    "featured": false,
    "isNew": true,
    "bestseller": false,
-   "sort": 11,
+   "sort": 12,
    "specs": [
     [
      "Format",
@@ -1446,7 +1888,7 @@
     ],
     [
      "Blackseed oil",
-     "Thymoquinone-standardized 4.64% oil"
+     "Cold-pressed, lot-tested oil"
     ],
     [
      "Fragrance",
@@ -1534,22 +1976,50 @@
      "i": 2
     }
    ],
+   "why": [
+    "Blackseed oil: leaves skin feeling supple after the soak.",
+    "Frankincense: the only scent, resinous and quiet.",
+    "Dead Sea and Epsom salts: coarse, magnesium-rich minerals; bathing in Dead Sea salt solution has been shown to leave skin smoother and better hydrated."
+   ],
    "bundle": []
   },
   {
    "slug": "saffron-sesame-body-oil",
+   "status": "concept",
    "name": "Saffron & Sesame Body Oil",
    "subtitle": "Warm-oil massage in the abhyanga tradition",
    "tagline": "The daily anointing.",
    "category": "topical",
    "type": "cosmetic",
-   "short": "Cold-pressed sesame and blackseed oils infused with Kashmiri saffron and a trace of frankincense. For warm self-massage before the shower.",
-   "long": "Abhyanga, the Ayurvedic practice of warm-oil self-massage, traditionally uses sesame. We keep the sesame and add our 4.64% blackseed oil, a forty-day saffron infusion, and a trace of Dhofar frankincense. Warm the bottle in a bowl of hot water, take ten minutes, then shower.",
+   "intendedUse": "A daily body oil for after the shower, applied to damp skin.",
+   "sensoryLine": "Light sesame slip, saffron warmth, frankincense.",
+   "sensory": null,
+   "storage": null,
+   "shelfLife": null,
+   "serving": null,
+   "servingMl": null,
+   "directions": [
+    "Stand the bottle in a bowl of hot water for five minutes.",
+    "Massage warm oil over the whole body with long strokes toward the heart; circles over joints.",
+    "Rest ten minutes, then shower without soap on the oiled areas."
+   ],
+   "howTo": [
+    [
+     "After the shower",
+     "Two pumps on damp skin in upward strokes before towel-drying fully."
+    ],
+    [
+     "Massage",
+     "Warm in the palms for a slower evening application."
+    ]
+   ],
+   "short": "Cold-pressed sesame and blackseed oils infused with saffron and a trace of frankincense. For warm self-massage before the shower.",
+   "long": "Abhyanga, the Ayurvedic practice of warm-oil self-massage, traditionally uses sesame. We keep the sesame and add our lot-tested blackseed oil, a forty-day saffron infusion, and a trace of frankincense. Warm the bottle in a bowl of hot water, take ten minutes, then shower.",
    "ingredients": "Sesamum indicum (sesame) seed oil, Nigella sativa (black seed) oil, Crocus sativus (saffron) flower extract, Boswellia sacra resin oil, Tocopherol.",
    "featured": true,
    "isNew": true,
    "bestseller": false,
-   "sort": 12,
+   "sort": 13,
    "specs": [
     [
      "Format",
@@ -1561,11 +2031,11 @@
     ],
     [
      "Blackseed oil",
-     "Thymoquinone-standardized 4.64% oil"
+     "Cold-pressed, lot-tested oil"
     ],
     [
      "Saffron",
-     "Pampore Grade I threads, 40-day infusion"
+     "Grade I threads, 40-day infusion"
     ],
     [
      "Fragrance",
@@ -1666,22 +2136,50 @@
      "i": 2
     }
    ],
+   "why": [
+    "Saffron: 40-day infusion for a warm, golden look on the skin.",
+    "Sesame: unroasted and cold-pressed; a light slip that absorbs on damp skin.",
+    "Blackseed: supports the moisture barrier of the skin day to day."
+   ],
    "bundle": []
   },
   {
    "slug": "oud-noir-attar",
+   "status": "concept",
    "name": "Oud Noir Attar",
-   "subtitle": "Assam oud, blackseed, amber",
+   "subtitle": "oud, blackseed, amber",
    "tagline": "Dark wood, warm seed, no alcohol.",
    "category": "fragrance",
    "type": "cosmetic",
-   "short": "Hydro-distilled Assam agarwood oil in a base of jojoba and blackseed oil, with labdanum and a trace of frankincense. Worn on the pulse points, it stays close for a working day.",
-   "long": "An attar is a perfume without alcohol: pure aromatic oils carried in a fixed oil and worn on the skin. Ours begins with plantation agarwood from Assam, deep and dry, warmed by our blackseed oil, rounded with labdanum amber and lifted by Dhofar frankincense. It opens dark and settles into skin-warm wood.",
+   "intendedUse": "An alcohol-free attar for pulse points: dark wood and warm seed.",
+   "sensoryLine": "Oud, labdanum, frankincense; 8 to 10 hours close to the skin.",
+   "sensory": null,
+   "storage": null,
+   "shelfLife": null,
+   "serving": null,
+   "servingMl": null,
+   "directions": [
+    "Touch the dabber to wrists, behind the ears, and the hollow of the throat.",
+    "Do not rub; let it warm.",
+    "Layer under Kesar Rose for a softer edge."
+   ],
+   "howTo": [
+    [
+     "Wear",
+     "One dab on wrists and behind the ears; the glass dabber measures it."
+    ],
+    [
+     "Layer",
+     "Over the body oil on the same points for longer wear."
+    ]
+   ],
+   "short": "Hydro-distilled agarwood oil in a base of jojoba and blackseed oil, with labdanum and a trace of frankincense. Worn on the pulse points, it stays close for a working day.",
+   "long": "An attar is a perfume without alcohol: pure aromatic oils carried in a fixed oil and worn on the skin. Ours begins with plantation agarwood, deep and dry, warmed by our blackseed oil, rounded with labdanum amber and lifted by frankincense. It opens dark and settles into skin-warm wood.",
    "ingredients": "Simmondsia chinensis (jojoba) seed oil, Nigella sativa (black seed) oil, Aquilaria malaccensis wood oil, Cistus ladaniferus resin extract, Boswellia sacra resin oil, Tocopherol.",
    "featured": true,
    "isNew": true,
    "bestseller": false,
-   "sort": 13,
+   "sort": 14,
    "specs": [
     [
      "Family",
@@ -1769,7 +2267,7 @@
      "c": [
       [
        "Is the oud real?",
-       "Yes. Plantation-grown Aquilaria malaccensis, hydro-distilled in Assam. The supplier’s GC-MS profile is kept with each lot."
+       "Yes. Plantation-grown Aquilaria malaccensis, hydro-distilled. The supplier’s GC-MS profile is kept with each lot."
       ],
       [
        "Why no alcohol?",
@@ -1786,22 +2284,45 @@
      "i": 2
     }
    ],
+   "why": [],
    "bundle": []
   },
   {
    "slug": "kesar-rose-attar",
+   "status": "concept",
    "name": "Kesar Rose Attar",
    "subtitle": "Saffron, damask rose, sandalwood",
    "tagline": "Rose with the saffron left in.",
    "category": "fragrance",
    "type": "cosmetic",
-   "short": "Isparta rose otto and a forty-day saffron infusion over Mysore sandalwood, in jojoba and blackseed oil. Honeyed, spiced, and quiet.",
+   "intendedUse": "An alcohol-free attar of damask rose with saffron and sandalwood.",
+   "sensoryLine": "Rose, saffron, sandalwood; 6 to 8 hours.",
+   "sensory": null,
+   "storage": null,
+   "shelfLife": null,
+   "serving": null,
+   "servingMl": null,
+   "directions": [
+    "Touch the dabber to wrists and throat.",
+    "Wear alone, or over Oud Noir for depth."
+   ],
+   "howTo": [
+    [
+     "Wear",
+     "One dab on wrists and behind the ears."
+    ],
+    [
+     "Layer",
+     "Over the body oil on the same points for longer wear."
+    ]
+   ],
+   "short": "rose otto and a forty-day saffron infusion over sandalwood, in jojoba and blackseed oil. Honeyed, spiced, and quiet.",
    "long": "Kesar is the Hindi word for saffron. This attar pairs it with the rose it has always been paired with, in the way an Indian attar-maker would: over sandalwood, in oil, without alcohol. It smells of rose, then of saffron’s leather-and-honey, then for hours of warm sandalwood.",
    "ingredients": "Simmondsia chinensis (jojoba) seed oil, Nigella sativa (black seed) oil, Santalum album wood oil, Rosa damascena flower oil, Crocus sativus (saffron) flower extract, Tocopherol.",
    "featured": true,
    "isNew": true,
    "bestseller": false,
-   "sort": 14,
+   "sort": 15,
    "specs": [
     [
      "Family",
@@ -1906,22 +2427,45 @@
      "i": 2
     }
    ],
+   "why": [],
    "bundle": []
   },
   {
    "slug": "vigne-verte-attar",
+   "status": "concept",
    "name": "Vigne Verte Attar",
    "subtitle": "Grapevine leaf, vetiver, bergamot",
    "tagline": "A vineyard in June.",
    "category": "fragrance",
    "type": "cosmetic",
+   "intendedUse": "An alcohol-free green attar of grapevine leaf and vetiver.",
+   "sensoryLine": "Green and woody with bright bergamot; 5 to 7 hours.",
+   "sensory": null,
+   "storage": null,
+   "shelfLife": null,
+   "serving": null,
+   "servingMl": null,
+   "directions": [
+    "Touch the dabber to wrists and the back of the neck.",
+    "Best in daylight and warm weather."
+   ],
+   "howTo": [
+    [
+     "Wear",
+     "One dab on wrists and behind the ears."
+    ],
+    [
+     "Layer",
+     "Over the body oil on the same points for longer wear."
+    ]
+   ],
    "short": "Green grapevine-leaf absolute and Haitian vetiver over bergamot, in jojoba and blackseed oil. Cool, green, and dry.",
    "long": "The third attar is the green one. Grapevine-leaf absolute smells of a vineyard row in early summer: sap, crushed leaf, a little tannin. Vetiver roots it; bergamot opens it; blackseed keeps it from turning sweet.",
    "ingredients": "Simmondsia chinensis (jojoba) seed oil, Nigella sativa (black seed) oil, Chrysopogon zizanioides (vetiver) root oil, Vitis vinifera (grape) leaf extract, Citrus bergamia (bergamot) peel oil, Tocopherol.",
    "featured": false,
    "isNew": true,
    "bestseller": false,
-   "sort": 15,
+   "sort": 16,
    "specs": [
     [
      "Family",
@@ -2021,22 +2565,45 @@
      "i": 2
     }
    ],
+   "why": [],
    "bundle": []
   },
   {
    "slug": "fragrance-discovery-set",
+   "status": "concept",
    "name": "Fragrance Discovery Set",
    "subtitle": "All three attars, 3 mL each",
    "tagline": "Wear each for a week before you choose.",
    "category": "bundle",
    "type": "bundle",
+   "intendedUse": "Three 3 mL attars to wear for a week each before choosing; the set price is credited toward any 30 mL.",
+   "sensoryLine": "Three vials, one rigid black box.",
+   "sensory": null,
+   "storage": null,
+   "shelfLife": null,
+   "serving": null,
+   "servingMl": null,
+   "directions": [
+    "Wear one attar per week on the pulse points.",
+    "Use the code inside the lid toward a full bottle."
+   ],
+   "howTo": [
+    [
+     "Week by week",
+     "Wear one attar for a week, then the next."
+    ],
+    [
+     "Choose",
+     "Use the enclosed credit toward the 30 mL you keep reaching for."
+    ]
+   ],
    "short": "Oud Noir, Kesar Rose, and Vigne Verte in 3 mL dabber vials, seated in a black and gold box. The price is credited back when you buy a full bottle.",
    "long": "Attars change on the skin over hours, so a paper strip tells you nothing. Wear each of the three for a week. When you choose, the code inside the lid takes the full price of this set off any 30 mL bottle.",
    "ingredients": "See Oud Noir Attar, Kesar Rose Attar, and Vigne Verte Attar.",
    "featured": true,
    "isNew": true,
    "bestseller": false,
-   "sort": 16,
+   "sort": 17,
    "specs": [
     [
      "Contents",
@@ -2128,22 +2695,45 @@
      "i": 2
     }
    ],
+   "why": [],
    "bundle": []
   },
   {
    "slug": "the-travel-ritual",
+   "status": "concept",
    "name": "The Travel Ritual",
    "subtitle": "Five 10 mL vials of Blackseed Oil",
    "tagline": "The oil, portioned for the road.",
    "category": "bundle",
    "type": "bundle",
-   "short": "Our 4.64% Blackseed Oil in five 10 mL vials, seated in a walnut stand inside a rigid magnetic box. For travel, gifting, or a first month.",
+   "intendedUse": "Blackseed Oil portioned into five 10 mL vials for the road.",
+   "sensoryLine": null,
+   "sensory": null,
+   "storage": null,
+   "shelfLife": null,
+   "serving": null,
+   "servingMl": null,
+   "directions": [
+    "One vial is about ten days at 1 mL daily.",
+    "Keep sealed vials in the box, away from light."
+   ],
+   "howTo": [
+    [
+     "Pack",
+     "One vial is about ten days of the daily dropper."
+    ],
+    [
+     "At home",
+     "The walnut stand keeps the vials upright on the shelf."
+    ]
+   ],
+   "short": "Our Blackseed Oil in five 10 mL vials, seated in a walnut stand inside a rigid magnetic box. For travel, gifting, or a first month.",
    "long": "Five vials is roughly a month at one dropper a day, portioned so a bottle never has to travel. The walnut stand lives on a bathroom shelf; the box is made to be kept.",
    "ingredients": "Nigella sativa (black seed) oil.",
    "featured": true,
    "isNew": false,
    "bestseller": false,
-   "sort": 17,
+   "sort": 18,
    "specs": [
     [
      "Contents",
@@ -2151,7 +2741,7 @@
     ],
     [
      "Oil",
-     "Blackseed Oil, thymoquinone 4.64% by HPLC"
+     "Blackseed Oil, thymoquinone measured per lot"
     ],
     [
      "Stand",
@@ -2217,27 +2807,49 @@
     {
      "t": "key_points",
      "c": {
-      "safety": "For adults. Consult a qualified clinician before use if you are pregnant or nursing, taking medication, managing a medical condition, scheduled for a procedure, or considering use for a child. Discontinue and seek advice if any adverse reaction occurs."
+      "safety": "For adults. Read the full label. Talk to your clinician first if pregnant, nursing, taking medication, or managing a health condition. Discontinue and seek advice if any adverse reaction occurs."
      },
      "i": 2
     }
    ],
+   "why": [],
    "bundle": []
   },
   {
    "slug": "the-morning-protocol",
+   "status": "concept",
    "name": "The Morning Protocol",
    "subtitle": "Blackseed Oil 125 mL + Softgels 90",
    "tagline": "The dropper at home, the softgel away.",
    "category": "bundle",
    "type": "bundle",
+   "intendedUse": "The dropper bottle for home and the softgels for away, bought together.",
+   "sensoryLine": null,
+   "sensory": null,
+   "storage": null,
+   "shelfLife": null,
+   "serving": null,
+   "servingMl": null,
+   "directions": [
+    "One dropper or two softgels daily, not both."
+   ],
+   "howTo": [
+    [
+     "Home",
+     "One dropper with breakfast."
+    ],
+    [
+     "Away",
+     "Two softgels in the travel case."
+    ]
+   ],
    "short": "The two ways of taking the oil, together: a 125 mL dropper bottle for the kitchen and ninety softgels for the bag.",
    "long": "Most people who stay with blackseed oil end up with both formats: the dropper when they are home, the softgel when they are not. This set pairs them and saves ten percent.",
    "ingredients": "See Blackseed Oil and Blackseed Oil Softgels.",
    "featured": true,
    "isNew": false,
    "bestseller": false,
-   "sort": 18,
+   "sort": 19,
    "specs": [
     [
      "Contents",
@@ -2287,11 +2899,12 @@
     {
      "t": "key_points",
      "c": {
-      "safety": "For adults. Consult a qualified clinician before use if you are pregnant or nursing, taking medication, managing a medical condition, scheduled for a procedure, or considering use for a child. Discontinue and seek advice if any adverse reaction occurs."
+      "safety": "For adults. Read the full label. Talk to your clinician first if pregnant, nursing, taking medication, or managing a health condition. Discontinue and seek advice if any adverse reaction occurs."
      },
      "i": 2
     }
    ],
+   "why": [],
    "bundle": [
     {
      "sku": "DM-BSO-125",
@@ -2305,22 +2918,44 @@
   },
   {
    "slug": "the-skin-ritual",
+   "status": "concept",
    "name": "The Skin Ritual",
-   "subtitle": "Cleanse, treat, seal",
+   "subtitle": "Cleanse, nourish, seal",
    "tagline": "The whole three-step routine, ten percent off.",
    "category": "bundle",
    "type": "bundle",
-   "short": "Rose & Blackseed Cleansing Oil 125 mL, Saffron Radiance Face Oil 50 mL, and Blackseed Balm 60 mL.",
-   "long": "An oil-first routine in three steps: cleanse with rose, treat with saffron, seal with the balm. Everything you need for about four months.",
+   "intendedUse": "The full three-step skin routine: cleanse, nourish, seal.",
+   "sensoryLine": null,
+   "sensory": null,
+   "storage": null,
+   "shelfLife": null,
+   "serving": null,
+   "servingMl": null,
+   "directions": [
+    "Morning: cleanse, six drops of face oil, sunscreen.",
+    "Evening: cleanse, face oil, balm on dry areas."
+   ],
+   "howTo": [
+    [
+     "Evening",
+     "Cleansing Oil, Face Oil, Balm on dry areas."
+    ],
+    [
+     "Morning",
+     "Face Oil, then sunscreen."
+    ]
+   ],
+   "short": "Rose & Blackseed Cleansing Oil 125 mL, Saffron Radiance Face Oil 50 mL, Saffron & Blackseed Eye Concentrate 15 mL, and Blackseed Balm 60 mL.",
+   "long": "An oil-first routine in three steps: cleanse with rose, nourish with saffron on the face and the cooling concentrate under the eyes, seal with the balm. Everything you need for about four months.",
    "ingredients": "See the three products.",
    "featured": true,
    "isNew": true,
    "bestseller": false,
-   "sort": 19,
+   "sort": 20,
    "specs": [
     [
      "Contents",
-     "Cleansing Oil 125 mL, Face Oil 50 mL, Balm 60 mL"
+     "Cleansing Oil 125 mL, Face Oil 50 mL, Eye Concentrate 15 mL, Balm 60 mL"
     ],
     [
      "Saving",
@@ -2345,12 +2980,12 @@
      "sku": "DM-SET-SKIN",
      "label": "The Set",
      "sizeMl": null,
-     "price": 24300,
-     "compare": 27000,
+     "price": 32200,
+     "compare": 35800,
      "def": true,
      "i": 0,
      "image": null,
-     "desc": "3 pieces | "
+     "desc": "4 pieces | "
     }
    ],
    "gallery": [],
@@ -2358,8 +2993,8 @@
     {
      "t": "how_to_use",
      "c": [
-      "Morning: cleanse, six drops of face oil, sunscreen.",
-      "Evening: cleanse, face oil, balm on dry areas."
+      "Morning: cleanse, one pass of the eye concentrate, six drops of face oil, sunscreen.",
+      "Evening: cleanse, eye concentrate, face oil, balm on dry areas."
      ],
      "i": 0
     },
@@ -2376,6 +3011,7 @@
      "i": 2
     }
    ],
+   "why": [],
    "bundle": [
     {
      "sku": "DM-RCO-125",
@@ -2386,6 +3022,10 @@
      "qty": 1
     },
     {
+     "sku": "DM-EYE-15",
+     "qty": 1
+    },
+    {
      "sku": "DM-BALM-60",
      "qty": 1
     }
@@ -2393,18 +3033,39 @@
   },
   {
    "slug": "the-hair-ritual",
+   "status": "concept",
    "name": "The Hair Ritual",
    "subtitle": "Pre-wash oil + leave-in serum",
    "tagline": "Sunday oiling and the everyday serum.",
    "category": "bundle",
    "type": "bundle",
+   "intendedUse": "The Sunday pre-wash oiling and the everyday leave-on serum.",
+   "sensoryLine": null,
+   "sensory": null,
+   "storage": null,
+   "shelfLife": null,
+   "serving": null,
+   "servingMl": null,
+   "directions": [
+    "Oil once a week before washing; serum daily after."
+   ],
+   "howTo": [
+    [
+     "Sunday",
+     "Hair Oil for one hour or overnight, then wash."
+    ],
+    [
+     "Daily",
+     "Serum along the parting or through the beard."
+    ]
+   ],
    "short": "Amla & Blackseed Hair Oil 125 mL and Scalp & Beard Serum 60 mL.",
-   "long": "The weekly treatment and the daily finish, together and ten percent off.",
+   "long": "The weekly oiling and the daily finish, together and ten percent off.",
    "ingredients": "See the two products.",
    "featured": false,
    "isNew": true,
    "bestseller": false,
-   "sort": 20,
+   "sort": 21,
    "specs": [
     [
      "Contents",
@@ -2462,6 +3123,7 @@
      "i": 2
     }
    ],
+   "why": [],
    "bundle": [
     {
      "sku": "DM-AHO-125",
@@ -2475,22 +3137,43 @@
   },
   {
    "slug": "the-founders-set",
+   "status": "concept",
    "name": "The Founder’s Set",
-   "subtitle": "Oil, balm, and the three attars",
+   "subtitle": "Oil, balm, eye concentrate, and the three attars",
    "tagline": "What Dr. Mushtaq gives.",
    "category": "bundle",
    "type": "bundle",
-   "short": "Blackseed Oil 125 mL, Blackseed Balm 60 mL, and the Fragrance Discovery Set, in a rigid black and gold presentation box with a botanical card.",
-   "long": "The set the founder sends to friends: the original oil, the balm, and a first taste of all three attars, boxed with a letterpress card on Nigella sativa and thymoquinone.",
+   "intendedUse": "What Dr. Mushtaq gives: the oil, the balm, and the three attars, boxed.",
+   "sensoryLine": null,
+   "sensory": null,
+   "storage": null,
+   "shelfLife": null,
+   "serving": null,
+   "servingMl": null,
+   "directions": [
+    "Add a gift note at checkout."
+   ],
+   "howTo": [
+    [
+     "Within",
+     "One dropper daily."
+    ],
+    [
+     "Skin and scent",
+     "Balm on dry places; attars on pulse points."
+    ]
+   ],
+   "short": "Blackseed Oil 125 mL, Blackseed Balm 60 mL, Saffron & Blackseed Eye Concentrate 15 mL, and the Fragrance Discovery Set, in a rigid black and gold presentation box with a botanical card.",
+   "long": "The set the founder sends to friends: the original oil, the balm, the cooling eye concentrate, and a first taste of all three attars, boxed with a letterpress card on Nigella sativa and thymoquinone.",
    "ingredients": "See the individual products.",
    "featured": true,
    "isNew": true,
    "bestseller": false,
-   "sort": 21,
+   "sort": 22,
    "specs": [
     [
      "Contents",
-     "Blackseed Oil 125 mL, Blackseed Balm 60 mL, Fragrance Discovery Set"
+     "Blackseed Oil 125 mL, Blackseed Balm 60 mL, Eye Concentrate 15 mL, Fragrance Discovery Set"
     ],
     [
      "Box",
@@ -2515,8 +3198,8 @@
      "sku": "DM-SET-FOUNDER",
      "label": "The Set",
      "sizeMl": null,
-     "price": 21800,
-     "compare": 24300,
+     "price": 29800,
+     "compare": 33100,
      "def": true,
      "i": 0,
      "image": "collection-gift-set",
@@ -2553,11 +3236,12 @@
     {
      "t": "key_points",
      "c": {
-      "safety": "For adults. Consult a qualified clinician before use if you are pregnant or nursing, taking medication, managing a medical condition, scheduled for a procedure, or considering use for a child. Discontinue and seek advice if any adverse reaction occurs."
+      "safety": "For adults. Read the full label. Talk to your clinician first if pregnant, nursing, taking medication, or managing a health condition. Discontinue and seek advice if any adverse reaction occurs."
      },
      "i": 2
     }
    ],
+   "why": [],
    "bundle": [
     {
      "sku": "DM-BSO-125",
@@ -2568,6 +3252,10 @@
      "qty": 1
     },
     {
+     "sku": "DM-EYE-15",
+     "qty": 1
+    },
+    {
      "sku": "DM-FDS",
      "qty": 1
     }
@@ -2575,22 +3263,43 @@
   },
   {
    "slug": "the-complete-shelf",
+   "status": "concept",
    "name": "The Complete Shelf",
    "subtitle": "One of everything, twenty percent off",
    "tagline": "Within, skin, hair, body. The whole house.",
    "category": "bundle",
    "type": "bundle",
-   "short": "Nine products across Within, Skin, Hair and Body in their starting sizes. The way to furnish a whole bathroom shelf at once.",
-   "long": "Blackseed Oil, Softgels, Culinary Finishing Oil, Rose & Blackseed Cleansing Oil, Saffron Radiance Face Oil, Blackseed Balm, Scalp & Beard Serum, Amla & Blackseed Hair Oil, and Saffron & Sesame Body Oil. Twenty percent below the sum of the parts.",
+   "intendedUse": "Nine products in starting sizes across Within, Skin, Hair, and Body.",
+   "sensoryLine": null,
+   "sensory": null,
+   "storage": null,
+   "shelfLife": null,
+   "serving": null,
+   "servingMl": null,
+   "directions": [
+    "Follow the Protocol page for a day with the shelf."
+   ],
+   "howTo": [
+    [
+     "A day",
+     "Oil at breakfast, cleanse and nourish at night, hair on Sunday, a soak once a week."
+    ],
+    [
+     "Pricing",
+     "20% against buying separately."
+    ]
+   ],
+   "short": "Ten products across Within, Skin, Hair and Body in their starting sizes. The way to furnish a whole bathroom shelf at once.",
+   "long": "Blackseed Oil, Softgels, Culinary Finishing Oil, Rose & Blackseed Cleansing Oil, Saffron Radiance Face Oil, Saffron & Blackseed Eye Concentrate, Blackseed Balm, Scalp & Beard Serum, Amla & Blackseed Hair Oil, and Saffron & Sesame Body Oil. Twenty percent below the sum of the parts.",
    "ingredients": "See the individual products.",
    "featured": true,
    "isNew": true,
    "bestseller": false,
-   "sort": 22,
+   "sort": 23,
    "specs": [
     [
      "Contents",
-     "Nine products in starting sizes"
+     "Ten products in starting sizes"
     ],
     [
      "Saving",
@@ -2613,12 +3322,12 @@
      "sku": "DM-SET-SHELF",
      "label": "The Shelf",
      "sizeMl": null,
-     "price": 61000,
-     "compare": 76200,
+     "price": 68000,
+     "compare": 85000,
      "def": true,
      "i": 0,
      "image": "collection-flatlay",
-     "desc": "9 pieces | "
+     "desc": "10 pieces | "
     }
    ],
    "gallery": [
@@ -2651,11 +3360,12 @@
     {
      "t": "key_points",
      "c": {
-      "safety": "For adults. Consult a qualified clinician before use if you are pregnant or nursing, taking medication, managing a medical condition, scheduled for a procedure, or considering use for a child. Discontinue and seek advice if any adverse reaction occurs."
+      "safety": "For adults. Read the full label. Talk to your clinician first if pregnant, nursing, taking medication, or managing a health condition. Discontinue and seek advice if any adverse reaction occurs."
      },
      "i": 2
     }
    ],
+   "why": [],
    "bundle": [
     {
      "sku": "DM-BSO-125",
@@ -2678,6 +3388,10 @@
      "qty": 1
     },
     {
+     "sku": "DM-EYE-15",
+     "qty": 1
+    },
+    {
      "sku": "DM-BALM-60",
      "qty": 1
     },
@@ -2697,18 +3411,39 @@
   },
   {
    "slug": "practitioner-case",
+   "status": "concept",
    "name": "Practitioner Case",
    "subtitle": "Six 500 mL Blackseed Oil",
    "tagline": "Three litres, one lot, one certificate.",
    "category": "bundle",
    "type": "bundle",
+   "intendedUse": "Six 500 mL bottles from one lot with one certificate, for clinics and dispensaries.",
+   "sensoryLine": null,
+   "sensory": null,
+   "storage": null,
+   "shelfLife": null,
+   "serving": null,
+   "servingMl": null,
+   "directions": [
+    "Dispense as your practice sees fit. Lot number is printed on every bottle for your records."
+   ],
+   "howTo": [
+    [
+     "Dispense",
+     "Twelve glass pipettes included; the lot number goes on each dispensed bottle."
+    ],
+    [
+     "Certificate",
+     "The COA for the lot is enclosed and published on /coa."
+    ]
+   ],
    "short": "Six 500 mL apothecary bottles of Blackseed Oil from a single lot, with the lot’s certificate of analysis and twelve glass pipettes. For clinics, dispensaries, and households that buy by the case.",
    "long": "Ayurvedic, Unani, and Chinese-medicine practitioners asked for the oil in a form they could dispense. This is it: one lot, six bottles, the certificate of analysis in the crate, and a price seventeen percent below the single 500 mL bottle.",
    "ingredients": "Nigella sativa (black seed) oil.",
    "featured": false,
    "isNew": true,
    "bestseller": false,
-   "sort": 23,
+   "sort": 24,
    "specs": [
     [
      "Contents",
@@ -2777,11 +3512,12 @@
     {
      "t": "key_points",
      "c": {
-      "safety": "For adults. Consult a qualified clinician before use if you are pregnant or nursing, taking medication, managing a medical condition, scheduled for a procedure, or considering use for a child. Discontinue and seek advice if any adverse reaction occurs."
+      "safety": "For adults. Read the full label. Talk to your clinician first if pregnant, nursing, taking medication, or managing a health condition. Discontinue and seek advice if any adverse reaction occurs."
      },
      "i": 2
     }
    ],
+   "why": [],
    "bundle": [
     {
      "sku": "DM-BSO-500",
