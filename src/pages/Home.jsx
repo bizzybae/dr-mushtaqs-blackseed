@@ -1,24 +1,24 @@
 import { Link } from 'react-router-dom'
 import ProductPhoto from '../components/ProductPhoto'
-import ProductCard from '../components/ProductCard'
 import BatchBadge from '../components/BatchBadge'
 import ReviewsSlot from '../components/ReviewsSlot'
 import TrustStrip from '../components/TrustStrip'
 import WaitlistForm from '../components/WaitlistForm'
 import { Accordion, GuaranteeStrip, PhysicianSeal, SectionHead, Seo } from '../components/ui'
 import { useSite } from '../lib/content'
-import { defaultVariant, isConcept, money, useCatalog, useCurrentBatch, useSiteMode } from '../lib/catalog'
+import { defaultVariant, money, useCatalog, useCurrentBatch, useSiteMode } from '../lib/catalog'
 
 export default function Home() {
   const { FOUNDER, HOME, SITE_FAQ } = useSite()
-  const { products, collections } = useCatalog()
+  const { products, settings } = useCatalog()
   const mode = useSiteMode()
   const live = mode === 'live'
   const original = products.find((p) => p.slug === 'blackseed-oil') || products[0]
   const batch = useCurrentBatch(original)
-  const concepts = products.filter(isConcept).filter((p) => p.productType !== 'bundle').slice(0, 4)
-  const shopCollections = collections.filter((c) => c.slug !== 'ritual-sets')
   const [ctaPrimary, ctaSecondary] = live ? HOME.cta.live : HOME.cta.prelaunch
+  // Scarcity line renders only from a real number in site_settings; never a placeholder.
+  const lotOne = Number(settings?.lot_one_bottles) > 0 ? HOME.lotOne.replace('{n}', Number(settings.lot_one_bottles).toLocaleString('en-US')) : null
+  const credentials = (FOUNDER.credentials || []).slice(0, 4)
   const reviews = products.flatMap((p) => p.reviews || [])
 
   return (
@@ -28,32 +28,45 @@ export default function Home() {
       {/* Hero */}
       <section className="relative bg-sand">
         <div className="mx-auto grid max-w-[1440px] lg:grid-cols-12">
-          <div className="order-2 flex flex-col justify-center px-5 py-14 sm:px-8 lg:order-1 lg:col-span-5 lg:px-12 lg:py-24">
+          <div className="order-2 flex flex-col justify-center px-5 py-8 sm:px-8 lg:order-1 lg:col-span-5 lg:px-12 lg:py-10">
             <p className="eyebrow">{batch ? HOME.eyebrowTested : HOME.eyebrow}</p>
-            <h1 className="h1 mt-6">
+            <h1 className="mt-4 font-display text-[2.4rem] leading-[0.98] tracking-tight sm:text-6xl lg:text-[3.9rem] xl:text-[4.4rem]">
               {HOME.h1[0]}
               <br />
               <span className="italic text-brass">{HOME.h1[1]}</span>
             </h1>
-            <p className="mt-8 max-w-md text-lg leading-relaxed text-ink/70">{HOME.sub}</p>
-            <div className="mt-10 flex flex-wrap gap-4">
-              {live ? (
+            <p className="mt-5 max-w-md text-[17px] leading-relaxed text-ink/70">{HOME.sub}</p>
+            {live ? (
+              <div className="mt-10 flex flex-wrap gap-4">
                 <Link to={`/shop/${original.slug}`} className="btn btn-solid" data-testid="link-hero-shop">
                   {ctaPrimary} · {money(defaultVariant(original).priceCents)}
                 </Link>
-              ) : (
-                <a href="#first-lot" className="btn btn-solid" data-testid="link-hero-waitlist">
-                  {ctaPrimary}
-                </a>
-              )}
-              <Link to="/coa" className="btn" data-testid="link-hero-coa">
-                {ctaSecondary}
-              </Link>
-            </div>
+                <Link to="/coa" className="btn" data-testid="link-hero-coa">
+                  {ctaSecondary}
+                </Link>
+              </div>
+            ) : (
+              <div id="first-lot" className="mt-7 scroll-mt-32 border border-ink/15 bg-cream/70 p-5" data-testid="box-hero-waitlist">
+                <WaitlistForm sku={defaultVariant(original).sku} source="home-hero" label={ctaPrimary} interests={['within']} options={['subscription']} compact />
+                {lotOne && (
+                  <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.14em] text-brass" data-testid="text-lot-one">
+                    {lotOne}
+                  </p>
+                )}
+                <p className="mt-3 text-[13px] leading-relaxed text-ink/60">
+                  From {money(defaultVariant(original).priceCents)} for 125 mL. Nothing is charged until the lot has its certificate.{' '}
+                  <Link to="/coa" className="underline hover:text-ink" data-testid="link-hero-coa">
+                    {ctaSecondary}
+                  </Link>
+                </p>
+              </div>
+            )}
             {batch && <BatchBadge batch={batch} className="mt-8" />}
           </div>
           <div className="relative order-1 lg:order-2 lg:col-span-7 lg:min-h-[640px]">
-            <ProductPhoto slug="blackseed-oil" priority className="lg:absolute lg:inset-0" fit="cover" ratio={1.5} position="center 40%" sizes="(min-width: 1024px) 58vw, 100vw" imgClassName="lg:min-h-[640px]" />
+            {/* Shorter crop on phones so the first-lot form sits within the first screen. */}
+            <ProductPhoto slug="blackseed-oil" priority className="lg:hidden" fit="cover" ratio={1.9} position="center 45%" sizes="100vw" />
+            <ProductPhoto slug="blackseed-oil" priority className="hidden lg:absolute lg:inset-0 lg:block" fit="cover" ratio={1.5} position="center 40%" sizes="(min-width: 1024px) 58vw, 100vw" imgClassName="lg:min-h-[640px]" />
           </div>
         </div>
       </section>
@@ -105,13 +118,33 @@ export default function Home() {
       {/* Founder teaser */}
       <section className="bg-ink text-cream">
         <div className="mx-auto grid max-w-[1440px] gap-12 px-5 py-20 sm:px-8 lg:grid-cols-12 lg:px-12 lg:py-28">
-          <div className="lg:col-span-6">
-            <ProductPhoto slug="physician-desk" fit="cover" ratio={1.45} sizes="(min-width: 1024px) 50vw, 100vw" />
+          <div className="lg:col-span-5">
+            {FOUNDER.portraitUrl ? (
+              <img src={FOUNDER.portraitUrl} alt={FOUNDER.portraitAlt} className="aspect-[4/5] w-full object-cover" loading="lazy" data-testid="img-founder-portrait" />
+            ) : (
+              <ProductPhoto slug="physician-desk" fit="cover" ratio={0.8} sizes="(min-width: 1024px) 42vw, 100vw" />
+            )}
+            <dl className="mt-6 grid grid-cols-2 gap-x-6 gap-y-4 border-t border-cream/15 pt-6" data-testid="list-founder-credentials">
+              {credentials.map(([k, v]) => (
+                <div key={k}>
+                  <dt className="font-mono text-[10px] uppercase tracking-[0.16em] text-brass">{k}</dt>
+                  <dd className="mt-1 text-sm leading-snug text-cream/80">{v}</dd>
+                </div>
+              ))}
+            </dl>
           </div>
-          <div className="flex flex-col justify-center lg:col-span-5 lg:col-start-8">
-            <PhysicianSeal className="h-24 w-24" dark />
+          <div className="flex flex-col justify-center lg:col-span-6 lg:col-start-7">
+            <div className="flex items-center gap-5">
+              <PhysicianSeal className="h-20 w-20 shrink-0" dark />
+              <div>
+                <p className="font-display text-2xl text-cream">{FOUNDER.name}</p>
+                <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.14em] text-cream/60">{FOUNDER.role}</p>
+              </div>
+            </div>
             <h2 className="h2 mt-8 text-cream">{HOME.founderTeaser.title}</h2>
-            <p className="mt-6 text-lg leading-relaxed text-cream/70">{HOME.founderTeaser.body}</p>
+            <p className="mt-6 text-lg leading-relaxed text-cream/75">{FOUNDER.why?.[0] || HOME.founderTeaser.body}</p>
+            <p className="mt-4 text-base leading-relaxed text-cream/70">{HOME.founderTeaser.body}</p>
+            <p className="mt-6 font-display text-xl italic text-brass">{FOUNDER.lede}</p>
             <ul className="mt-6 space-y-3">
               {HOME.founderTeaser.points.map((pt) => (
                 <li key={pt} className="flex gap-3 text-base text-cream/85">
@@ -128,40 +161,41 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Shop by purpose: the wider line, mostly coming soon */}
-      <section className="mx-auto max-w-[1440px] px-5 py-20 sm:px-8 lg:px-12 lg:py-28">
-        <SectionHead eyebrow="The line, by purpose" title="One oil. Five purposes." lede="Every line begins with the same cold-pressed, lot-tested blackseed oil. The botanicals change with the purpose: saffron for skin, amla for hair, sesame for the body, oud and rose for fragrance. Most of the line is still coming; the Original leads." />
-        <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
-          {shopCollections.map((c, i) => (
-            <Link key={c.slug} to={`/collections/${c.slug}`} className={`group relative block overflow-hidden bg-sand ${i === 0 ? 'sm:col-span-2 lg:col-span-2 lg:row-span-2' : ''}`} data-testid={`link-collection-${c.slug}`}>
-              <ProductPhoto slug={c.hero} fit="cover" ratio={i === 0 ? 1.05 : 1.1} className="h-full" sizes={i === 0 ? '(min-width: 1024px) 40vw, 100vw' : '(min-width: 1024px) 20vw, 50vw'} imgClassName="transition-transform duration-500 group-hover:scale-[1.03] motion-reduce:transition-none" />
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/90 via-ink/55 to-transparent p-6 pt-28">
-                <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-cream/75">{c.short}</p>
-                <p className={`mt-1 font-display text-cream ${i === 0 ? 'text-4xl' : 'text-2xl'}`}>{c.name}</p>
-              </div>
-            </Link>
-          ))}
+      {/* What is next: a sentence and a link, not a catalogue */}
+      <section className="mx-auto max-w-[1440px] px-5 py-16 sm:px-8 lg:px-12 lg:py-20">
+        <div className="flex flex-col gap-6 border-y border-ink/10 py-10 lg:flex-row lg:items-center lg:justify-between">
+          <div className="max-w-2xl">
+            <p className="eyebrow">What is next</p>
+            <h2 className="h2 mt-4">{HOME.roadmapTeaser.title}</h2>
+            <p className="mt-4 text-lg leading-relaxed text-ink/70">{HOME.roadmapTeaser.body}</p>
+          </div>
+          <Link to="/coming-soon" className="btn shrink-0 self-start lg:self-center" data-testid="link-coming-soon">
+            {HOME.roadmapTeaser.cta} →
+          </Link>
         </div>
       </section>
 
-      {/* Coming soon preview */}
-      {concepts.length > 0 && (
-        <section className="border-y border-ink/10 bg-sand/60">
-          <div className="mx-auto max-w-[1440px] px-5 py-20 sm:px-8 lg:px-12 lg:py-28">
-            <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-              <SectionHead eyebrow="Coming to the shelf" title="Next from the press." />
-              <Link to="/coming-soon" className="font-mono text-[11px] uppercase tracking-[0.14em] text-ink hover:text-brass" data-testid="link-coming-soon">
-                Everything coming soon →
-              </Link>
-            </div>
-            <div className="mt-14 grid gap-x-6 gap-y-14 sm:grid-cols-2 lg:grid-cols-4">
-              {concepts.map((p, i) => (
-                <ProductCard key={p.slug} product={p} index={i} ratio={1.1} />
-              ))}
-            </div>
+      {/* Practitioners */}
+      <section className="bg-sand" data-testid="band-practitioners">
+        <div className="mx-auto grid max-w-[1440px] gap-10 px-5 py-20 sm:px-8 lg:grid-cols-12 lg:px-12 lg:py-24">
+          <div className="lg:col-span-5">
+            <p className="eyebrow">Practitioners</p>
+            <h2 className="h2 mt-4">{HOME.practitionerTeaser.title}</h2>
+            <p className="mt-6 text-lg leading-relaxed text-ink/70">{HOME.practitionerTeaser.body}</p>
+            <Link to="/practitioners" className="btn btn-solid mt-8" data-testid="link-practitioners-home">
+              {HOME.practitionerTeaser.cta}
+            </Link>
           </div>
-        </section>
-      )}
+          <ul className="grid gap-4 self-center sm:grid-cols-3 lg:col-span-7 lg:grid-cols-1 lg:gap-0 lg:divide-y lg:divide-ink/10 lg:border-y lg:border-ink/10">
+            {HOME.practitionerTeaser.points.map((pt, i) => (
+              <li key={pt} className="flex gap-4 border border-ink/10 p-5 lg:border-0 lg:px-0 lg:py-5">
+                <span className="font-mono text-[11px] text-brass">0{i + 1}</span>
+                <p className="text-base leading-relaxed text-ink/80">{pt}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
 
       {/* Heritage teaser */}
       <section className="mx-auto max-w-3xl px-5 py-20 text-center sm:px-8 lg:py-24">
@@ -220,7 +254,7 @@ export default function Home() {
                   Shop the Original
                 </Link>
               ) : (
-                <WaitlistForm dark sku={defaultVariant(original).sku} source="home-final" label="Join the first-lot list" />
+                <WaitlistForm dark sku={defaultVariant(original).sku} source="home-final" label="Join the first-lot list" interests={['within']} options={['subscription', 'practitioner']} />
               )}
             </div>
           </div>
