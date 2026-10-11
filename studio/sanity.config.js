@@ -27,6 +27,7 @@ export default defineConfig({
             S.divider(),
             S.documentTypeListItem('productContent').title('Product copy'),
             S.documentTypeListItem('botanical').title('Botanicals'),
+            S.documentTypeListItem('journalPost').title('Journal'),
             S.documentTypeListItem('faqGroup').title('FAQ groups'),
             S.documentTypeListItem('policy').title('Policies'),
           ]),

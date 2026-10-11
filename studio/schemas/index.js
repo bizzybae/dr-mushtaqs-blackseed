@@ -86,6 +86,26 @@ const homePage = defineType({
       type: 'object',
       fields: [str('title', 'Title'), txt('body', 'Body', { rows: 3, validation: (R) => R.custom((v) => (!v || (v.match(/[.!?](\s|$)/g) || []).length <= 2 ? true : 'Keep the teaser to two sentences.')) })],
     }),
+    defineField({
+      name: 'seed',
+      title: 'The Seed (Nigella sativa section)',
+      type: 'object',
+      fields: [
+        str('eyebrow', 'Eyebrow'),
+        str('title', 'Title'),
+        txt('body', 'Body', { rows: 4 }),
+        list('steps', 'Three steps: flower, capsule, oil (images are fixed)', [{ type: 'titledBody' }], { validation: (R) => R.max(3) }),
+        txt('founderNote', 'Founder note (signed)', { rows: 3 }),
+      ],
+    }),
+    defineField({ name: 'journalTeaser', title: 'Journal teaser', type: 'object', fields: [str('title', 'Title'), txt('body', 'Body', { rows: 2 })] }),
+    defineField({
+      name: 'practitionerTeaser',
+      title: 'Practitioner band',
+      type: 'object',
+      fields: [str('title', 'Title'), txt('body', 'Body', { rows: 3 }), strings('points', 'Points'), str('cta', 'Button label')],
+    }),
+    defineField({ name: 'subscription', title: 'Monthly delivery option', type: 'object', fields: [str('label', 'Checkbox label'), str('note', 'Note under the checkbox')] }),
     list('whoFor', 'Who it is for (four tiles)', [{ type: 'titledBody' }], { validation: (R) => R.max(4) }),
     str('finalCtaPrelaunch', 'Final CTA (prelaunch)'),
     str('finalCtaLive', 'Final CTA (live)'),
@@ -113,6 +133,7 @@ const founderPage = defineType({
     str('noMedical', 'No medical services line'),
     txt('disclosure', 'Founder disclosure', { rows: 5 }),
     list('qa', 'Straight answers', [{ type: 'qa' }]),
+    defineField({ name: 'portrait', title: 'Portrait photograph', type: 'image', options: { hotspot: true }, fields: [str('alt', 'Alt text')], description: 'A real photograph of the founder. Shown on the home page and the founder page when set.' }),
   ],
   preview: { prepare: () => ({ title: 'Dr. Mushtaq (about)' }) },
 })
@@ -232,6 +253,32 @@ const productContent = defineType({
   preview: { select: { title: 'name', subtitle: 'slug' } },
 })
 
+// Journal: one post per botanical or topic. Body is plain paragraphs (no rich
+// text) so the claims rule can read every sentence. Repo posts in
+// src/data/journal.js are the floor; a Sanity post with the same slug replaces it.
+const journalPost = defineType({
+  name: 'journalPost',
+  title: 'Journal post',
+  type: 'document',
+  validation: claims,
+  fields: [
+    str('title', 'Title', { validation: (R) => R.required() }),
+    defineField({ name: 'slug', title: 'Slug', type: 'slug', options: { source: 'title' }, validation: (R) => R.required() }),
+    txt('deck', 'Deck (one or two sentences)', { rows: 2 }),
+    str('botanical', 'Botanical key', { description: 'blackseed, saffron, grapevine, rose, amla, sesame, oud, sandalwood, vetiver, frankincense, rosemary. Leave empty for a topic post.' }),
+    strings('products', 'Product slugs where this botanical is used'),
+    defineField({ name: 'published', title: 'Published date', type: 'date' }),
+    defineField({ name: 'order', title: 'Order (lower first)', type: 'number' }),
+    str('readingTime', 'Reading time (e.g. 4 min)'),
+    strings('body', 'Body paragraphs'),
+    txt('founderNote', 'A note from Dr. Mushtaq', { rows: 3 }),
+    list('sources', 'Sources', [{ type: 'object', name: 'src', fields: [str('label', 'Label'), str('url', 'URL')], preview: { select: { title: 'label', subtitle: 'url' } } }]),
+    str('imageSlug', 'Repo image slug', { description: 'A slug from public/products (e.g. saffron). Ignored when a photograph is uploaded below.' }),
+    defineField({ name: 'image', title: 'Photograph', type: 'image', options: { hotspot: true }, fields: [str('alt', 'Alt text')] }),
+  ],
+  preview: { select: { title: 'title', subtitle: 'botanical' } },
+})
+
 export const SINGLETONS = [
   { id: 'siteSettings', type: 'siteSettings', title: 'Site settings' },
   { id: 'homePage', type: 'homePage', title: 'Home page' },
@@ -242,4 +289,4 @@ export const SINGLETONS = [
   { id: 'safetyPage', type: 'safetyPage', title: 'Safety' },
 ]
 
-export const schemaTypes = [titledBody, qa, link, siteSettings, homePage, founderPage, heritagePage, coaGuide, practitionersPage, safetyPage, faqGroup, policy, botanical, productContent]
+export const schemaTypes = [titledBody, qa, link, siteSettings, homePage, founderPage, heritagePage, coaGuide, practitionersPage, safetyPage, faqGroup, policy, botanical, productContent, journalPost]

@@ -30,6 +30,8 @@ import {
 import { CoaPage, LotPage } from "./pages/Coa";
 import { ComingSoonPage, HeritagePage, SafetyPage } from "./pages/Launch";
 import OwnerPage from "./pages/Owner";
+import SeedPage from "./pages/Seed";
+import { JournalIndex, JournalPost } from "./pages/Journal";
 import { CatalogProvider } from "./lib/catalog";
 import { ContentProvider } from "./lib/content";
 import { CartProvider } from "./lib/cart";
@@ -69,6 +71,10 @@ export default function App() {
                   <Route path="/coa/:lot" element={<LotPage />} />
                   <Route path="/safety" element={<SafetyPage />} />
                   <Route path="/heritage" element={<HeritagePage />} />
+                  <Route path="/the-seed" element={<SeedPage />} />
+                  <Route path="/nigella-sativa" element={<Navigate to="/the-seed" replace />} />
+                  <Route path="/journal" element={<JournalIndex />} />
+                  <Route path="/journal/:slug" element={<JournalPost />} />
                   <Route path="/botanicals" element={<BotanicalsPage />} />
                   <Route path="/protocol" element={<ProtocolPage />} />
                   <Route

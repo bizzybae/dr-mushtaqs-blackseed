@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useMemo, useState } from 'react'
 import { createClient } from '@sanity/client'
 import * as DEFAULTS from '../data/site'
 import { BOTANICALS as BOTANICAL_DEFAULTS } from '../data/catalog'
+import { JOURNAL as JOURNAL_DEFAULTS } from '../data/journal'
 
 // Content layer. Editorial copy comes from Sanity when VITE_SANITY_PROJECT_ID
 // is set; otherwise (or until it loads, or if it fails) the storefront renders
@@ -25,7 +26,7 @@ export const sanity = projectId
 const QUERY = `{
   "settings": *[_id == "siteSettings"][0],
   "home": *[_id == "homePage"][0],
-  "founder": *[_id == "founderPage"][0],
+  "founder": *[_id == "founderPage"][0]{ ..., "portraitUrl": portrait.asset->url, "portraitAlt": portrait.alt },
   "heritage": *[_id == "heritagePage"][0],
   "coa": *[_id == "coaGuide"][0],
   "practitioners": *[_id == "practitionersPage"][0],
@@ -33,6 +34,10 @@ const QUERY = `{
   "faq": *[_type == "faqGroup"] | order(order asc) { group, items },
   "policies": *[_type == "policy"] { "slug": slug.current, title, updated, sections },
   "botanicals": *[_type == "botanical"] { key, name, latin, part, ayurveda, unani, tcm, note },
+  "journal": *[_type == "journalPost" && defined(slug.current)] | order(coalesce(order, 999) asc, published desc) {
+    "slug": slug.current, title, deck, botanical, products, published, readingTime, body, founderNote, sources,
+    "imageSlug": imageSlug, "imageUrl": image.asset->url, "imageAlt": image.alt
+  },
   "products": *[_type == "productContent"] {
     slug, tagline, short, long, intendedUse, sensoryLine, sensory, howTo, directions, why, storage, shelfLife, faq,
     "gallery": gallery[] { "url": asset->url, alt }
@@ -47,7 +52,7 @@ const qa = (arr, d) => pairs(arr, d, 'q', 'a')
 // Shape Sanity documents into exactly the objects src/data/site.js exports, so
 // pages do not care where the copy came from.
 export function shapeSite(c) {
-  if (!c) return { ...DEFAULTS, BOTANICALS: BOTANICAL_DEFAULTS, PRODUCT_CONTENT: {} }
+  if (!c) return { ...DEFAULTS, BOTANICALS: BOTANICAL_DEFAULTS, PRODUCT_CONTENT: {}, JOURNAL: JOURNAL_DEFAULTS }
   const s = c.settings || {}
   const h = c.home || {}
   const f = c.founder || {}
@@ -72,6 +77,23 @@ export function shapeSite(c) {
       points: or(h.founderTeaser?.points, D.HOME.founderTeaser.points),
     },
     heritageTeaser: { title: or(h.heritageTeaser?.title, D.HOME.heritageTeaser.title), body: or(h.heritageTeaser?.body, D.HOME.heritageTeaser.body) },
+    subscription: { label: or(h.subscription?.label, D.HOME.subscription.label), note: or(h.subscription?.note, D.HOME.subscription.note) },
+    practitionerTeaser: {
+      title: or(h.practitionerTeaser?.title, D.HOME.practitionerTeaser.title),
+      body: or(h.practitionerTeaser?.body, D.HOME.practitionerTeaser.body),
+      points: or(h.practitionerTeaser?.points, D.HOME.practitionerTeaser.points),
+      cta: or(h.practitionerTeaser?.cta, D.HOME.practitionerTeaser.cta),
+    },
+    seed: {
+      eyebrow: or(h.seed?.eyebrow, D.HOME.seed.eyebrow),
+      title: or(h.seed?.title, D.HOME.seed.title),
+      body: or(h.seed?.body, D.HOME.seed.body),
+      // Steps keep the repo images; Sanity may rewrite the words.
+      steps: D.HOME.seed.steps.map(([img, t, b], i) => [img, or(h.seed?.steps?.[i]?.title, t), or(h.seed?.steps?.[i]?.body, b)]),
+      founderNote: or(h.seed?.founderNote, D.HOME.seed.founderNote),
+      cta: D.HOME.seed.cta,
+    },
+    journalTeaser: { ...D.HOME.journalTeaser, title: or(h.journalTeaser?.title, D.HOME.journalTeaser.title), body: or(h.journalTeaser?.body, D.HOME.journalTeaser.body) },
     whoFor: pairs(h.whoFor, D.HOME.whoFor),
     finalCta: { prelaunch: or(h.finalCtaPrelaunch, D.HOME.finalCta.prelaunch), live: or(h.finalCtaLive, D.HOME.finalCta.live) },
   }
@@ -91,6 +113,9 @@ export function shapeSite(c) {
     noMedical: or(f.noMedical, D.FOUNDER.noMedical),
     disclosure: or(f.disclosure, D.FOUNDER.disclosure),
     qa: qa(f.qa, D.FOUNDER.qa),
+    // Portrait only from Sanity; the repo ships no photograph of a real person.
+    portraitUrl: f.portraitUrl || null,
+    portraitAlt: or(f.portraitAlt, `${or(f.name, D.FOUNDER.name)}, founder`),
   }
   const HADITH = {
     narration: D.HADITH.narration, // never editable
@@ -109,6 +134,33 @@ export function shapeSite(c) {
   const POLICIES = Array.isArray(c.policies) && c.policies.length ? Object.fromEntries(c.policies.filter((p) => p.slug).map((p) => [p.slug, { title: p.title, updated: p.updated, sections: pairs(p.sections, []) }])) : D.POLICIES
   const TRUST = Array.isArray(s.trust) && s.trust.length ? s.trust.filter((t) => t.label).map((t) => ({ label: t.label, to: t.to, external: !!t.external })) : D.TRUST
   const BOTANICALS = Array.isArray(c.botanicals) && c.botanicals.length ? { ...BOTANICAL_DEFAULTS, ...Object.fromEntries(c.botanicals.filter((b) => b.key).map((b) => [b.key, { ...BOTANICAL_DEFAULTS[b.key], ...Object.fromEntries(Object.entries(b).filter(([k, v]) => k !== 'key' && v)) }])) } : BOTANICAL_DEFAULTS
+  // Journal: Sanity posts replace the repo post with the same slug and add new ones; repo posts stay as the floor.
+  const JOURNAL = Array.isArray(c.journal) && c.journal.length
+    ? (() => {
+        const bySlug = Object.fromEntries(JOURNAL_DEFAULTS.map((p) => [p.slug, p]))
+        for (const p of c.journal) {
+          const base = bySlug[p.slug] || {}
+          bySlug[p.slug] = {
+            ...base,
+            slug: p.slug,
+            title: or(p.title, base.title),
+            deck: or(p.deck, base.deck),
+            botanical: or(p.botanical, base.botanical),
+            covers: base.covers,
+            products: or(p.products, base.products || []),
+            published: or(p.published, base.published),
+            readingTime: or(p.readingTime, base.readingTime),
+            body: or(p.body, base.body || []),
+            founderNote: or(p.founderNote, base.founderNote),
+            sources: pairs(p.sources, base.sources || [], 'label', 'url'),
+            image: or(p.imageSlug, base.image),
+            imageUrl: p.imageUrl || base.imageUrl || null,
+            imageAlt: or(p.imageAlt, base.imageAlt),
+          }
+        }
+        return Object.values(bySlug).sort((a, b) => String(b.published || '').localeCompare(String(a.published || '')))
+      })()
+    : JOURNAL_DEFAULTS
   const PRODUCT_CONTENT = Object.fromEntries(
     (c.products || []).filter((p) => p.slug).map((p) => [
       p.slug,
@@ -125,7 +177,7 @@ export function shapeSite(c) {
   )
   return {
     ...D,
-    HOME, FOUNDER, HADITH, HERITAGE, COA, PRACTITIONERS, SAFETY_FAQ, SITE_FAQ, POLICIES, TRUST, BOTANICALS, PRODUCT_CONTENT,
+    HOME, FOUNDER, HADITH, HERITAGE, COA, PRACTITIONERS, SAFETY_FAQ, SITE_FAQ, POLICIES, TRUST, BOTANICALS, PRODUCT_CONTENT, JOURNAL,
     FDA_DISCLAIMER: or(s.fdaDisclaimer, D.FDA_DISCLAIMER),
     NO_MEDICAL_SERVICES: or(s.noMedicalServices, D.NO_MEDICAL_SERVICES),
     SAFETY_LINE: or(s.safetyLine, D.SAFETY_LINE),

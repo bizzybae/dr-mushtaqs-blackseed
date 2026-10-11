@@ -51,7 +51,7 @@ export function ComingSoonPage() {
                 <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.14em] text-muted">{p.subtitle}</p>
                 <p className="mb-5 mt-3 text-base leading-relaxed text-ink/70">{p.sensoryLine || p.tagline}</p>
                 <div className="mt-auto">
-                  <NotifyButton sku={defaultVariant(p).sku} source={`coming-soon-${p.slug}`} className="btn min-h-[48px] w-full" />
+                  <NotifyButton sku={defaultVariant(p).sku} source={`coming-soon-${p.slug}`} interests={[p.collection]} className="btn min-h-[48px] w-full" />
                   <Link to={`/shop/${p.slug}`} className="mt-3 block text-center font-mono text-[11px] uppercase tracking-[0.14em] text-muted hover:text-brass">
                     What it’s for and how to use it →
                   </Link>

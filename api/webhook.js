@@ -4,7 +4,13 @@
 // Stripe Dashboard -> Developers -> Webhooks -> Add endpoint:
 //   https://<your-domain>/api/webhook
 //   events: checkout.session.completed, checkout.session.async_payment_succeeded,
-//           checkout.session.async_payment_failed, charge.refunded
+//           checkout.session.async_payment_failed, charge.refunded, invoice.paid
+//
+// Subscriptions: the first delivery is recorded from the Checkout Session like
+// any order. Each renewal arrives as invoice.paid (billing_reason
+// subscription_cycle) and is recorded as its own order so it ships like one;
+// the invoice id is stored in stripe_session_id (in_...), which keeps the
+// unique key and the ignore-duplicates behaviour without a schema change.
 // Then set STRIPE_WEBHOOK_SECRET in Vercel.
 
 import Stripe from 'stripe'
@@ -41,6 +47,12 @@ export async function POST(request) {
       }
       case 'checkout.session.async_payment_failed': {
         await updateOrderStatus(event.data.object.id, 'cancelled')
+        break
+      }
+      case 'invoice.paid': {
+        const invoice = event.data.object
+        // The first invoice of a subscription is already recorded via the Checkout Session.
+        if (invoice.billing_reason && invoice.billing_reason !== 'subscription_create' && invoice.subscription) await recordRenewal(stripe, invoice)
         break
       }
       case 'charge.refunded': {
@@ -97,6 +109,45 @@ async function recordOrder(stripe, session) {
     }
   })
   await insertOrderItems(items)
+}
+
+async function recordRenewal(stripe, invoice) {
+  const full = await stripe.invoices.retrieve(invoice.id, { expand: ['lines.data.price.product', 'subscription'] })
+  const lines = full.lines?.data || []
+  const skus = lines.map((li) => li.price?.product?.metadata?.sku).filter(Boolean)
+  const variants = skus.length ? await fetchVariants(skus) : []
+  const bySku = Object.fromEntries(variants.map((v) => [v.sku, v]))
+  const shipping = full.customer_shipping || null
+
+  const order = await insertOrder({
+    email: full.customer_email || 'unknown@unknown',
+    status: 'paid',
+    subtotal_cents: full.subtotal ?? 0,
+    shipping_cents: 0,
+    tax_cents: full.tax ?? 0,
+    total_cents: full.amount_paid ?? full.total ?? 0,
+    stripe_session_id: full.id,
+    shipping_address: {
+      name: shipping?.name || full.customer_name || null,
+      address: shipping?.address || full.customer_address || null,
+      phone: shipping?.phone || full.customer_phone || null,
+      renewal_of: typeof full.subscription === 'string' ? full.subscription : full.subscription?.id || null,
+    },
+  })
+  if (!order) return
+
+  const items = lines
+    .filter((li) => li.price?.product?.metadata?.sku)
+    .map((li) => {
+      const sku = li.price.product.metadata.sku
+      return {
+        order_id: order.id,
+        variant_id: bySku[sku] ? bySku[sku].id : null,
+        quantity: li.quantity ?? 1,
+        unit_price_cents: li.price?.unit_amount ?? Math.round((li.amount ?? 0) / (li.quantity || 1)),
+      }
+    })
+  if (items.length) await insertOrderItems(items)
 }
 
 function safeJson(s) {
