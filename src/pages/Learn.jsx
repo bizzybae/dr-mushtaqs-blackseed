@@ -29,7 +29,13 @@ export function FounderPage() {
             <p className="mt-6 font-mono text-[10px] uppercase tracking-[0.14em] text-muted">{FOUNDER.role}</p>
           </div>
           <div className="lg:col-span-7">
-            <ProductPhoto slug="physician-desk" fit="cover" ratio={1.5} priority sizes="(min-width: 1024px) 58vw, 100vw" />
+            {FOUNDER.portraitUrl ? (
+              <div className="overflow-hidden bg-sand" style={{ aspectRatio: 1.5 }}>
+                <img src={FOUNDER.portraitUrl} alt={FOUNDER.portraitAlt} className="h-full w-full object-cover" loading="eager" decoding="async" data-testid="img-founder-portrait" />
+              </div>
+            ) : (
+              <ProductPhoto slug="physician-desk" fit="cover" ratio={1.5} priority sizes="(min-width: 1024px) 58vw, 100vw" />
+            )}
           </div>
         </div>
       </section>

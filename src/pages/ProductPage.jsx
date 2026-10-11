@@ -9,6 +9,8 @@ import StickyBuyBar from '../components/StickyBuyBar'
 import WaitlistForm from '../components/WaitlistForm'
 import { Accordion, GuaranteeStrip, LabelBadges, PhysicianSeal, Seo } from '../components/ui'
 import { PROTOCOL } from '../data/catalog'
+import { journalForBotanical } from '../data/journal'
+import { JournalImage } from './Journal'
 import { useSite } from '../lib/content'
 import { track } from '../lib/analytics'
 import { findVariant, isPurchasable, money, perMl, perOz, savingsPct, servingsPer, showsUnitPrice, statusOf, useCatalog, useCurrentBatch, useProduct, whyLabel } from '../lib/catalog'
@@ -16,11 +18,11 @@ import { startCheckout, useCart } from '../lib/cart'
 import NotFound from './NotFound'
 
 export default function ProductPage() {
-  const { FOUNDER, BOTANICALS } = useSite()
+  const { FOUNDER, BOTANICALS, HOME, JOURNAL } = useSite()
   const { slug } = useParams()
   const [params, setParams] = useSearchParams()
   const { product, loading } = useProduct(slug)
-  const { products, collections } = useCatalog()
+  const { products, collections, settings } = useCatalog()
   const { add } = useCart()
   const [qty, setQty] = useState(1)
   const [busy, setBusy] = useState(false)
@@ -96,6 +98,10 @@ export default function ProductPage() {
     steps.length > 0 && { key: 'how', label: 'How to use', steps },
     why.length > 0 && { key: 'why', label: whyLabel(product), items: why },
   ].filter(Boolean)
+  // Monthly delivery: daily-use products in Within, never sets or fragrance.
+  const subscribable = product.collection === 'within' && product.productType !== 'bundle'
+  const subPct = Number(settings?.subscription_discount_pct ?? 15)
+  const [plan, setPlan] = useState('once') // once | monthly
   const waitlistCopy =
     product.status === 'prelaunch'
       ? ['The first lot is still at the lab.', 'We will email you the day it ships, with its certificate attached. No charge, no card.']
@@ -103,13 +109,14 @@ export default function ProductPage() {
         ? ['Still in development.', 'Leave your email and we will write when it is ready, with its lab report. No charge, no card.']
         : ['Not available right now.', 'Leave your email and we will write when it is back.']
   const bundleLines = (product.bundle || []).map((b) => ({ ...b, hit: findVariant(products, b.sku) })).filter((b) => b.hit)
-  const botanicals = (product.botanicals || []).map((k) => BOTANICALS[k]).filter(Boolean)
+  const botanicals = (product.botanicals || []).map((k) => (BOTANICALS[k] ? { key: k, ...BOTANICALS[k], post: journalForBotanical(JOURNAL, k) } : null)).filter(Boolean)
 
   async function buyNow() {
     setBusy(true)
-    track('checkout_started', { sku: variant.sku, qty })
+    const subscribe = subscribable && plan === 'monthly'
+    track('checkout_started', { sku: variant.sku, qty, plan: subscribe ? 'monthly' : 'once' })
     try {
-      await startCheckout([{ sku: variant.sku, qty }])
+      await startCheckout([{ sku: variant.sku, qty }], { subscribe })
     } catch (err) {
       track('checkout_error', { code: err.code || 'unknown' })
       setNote(err.code === 'checkout_not_configured' ? 'Checkout is not open yet.' : err.message)
@@ -257,6 +264,20 @@ export default function ProductPage() {
           )}
 
           <div ref={ctaRef} className="mt-8">
+            {buyable && subscribable && (
+              <fieldset className="mb-4 grid grid-cols-2 gap-3" data-testid="fieldset-plan">
+                <legend className="sr-only">Delivery</legend>
+                {[
+                  ['once', 'One time', money(variant.priceCents)],
+                  ['monthly', `Every 30 days · save ${subPct}%`, money(Math.round(variant.priceCents * (1 - subPct / 100)))],
+                ].map(([key, title, price]) => (
+                  <button key={key} type="button" onClick={() => setPlan(key)} aria-pressed={plan === key} className={`border px-3 py-3 text-left transition-colors ${plan === key ? 'border-ink bg-ink text-cream' : 'border-ink/20 hover:border-ink'}`} data-testid={`button-plan-${key}`}>
+                    <span className="block font-display text-base">{title}</span>
+                    <span className={`mt-1 block font-mono text-[11px] uppercase tracking-[0.12em] ${plan === key ? 'text-cream/70' : 'text-muted'}`}>{price}{key === 'monthly' ? ' per delivery' : ''}</span>
+                  </button>
+                ))}
+              </fieldset>
+            )}
             {buyable ? (
               <>
                 <div className="flex gap-3">
@@ -271,13 +292,14 @@ export default function ProductPage() {
                       +
                     </button>
                   </div>
-                  <button onClick={addToBag} className="btn btn-solid h-14 flex-1" data-testid="button-pdp-add">
-                    Add to bag · {money(variant.priceCents * qty)}
+                  <button onClick={subscribable && plan === 'monthly' ? buyNow : addToBag} disabled={busy} className="btn btn-solid h-14 flex-1 disabled:opacity-60" data-testid="button-pdp-add">
+                    {subscribable && plan === 'monthly' ? 'Start monthly delivery' : `Add to bag · ${money(variant.priceCents * qty)}`}
                   </button>
                 </div>
                 <button onClick={buyNow} disabled={busy} className="btn mt-3 h-14 w-full disabled:opacity-60" data-testid="button-pdp-buy">
-                  {busy ? 'Opening secure checkout' : 'Buy now with Stripe'}
+                  {busy ? 'Opening secure checkout' : subscribable && plan === 'monthly' ? `Subscribe · ${money(Math.round(variant.priceCents * qty * (1 - subPct / 100)))} every 30 days` : 'Buy now with Stripe'}
                 </button>
+                {subscribable && plan === 'monthly' && <p className="mt-3 text-[13px] leading-relaxed text-ink/60">{HOME.subscription.note} Each delivery carries its own lot certificate.</p>}
                 {note && (
                   <p className="mt-3 text-base leading-relaxed text-ink/75" role="status" data-testid="text-pdp-note">
                     {note}
@@ -289,7 +311,7 @@ export default function ProductPage() {
                 <p className="font-display text-xl">{waitlistCopy[0]}</p>
                 <p className="mt-2 text-base leading-relaxed text-ink/70">{waitlistCopy[1]}</p>
                 <div className="mt-5">
-                  <WaitlistForm sku={variant.sku} source={`pdp-${product.slug}`} label={status.cta} compact />
+                  <WaitlistForm sku={variant.sku} source={`pdp-${product.slug}`} label={status.cta} interests={[product.collection]} options={subscribable ? ['subscription'] : []} compact />
                 </div>
               </div>
             )}
@@ -383,7 +405,13 @@ export default function ProductPage() {
             </div>
             <ul className={`mt-10 grid gap-4 sm:grid-cols-2 ${botanicals.length >= 3 ? 'lg:grid-cols-3' : ''}`}>
               {botanicals.map((b) => (
-                <li key={b.latin} className="border border-ink/10 p-6">
+                <li key={b.latin} className="flex flex-col border border-ink/10" data-testid={`card-botanical-${b.key}`}>
+                  {b.post && (
+                    <Link to={`/journal/${b.post.slug}`} className="group block" aria-label={`${b.name}: read in the Journal`}>
+                      <JournalImage post={b.post} ratio={1.6} sizes="(min-width: 1024px) 30vw, 100vw" className="transition-opacity group-hover:opacity-95" />
+                    </Link>
+                  )}
+                  <div className="flex flex-1 flex-col p-6">
                   <p className="font-display text-xl">{b.name}</p>
                   <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.12em] text-muted">
                     {b.latin} · {b.part}
@@ -403,6 +431,12 @@ export default function ProductPage() {
                       <dd className="mt-1 text-ink/70">{b.tcm}</dd>
                     </div>
                   </dl>
+                  {b.post && (
+                    <Link to={`/journal/${b.post.slug}`} className="mt-auto inline-block pt-5 font-mono text-[11px] uppercase tracking-[0.14em] hover:text-brass" data-testid={`link-journal-${b.key}`}>
+                      Read in the Journal →
+                    </Link>
+                  )}
+                  </div>
                 </li>
               ))}
             </ul>

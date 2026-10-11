@@ -5,17 +5,19 @@ export const NAV = [
   { label: 'Body', to: '/collections/body', collection: 'body' },
   { label: 'Fragrance', to: '/collections/fragrance', collection: 'fragrance' },
   { label: 'Ritual Sets', to: '/collections/ritual-sets', collection: 'ritual-sets' },
+  { label: 'Practitioners', to: '/practitioners' },
   {
     label: 'Learn',
     to: '/dr-mushtaq',
     children: [
       { label: 'Dr. Mushtaq', to: '/dr-mushtaq', note: 'The physician behind the label' },
+      { label: 'The Seed', to: '/the-seed', note: 'Nigella sativa, from flower to oil' },
+      { label: 'Journal', to: '/journal', note: 'The botanicals, one at a time' },
       { label: 'Lab Reports', to: '/coa', note: 'Every lot, tested. Every number, published.' },
       { label: 'The Molecule', to: '/science', note: 'What we measure and how' },
       { label: 'Botanicals', to: '/botanicals', note: 'Materia medica across three traditions' },
       { label: 'Heritage', to: '/heritage', note: 'A seed with a long story' },
       { label: 'The Protocol', to: '/protocol', note: 'A day with the shelf' },
-      { label: 'Practitioners', to: '/practitioners', note: 'Dispensing and documentation' },
       { label: 'Safety', to: '/safety', note: 'Who should check with a clinician first' },
       { label: 'Questions', to: '/faq', note: 'Ordering, sizes, the guarantee' },
     ],
@@ -34,6 +36,8 @@ export const FOOTER_LINKS = {
   ],
   Learn: [
     { label: 'Dr. Mushtaq', to: '/dr-mushtaq' },
+    { label: 'The Seed', to: '/the-seed' },
+    { label: 'Journal', to: '/journal' },
     { label: 'Lab Reports (COA)', to: '/coa' },
     { label: 'The Molecule', to: '/science' },
     { label: 'Botanicals', to: '/botanicals' },
@@ -90,7 +94,40 @@ export const HOME = {
     ['Family tradition', 'The seed your grandmother kept beside the salt.'],
   ],
   finalCta: { prelaunch: 'Be first to try the Original.', live: 'Start with the Original.' },
+  subscription: { label: 'Monthly delivery at launch', note: 'Save 15% on every refill. Pause or cancel any time.' },
+  practitionerTeaser: {
+    title: 'For practitioners.',
+    body: 'Verified accounts, practitioner pricing, 500 mL dispensing bottles, and the six-bottle Practitioner Case, each with its lot certificate enclosed. Specification claims only, so nothing we print conflicts with your guidance.',
+    points: ['Verification by credential, then pricing and terms', 'Classical names beside every Latin binomial', 'Certificate of analysis in every case'],
+    cta: 'Open a practitioner account',
+  },
+  // The cornerstone: the plant itself, before any product.
+  seed: {
+    eyebrow: 'Nigella sativa',
+    title: 'One seed. Every bottle.',
+    body: 'Before it is an oil, it is a small annual in the buttercup family with a pale blue flower and a papery seed capsule. Everything we make starts with that seed, pressed cold and measured per lot. We would rather you know the plant than take our word for the bottle.',
+    steps: [
+      ['seed-flower', 'The flower', 'Nigella sativa blooms once a year: five to ten pale blue-white petals around a ring of stamens, on a stem of finely divided leaves. Grown from seed in a single season.'],
+      ['seed-capsule', 'The capsule', 'The flower sets a horned capsule that dries on the plant. Inside, in chambers, sit the matte black seeds, angular and faintly ridged, the part that is harvested and pressed.'],
+      ['seed-oil', 'The oil', 'The seed is pressed below 40 °C with nothing added and nothing removed. The oil is dark amber, peppery, and faintly of oregano. Each lot goes to an independent laboratory before it is bottled.'],
+    ],
+    founderNote: 'I start every conversation with the plant, not the bottle. If you know what the seed is, how it is pressed, and what a certificate measures, you can judge any blackseed oil, including mine.',
+    cta: ['Read about the seed', 'See a lab report'],
+  },
+  journalTeaser: { eyebrow: 'The Journal', title: 'The botanicals, one at a time.', body: 'Short, sourced notes on each plant in the shelf: what it is, where it grows, which part we use, and where it goes.', cta: 'Open the Journal' },
 }
+
+// Interest tags stored in waitlist.interests (one row per email; tags merge on repeat signup).
+export const INTERESTS = [
+  { key: 'within', label: 'Within', note: 'Oil, softgels, saffron infusion, finishing oil' },
+  { key: 'skin', label: 'Skin', note: 'Cleansing oil, face oil, eye concentrate, serum, balm' },
+  { key: 'hair', label: 'Hair', note: 'Hair oil, scalp and beard serum' },
+  { key: 'body', label: 'Body', note: 'Bath soak, body oil' },
+  { key: 'fragrance', label: 'Fragrance', note: 'Three attars and the Discovery Set' },
+  { key: 'ritual-sets', label: 'Ritual Sets', note: 'Bundles at 10 to 20% off' },
+  { key: 'subscription', label: 'Monthly delivery', note: 'Refills at 15% off, pause or cancel any time' },
+  { key: 'practitioner', label: 'Practitioner account', note: 'Verification, pricing, dispensing sizes' },
+]
 
 export const COA = {
   title: 'Every lot, tested. Every number, published.',
@@ -217,7 +254,7 @@ export const SITE_FAQ = [
   {
     group: 'The products',
     items: [
-      ['What does “lot tested” mean?', 'Every lot of oil goes to an independent laboratory for thymoquinone, fatty-acid profile, peroxide value, heavy metals, and a microbial screen. We publish the certificate on the lot page before the lot ships, and the lot code is printed on the bottle.'],
+      ['What does “lot tested” mean?', 'Every lot of oil goes to an independent laboratory for thymoquinone, fatty-acid profile, peroxide value, heavy metals, and a microbial screen. We publish the certificate on the lot page before the lot ships, and the lot code is printed on the bottle. A specimen of the certificate, with every field and no results, is on the Lab Reports page now.'],
       ['Why is there no thymoquinone number on the label?', 'Because the honest number belongs to a lot, not a brand. Thymoquinone varies with the harvest and the press. We publish each lot’s result on its certificate page rather than printing one figure for all time.'],
       ['Is blackseed oil in every product?', 'Yes. Everything we make, from the dropper bottle to the attars, begins with the same cold-pressed, lot-tested blackseed oil. Saffron, grapevine, rose, amla, sesame, and the resins are added by purpose.'],
       ['Where do the botanicals come from?', 'One origin and one harvest per lot. We name the origin on the lot’s certificate once we hold the supplier documentation for it, not before.'],
@@ -237,6 +274,7 @@ export const SITE_FAQ = [
     items: [
       ['When can I buy?', 'The Original ships when its first lot clears the laboratory. Join the first-lot list and we will email you the day it opens, with the certificate attached. Other products open as they are finalised.'],
       ['How will checkout work?', 'Checkout is handled by Stripe. We never see or store your card details. You can pay by card, Apple Pay, Google Pay, or Link.'],
+      ['Is there a subscription?', 'Yes, from launch. Blackseed Oil and the Softgels can be set to arrive every 30 days at 15% off, with each delivery carrying its own lot certificate. Pause, skip, or cancel any time from the link in your receipt. Tick “Monthly delivery” on the list and we will set yours up first.'],
       ['How much is shipping?', 'Shipping within the United States is complimentary on orders over $150 and a flat $9 below that. Orders ship Monday through Friday and most arrive in two to five business days with a tracking link by email.'],
       ['What is the guarantee?', 'The 60-Day Standard: use any product for up to 60 days and, if you do not love it, write to us for a full refund of the product price. Opened or not.'],
       ['Do you ship internationally?', 'Not yet. We are starting with the United States while we finalise labeling for other markets.'],

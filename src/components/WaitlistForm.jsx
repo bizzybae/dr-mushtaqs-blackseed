@@ -1,17 +1,43 @@
 import { useId, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { MICRO } from '../data/catalog'
+import { INTERESTS } from '../data/site'
 import { track } from '../lib/analytics'
 
-// Double opt-in waitlist. Submits to /api/waitlist which inserts the row and
-// sends the confirmation email. Success only renders after the insert is
-// confirmed by the server. Duplicate and error states are explicit.
-export default function WaitlistForm({ sku = null, source = 'site', label = 'Join the first-lot list', dark = false, compact = false, onDone }) {
+// One list, many interests. Submits to /api/waitlist, which upserts one row per
+// email and merges interest tags, then sends the confirmation email on first
+// signup. Success only renders after the server confirms. Duplicate (already on
+// the list; interests added) and error states are explicit.
+//
+//   interests  tags always attached to this signup (e.g. the product's collection)
+//   options    interest keys offered as checkboxes under the email field
+//   checked    option keys ticked by default
+export default function WaitlistForm({
+  sku = null,
+  source = 'site',
+  label = 'Join the first-lot list',
+  dark = false,
+  compact = false,
+  interests = [],
+  options = [],
+  checked = [],
+  onDone,
+}) {
   const id = useId()
   const [email, setEmail] = useState('')
   const [hp, setHp] = useState('') // honeypot
+  const [picked, setPicked] = useState(() => new Set(checked))
   const [state, setState] = useState('idle') // idle | busy | done | duplicate | invalid | error
   const [message, setMessage] = useState('')
+  const shown = INTERESTS.filter((i) => options.includes(i.key))
+
+  function toggle(key) {
+    setPicked((prev) => {
+      const next = new Set(prev)
+      next.has(key) ? next.delete(key) : next.add(key)
+      return next
+    })
+  }
 
   async function submit(e) {
     e.preventDefault()
@@ -21,20 +47,22 @@ export default function WaitlistForm({ sku = null, source = 'site', label = 'Joi
       setState('invalid')
       return
     }
+    const tags = [...new Set([...interests, ...picked])]
     setState('busy')
     try {
       const res = await fetch('/api/waitlist', {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ email: clean, sku, source, website: hp }),
+        body: JSON.stringify({ email: clean, sku, source, interests: tags, website: hp }),
       })
       const data = await res.json().catch(() => ({}))
-      if (res.status === 409 || data.status === 'duplicate') {
+      if (res.status === 409 || data.status === 'duplicate' || data.status === 'updated') {
+        track('waitlist_updated', { source, interests: tags.join(',') })
         setState('duplicate')
         return
       }
       if (!res.ok || !data.ok) throw new Error(data.message || 'Could not save your email.')
-      track('waitlist_submitted', { sku: sku || 'general', source })
+      track('waitlist_submitted', { sku: sku || 'general', source, interests: tags.join(',') })
       setState('done')
       setMessage(data.confirmation_sent ? MICRO.waitlistCheckInbox : MICRO.waitlistDone)
       setEmail('')
@@ -58,7 +86,7 @@ export default function WaitlistForm({ sku = null, source = 'site', label = 'Joi
   if (state === 'duplicate') {
     return (
       <p className={`text-base leading-relaxed ${text}`} role="status" data-testid="text-waitlist-duplicate">
-        You are already on this list. We will write the day the lot ships.
+        You are already on the list; we have noted what you are interested in. We will write the day the lot ships.
       </p>
     )
   }
@@ -92,10 +120,34 @@ export default function WaitlistForm({ sku = null, source = 'site', label = 'Joi
           {state === 'busy' ? 'Saving' : 'Notify me'}
         </button>
       </div>
-      <p id={`${id}-help`} className={`mt-3 text-[13px] leading-relaxed ${state === 'invalid' || state === 'error' ? 'text-red-700' : sub}`} role={state === 'invalid' || state === 'error' ? 'alert' : undefined}>
+      {shown.length > 0 && (
+        <fieldset className="mt-4" data-testid="fieldset-interests">
+          <legend className={`font-mono text-[10px] uppercase tracking-[0.16em] ${sub} ${shown.length === 1 ? 'sr-only' : ''}`}>Tell us what to write about</legend>
+          <ul className={`${shown.length === 1 ? '' : 'mt-3'} grid gap-x-6 gap-y-3 ${shown.length > 2 ? 'sm:grid-cols-2' : ''}`}>
+            {shown.map((o) => (
+              <li key={o.key}>
+                <label className={`flex cursor-pointer items-start gap-3 ${text}`}>
+                  <input
+                    type="checkbox"
+                    checked={picked.has(o.key)}
+                    onChange={() => toggle(o.key)}
+                    className={`mt-1 h-4 w-4 shrink-0 accent-[#bb8c4b] ${dark ? 'border-cream/40' : 'border-ink/30'}`}
+                    data-testid={`checkbox-interest-${o.key}`}
+                  />
+                  <span>
+                    <span className="block text-base leading-snug">{o.label}</span>
+                    <span className={`block text-[13px] leading-snug ${sub}`}>{o.note}</span>
+                  </span>
+                </label>
+              </li>
+            ))}
+          </ul>
+        </fieldset>
+      )}
+      <p id={`${id}-help`} className={`${compact ? 'mt-2' : 'mt-3'} text-[13px] leading-relaxed ${state === 'invalid' || state === 'error' ? 'text-red-700' : sub}`} role={state === 'invalid' || state === 'error' ? 'alert' : undefined}>
         {state === 'invalid' ? 'Please enter a valid email address.' : state === 'error' ? message : (
           <>
-            One confirmation email, then a note when the lot ships. Unsubscribe in one click.{' '}
+            One list, one confirmation email, then a note when each thing you ticked is ready. Unsubscribe in one click.{' '}
             <Link to="/policies/privacy" className={`underline ${dark ? 'hover:text-cream' : 'hover:text-ink'}`}>
               Privacy
             </Link>
@@ -107,9 +159,9 @@ export default function WaitlistForm({ sku = null, source = 'site', label = 'Joi
 }
 
 // Compact "Notify me" that expands into the form in place.
-export function NotifyButton({ sku, source, label = 'Notify me', className = 'btn flex-1' }) {
+export function NotifyButton({ sku, source, label = 'Notify me', className = 'btn flex-1', interests = [] }) {
   const [open, setOpen] = useState(false)
-  if (open) return <WaitlistForm sku={sku} source={source} label={label} compact />
+  if (open) return <WaitlistForm sku={sku} source={source} label={label} interests={interests} compact />
   return (
     <button type="button" onClick={() => setOpen(true)} className={className} data-testid={`button-notify-${sku || source}`}>
       {label}

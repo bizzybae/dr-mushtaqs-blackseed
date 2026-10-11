@@ -151,6 +151,16 @@ export const BOTANICALS = {
 }
 
 export const IMAGES = {
+  // botanicals (renders on the brand set; the plant, not a product)
+  'seed-flower': { aspect: 1.3333, alt: 'Nigella sativa in flower: pale blue sepals around a ring of stamens, on a stem of fine thread-like leaves, with a closed bud' },
+  'seed-capsule': { aspect: 1.3333, alt: 'A dried Nigella sativa seed capsule split open, matte black angular seeds spilled across marble' },
+  'seed-oil': { aspect: 1.3333, alt: 'Cold-pressed blackseed oil poured into a brass dish beside a split seed capsule and loose seeds' },
+  saffron: { aspect: 1.3333, alt: 'Dried saffron threads spilling from a brass dish beside a single Crocus sativus flower' },
+  amla: { aspect: 1.3333, alt: 'Fresh amla fruits, one halved to show the six-segment stone, with a sprig of feathery leaves' },
+  rose: { aspect: 1.3333, alt: 'Two Damask roses with fallen petals and a brass dish of dried petals' },
+  grapevine: { aspect: 1.3333, alt: 'A grapevine leaf, a cluster of green grapes, a piece of vine cane, and a dish of grape seeds' },
+  sesame: { aspect: 1.3333, alt: 'A brass dish of hulled sesame seeds beside two split sesame pods' },
+  resins: { aspect: 1.3333, alt: 'Frankincense tears in a brass dish beside agarwood chips, a piece of sandalwood, and a bundle of vetiver root' },
   // originals
   'blackseed-oil': { aspect: 1.8333, alt: 'Dr. Mushtaq’s Blackseed Oil, amber dropper bottle on marble beside Nigella sativa flowers and seeds' },
   'travel-ritual': { aspect: 1.4906, alt: 'Dr. Mushtaq’s Travel Ritual: black and gold box with five 10 mL vials and a walnut stand' },
