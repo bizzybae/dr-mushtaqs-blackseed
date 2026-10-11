@@ -3,6 +3,7 @@
 // upserts it). Run `npm run seed:sql`, commit, push, then execute seed.sql.
 import { writeFileSync } from 'node:fs'
 import { PRODUCTS, IMAGES, COLLECTIONS, BOTANICALS, LABEL_BADGES } from '../src/data/catalog.js'
+import { CLAIM_EVIDENCE } from './data/claims-evidence.js'
 
 const doc = {
   collections: COLLECTIONS.map((c) => ({ slug: c.slug, name: c.name, short: c.short, description: c.description, hero: c.hero, steps: c.steps, sort: c.sort })),
@@ -17,7 +18,7 @@ const doc = {
     variants: p.variants.map((v, i) => ({ sku: v.sku, label: v.label, sizeMl: v.sizeMl ?? null, price: v.priceCents, compare: v.compareAtCents ?? null, def: !!v.default, i, image: v.image || null, desc: `${v.format || ''} | ${v.description || ''}` })),
     gallery: (p.gallery || []).map((g, i) => ({ path: g, alt: IMAGES[g]?.alt || null, aspect: IMAGES[g]?.aspect ?? null, i })),
     sections: [{ t: 'how_to_use', c: p.howToUse || [], i: 0 }, { t: 'faq', c: p.faq || [], i: 1 }, { t: 'key_points', c: { safety: p.safety }, i: 2 }],
-    why: p.why || [],
+    why: (p.why || []).map((t) => ({ t, e: CLAIM_EVIDENCE[t] || null })),
     bundle: p.bundle || [],
   })),
 }
@@ -87,8 +88,8 @@ join public.products p on p.slug = pr->>'slug',
 jsonb_to_recordset(pr->'sections') as s(t text, c jsonb, i int);
 
 delete from public.claims where product_id in (select id from public.products where slug in (${slugs}));
-insert into public.claims (product_id, text, claim_type, requires_dshea_disclaimer, approved_by, approved_at)
-select p.id, c.t, 'spec', false, 'founder', now()
+insert into public.claims (product_id, text, claim_type, requires_dshea_disclaimer, approved_by, approved_at, evidence)
+select p.id, c.t, 'spec', false, 'founder', now(), 'Brand specification: founder credential, per-lot third-party testing, single-origin sourcing, thymoquinone measured per lot. Verify against the lot certificate before sale.'
 from public.products p, (values
   ('Physician formulated by Dr. Quddarat U. Mushtaq, MD, MS, founder and owner'),
   ('Thymoquinone measured per lot; see the lot certificate'),
@@ -96,13 +97,14 @@ from public.products p, (values
   ('Third-party tested; certificate of analysis per lot')) as c(t)
 where p.slug in (${slugs});
 
--- "Why it suits your skin": appearance-and-feel statements per hero botanical (product-detail.js).
--- Seeded as approved because the repo copy passes the banned-word check and owner review before merge.
-insert into public.claims (product_id, text, claim_type, requires_dshea_disclaimer, approved_by, approved_at)
-select p.id, w.t, 'cosmetic', false, 'founder', now()
+-- "Why it suits your skin": appearance-and-feel statements per hero botanical (product-detail.js), each with
+-- its basis from claims-evidence.js (internal column; anon cannot select it). Seeded as approved because the
+-- repo copy passes the banned-word check and the source review in COMPLIANCE-CLAIMS.md before merge.
+insert into public.claims (product_id, text, claim_type, requires_dshea_disclaimer, approved_by, approved_at, evidence)
+select p.id, w.t, 'cosmetic', false, 'founder; source review, see COMPLIANCE-CLAIMS.md', now(), w.e
 from seed_doc, jsonb_array_elements(d->'products') pr
 join public.products p on p.slug = pr->>'slug',
-jsonb_array_elements_text(pr->'why') as w(t);
+jsonb_to_recordset(pr->'why') as w(t text, e text);
 
 delete from public.bundle_items where bundle_product_id in (select id from public.products where slug in (${slugs}));
 insert into public.bundle_items (bundle_product_id, variant_id, quantity)

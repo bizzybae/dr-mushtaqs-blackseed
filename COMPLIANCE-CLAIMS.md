@@ -2,7 +2,9 @@
 
 Every `claims` row with `claim_type = 'cosmetic'` renders as the "Why it suits your skin" block on the product page. Rows are
 approved in Supabase (`approved_at`, `approved_by`) only after this review; RLS hides unapproved rows from the site.
-Each statement is limited to appearance, feel, or a formulation fact. None describes a health, treatment, or prevention
+The basis below is also stored in `claims.evidence` (migration `claims_evidence_column_owner_only`, 2026-10-11), readable by
+owners and the service role only; the storefront never selects it. `scripts/data/claims-evidence.js` carries the same map so
+`seed:sql` restores it. Each statement is limited to appearance, feel, or a formulation fact. None describes a health, treatment, or prevention
 effect, and all pass `npm run check:claims`. Six statements were rewritten during review (marked). Formulation facts must be
 re-verified against the finished formula and supplier specifications before any product is set to `available`.
 
