@@ -403,7 +403,7 @@ export default function ProductPage() {
                 Full materia medica →
               </Link>
             </div>
-            <ul className={`mt-10 grid gap-4 sm:grid-cols-2 ${botanicals.length >= 3 ? 'lg:grid-cols-3' : ''}`}>
+            <ul className={`mt-10 grid gap-4 sm:grid-cols-2 ${botanicals.length === 3 || botanicals.length >= 5 ? 'lg:grid-cols-3' : ''}`}>
               {botanicals.map((b) => (
                 <li key={b.latin} className="flex flex-col border border-ink/10" data-testid={`card-botanical-${b.key}`}>
                   {b.post && (
