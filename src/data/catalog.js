@@ -164,6 +164,7 @@ export const IMAGES = {
   'golden-hour-saffron-infusion': { aspect: 1.7778, alt: 'Dr. Mushtaq’s Golden Hour Saffron Infusion, amber bottle with gold cap beside a brass dish of saffron threads' },
   'rose-blackseed-cleansing-oil': { aspect: 1.7778, alt: 'Dr. Mushtaq’s Rose & Blackseed Cleansing Oil, amber pump bottle beside damask rose petals' },
   'saffron-radiance-face-oil': { aspect: 1.7778, alt: 'Dr. Mushtaq’s Saffron Radiance Face Oil, dropper bottle beside a marble dish of saffron' },
+  'saffron-blackseed-eye-concentrate': { aspect: 1.7778, alt: 'Dr. Mushtaq’s Saffron & Blackseed Eye Concentrate, white airless tube with metal applicator tip and brass cap, beside saffron threads and a Nigella flower' },
   'grapevine-renewal-serum': { aspect: 1.7778, alt: 'Dr. Mushtaq’s Grapevine Renewal Serum, dropper bottle beside a grapevine leaf and grapes' },
   'amla-blackseed-hair-oil': { aspect: 1.7778, alt: 'Dr. Mushtaq’s Amla & Blackseed Hair Oil, amber bottle beside amla fruit and a wooden comb' },
   'saffron-sesame-body-oil': { aspect: 1.7778, alt: 'Dr. Mushtaq’s Saffron & Sesame Body Oil, amber pump bottle beside sesame seeds and saffron' },
@@ -318,8 +319,8 @@ const PRODUCT_ROWS = [
     tagline: 'Awake, under the eye.',
     category: 'topical', productType: 'cosmetic', featured: false, isNew: true,
     botanicals: ['saffron', 'blackseed', 'grapevine', 'rose'],
-    // No render yet: shares the flat-lay until the airless tube is photographed.
-    image: 'collection-flatlay', gallery: ['collection-flatlay'],
+    // AI render from the brand set; replace with a real packaging photo before launch.
+    image: 'saffron-blackseed-eye-concentrate', gallery: ['saffron-blackseed-eye-concentrate', 'saffron-radiance-face-oil', 'collection-flatlay'],
     short: 'A light, cooling concentrate for the thin skin around the eyes, with a sealed metal applicator tip.',
     long: 'Saffron and grapevine, the two botanicals already in the Radiance oil and the Renewal serum, carried in a weightless gel-cream with cold-pressed blackseed oil, niacinamide, and caffeine. The zinc-alloy tip stays a few degrees cooler than skin, so each pass feels cool and applies the formula without fingers touching it. Fragrance-free, because the eye area is where fragrance most often stings.',
     ingredients: 'Aqua, Squalane, Niacinamide, Glycerin, Nigella Sativa Seed Oil, Caffeine, Crocus Sativus Flower Extract, Vitis Vinifera Shoot Extract, Rosa Damascena Flower Water, Sodium Hyaluronate, Polyglyceryl-6 Distearate, Xanthan Gum, Sodium Phytate, Pentylene Glycol',
@@ -328,8 +329,8 @@ const PRODUCT_ROWS = [
     faq: [['Can I use it with the Grapevine Renewal Serum?', 'Yes. Serum first on the face, eye concentrate last before oil.'], ['Does it replace eye makeup remover?', 'No. Use the Cleansing Oil to remove makeup first.'], ['Why no fragrance?', 'The eye area is where fragrance most often stings; this is the only product in the line without a scent profile.']],
     safety: 'For external use only. Keep out of the eye itself. Patch test behind the ear 24 hours before first use. Discontinue if irritation occurs. Keep out of reach of children.',
     variants: [
-      { sku: 'DM-EYE-15', label: '15 mL', sizeMl: 15, priceCents: 8800, compareAtCents: null, default: true, format: 'Airless tube', image: 'collection-flatlay', description: 'About three months, morning and night.' },
-      { sku: 'DM-EYE-30', label: '30 mL', sizeMl: 30, priceCents: 16000, compareAtCents: 17600, default: false, format: 'Airless tube', image: 'collection-flatlay', description: 'The six-month size.' },
+      { sku: 'DM-EYE-15', label: '15 mL', sizeMl: 15, priceCents: 8800, compareAtCents: null, default: true, format: 'Airless tube', image: 'saffron-blackseed-eye-concentrate', description: 'About three months, morning and night.' },
+      { sku: 'DM-EYE-30', label: '30 mL', sizeMl: 30, priceCents: 16000, compareAtCents: 17600, default: false, format: 'Airless tube', image: 'saffron-blackseed-eye-concentrate', description: 'The six-month size.' },
     ],
   },
   {

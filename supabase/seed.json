@@ -1182,7 +1182,7 @@
      "compare": null,
      "def": true,
      "i": 0,
-     "image": "collection-flatlay",
+     "image": "saffron-blackseed-eye-concentrate",
      "desc": "Airless tube | About three months, morning and night."
     },
     {
@@ -1193,16 +1193,28 @@
      "compare": 17600,
      "def": false,
      "i": 1,
-     "image": "collection-flatlay",
+     "image": "saffron-blackseed-eye-concentrate",
      "desc": "Airless tube | The six-month size."
     }
    ],
    "gallery": [
     {
+     "path": "saffron-blackseed-eye-concentrate",
+     "alt": "Dr. Mushtaq’s Saffron & Blackseed Eye Concentrate, white airless tube with metal applicator tip and brass cap, beside saffron threads and a Nigella flower",
+     "aspect": 1.7778,
+     "i": 0
+    },
+    {
+     "path": "saffron-radiance-face-oil",
+     "alt": "Dr. Mushtaq’s Saffron Radiance Face Oil, dropper bottle beside a marble dish of saffron",
+     "aspect": 1.7778,
+     "i": 1
+    },
+    {
      "path": "collection-flatlay",
      "alt": "Dr. Mushtaq’s collection on marble: oil, balm, sample vials, botanical card, brass dishes and mortar",
      "aspect": 1.8338,
-     "i": 0
+     "i": 2
     }
    ],
    "sections": [
