@@ -56,7 +56,7 @@ const docs = [
   ...PRODUCTS.map((p) => ({
     _id: `product-${p.slug}`, _type: 'productContent', slug: p.slug, name: p.name,
     tagline: p.tagline, short: p.short, long: p.long, intendedUse: p.intendedUse, sensoryLine: p.sensoryLine, sensory: p.sensory,
-    howTo: tb(p.howTo), directions: p.directions || [], storage: p.storage, shelfLife: p.shelfLife, faq: qa(p.faq),
+    howTo: tb(p.howTo), directions: p.directions || [], why: p.why || [], storage: p.storage, shelfLife: p.shelfLife, faq: qa(p.faq),
   })),
 ]
 

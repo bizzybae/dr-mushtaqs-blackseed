@@ -209,7 +209,7 @@ export function BotanicalsPage() {
                       <ul className="mt-4 flex flex-wrap gap-2">
                         {used.slice(0, 4).map((p) => (
                           <li key={p.slug}>
-                            <Link to={isConcept(p) ? `/coming-soon#${p.slug}` : `/shop/${p.slug}`} className="border border-ink/15 px-2 py-1 font-mono text-[10px] uppercase tracking-[0.1em] hover:border-ink hover:text-brass">
+                            <Link to={`/shop/${p.slug}`} className="border border-ink/15 px-2 py-1 font-mono text-[10px] uppercase tracking-[0.1em] hover:border-ink hover:text-brass">
                               {p.name}
                             </Link>
                           </li>
@@ -264,7 +264,7 @@ export function ProtocolPage() {
                   <span className="font-mono text-[11px] text-brass">{step.step}</span>
                   <span className="font-display text-2xl">{step.time}</span>
                 </div>
-                <Link to={isConcept(p) ? `/coming-soon#${p.slug}` : `/shop/${p.slug}`} className="group flex items-center gap-5 lg:col-span-6">
+                <Link to={`/shop/${p.slug}`} className="group flex items-center gap-5 lg:col-span-6">
                   <div className="w-28 shrink-0">
                     <ProductThumb product={p} ratio={1.2} sizes="112px" imgClassName="transition-transform duration-700 group-hover:scale-[1.03]" />
                   </div>
@@ -287,7 +287,7 @@ export function ProtocolPage() {
               <p className="eyebrow">The whole day, boxed</p>
               <p className="mt-3 font-display text-3xl text-cream">{shelf.name}</p>
               <p className="mt-3 text-cream/70">{shelf.short}</p>
-              <Link to={isConcept(shelf) ? `/coming-soon#${shelf.slug}` : `/shop/${shelf.slug}`} className="btn mt-8 border-cream/40 text-cream hover:bg-cream hover:text-ink" data-testid="link-protocol-shelf">
+              <Link to={`/shop/${shelf.slug}`} className="btn mt-8 border-cream/40 text-cream hover:bg-cream hover:text-ink" data-testid="link-protocol-shelf">
                 {isConcept(shelf) ? 'Coming soon · notify me' : 'See the set'}
               </Link>
             </div>

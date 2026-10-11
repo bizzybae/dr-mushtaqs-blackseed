@@ -109,7 +109,7 @@ export default function Header() {
                 </div>
                 <div className={`col-span-9 grid gap-5 ${panelProducts.length > 4 ? 'grid-cols-5' : 'grid-cols-4'}`}>
                   {panelProducts.slice(0, 10).map((p) => (
-                    <Link key={p.slug} to={isConcept(p) ? `/coming-soon#${p.slug}` : `/shop/${p.slug}`} className="group" data-testid={`link-menu-${p.slug}`} tabIndex={panel ? 0 : -1}>
+                    <Link key={p.slug} to={`/shop/${p.slug}`} className="group" data-testid={`link-menu-${p.slug}`} tabIndex={panel ? 0 : -1}>
                       <ProductThumb product={p} ratio={1.15} sizes="220px" />
                       <p className="mt-3 font-display text-base leading-tight group-hover:text-brass">{p.name}</p>
                       <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.12em] text-muted">{p.step}</p>

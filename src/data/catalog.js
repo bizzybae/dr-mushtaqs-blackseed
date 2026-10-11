@@ -1,3 +1,4 @@
+import { PRODUCT_DETAIL } from './product-detail.js'
 // Source of truth for the Dr. Mushtaq’s catalog.
 // `scripts/seed-sql.mjs` turns this file into SQL for Supabase, and the
 // storefront falls back to it whenever Supabase is unreachable.
@@ -194,7 +195,7 @@ const tiers = (unit, sizes) =>
     ...extra,
   }))
 
-export const PRODUCTS = [
+const PRODUCT_ROWS = [
   // ───────────────────────── WITHIN ─────────────────────────
   {
     status: 'prelaunch',
@@ -312,7 +313,28 @@ export const PRODUCTS = [
   },
   {
     status: 'concept',
-    slug: 'grapevine-renewal-serum', sort: 7, collection: 'skin', step: 'Nourish',
+    slug: 'saffron-blackseed-eye-concentrate', sort: 7, collection: 'skin', step: 'Nourish',
+    name: 'Saffron & Blackseed Eye Concentrate', subtitle: 'Cooling eye concentrate with applicator tip',
+    tagline: 'Awake, under the eye.',
+    category: 'topical', productType: 'cosmetic', featured: false, isNew: true,
+    botanicals: ['saffron', 'blackseed', 'grapevine', 'rose'],
+    // No render yet: shares the flat-lay until the airless tube is photographed.
+    image: 'collection-flatlay', gallery: ['collection-flatlay'],
+    short: 'A light, cooling concentrate for the thin skin around the eyes, with a sealed metal applicator tip.',
+    long: 'Saffron and grapevine, the two botanicals already in the Radiance oil and the Renewal serum, carried in a weightless gel-cream with cold-pressed blackseed oil, niacinamide, and caffeine. The zinc-alloy tip stays a few degrees cooler than skin, so each pass feels cool and applies the formula without fingers touching it. Fragrance-free, because the eye area is where fragrance most often stings.',
+    ingredients: 'Aqua, Squalane, Niacinamide, Glycerin, Nigella Sativa Seed Oil, Caffeine, Crocus Sativus Flower Extract, Vitis Vinifera Shoot Extract, Rosa Damascena Flower Water, Sodium Hyaluronate, Polyglyceryl-6 Distearate, Xanthan Gum, Sodium Phytate, Pentylene Glycol',
+    specs: [['Format', 'Leave-on eye concentrate'], ['Applicator', 'Zinc-alloy cooling tip, sealed into the tube neck'], ['Saffron', 'Grade I threads, 40-day infusion'], ['Blackseed oil', 'Cold-pressed, lot-tested oil'], ['Also', 'Niacinamide 4%, caffeine 1%, squalane, sodium hyaluronate'], ['Fragrance', 'None added'], ['Packaging', 'Airless tube, brass cap, metal tip']],
+    howToUse: ['Start on clean, dry skin. Press the tube once; a rice-grain amount is enough for both eyes.', 'Glide the cooling tip from the inner corner outward along the orbital bone; do not pull the skin.', 'Roll upward over the brow bone and tap any remainder in with the ring finger.', 'Wait 30 seconds, then follow with face oil or concealer.'],
+    faq: [['Can I use it with the Grapevine Renewal Serum?', 'Yes. Serum first on the face, eye concentrate last before oil.'], ['Does it replace eye makeup remover?', 'No. Use the Cleansing Oil to remove makeup first.'], ['Why no fragrance?', 'The eye area is where fragrance most often stings; this is the only product in the line without a scent profile.']],
+    safety: 'For external use only. Keep out of the eye itself. Patch test behind the ear 24 hours before first use. Discontinue if irritation occurs. Keep out of reach of children.',
+    variants: [
+      { sku: 'DM-EYE-15', label: '15 mL', sizeMl: 15, priceCents: 8800, compareAtCents: null, default: true, format: 'Airless tube', image: 'collection-flatlay', description: 'About three months, morning and night.' },
+      { sku: 'DM-EYE-30', label: '30 mL', sizeMl: 30, priceCents: 16000, compareAtCents: 17600, default: false, format: 'Airless tube', image: 'collection-flatlay', description: 'The six-month size.' },
+    ],
+  },
+  {
+    status: 'concept',
+    slug: 'grapevine-renewal-serum', sort: 8, collection: 'skin', step: 'Nourish',
     name: 'Grapevine Renewal Serum', subtitle: 'Vine-shoot extract, grapeseed and blackseed',
     tagline: 'From the part of the vine the winemaker prunes away.',
     category: 'topical', productType: 'cosmetic', featured: true, isNew: true,
@@ -329,7 +351,7 @@ export const PRODUCTS = [
   },
   {
     status: 'concept',
-    slug: 'blackseed-balm', sort: 8, collection: 'skin', step: 'Seal',
+    slug: 'blackseed-balm', sort: 9, collection: 'skin', step: 'Seal',
     name: 'Blackseed Balm', subtitle: 'Concentrated anhydrous salve',
     tagline: 'A dense, slow-melting salve for dry places.',
     category: 'topical', productType: 'cosmetic', featured: true,
@@ -348,7 +370,7 @@ export const PRODUCTS = [
   // ───────────────────────── HAIR ─────────────────────────
   {
     status: 'concept',
-    slug: 'amla-blackseed-hair-oil', sort: 9, collection: 'hair', step: 'Pre-wash',
+    slug: 'amla-blackseed-hair-oil', sort: 10, collection: 'hair', step: 'Pre-wash',
     name: 'Amla & Blackseed Hair Oil', subtitle: 'Pre-wash scalp and length oil',
     tagline: 'The Sunday oiling, made properly.',
     category: 'hair', productType: 'cosmetic', featured: true, isNew: true,
@@ -365,7 +387,7 @@ export const PRODUCTS = [
   },
   {
     status: 'concept',
-    slug: 'scalp-beard-serum', sort: 10, collection: 'hair', step: 'Leave-in',
+    slug: 'scalp-beard-serum', sort: 11, collection: 'hair', step: 'Leave-in',
     name: 'Scalp & Beard Serum', subtitle: 'Blackseed, rosemary and jojoba',
     tagline: 'Light enough for the scalp, rich enough for the beard.',
     category: 'hair', productType: 'cosmetic', featured: true,
@@ -384,7 +406,7 @@ export const PRODUCTS = [
   // ───────────────────────── BODY ─────────────────────────
   {
     status: 'concept',
-    slug: 'blackseed-bath-soak', sort: 11, collection: 'body', step: 'Soak',
+    slug: 'blackseed-bath-soak', sort: 12, collection: 'body', step: 'Soak',
     name: 'Blackseed & Mineral Bath Soak', subtitle: 'Dead Sea and Epsom salts with blackseed oil',
     tagline: 'Twenty minutes, once a week.',
     category: 'topical', productType: 'cosmetic', featured: false, isNew: true,
@@ -401,7 +423,7 @@ export const PRODUCTS = [
   },
   {
     status: 'concept',
-    slug: 'saffron-sesame-body-oil', sort: 12, collection: 'body', step: 'Anoint',
+    slug: 'saffron-sesame-body-oil', sort: 13, collection: 'body', step: 'Anoint',
     name: 'Saffron & Sesame Body Oil', subtitle: 'Warm-oil massage in the abhyanga tradition',
     tagline: 'The daily anointing.',
     category: 'topical', productType: 'cosmetic', featured: true, isNew: true,
@@ -420,7 +442,7 @@ export const PRODUCTS = [
   // ───────────────────────── FRAGRANCE ─────────────────────────
   {
     status: 'concept',
-    slug: 'oud-noir-attar', sort: 13, collection: 'fragrance', step: 'Attar',
+    slug: 'oud-noir-attar', sort: 14, collection: 'fragrance', step: 'Attar',
     name: 'Oud Noir Attar', subtitle: 'oud, blackseed, amber',
     tagline: 'Dark wood, warm seed, no alcohol.',
     category: 'fragrance', productType: 'cosmetic', featured: true, isNew: true,
@@ -437,7 +459,7 @@ export const PRODUCTS = [
   },
   {
     status: 'concept',
-    slug: 'kesar-rose-attar', sort: 14, collection: 'fragrance', step: 'Attar',
+    slug: 'kesar-rose-attar', sort: 15, collection: 'fragrance', step: 'Attar',
     name: 'Kesar Rose Attar', subtitle: 'Saffron, damask rose, sandalwood',
     tagline: 'Rose with the saffron left in.',
     category: 'fragrance', productType: 'cosmetic', featured: true, isNew: true,
@@ -454,7 +476,7 @@ export const PRODUCTS = [
   },
   {
     status: 'concept',
-    slug: 'vigne-verte-attar', sort: 15, collection: 'fragrance', step: 'Attar',
+    slug: 'vigne-verte-attar', sort: 16, collection: 'fragrance', step: 'Attar',
     name: 'Vigne Verte Attar', subtitle: 'Grapevine leaf, vetiver, bergamot',
     tagline: 'A vineyard in June.',
     category: 'fragrance', productType: 'cosmetic', featured: false, isNew: true,
@@ -471,7 +493,7 @@ export const PRODUCTS = [
   },
   {
     status: 'concept',
-    slug: 'fragrance-discovery-set', sort: 16, collection: 'fragrance', step: 'Discovery',
+    slug: 'fragrance-discovery-set', sort: 17, collection: 'fragrance', step: 'Discovery',
     name: 'Fragrance Discovery Set', subtitle: 'All three attars, 3 mL each',
     tagline: 'Wear each for a week before you choose.',
     category: 'bundle', productType: 'bundle', featured: true, isNew: true,
@@ -490,7 +512,7 @@ export const PRODUCTS = [
   // ───────────────────────── RITUAL SETS ─────────────────────────
   {
     status: 'concept',
-    slug: 'the-travel-ritual', sort: 17, collection: 'ritual-sets', step: 'Routine',
+    slug: 'the-travel-ritual', sort: 18, collection: 'ritual-sets', step: 'Routine',
     name: 'The Travel Ritual', subtitle: 'Five 10 mL vials of Blackseed Oil',
     tagline: 'The oil, portioned for the road.',
     category: 'bundle', productType: 'bundle', featured: true,
@@ -507,7 +529,7 @@ export const PRODUCTS = [
   },
   {
     status: 'concept',
-    slug: 'the-morning-protocol', sort: 18, collection: 'ritual-sets', step: 'Routine',
+    slug: 'the-morning-protocol', sort: 19, collection: 'ritual-sets', step: 'Routine',
     name: 'The Morning Protocol', subtitle: 'Blackseed Oil 125 mL + Softgels 90',
     tagline: 'The dropper at home, the softgel away.',
     category: 'bundle', productType: 'bundle', featured: true,
@@ -525,25 +547,25 @@ export const PRODUCTS = [
   },
   {
     status: 'concept',
-    slug: 'the-skin-ritual', sort: 19, collection: 'ritual-sets', step: 'Routine',
+    slug: 'the-skin-ritual', sort: 20, collection: 'ritual-sets', step: 'Routine',
     name: 'The Skin Ritual', subtitle: 'Cleanse, nourish, seal',
     tagline: 'The whole three-step routine, ten percent off.',
     category: 'bundle', productType: 'bundle', featured: true, isNew: true,
     botanicals: ['rose', 'saffron', 'blackseed', 'grapevine'],
     image: null, gallery: [], mosaic: ['rose-blackseed-cleansing-oil', 'saffron-radiance-face-oil', 'blackseed-balm'],
-    bundle: [{ sku: 'DM-RCO-125', qty: 1 }, { sku: 'DM-SRF-50', qty: 1 }, { sku: 'DM-BALM-60', qty: 1 }],
-    short: 'Rose & Blackseed Cleansing Oil 125 mL, Saffron Radiance Face Oil 50 mL, and Blackseed Balm 60 mL.',
-    long: 'An oil-first routine in three steps: cleanse with rose, nourish with saffron, seal with the balm. Everything you need for about four months.',
+    bundle: [{ sku: 'DM-RCO-125', qty: 1 }, { sku: 'DM-SRF-50', qty: 1 }, { sku: 'DM-EYE-15', qty: 1 }, { sku: 'DM-BALM-60', qty: 1 }],
+    short: 'Rose & Blackseed Cleansing Oil 125 mL, Saffron Radiance Face Oil 50 mL, Saffron & Blackseed Eye Concentrate 15 mL, and Blackseed Balm 60 mL.',
+    long: 'An oil-first routine in three steps: cleanse with rose, nourish with saffron on the face and the cooling concentrate under the eyes, seal with the balm. Everything you need for about four months.',
     ingredients: 'See the three products.',
-    specs: [['Contents', 'Cleansing Oil 125 mL, Face Oil 50 mL, Balm 60 mL'], ['Saving', '10% against buying separately']],
-    howToUse: ['Morning: cleanse, six drops of face oil, sunscreen.', 'Evening: cleanse, face oil, balm on dry areas.'],
+    specs: [['Contents', 'Cleansing Oil 125 mL, Face Oil 50 mL, Eye Concentrate 15 mL, Balm 60 mL'], ['Saving', '10% against buying separately']],
+    howToUse: ['Morning: cleanse, one pass of the eye concentrate, six drops of face oil, sunscreen.', 'Evening: cleanse, eye concentrate, face oil, balm on dry areas.'],
     faq: [],
     safety: SAFETY_TOPICAL,
-    variants: [{ sku: 'DM-SET-SKIN', label: 'The Set', format: '3 pieces', priceCents: 24300, compareAtCents: 27000, default: true }],
+    variants: [{ sku: 'DM-SET-SKIN', label: 'The Set', format: '4 pieces', priceCents: 32200, compareAtCents: 35800, default: true }],
   },
   {
     status: 'concept',
-    slug: 'the-hair-ritual', sort: 20, collection: 'ritual-sets', step: 'Routine',
+    slug: 'the-hair-ritual', sort: 21, collection: 'ritual-sets', step: 'Routine',
     name: 'The Hair Ritual', subtitle: 'Pre-wash oil + leave-in serum',
     tagline: 'Sunday oiling and the everyday serum.',
     category: 'bundle', productType: 'bundle', featured: false, isNew: true,
@@ -561,43 +583,43 @@ export const PRODUCTS = [
   },
   {
     status: 'concept',
-    slug: 'the-founders-set', sort: 21, collection: 'ritual-sets', step: 'Gift',
-    name: 'The Founder’s Set', subtitle: 'Oil, balm, and the three attars',
+    slug: 'the-founders-set', sort: 22, collection: 'ritual-sets', step: 'Gift',
+    name: 'The Founder’s Set', subtitle: 'Oil, balm, eye concentrate, and the three attars',
     tagline: 'What Dr. Mushtaq gives.',
     category: 'bundle', productType: 'bundle', featured: true, isNew: true,
     botanicals: ['blackseed', 'saffron', 'rose', 'oud'],
     image: 'collection-gift-set', gallery: ['collection-gift-set', 'fragrance-discovery-set'],
-    bundle: [{ sku: 'DM-BSO-125', qty: 1 }, { sku: 'DM-BALM-60', qty: 1 }, { sku: 'DM-FDS', qty: 1 }],
-    short: 'Blackseed Oil 125 mL, Blackseed Balm 60 mL, and the Fragrance Discovery Set, in a rigid black and gold presentation box with a botanical card.',
-    long: 'The set the founder sends to friends: the original oil, the balm, and a first taste of all three attars, boxed with a letterpress card on Nigella sativa and thymoquinone.',
+    bundle: [{ sku: 'DM-BSO-125', qty: 1 }, { sku: 'DM-BALM-60', qty: 1 }, { sku: 'DM-EYE-15', qty: 1 }, { sku: 'DM-FDS', qty: 1 }],
+    short: 'Blackseed Oil 125 mL, Blackseed Balm 60 mL, Saffron & Blackseed Eye Concentrate 15 mL, and the Fragrance Discovery Set, in a rigid black and gold presentation box with a botanical card.',
+    long: 'The set the founder sends to friends: the original oil, the balm, the cooling eye concentrate, and a first taste of all three attars, boxed with a letterpress card on Nigella sativa and thymoquinone.',
     ingredients: 'See the individual products.',
-    specs: [['Contents', 'Blackseed Oil 125 mL, Blackseed Balm 60 mL, Fragrance Discovery Set'], ['Box', 'Rigid magnetic, gold interior, botanical card'], ['Saving', '10% against buying separately']],
+    specs: [['Contents', 'Blackseed Oil 125 mL, Blackseed Balm 60 mL, Eye Concentrate 15 mL, Fragrance Discovery Set'], ['Box', 'Rigid magnetic, gold interior, botanical card'], ['Saving', '10% against buying separately']],
     howToUse: ['Add a gift note at checkout.'],
     faq: [],
     safety: SAFETY_INTERNAL,
-    variants: [{ sku: 'DM-SET-FOUNDER', label: 'The Set', format: 'Gift box', priceCents: 21800, compareAtCents: 24300, default: true, image: 'collection-gift-set' }],
+    variants: [{ sku: 'DM-SET-FOUNDER', label: 'The Set', format: 'Gift box', priceCents: 29800, compareAtCents: 33100, default: true, image: 'collection-gift-set' }],
   },
   {
     status: 'concept',
-    slug: 'the-complete-shelf', sort: 22, collection: 'ritual-sets', step: 'Routine',
+    slug: 'the-complete-shelf', sort: 23, collection: 'ritual-sets', step: 'Routine',
     name: 'The Complete Shelf', subtitle: 'One of everything, twenty percent off',
     tagline: 'Within, skin, hair, body. The whole house.',
     category: 'bundle', productType: 'bundle', featured: true, isNew: true,
     botanicals: ['blackseed', 'saffron', 'grapevine', 'rose', 'amla', 'sesame'],
     image: 'collection-flatlay', gallery: ['collection-flatlay', 'collection-gift-set'],
-    bundle: [{ sku: 'DM-BSO-125', qty: 1 }, { sku: 'DM-SG-90', qty: 1 }, { sku: 'DM-CFO-250', qty: 1 }, { sku: 'DM-RCO-125', qty: 1 }, { sku: 'DM-SRF-50', qty: 1 }, { sku: 'DM-BALM-60', qty: 1 }, { sku: 'DM-SRM-60', qty: 1 }, { sku: 'DM-AHO-125', qty: 1 }, { sku: 'DM-SBO-125', qty: 1 }],
-    short: 'Nine products across Within, Skin, Hair and Body in their starting sizes. The way to furnish a whole bathroom shelf at once.',
-    long: 'Blackseed Oil, Softgels, Culinary Finishing Oil, Rose & Blackseed Cleansing Oil, Saffron Radiance Face Oil, Blackseed Balm, Scalp & Beard Serum, Amla & Blackseed Hair Oil, and Saffron & Sesame Body Oil. Twenty percent below the sum of the parts.',
+    bundle: [{ sku: 'DM-BSO-125', qty: 1 }, { sku: 'DM-SG-90', qty: 1 }, { sku: 'DM-CFO-250', qty: 1 }, { sku: 'DM-RCO-125', qty: 1 }, { sku: 'DM-SRF-50', qty: 1 }, { sku: 'DM-EYE-15', qty: 1 }, { sku: 'DM-BALM-60', qty: 1 }, { sku: 'DM-SRM-60', qty: 1 }, { sku: 'DM-AHO-125', qty: 1 }, { sku: 'DM-SBO-125', qty: 1 }],
+    short: 'Ten products across Within, Skin, Hair and Body in their starting sizes. The way to furnish a whole bathroom shelf at once.',
+    long: 'Blackseed Oil, Softgels, Culinary Finishing Oil, Rose & Blackseed Cleansing Oil, Saffron Radiance Face Oil, Saffron & Blackseed Eye Concentrate, Blackseed Balm, Scalp & Beard Serum, Amla & Blackseed Hair Oil, and Saffron & Sesame Body Oil. Twenty percent below the sum of the parts.',
     ingredients: 'See the individual products.',
-    specs: [['Contents', 'Nine products in starting sizes'], ['Saving', '20% against buying separately']],
+    specs: [['Contents', 'Ten products in starting sizes'], ['Saving', '20% against buying separately']],
     howToUse: ['Follow the Protocol page for a day with the shelf.'],
     faq: [],
     safety: SAFETY_INTERNAL,
-    variants: [{ sku: 'DM-SET-SHELF', label: 'The Shelf', format: '9 pieces', priceCents: 61000, compareAtCents: 76200, default: true, image: 'collection-flatlay' }],
+    variants: [{ sku: 'DM-SET-SHELF', label: 'The Shelf', format: '10 pieces', priceCents: 68000, compareAtCents: 85000, default: true, image: 'collection-flatlay' }],
   },
   {
     status: 'concept',
-    slug: 'practitioner-case', sort: 23, collection: 'ritual-sets', step: 'Practitioner',
+    slug: 'practitioner-case', sort: 24, collection: 'ritual-sets', step: 'Practitioner',
     name: 'Practitioner Case', subtitle: 'Six 500 mL Blackseed Oil',
     tagline: 'Three litres, one lot, one certificate.',
     category: 'bundle', productType: 'bundle', featured: false, isNew: true,
@@ -614,6 +636,10 @@ export const PRODUCTS = [
     variants: [{ sku: 'DM-CASE-BSO', label: 'The Case', format: '6 × 500 mL', priceCents: 136000, compareAtCents: 163200, default: true, image: 'practitioner-case' }],
   },
 ]
+
+// Detail blocks (what it's for, how to use, why it suits your skin) come from
+// product-detail.js; anything written directly on a product above wins.
+export const PRODUCTS = PRODUCT_ROWS.map((p) => ({ ...(PRODUCT_DETAIL[p.slug] || {}), ...p }))
 
 // Lifecycle states. Purchasability is also enforced server-side in api/checkout.js.
 export const STATUS = {

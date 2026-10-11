@@ -17,6 +17,7 @@ const doc = {
     variants: p.variants.map((v, i) => ({ sku: v.sku, label: v.label, sizeMl: v.sizeMl ?? null, price: v.priceCents, compare: v.compareAtCents ?? null, def: !!v.default, i, image: v.image || null, desc: `${v.format || ''} | ${v.description || ''}` })),
     gallery: (p.gallery || []).map((g, i) => ({ path: g, alt: IMAGES[g]?.alt || null, aspect: IMAGES[g]?.aspect ?? null, i })),
     sections: [{ t: 'how_to_use', c: p.howToUse || [], i: 0 }, { t: 'faq', c: p.faq || [], i: 1 }, { t: 'key_points', c: { safety: p.safety }, i: 2 }],
+    why: p.why || [],
     bundle: p.bundle || [],
   })),
 }
@@ -90,10 +91,18 @@ insert into public.claims (product_id, text, claim_type, requires_dshea_disclaim
 select p.id, c.t, 'spec', false, 'founder', now()
 from public.products p, (values
   ('Physician formulated by Dr. Quddarat U. Mushtaq, MD, MS, founder and owner'),
-  ('Blackseed oil standardized to 4.64% thymoquinone by HPLC'),
+  ('Thymoquinone measured per lot; see the lot certificate'),
   ('Single-origin botanicals, one harvest per lot'),
   ('Third-party tested; certificate of analysis per lot')) as c(t)
 where p.slug in (${slugs});
+
+-- "Why it suits your skin": appearance-and-feel statements per hero botanical (product-detail.js).
+-- Seeded as approved because the repo copy passes the banned-word check and owner review before merge.
+insert into public.claims (product_id, text, claim_type, requires_dshea_disclaimer, approved_by, approved_at)
+select p.id, w.t, 'cosmetic', false, 'founder', now()
+from seed_doc, jsonb_array_elements(d->'products') pr
+join public.products p on p.slug = pr->>'slug',
+jsonb_array_elements_text(pr->'why') as w(t);
 
 delete from public.bundle_items where bundle_product_id in (select id from public.products where slug in (${slugs}));
 insert into public.bundle_items (bundle_product_id, variant_id, quantity)

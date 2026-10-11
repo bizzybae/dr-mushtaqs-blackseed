@@ -34,7 +34,7 @@ const QUERY = `{
   "policies": *[_type == "policy"] { "slug": slug.current, title, updated, sections },
   "botanicals": *[_type == "botanical"] { key, name, latin, part, ayurveda, unani, tcm, note },
   "products": *[_type == "productContent"] {
-    slug, tagline, short, long, intendedUse, sensoryLine, sensory, howTo, directions, storage, shelfLife, faq,
+    slug, tagline, short, long, intendedUse, sensoryLine, sensory, howTo, directions, why, storage, shelfLife, faq,
     "gallery": gallery[] { "url": asset->url, alt }
   }
 }`
@@ -116,6 +116,7 @@ export function shapeSite(c) {
         tagline: p.tagline, short: p.short, long: p.long, intendedUse: p.intendedUse, sensoryLine: p.sensoryLine, sensory: p.sensory,
         howTo: Array.isArray(p.howTo) && p.howTo.length ? p.howTo.map((x) => [x.title, x.body]) : undefined,
         directions: Array.isArray(p.directions) && p.directions.length ? p.directions : undefined,
+        why: Array.isArray(p.why) && p.why.length ? p.why : undefined,
         storage: p.storage, shelfLife: p.shelfLife,
         faq: Array.isArray(p.faq) && p.faq.length ? p.faq.map((x) => [x.q, x.a]) : undefined,
         galleryUrls: Array.isArray(p.gallery) ? p.gallery.filter((g) => g?.url) : [],
@@ -136,7 +137,7 @@ export function shapeSite(c) {
 export function applyProductContent(product, content) {
   if (!content) return product
   const out = { ...product }
-  for (const k of ['tagline', 'short', 'long', 'intendedUse', 'sensoryLine', 'sensory', 'howTo', 'directions', 'storage', 'shelfLife', 'faq']) {
+  for (const k of ['tagline', 'short', 'long', 'intendedUse', 'sensoryLine', 'sensory', 'howTo', 'directions', 'why', 'storage', 'shelfLife', 'faq']) {
     if (content[k] !== undefined && content[k] !== null && content[k] !== '') out[k] = content[k]
   }
   if (content.galleryUrls?.length) out.galleryUrls = content.galleryUrls

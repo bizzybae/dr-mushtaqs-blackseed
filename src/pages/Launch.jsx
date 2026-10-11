@@ -40,12 +40,21 @@ export function ComingSoonPage() {
           <ul className="mt-10 grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
             {g.items.map((p) => (
               <li key={p.slug} id={p.slug} className="flex scroll-mt-40 flex-col" data-testid={`card-concept-${p.slug}`}>
-                <ProductThumb product={p} ratio={1.1} sizes="(min-width: 1280px) 25vw, (min-width: 768px) 33vw, 100vw" />
-                <h3 className="mt-5 font-display text-xl leading-tight">{p.name}</h3>
+                <Link to={`/shop/${p.slug}`} className="group block" aria-label={`${p.name}: what it is for and how to use it`}>
+                  <ProductThumb product={p} ratio={1.1} sizes="(min-width: 1280px) 25vw, (min-width: 768px) 33vw, 100vw" imgClassName="transition-transform duration-500 ease-out group-hover:scale-[1.03] motion-reduce:transition-none" />
+                </Link>
+                <h3 className="mt-5 font-display text-xl leading-tight">
+                  <Link to={`/shop/${p.slug}`} className="hover:text-brass" data-testid={`link-concept-${p.slug}`}>
+                    {p.name}
+                  </Link>
+                </h3>
                 <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.14em] text-muted">{p.subtitle}</p>
                 <p className="mb-5 mt-3 text-base leading-relaxed text-ink/70">{p.sensoryLine || p.tagline}</p>
                 <div className="mt-auto">
                   <NotifyButton sku={defaultVariant(p).sku} source={`coming-soon-${p.slug}`} className="btn min-h-[48px] w-full" />
+                  <Link to={`/shop/${p.slug}`} className="mt-3 block text-center font-mono text-[11px] uppercase tracking-[0.14em] text-muted hover:text-brass">
+                    What it’s for and how to use it →
+                  </Link>
                 </div>
               </li>
             ))}
